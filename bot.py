@@ -5153,7 +5153,7 @@ async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, not
         
         m = f'sent message confirming to user ID: {userid.mention}'
         try:
-            await userid.send(f"Your photo with id {id} of your photos has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.")
+            await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.")
         except:
             m = (f"Could not send message to user ID: {userid.id}. They may have DMs disabled.")
         await ctx.followup.send(f"Submission with queue number {id} has been accepted and removed from the queue. {m}")
@@ -5194,7 +5194,7 @@ async def reject(ctx, id: int, *, reason: str):
         
         m = f'Sent message confirming to user ID: {user.mention}'
         try:
-            await user.send(f"One of your photos has been rejected and removed from the queue.\nReason: {reason}")
+            await user.send(f"Your photo with id {id} has been rejected and removed from the queue.\nReason: {reason}")
         except:
             m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
         await ctx.send(f"Submission with queue number {id} has been rejected and removed from the queue. {m}")
