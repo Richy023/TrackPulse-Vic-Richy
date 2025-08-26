@@ -433,6 +433,27 @@ async def download_csv(url, save_path):
             await printlog(f"CSV downloaded successfully and saved as {save_path}")
         else:
             raise Exception(f"Failed to download CSV. Status code: {response.status_code}")
+        
+# web server thing for recieving submissions
+from aiohttp import web
+
+async def handle_submission(request):
+    data = await request.post()
+    filename = data['filename']
+    user_id = int(data['user_id'])
+    number = data.get('number', '')
+    # put the thing to add it to queue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return web.Response(text="Submission received!")
+
+app = web.Application()
+app.add_routes([web.post('/submit_photo', handle_submission)])
+
+# start aiohttp server in background when bot starts
+async def start_webserver():
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', 8080)
+    await site.start()
 
 @bot.event
 async def on_ready():
