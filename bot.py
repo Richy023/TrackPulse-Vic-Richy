@@ -5048,7 +5048,7 @@ async def sets(ctx, state:str):
         for item in split_strings:
             await logsthread.send(item)
 
-@bot.tree.command(name='submit-photo', description="Submit a photo to victorianrailphotos.com and the bot.")
+@bot.tree.command(name='submit-photo', description="Submit a photo to victorianrailphotos.com.")
 @app_commands.choices(photofor=[
     app_commands.Choice(name="Railway Photo & Bot train search", value="website"),
     app_commands.Choice(name="Bot/Website Station Photo Guessing Game", value="guesser"),
@@ -5076,19 +5076,23 @@ async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str,
             public_channel = target_guild.get_channel(showcase_channel)
             if channel:
                 if photo.content_type.startswith('image/'):
-                    await photo.save(f"./photosubmissions/photos/{photo.filename}")
-                    file = discord.File(f"./photosubmissions/photos/{photo.filename}")
-                    subid, queue = await addSubmission(photo.filename, ctx.user.id, date, location, photofor, number)
-                    await channel.send(f'# Photo submitted for {photofor} by <@{ctx.user.id}>:\n- Number {number}\n- Date: {date}\n- Location: {location}\n<@780303451980038165> ID = `{subid}`', file=file) # type: ignore
-                    
-                    # publically send embed
-                    embed = discord.Embed(title='Photo Submission', 
-                      description=f'Photo submitted by <@{ctx.user.id}> for {photofor}:\n- Number {number}\n- Date: {date}\n- Location: {location}')
-                    file = discord.File(f"./photosubmissions/photos/{photo.filename}", filename=f'{photo.filename}')
-                    embed.set_image(url=f"attachment://{photo.filename}")
-                    embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
-                    await public_channel.send(embed=embed, file=file) # type: ignore
-                    await ctx.edit_original_response(content=f'Your photo has been submitted! `Position in queue: {queue}`\nSubmitted photos can be used in their original form with proper attribution to represent trains, trams, groupings, stations, and stops. They will be featured on the Discord bot and on https://victorianrailphotos.com.\n[Join the Discord server to be notified when you photo is accepted.](https://discord.gg/nfAqAnceQ5)\nTo ensure your photo is on the website it must follow [these guidelines](https://docs.google.com/document/d/e/2PACX-1vRd6gGTd-hWTjT-eyorgvnm9asDlBTzy8nKPfBdxl2_W_qzSPKj1G7stPEtgxGN3s4Mrplz63cA3L8h/pub).')
+                    try:
+                        await photo.save(f"./photosubmissions/photos/{photo.filename}")
+                        file = discord.File(f"./photosubmissions/photos/{photo.filename}")
+                        publicMessage = await public_channel.send(f'New photo submission received from {ctx.user.name}')
+                        subid, queue = await addSubmission(photo.filename, ctx.user.id, date, location, photofor, number, publicMessage.id)
+                        await channel.send(f'# Photo submitted for {photofor} by <@{ctx.user.id}>:\n- Number {number}\n- Date: {date}\n- Location: {location}\n<@780303451980038165> ID = `{subid}`', file=file) # type: ignore
+                        
+                        # publically send embed
+                        embed = discord.Embed(title='Photo Submission', 
+                        description=f'Photo submitted by <@{ctx.user.id}> for {photofor}:\n- Number {number}\n- Date: {date}\n- Location: {location}')
+                        file = discord.File(f"./photosubmissions/photos/{photo.filename}", filename=f'{photo.filename}')
+                        embed.set_image(url=f"attachment://{photo.filename}")
+                        embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
+                        await public_channel.send(embed=embed, file=file) # type: ignore
+                        await ctx.edit_original_response(content=f'Your photo has been submitted! `Position in queue: {queue}`\nSubmitted photos can be used in their original form with proper attribution to represent trains, trams, groupings, stations, and stops. They will be featured on the Discord bot and on https://victorianrailphotos.com.\n[Join the Discord server to be notified when you photo is accepted.](https://discord.gg/nfAqAnceQ5)\nTo ensure your photo is on the website it must follow [these guidelines](https://docs.google.com/document/d/e/2PACX-1vRd6gGTd-hWTjT-eyorgvnm9asDlBTzy8nKPfBdxl2_W_qzSPKj1G7stPEtgxGN3s4Mrplz63cA3L8h/pub).')
+                    except Exception as e:
+                        await ctx.edit_original_response(content=f"An error occurred while processing your photo: {str(e)}")
                 else:
                     await ctx.edit_original_response(content="Please upload a valid image file.")
             else:
@@ -5189,15 +5193,15 @@ async def accept_guesser(ctx, id: int, station:str, difficulty:str, mode:str='gu
 @bot.command(name='reject', description="Reject a photo submission from the queue")
 async def reject(ctx, id: int, *, reason: str):
     if ctx.author.id in admin_users:
-        userid = await removeSubmission(id)
+        userid, msgid = await removeSubmission(id)
         user = bot.get_user(int(userid))
         
         m = f'Sent message confirming to user ID: {user.mention}'
         try:
-            await user.send(f"Your photo with id {id} has been rejected and removed from the queue.\nReason: {reason}")
+            await user.send(f"Your photo with id `{id}` has been rejected and removed from the queue.\nReason: {reason}\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
         except:
             m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
-        await ctx.send(f"Submission with queue number {id} has been rejected and removed from the queue. {m}")
+        await ctx.send(f"Submission with queue number `{id}` has been rejected and removed from the queue. {m}")
     
 @bot.tree.command(name='queue', description="View the current photo submission queue")
 async def queue(ctx: discord.Interaction):

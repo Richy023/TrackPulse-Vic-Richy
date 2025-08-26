@@ -1,15 +1,15 @@
 import sqlite3
 
-async def addSubmission(photo, userid, date, location, photofor, number=None):
+async def addSubmission(photo, userid, date, location, photofor, number=None, id=None):
     conn = sqlite3.connect('photosubmissions/db.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS submissions
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT, display_id INTEGER, photo text, userid text, date text, location text, photofor text, number text)''')
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT, display_id INTEGER, photo text, userid text, date text, location text, photofor text, number text, msgid INTEGER)''')
     # Get next display_id
     c.execute("SELECT COUNT(*) FROM submissions")
     next_display_id = c.fetchone()[0] + 1
-    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-              (next_display_id, photo, userid, date, location, photofor, number))
+    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number, msgid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+              (next_display_id, photo, userid, date, location, photofor, number, id))
     conn.commit()
     submission_id = c.lastrowid
     conn.close()
@@ -18,10 +18,13 @@ async def addSubmission(photo, userid, date, location, photofor, number=None):
 async def removeSubmission(submission_id):
     conn = sqlite3.connect('photosubmissions/db.db')
     c = conn.cursor()
-    # Get userid before deleting
-    c.execute("SELECT userid FROM submissions WHERE id = ?", (submission_id,))
+    # Get userid and msgid before deleting
+    c.execute("SELECT userid, msgid FROM submissions WHERE id = ?", (submission_id,))
     result = c.fetchone()
-    userid = result[0] if result else None
+    if result:
+        userid, msgid = result
+    else:
+        userid, msgid = None, None
 
     c.execute("DELETE FROM submissions WHERE id = ?", (submission_id,))
     conn.commit()
@@ -33,7 +36,7 @@ async def removeSubmission(submission_id):
         c.execute("UPDATE submissions SET display_id = ? WHERE id = ?", (new_display_id, row_id))
     conn.commit()
     conn.close()
-    return userid
+    return userid, msgid
 
 async def getUserID(submission_id):
     conn = sqlite3.connect('photosubmissions/db.db')
