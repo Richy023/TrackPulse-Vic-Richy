@@ -5125,7 +5125,7 @@ async def alias(ctx, name:str):
     
     
 @bot.tree.command(name='accept', description="Accept a photo submission from the queue")
-async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None):
+async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
     await ctx.response.defer()
     if ctx.user.id in admin_users:
         try:
@@ -5153,11 +5153,14 @@ async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, not
             await ctx.followup.send(apiResponse)
             return
         
-        await removeSubmission(id)
+        userid, msgid = await removeSubmission(id)
         
         m = f'sent message confirming to user ID: {userid.mention}'
         try:
-            await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.")
+            if reason == None:
+                await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
+            else:
+                await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
         except:
             m = (f"Could not send message to user ID: {userid.id}. They may have DMs disabled.")
         await ctx.followup.send(f"Submission with queue number {id} has been accepted and removed from the queue. {m}")
