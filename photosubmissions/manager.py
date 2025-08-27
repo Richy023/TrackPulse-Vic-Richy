@@ -4,12 +4,12 @@ async def addSubmission(photo, userid, date, location, photofor, number=None, id
     conn = sqlite3.connect('photosubmissions/db.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS submissions
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT, display_id INTEGER, photo text, userid text, date text, location text, photofor text, number text, msgid INTEGER, exif text)''')
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT, display_id INTEGER, photo text, userid text, date text, location text, photofor text, number text, msgid INTEGER, exif text, note text)''')
     # Get next display_id
     c.execute("SELECT COUNT(*) FROM submissions")
     next_display_id = c.fetchone()[0] + 1
-    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number, msgid, exif) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-              (next_display_id, photo, userid, date, location, photofor, number, id, exif))
+    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number, msgid, exif) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+              (next_display_id, photo, userid, date, location, photofor, number, id, exif, note))
     conn.commit()
     submission_id = c.lastrowid
     conn.close()
