@@ -457,7 +457,7 @@ app.add_routes([web.post('/submit_photo', handle_submission)])
 async def start_webserver():
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', 8080)
+    site = web.TCPSite(runner, '0.0.0.0', 1237)
     await site.start()
     print('Web server on!',)
 
