@@ -453,13 +453,23 @@ async def handle_submission(request):
 app = web.Application()
 app.add_routes([web.post('/submit_photo', handle_submission)])
 
+web_runner = None
 # start aiohttp server in background when bot starts
 async def start_webserver():
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', 1237)
+    global web_runner
+    web_runner = web.AppRunner(app)
+    await web_runner.setup()
+    site = web.TCPSite(web_runner, '0.0.0.0', 1237)
     await site.start()
-    print('Web server on!',)
+    print('Web server on!')
+    
+async def stop_webserver():
+    global web_runner
+    if web_runner:
+        await web_runner.cleanup()
+        print('Web server stopped!')
+        web_runner = None
+
 
 
 
@@ -6469,7 +6479,7 @@ async def restart(ctx):
         with open('restart.txt', 'w') as file:
             file.write(str(ctx.channel.id))
         await bot.close()
-        await app.shutdown()
+        await stop_webserver()
         os.system('python bot.py')
 
     else:
