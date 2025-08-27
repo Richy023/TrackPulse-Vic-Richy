@@ -25,6 +25,7 @@ cache/
 photo-submissions/
 assets/guesser/images/
 utils/game/images/
+photosubmissions/images/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
