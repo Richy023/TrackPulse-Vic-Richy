@@ -58,7 +58,7 @@ from utils.aviationAPIs.airportdata import get_airport_data
 from utils.aviationAPIs.aircraftphoto import getplaneimage
 from utils.game.imageadder import acceptGuesserPhoto
 from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines
-from utils.vicrailphotosapi.accepter import acceptPhoto
+from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
 sys.stdout = sys.__stdout__  # Reset stdout if needed
 
 original_open = builtins.open
@@ -439,10 +439,15 @@ from aiohttp import web
 
 async def handle_submission(request):
     data = await request.post()
-    filename = data['filename']
-    user_id = int(data['user_id'])
-    number = data.get('number', '')
     # put the thing to add it to queue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    target_guild_id = 1214139268725870602
+    target_channel_id = 1238821549352685568
+    showcase_channel = 1322889624250486848
+    target_guild = bot.get_guild(target_guild_id)
+    if target_guild:
+        await webAddImage(target_guild, target_channel_id, showcase_channel, data)
+
+    
     return web.Response(text="Submission received!")
 
 app = web.Application()
@@ -454,6 +459,9 @@ async def start_webserver():
     await runner.setup()
     site = web.TCPSite(runner, '0.0.0.0', 8080)
     await site.start()
+    print('Web server on!',)
+
+
 
 @bot.event
 async def on_ready():
@@ -540,6 +548,10 @@ async def on_ready():
     global uptime
     uptime = int(time.time())
     healthcheck.pinghealthcheck() # ping to the monitoring thing
+    
+    # start webserver
+    bot.loop.create_task(start_webserver())
+
     
     # restart or normal start
     file = open('restart.txt','r')
@@ -632,6 +644,13 @@ async def task_loop():
         healthcheck.pinghealthcheck(fail=True)
         
     await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs} trips logged'))
+    try:
+        # write totalLogs to a csv with current date time in iso format
+            with open('utils/trainlogger/userdata/totalLogs.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([totalLogs, datetime.now().isoformat()])
+    except Exception as e:
+        await printlog(f'Error writing totalLogs to CSV: {e}')
     
     if rareCheckerOn:
         log_channel = bot.get_channel(RARE_SERVICE_CHANNEL_ID)
