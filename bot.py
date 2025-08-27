@@ -5193,19 +5193,21 @@ async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, not
             await ctx.followup.send(apiResponse)
             return
         
-        userid, msgid = await removeSubmission(id)
+        user_id, msgid = await removeSubmission(id)
         
-        m = f'sent message confirming to user ID: {userid.mention}'
+        user = bot.get_user(int(user_id))
+
+        m = f'sent message confirming to user ID: {user.mention}'
         try:
             if reason == None:
-                await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
+                await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
             else:
-                await userid.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
+                await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
         except:
-            m = (f"Could not send message to user ID: {userid.id}. They may have DMs disabled.")
+            m = (f"Could not send message to user ID: {user.id}. They may have DMs disabled.")
         await ctx.followup.send(f"Submission with queue number {id} has been accepted and removed from the queue. {m}")
     else:
-        await ctx.followup.send("You do not have permission to use this command.")
+      await ctx.followup.send("You do not have permission to use this command.")
 
 @bot.tree.command(name='accept-guesser', description="Accept a photo submission for the station photo guessing game")
 @app_commands.describe(station="only put in the name of the station, not 'station' or anything else")
