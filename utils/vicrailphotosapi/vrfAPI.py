@@ -2,7 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
-def upload_image(image_path, number, train_type, location, date, photographer, featured='N', note='', mode='train'):
+def upload_image(image_path, number, train_type, location, date, photographer, featured='N', note='', mode='train', exif=None):
     load_dotenv()
     api_token = os.getenv('VRF_TOKEN')
     
@@ -18,6 +18,7 @@ def upload_image(image_path, number, train_type, location, date, photographer, f
         'featured': featured,
         'note': note,
         'mode': mode,
+        'exif': exif if exif else None
     }
     
     # Prepare file

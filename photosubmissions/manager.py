@@ -1,6 +1,6 @@
 import sqlite3
 
-async def addSubmission(photo, userid, date, location, photofor, number=None, id=None, exif=None):
+async def addSubmission(photo, userid, date, location, photofor, number=None, id=None, exif=None, note=None):
     conn = sqlite3.connect('photosubmissions/db.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS submissions

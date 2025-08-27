@@ -29,6 +29,9 @@ async def acceptPhoto(id, username, trainType, featured:bool, note, number, loca
             location = rows[0][5]
         if date == None:
             date = rows[0][4]
+        if note == None:
+            note = rows[0][10]
+        exif = rows[0][9]
         
         image_filename = rows[0][2]
         image_extension = os.path.splitext(image_filename)[1].lower()
@@ -51,6 +54,7 @@ async def acceptPhoto(id, username, trainType, featured:bool, note, number, loca
             featured='Y' if featured else 'N',
             note=note,
             mode=mode,
+            exif=exif,
         )
 
         if 'error' in url:
@@ -90,7 +94,7 @@ async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
             try:
                 file = discord.File(photo_path)
                 await public_channel.send(f'New photo submission received from {data['username']}')
-                subid, queue = await addSubmission(os.path.basename(photo_path), data['username'], data['date'], data['location'], 'website', data['number'], 0, data.get('exif', None))
+                subid, queue = await addSubmission(os.path.basename(photo_path), data['username'], data['date'], data['location'], 'website', data['number'], 0, data.get('exif', None), data.get('note', None))
                 await channel.send(f"# Photo submitted for website by {data['username']}:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}\n<@780303451980038165> ID = `{subid}`", file=file) # type: ignore
                 
                 # publically send embed
