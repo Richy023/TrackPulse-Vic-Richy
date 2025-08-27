@@ -8,7 +8,7 @@ async def addSubmission(photo, userid, date, location, photofor, number=None, id
     # Get next display_id
     c.execute("SELECT COUNT(*) FROM submissions")
     next_display_id = c.fetchone()[0] + 1
-    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number, msgid, exif) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+    c.execute("INSERT INTO submissions (display_id, photo, userid, date, location, photofor, number, msgid, exif, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
               (next_display_id, photo, userid, date, location, photofor, number, id, exif, note))
     conn.commit()
     submission_id = c.lastrowid
