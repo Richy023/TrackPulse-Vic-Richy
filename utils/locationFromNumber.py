@@ -158,9 +158,7 @@ async def makeMapv2(lat, long, name, geopath):
         print('started map gen')
         
         # Create a static map centered at the coordinates with the desired zoom level
-        # m = StaticMap(1024, 1024, 12, url_template='https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey='+key)
-        m = StaticMap(1024, 1024, 12)
-        m.set_tile_provider(tile_provider= 'openstreetmap')
+        m = StaticMap(1024, 1024, 12, url_template='https://tile.openstreetmap.org/{z}/{x}/{y}.png')
         print('created base map')
         
         # Split the coordinates into individual pairs
