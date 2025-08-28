@@ -190,3 +190,5 @@ cython_debug/
 utils/game/leaderboard.csv
 restart.txt
 utils/game/images/guesser.csv
+utils/game/images/guesser.csv
+utils/trainlogger/totalLogs.csv
