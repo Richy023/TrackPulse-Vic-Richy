@@ -5153,6 +5153,8 @@ async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str,
     await submitPhoto()
     
 @bot.tree.command(name='alias', description='Set an alias for your photos to be displayed on VictorianRailPhotos')
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def alias(ctx, name:str):
     await ctx.response.defer()
     conn = sqlite3.connect('userdata/aliases.db')
