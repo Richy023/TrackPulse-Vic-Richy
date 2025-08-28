@@ -656,7 +656,7 @@ async def task_loop():
     await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs} trips logged'))
     try:
         # write totalLogs to a csv with current date time in iso format
-            with open('utils/trainlogger/userdata/totalLogs.csv', 'a', newline='') as file:
+            with open('utils/trainlogger/totalLogs.csv', 'a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([totalLogs, datetime.now().isoformat()])
     except Exception as e:
