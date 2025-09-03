@@ -450,8 +450,27 @@ async def handle_submission(request):
     
     return web.Response(text="Submission received!")
 
+async def returnAlias(request):
+    userid = request.query.get('username')
+    if not userid:
+        return web.json_response({'error': 'Username is required'}, status=400)
+    try:
+        conn = sqlite3.connect('userdata/aliases.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT alias FROM aliases WHERE userid = ?', (userid,))
+        result = cursor.fetchone()
+        conn.close()
+        if result:
+            return web.json_response({'alias': result[0]})
+        else:
+            return web.json_response({'alias': None})
+            
+    except sqlite3.Error as e:
+        return web.json_response({'error': f'Database error: {str(e)}'}, status=500)
+
 app = web.Application()
 app.add_routes([web.post('/submit_photo', handle_submission)])
+app.add_routes([web.get('/alias', returnAlias)])
 
 web_runner = None
 # start aiohttp server in background when bot starts
@@ -5152,20 +5171,20 @@ async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str,
 
     await submitPhoto()
     
-@bot.tree.command(name='alias', description='Set an alias for your photos to be displayed on VictorianRailPhotos')
+@bot.tree.command(name='alias', description='Set or update an alias for your photos to be displayed on VictorianRailPhotos')
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-async def alias(ctx, name:str):
+async def alias(ctx: discord.Interaction, name: str):
     await ctx.response.defer()
     conn = sqlite3.connect('userdata/aliases.db')
     cursor = conn.cursor()
-    cursor.execute(f'''
+    cursor.execute('''
     CREATE TABLE IF NOT EXISTS aliases (
         userid INTEGER PRIMARY KEY,
         alias TEXT
     )''')
-    cursor.execute(f'''
-    INSERT INTO aliases (userid, alias)
+    cursor.execute('''
+    INSERT OR REPLACE INTO aliases (userid, alias)
     VALUES (?, ?)
     ''', (ctx.user.id, name))
     
@@ -5174,8 +5193,7 @@ async def alias(ctx, name:str):
     
     await ctx.followup.send(f'Set alias to `{name}`')
     
-    
-    
+
 @bot.tree.command(name='accept', description="Accept a photo submission from the queue")
 async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
     await ctx.response.defer()
