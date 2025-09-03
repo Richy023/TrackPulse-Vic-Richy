@@ -5117,7 +5117,7 @@ async def sets(ctx, state:str):
         for item in split_strings:
             await logsthread.send(item)
 
-@bot.tree.command(name='submit-photo', description="Submit a photo to victorianrailphotos.com.")
+@bot.tree.command(name='submit-photo', description="This command has been retired.")
 @app_commands.choices(photofor=[
     app_commands.Choice(name="Railway Photo & Bot train search", value="website"),
     app_commands.Choice(name="Bot/Website Station Photo Guessing Game", value="guesser"),
@@ -5129,46 +5129,7 @@ async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str,
     await ctx.response.defer(ephemeral=True)
     log_command(ctx.user.id, 'submit-photo')
     async def submitPhoto():
-        # see if they diddnt put a car number
-        # if photofor == 'website' and number == '':
-        #     await ctx.edit_original_response(content="Please provide the number for the train in the photo.")
-        #     return
-        
-        target_guild_id = 1214139268725870602
-        target_channel_id = 1238821549352685568
-        
-        showcase_channel = 1322889624250486848
-        
-        target_guild = bot.get_guild(target_guild_id)
-        if target_guild:
-            channel = target_guild.get_channel(target_channel_id)
-            public_channel = target_guild.get_channel(showcase_channel)
-            if channel:
-                if photo.content_type.startswith('image/'):
-                    try:
-                        await photo.save(f"./photosubmissions/photos/{photo.filename}")
-                        file = discord.File(f"./photosubmissions/photos/{photo.filename}")
-                        publicMessage = await public_channel.send(f'New photo submission received from {ctx.user.name}')
-                        subid, queue = await addSubmission(photo.filename, ctx.user.id, date, location, photofor, number, publicMessage.id)
-                        await channel.send(f'# Photo submitted for {photofor} by <@{ctx.user.id}>:\n- Number {number}\n- Date: {date}\n- Location: {location}\n<@780303451980038165> ID = `{subid}`', file=file) # type: ignore
-                        
-                        # publically send embed
-                        embed = discord.Embed(title='Photo Submission', 
-                        description=f'Photo submitted by <@{ctx.user.id}> for {photofor}:\n- Number {number}\n- Date: {date}\n- Location: {location}')
-                        file = discord.File(f"./photosubmissions/photos/{photo.filename}", filename=f'{photo.filename}')
-                        embed.set_image(url=f"attachment://{photo.filename}")
-                        embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
-                        await public_channel.send(embed=embed, file=file) # type: ignore
-                        await ctx.edit_original_response(content=f'Your photo has been submitted! `Position in queue: {queue}`\nSubmitted photos can be used in their original form with proper attribution to represent trains, trams, groupings, stations, and stops. They will be featured on the Discord bot and on https://victorianrailphotos.com.\n[Join the Discord server to be notified when you photo is accepted.](https://discord.gg/nfAqAnceQ5)\nTo ensure your photo is on the website it must follow [these guidelines](https://docs.google.com/document/d/e/2PACX-1vRd6gGTd-hWTjT-eyorgvnm9asDlBTzy8nKPfBdxl2_W_qzSPKj1G7stPEtgxGN3s4Mrplz63cA3L8h/pub).')
-                    except Exception as e:
-                        await ctx.edit_original_response(content=f"An error occurred while processing your photo: {str(e)}")
-                else:
-                    await ctx.edit_original_response(content="Please upload a valid image file.")
-            else:
-                await ctx.edit_original_response(content="Error: Target channel not found.")
-        else:
-            await ctx.edit_original_response(content="Error: Target guild not found.")
-
+        await ctx.followup.send('This command has been retired. Please submit photos via the VictorianRailPhotos website: https://victorianrailphotos.com/upload')
     await submitPhoto()
     
 @bot.tree.command(name='alias', description='Set or update an alias for your photos to be displayed on VictorianRailPhotos')
