@@ -54,6 +54,7 @@ from commands.searchPhoto import searchTrainPhoto
 from commands.searchtrain import searchTrainCommand
 from commands.traintimleyfetcher import getchannelstocheck, seeWhereTrainsAre, trainTimleyFetcherAdd, trainTimleyFetcherList, trainTimleyFetcherRemove
 from photosubmissions.manager import addSubmission, getUserID, removeSubmission, returnQueue
+from utils.alias import setWebAlias
 from utils.aviationAPIs.airportdata import get_airport_data
 from utils.aviationAPIs.aircraftphoto import getplaneimage
 from utils.game.imageadder import acceptGuesserPhoto
@@ -468,9 +469,40 @@ async def returnAlias(request):
     except sqlite3.Error as e:
         return web.json_response({'error': f'Database error: {str(e)}'}, status=500)
 
+async def setAlias(request):
+    try:
+        data = await request.json()
+        discord_id = data.get("discord_id")
+        name = data.get("name")
+
+        if not discord_id or not name:
+            return web.json_response({"error": "Missing discord_id or name"}, status=400)
+
+        print(f"Received data: Discord ID = {discord_id}, Name = {name}")
+        worked = setWebAlias(discord_id, name)
+        if worked:
+            return web.json_response({
+                "message": "Data received successfully",
+                "received_data": {
+                    "discord_id": discord_id,
+                    "name": name
+                }
+            }, status=200)
+        else:
+            return web.json_response({
+                "message": "There is already another user with this alias!"
+            }, status=400)
+
+    except json.JSONDecodeError:
+        return web.json_response({"error": "Invalid JSON payload"}, status=400)
+    except Exception as e:
+        print(f'Error setting alias: {e}')
+        return web.json_response({"error": f"Failed to process request: {str(e)}"}, status=500)
+
 app = web.Application()
 app.add_routes([web.post('/submit_photo', handle_submission)])
 app.add_routes([web.get('/alias', returnAlias)])
+app.add_routes([web.post('/set-alias', setAlias)])
 
 web_runner = None
 # start aiohttp server in background when bot starts
@@ -5127,7 +5159,7 @@ async def sets(ctx, state:str):
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str, location: str, photofor:str, number: str=''):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'submit-photo')
+    log_command(ctx.user.id, 'submit-photo-retired')
     async def submitPhoto():
         await ctx.followup.send('This command has been retired. Please submit photos via the VictorianRailPhotos website: https://victorianrailphotos.com/upload')
     await submitPhoto()
@@ -5137,22 +5169,11 @@ async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str,
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def alias(ctx: discord.Interaction, name: str):
     await ctx.response.defer()
-    conn = sqlite3.connect('userdata/aliases.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS aliases (
-        userid INTEGER PRIMARY KEY,
-        alias TEXT
-    )''')
-    cursor.execute('''
-    INSERT OR REPLACE INTO aliases (userid, alias)
-    VALUES (?, ?)
-    ''', (ctx.user.id, name))
-    
-    conn.commit()
-    conn.close()
-    
-    await ctx.followup.send(f'Set alias to `{name}`')
+    worked = setWebAlias(ctx.user.id, name)
+    if worked:
+        await ctx.followup.send(f'Set alias to `{name}`')
+    else:
+        await ctx.followup.send('There was an error changing your alias, please try again later.')
     
 
 @bot.tree.command(name='accept', description="Accept a photo submission from the queue")
