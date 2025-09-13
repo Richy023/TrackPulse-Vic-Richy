@@ -5156,7 +5156,13 @@ async def alias(ctx: discord.Interaction, name: str):
     
 
 @bot.tree.command(name='accept', description="Accept a photo submission from the queue")
-async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
+@app_commands.choices(mode=[
+    app_commands.Choice(name='train', value='train'),
+    app_commands.Choice(name='tram', value='tram'),
+    app_commands.Choice(name='bus', value='bus'),
+])
+
+async def accept(ctx, id: int, mode:str, traintype:str=None, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
     await ctx.response.defer()
     if ctx.user.id in admin_users:
         try:
