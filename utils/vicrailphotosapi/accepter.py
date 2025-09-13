@@ -31,8 +31,6 @@ async def acceptPhoto(id, username, trainType, featured:bool, note, number, loca
             date = rows[0][4]
         if note == None:
             note = rows[0][10]
-        if trainType == None:
-            trainType = rows[0][2]
         exif = rows[0][9]
         
         image_filename = rows[0][2]
