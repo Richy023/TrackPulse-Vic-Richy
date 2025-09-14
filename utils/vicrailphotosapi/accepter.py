@@ -93,13 +93,17 @@ async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
         if os.path.exists(photo_path):
             try:
                 file = discord.File(photo_path)
-                await public_channel.send(f"New photo submission received from <@{data['username']}>")
+                if not "@" in data['username']:
+                    await public_channel.send(f"New photo submission received from <@{data['username']}>")
                 subid, queue = await addSubmission(os.path.basename(photo_path), data['username'], data['date'], data['location'], 'website', data['number'], 0, data.get('exif', None), data.get('note', None))
                 await channel.send(f"# Photo submitted for website by <@{data['username']}>:\n- Number: {data['number']}\n- Type:{data['type']}\n- Date: {data['date']}\n- Location: {data['location']}\n- Note: {data['note']}\n<@780303451980038165> ID = `{subid}`", file=file) # type: ignore
                 
                 # publically send embed
-                embed = discord.Embed(title='Photo Submission', 
-                description=f"Photo submitted by <@{data['username']}> for website:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}")
+                if '@' in data['username']:
+                    description = f"Photo submitted by Google User for website:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}"
+                else:
+                    description = f"Photo submitted by <@{data['username']}> for website:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}"
+                embed = discord.Embed(title='Photo Submission', description=description)
                 file = discord.File(photo_path, filename=os.path.basename(photo_path))
                 embed.set_image(url=f"attachment://{os.path.basename(photo_path)}")
                 embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
