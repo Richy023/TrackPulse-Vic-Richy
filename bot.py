@@ -4014,31 +4014,31 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                     if row[0] == cleaned_id.upper():
                         
                         # thing to find image:
-                        if row[2] == 'Tait':
-                            image = 'https://victorianrailphotos.com/photos/317M-6.webp'
-                        
-                        if not '-' in row[1]:
-                            image = getImage(row[1])
+                        image, credits = None, None
 
+                        train_number = row[1]
+
+                        if "-" not in train_number:
+                            image, credits = getImage(train_number)
                         else:
-                            hyphen_index = row[1].find("-")
+                            hyphen_index = train_number.find("-")
                             if hyphen_index != -1:
-                                first_car = row[1][:hyphen_index]
+                                first_car = train_number[:hyphen_index]
                                 await printlog(f'First car: {first_car}')
-                                image = getImage(first_car)
-                                if image == None:
-                                    last_hyphen = row[1].rfind("-")
+                                
+                                image, credits = getImage(first_car)
+                                
+                                if image is None:
+                                    last_hyphen = train_number.rfind("-")
                                     if last_hyphen != -1:
-                                        last_car = row[1][last_hyphen + 1 :]  # Use last_hyphen instead of hyphen_index
+                                        last_car = train_number[last_hyphen + 1 :]
                                         await printlog(f'Last car: {last_car}')
-                                        image = getImage(last_car)
-                                        if image == None:
-                                            image = getImage(row[2])
-                                            await printlog(f'the loco number is: {row[1]}')
-                        if image == None:
-                            # thing to find image:
-                            await printlog(f"Finding image for {row[2].replace('-Class','')}.{row[1]}")
-                            image = getTramImage(f'{row[2].replace("-Class","")}.{row[1]}')
+                                        
+                                        image, credits = getImage(last_car)
+                                        
+                                        if image is None:
+                                            image, credits = getImage(row[2])
+                                            await printlog(f'the loco number is: {train_number}')
                                         
                         # Make the embed
                         if row[4] in vLineLines:
