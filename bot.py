@@ -496,7 +496,7 @@ async def setAlias(request):
     except json.JSONDecodeError:
         return web.json_response({"error": "Invalid JSON payload"}, status=400)
     except Exception as e:
-        print(f'Error setting alias: {e}')
+        print(f'Error setting alias: {e}')  
         return web.json_response({"error": f"Failed to process request: {str(e)}"}, status=500)
 
 app = web.Application()
@@ -5185,25 +5185,28 @@ async def alias(ctx: discord.Interaction, name: str):
 
 async def accept(ctx, id: int, mode:str, traintype:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
     await ctx.response.defer()
-    if ctx.user.id in admin_users:
+    if ctx.user.id in admin_users:            
         try:
             userid = await getUserID(id)
-            userid = bot.get_user(int(userid))
         except TypeError:
             await ctx.followup.send('i cant find that id')
+            return
 
         # see if thers an alias
         conn = sqlite3.connect('userdata/aliases.db')
         cursor = conn.cursor()
-        cursor.execute('SELECT alias FROM aliases WHERE userid = ?', (userid.id,))
-        result = cursor.fetchone()
-        conn.close()
-        # if its not use discord usernams
-        if result:
-            userName = result[0]
+        # If userid is an email, skip alias lookup
+        if isinstance(userid, str) and '@' in userid:
+            userName = userid[:-12]
         else:
-            userName = userid.name
-        
+            cursor.execute('SELECT alias FROM aliases WHERE userid = ?', (int(userid),))
+            result = cursor.fetchone()
+            if result:
+                userName = result[0]
+            else:
+                userName = bot.get_user(int(userid)).name
+        conn.close()
+
         apiResponse = await acceptPhoto(id, userName, traintype, featured, note, number, location, date, mode.lower())
 
         print(apiResponse)
@@ -5212,20 +5215,23 @@ async def accept(ctx, id: int, mode:str, traintype:str, featured:bool=False, not
             return
         
         user_id, msgid = await removeSubmission(id)
-        
-        user = bot.get_user(int(user_id))
 
-        m = f'sent message confirming to user ID: {user.mention}'
-        try:
-            if reason == None:
-                await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
-            else:
-                await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
-        except:
-            m = (f"Could not send message to user ID: {user.id}. They may have DMs disabled.")
+        # If user_id is an email, don't send DM
+        if isinstance(user_id, str) and '@' in user_id:
+            m = f'Did not send a message as that user is not from Discord.'
+        else:
+            user = bot.get_user(int(user_id))
+            m = f'sent message confirming to user ID: {user.mention}'
+            try:
+                if reason is None:
+                    await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
+                else:
+                    await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
+            except:
+                m = (f"Could not send message to user ID: {user.id}. They may have DMs disabled.")
         await ctx.followup.send(f"Submission with queue number {id} has been accepted and removed from the queue. {m}")
     else:
-      await ctx.followup.send("You do not have permission to use this command.")
+        await ctx.followup.send("You do not have permission to use this command.")
 
 @bot.tree.command(name='accept-guesser', description="Accept a photo submission for the station photo guessing game")
 @app_commands.describe(station="only put in the name of the station, not 'station' or anything else")
@@ -5257,14 +5263,18 @@ async def accept_guesser(ctx, id: int, station:str, difficulty:str, mode:str='gu
 async def reject(ctx, id: int, *, reason: str):
     if ctx.author.id in admin_users:
         userid, msgid = await removeSubmission(id)
-        user = bot.get_user(int(userid))
-        
-        m = f'Sent message confirming to user ID: {user.mention}'
-        try:
-            await user.send(f"Your photo with id `{id}` has been rejected and removed from the queue.\nReason: {reason}\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
-        except:
-            m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
-        await ctx.send(f"Submission with queue number `{id}` has been rejected and removed from the queue. {m}")
+        if '@' in userid:
+            await ctx.send(f'Submission with queue number `{id}` has been rejected and removed from the queue. Did not send a message as that user is not from Discord.')
+            return
+        else:
+            user = bot.get_user(int(userid))
+            
+            m = f'Sent message confirming to user ID: {user.mention}'
+            try:
+                await user.send(f"Your photo with id `{id}` has been rejected and removed from the queue.\nReason: {reason}")
+            except:
+                m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
+            await ctx.send(f"Submission with queue number `{id}` has been rejected and removed from the queue. {m}")
     
 @bot.tree.command(name='queue', description="View the current photo submission queue")
 async def queue(ctx: discord.Interaction):
