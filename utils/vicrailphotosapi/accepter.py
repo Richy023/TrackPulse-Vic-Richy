@@ -88,14 +88,10 @@ async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
     print('recieved web image submission, processing...')
     channel = target_guild.get_channel(target_channel_id)
     if channel:
-        photo_path = data['filename']
-        if os.path.exists(photo_path):
-            try:
-                file = discord.File(photo_path)
-                await channel.send(f"New submission received <@&1402142767060221997>\nhttps://victorianrailphotos.com/profile", file=file) # type: ignore
-            except Exception as e:
-                await channel.send(content=f"An error occurred while processing a photo: {str(e)}")
-        else:
-            print(f"Photo path {photo_path} does not exist.")
+        try:
+            await channel.send(f"New submission received <@&1402142767060221997>\nhttps://victorianrailphotos.com/profile\nhttps://victorianrailphotos.com/api/queue/{data['filename']}") # type: ignore
+        except Exception as e:
+            await channel.send(content=f"An error occurred while processing a photo: {str(e)}")
+
     else:
         print(f"Channel with ID {target_channel_id} not found in guild {target_guild.name}")
