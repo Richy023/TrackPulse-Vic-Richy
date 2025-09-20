@@ -87,27 +87,12 @@ def convertToWEBP(input_path, output_path, quality=100):
 async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
     print('recieved web image submission, processing...')
     channel = target_guild.get_channel(target_channel_id)
-    public_channel = target_guild.get_channel(showcase_channel)
     if channel:
         photo_path = data['filename']
         if os.path.exists(photo_path):
             try:
                 file = discord.File(photo_path)
-                if not "@" in data['username']:
-                    await public_channel.send(f"New photo submission received from <@{data['username']}>")
-                subid, queue = await addSubmission(os.path.basename(photo_path), data['username'], data['date'], data['location'], 'website', data['number'], 0, data.get('exif', None), data.get('note', None))
-                await channel.send(f"# Photo submitted for website by <@{data['username']}>:\n- Number: {data['number']}\n- Type:{data['type']}\n- Date: {data['date']}\n- Location: {data['location']}\n- Note: {data['note']}\n<@780303451980038165> ID = `{subid}`", file=file) # type: ignore
-                
-                # publically send embed
-                if '@' in data['username']:
-                    description = f"Photo submitted by Google User for website:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}"
-                else:
-                    description = f"Photo submitted by <@{data['username']}> for website:\n- Number {data['number']}\n- Date: {data['date']}\n- Location: {data['location']}"
-                embed = discord.Embed(title='Photo Submission', description=description)
-                file = discord.File(photo_path, filename=os.path.basename(photo_path))
-                embed.set_image(url=f"attachment://{os.path.basename(photo_path)}")
-                embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
-                await public_channel.send(embed=embed, file=file)
+                await channel.send(f"New submission received <@&1402142767060221997>\nhttps://victorianrailphotos.com/profile", file=file) # type: ignore
             except Exception as e:
                 await channel.send(content=f"An error occurred while processing a photo: {str(e)}")
         else:
