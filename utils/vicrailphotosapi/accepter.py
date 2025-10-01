@@ -90,7 +90,7 @@ async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
     if channel:
         try:
             await channel.send(f"New submission received <@&1402142767060221997>\nhttps://victorianrailphotos.com/profile") # type: ignore
-            await channel.send(f'https://victorianrailphotos.com/api/queue/{data['filename']}')
+            await channel.send(f'https://victorianrailphotos.com/api/queue/{data["filename"]}')
         except Exception as e:
             await channel.send(content=f"An error occurred while processing a photo: {str(e)}")
 

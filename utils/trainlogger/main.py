@@ -236,7 +236,7 @@ def addFlight(username, date, train_number, train_type, line, start, end, operat
 def addSydneyTram(username, date, train_number, train_type, line, start, end):
 
     # Create a CSV file named after the username
-    filename = f"utils/trainlogger/userdata/sydney-trams/{username}.csv"
+    filename = f"utils/trainlogger/userdata/canberra-trams/{username}.csv"
     
     if not os.path.exists(filename):
         # Create the file if it does not exist
@@ -253,9 +253,9 @@ def addSydneyTram(username, date, train_number, train_type, line, start, end):
 
     # Write the data to the CSV file
     try:
-        os.listdir('utils\\trainlogger\\userdata\\sydney-trams')
+        os.listdir('utils\\trainlogger\\userdata\\canberra-trams')
     except FileNotFoundError:
-        os.mkdir('utils/trainlogger/userdata/sydney-trams')
+        os.mkdir('utils/trainlogger/userdata/canberra-trams')
         id = 0
 
     with open(filename, 'r+', newline='') as file:
@@ -643,6 +643,35 @@ def readAdelaideTramLogs(username):
 def readPerthLogs(username):
 
     filename = f"utils/trainlogger/userdata/perth-trains/{username}.csv"
+    user_data = []
+
+    try:
+
+        with open(filename, 'r', newline='') as file:
+            reader = csv.reader(file)
+            user_data = list(reader)
+            # data = file.readlines()
+            # print(data)
+            if user_data == []:
+                return 'no data'
+        
+
+        if len(user_data) > 0:
+            return user_data[::-1]
+        else:
+            return []
+    except FileNotFoundError:
+        print(f"File {filename} not found.")
+        return []
+
+# use this instead for future
+def universalReadLogs(username, mode):
+
+    if mode == 'train':
+        filename = f"utils/trainlogger/userdata/{username}.csv"
+    else:
+        filename = f"utils/trainlogger/userdata/{mode}/{username}.csv"
+        
     user_data = []
 
     try:
