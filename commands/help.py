@@ -110,7 +110,7 @@ Required:
 
 Required:
     Stop: input the station/stop you wish to remove the favourite for. You can choose from the list or type your own.''',
-        '/games station-guesser': '''</games station-guesser:1240101357847838813> is a command that allows you to play a game where you have to guess the station where a photo was taken at. The photos are divided into difficulty levels, although all difficulty levels except "Ultrahard" are mixed into one set. The game is divided into rounds, each round one photo is shown and you have to guess the station before the time runs out. To add a guess, type "!" followed by the station name. To skip a round, type "!skip". To end the game, type "!stop".
+        '/games station-guesser': '''</games station-guesser:1240101357847838813> is a command that allows you to play a game where you have to guess the station where a photo was taken at. The photos are divided into difficulty levels, although all difficulty levels except "Ultrahard" are mixed into one set. The game is divided into rounds, each round one photo is shown and you have to guess the station before the time runs out. To add a guess, type "@TrackPulse Vic" followed by the station name. To skip a round, type "@TrackPulse Vicskip". To end the game, type "@TrackPulse Vicstop".
 
 **Options:**
 
@@ -118,14 +118,14 @@ Optional:
     Rounds: input the number of rounds you want to play. The default is 1. The range is 1 to 100.
     Line: if you wish to only see photos for stations going along a specific line, you may select that line. You must choose from the list.
     Ultrahard: True or False. False by default. If you choose true, the photos will only be photos in the "Ultrahard" category that do not appear in the normal mode.''',
-        '/games station-order': '''</games station-order:1240101357847838813> is a command that allows you to play a game where you have to guess the next stations in a certain direction from a given station. The direction is either "Up", towards the city, or "Down", away from the city. The game is divided into rounds, each round one station and the direction are named and you have to guess the other stations before the time runs out. To add a guess, type "!" followed by the station names in order, seperated by a ", ". To skip a round, type "!skip". To end the game, type "!stop".
+        '/games station-order': '''</games station-order:1240101357847838813> is a command that allows you to play a game where you have to guess the next stations in a certain direction from a given station. The direction is either "Up", towards the city, or "Down", away from the city. The game is divided into rounds, each round one station and the direction are named and you have to guess the other stations before the time runs out. To add a guess, type "@TrackPulse Vic" followed by the station names in order, seperated by a ", ". To skip a round, type "@TrackPulse Vicskip". To end the game, type "@TrackPulse Vicstop".
 
 **Options:**
 
 Optional:
     Direction: if you wish to only play with a certain direction from the station, you may select that station. You must choose from the list. By default it is set to "Up or Down"
     Rounds: input the number of rounds you want to play. The default is 1. The range is 1 to 10.''',
-        '/games station-hangman': '''</games station-hangman:1240101357847838813> is a command that allows you to play a game where you have to guess a station name, letter by letter. To skip a round, type "!skip". To end the game, type "!stop".
+        '/games station-hangman': '''</games station-hangman:1240101357847838813> is a command that allows you to play a game where you have to guess a station name, letter by letter. To skip a round, type "@TrackPulse Vicskip". To end the game, type "@TrackPulse Vicstop".
 
 **Options:**
 
