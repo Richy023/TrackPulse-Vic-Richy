@@ -356,7 +356,7 @@ RARE_SERVICE_CHANNEL_ID = int(config['RARE_SERVICE_CHANNEL_ID'])
 COMMAND_PREFIX = config['COMMAND_PREFIX']
 USER_ID = config['USER_ID']
 
-bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=discord.Intents.all())
+bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=discord.Intents.default())
 log_channel = bot.get_channel(STARTUP_CHANNEL_ID)
 
 async def printlog(text):
@@ -2215,9 +2215,9 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
             credit = random_row[3]
 
             if ultrahard:
-                embed = discord.Embed(title=f"Guess the station! | {setLine}", color=ultrahard_colour, description=f"Type ! before your answer, e.g. !Lilydale. You have 30 seconds to answer.\n\n**Difficulty:** `{difficulty.upper()}`")
+                embed = discord.Embed(title=f"Guess the station! | {setLine}", color=ultrahard_colour, description=f"Mention the bot at the start of you message e.g. `@TrackPulse Vic Lilydale`. You have 30 seconds to answer.\n\n**Difficulty:** `{difficulty.upper()}`")
             else:
-                embed = discord.Embed(title=f"Guess the station! | {setLine}", description=f"Type ! before your answer. You have 30 seconds!\n\n**Difficulty:** `{difficulty}`")
+                embed = discord.Embed(title=f"Guess the station! | {setLine}", description=f"Mention the bot at the start of you message e.g. `@TrackPulse Vic Lilydale`. You have 30 seconds!\n\n**Difficulty:** `{difficulty}`")
                 if difficulty == 'Very Easy':
                     embed.color = very_easy_colour
                 elif difficulty == 'Easy':
@@ -2230,7 +2230,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                     embed.color = very_hard_colour
             
             embed.set_image(url=url)
-            embed.set_footer(text=f"Photo by {credit}. Use the submit photo command to submit a photo | {len(data)} photos in set | Started by {ctx.user.name}")
+            embed.set_footer(text=f"Photo by {credit}. DM @xm9g to submit a photo | {len(data)} photos in set | Started by {ctx.user.name}")
             embed.set_author(name=f"Round {round+1}/{rounds}")
 
             # Send the embed message
@@ -2241,9 +2241,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
 
             # Define a check function to validate user input
             async def check(m):
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
-            async def funnyCheck(m):    
-                return m.channel == channel and m.author != bot.user
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
             try:
                 correct = False
                 if ultrahard:
@@ -2275,8 +2273,8 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 addLb(user_response.author.id, user_response.author.name, 'guesser')
                             if user_response.author not in participants:
                                 participants.append(user_response.author)
-                                
-                        elif user_response.content.lower() == '!skip':
+
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station.title()}||" if not ultrahard else f"Round {round+1} skipped.")
                                 log_command(user_response.author.id, 'game-station-guesser-skip')
@@ -2286,7 +2284,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
                                 roundResponse = True
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-guesser-stop')
@@ -2304,7 +2302,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")  
                         
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Station Name: `{station}`\nUrl: `{url}`")
                             else:
@@ -2322,30 +2320,6 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 addLoss(user_response.author.id, user_response.author.name, 'guesser')
                             if user_response.author not in participants:
                                 participants.append(user_response.author)
-                    
-                    # checker for the funnies ( no ! needed)       
-                    if await funnyCheck(user_response) == True:
-                        # funny ones
-                        if 'idk' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'i dont know' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'sorry' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'my bad' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.") 
-                        elif 'oops' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'bruh' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} 💀")
-                        elif 'shit' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'fuck' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'what' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} its a station.")
-                        elif 'wtf' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} what?")
                           
             except asyncio.TimeoutError:
                 if ultrahard:
@@ -2537,7 +2511,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             embed = discord.Embed(
                 title=f"Which __**{numdirection if numdirection > 0 else numdirection*-1}**__ stations are __**{direction1}**__ from __**{station}**__ station on the __**{line} line**__?",
-                description=f"**Answers must be in the correct order!** Answer using this format:\n!`station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use !skip to skip to the next round.*",
+                description=f"**Answers must be in the correct order!** Answer using this format:\n<@{bot.user.id}> `station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
                 colour=lines_dictionary_main[line][1])
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
@@ -2547,7 +2521,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             # Define a check function to validate user input
             async def check(m): 
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
             async def funnyCheck(m):    
                 return m.channel == channel and m.author != bot.user
 
@@ -2578,7 +2552,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                             ignoredRounds = 0
                             roundResponse = True
                             correct = True 
-                        elif user_response.content.lower() == '!skip':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{correct_list[0]}, {correct_list[1]}{f', {correct_list[2]}' if len(correct_list) >=3 else ''}{f', {correct_list[3]}' if len(correct_list) >=4 else ''}{f', {correct_list[4]}' if len(correct_list) >=5 else ''}||")
                                 log_command(user_response.author.id, 'game-station-order-skip')
@@ -2587,7 +2561,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                                 break
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-order-stop')
@@ -2604,7 +2578,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Stations: `{correct_list1}`")
                             else:
@@ -2730,7 +2704,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
             embed = discord.Embed(
                 title=f"Guess the station! It has {len(station)} letters",
-                description=f"**Guess either letters or station names.\nNote you only have {attempts} incorrect guesses until you lose**\nAnswer using this format:\n!`Letter` or !`Station name or part of station name`\n\n*Use !skip to skip to the next round.*",
+                description=f"**Guess either letters or station names.\nNote you only have {attempts} incorrect guesses until you lose**\nAnswer using this format:\n<@{bot.user.id}> `Letter` or <@{bot.user.id}> `Station name or part of station name`\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
                 colour=metro_colour)
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
@@ -2740,9 +2714,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
             # Define a check function to validate user input
             async def check(m): 
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
-            async def funnyCheck(m):    
-                return m.channel == channel and m.author != bot.user
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
 
             # the actual input part
             try:
@@ -2780,7 +2752,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
                                 await ctx.channel.send(f'# Letters: `{guessed}`\n\n**Incorrect guesses: {failed}**\n\nIncorrect guesses left: {attempts - incorrectGuesses}')
-                        elif user_response.content.lower() == '!skip':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station}||")
                                 log_command(user_response.author.id, 'game-station-hangman-skip')
@@ -2789,7 +2761,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 break
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-hangman-stop')
@@ -2806,7 +2778,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Station: `{station}`")
                             else:
@@ -2838,31 +2810,6 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
                                 await ctx.channel.send(f'# Letters: `{guessed}`\n\n**Incorrect guesses: {failed}**\n\nIncorrect guesses left: {attempts - incorrectGuesses}')
-
-                
-                    # checker for the funnies ( no ! needed)       
-                    if await funnyCheck(user_response) == True:
-                        # funny ones
-                        if 'idk' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'i dont know' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'sorry' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'my bad' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.") 
-                        elif 'oops' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'bruh' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} 💀")
-                        elif 'shit' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'fuck' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'what' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} its station.")
-                        elif 'wtf' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} what?")
                         
             except asyncio.TimeoutError:
                 await ctx.channel.send(f"Times up. The answer was ||{station}||")
