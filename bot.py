@@ -5122,7 +5122,7 @@ async def alias(ctx: discord.Interaction, name: str):
         await ctx.followup.send('There was an error changing your alias, please try again later.')
     
 
-@bot.tree.command(name='accept', description="Accept a photo submission from the queue")
+@bot.tree.command(name='accept', description="ADMIN ONLY Accept a photo submission from the queue")
 @app_commands.choices(mode=[
     app_commands.Choice(name='train', value='train'),
     app_commands.Choice(name='tram', value='tram'),
@@ -5179,7 +5179,7 @@ async def accept(ctx, id: int, mode:str, traintype:str, featured:bool=False, not
     else:
         await ctx.followup.send("You do not have permission to use this command.")
 
-@bot.tree.command(name='accept-guesser', description="Accept a photo submission for the station photo guessing game")
+@bot.tree.command(name='accept-guesser', description="ADMIN ONLY Accept a photo submission for the station photo guessing game")
 @app_commands.describe(station="only put in the name of the station, not 'station' or anything else")
 @app_commands.choices(mode=[
     app_commands.Choice(name="Normal", value="guesser"),
