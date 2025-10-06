@@ -353,10 +353,9 @@ config = dotenv_values(".env")
 BOT_TOKEN = config['BOT_TOKEN']
 STARTUP_CHANNEL_ID = int(config['STARTUP_CHANNEL_ID']) # channel id to send the startup message
 RARE_SERVICE_CHANNEL_ID = int(config['RARE_SERVICE_CHANNEL_ID'])
-COMMAND_PREFIX = config['COMMAND_PREFIX']
 USER_ID = config['USER_ID']
 
-bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=discord.Intents.default())
+bot = commands.Bot(command_prefix=commands.when_mentioned, intents=discord.Intents.default())
 log_channel = bot.get_channel(STARTUP_CHANNEL_ID)
 
 async def printlog(text):
