@@ -2255,7 +2255,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                     if await check(user_response) == True:  # fixed cause check broke
                     
                         # Check if the user's response matches the correct station
-                        if user_response.content[1:].lower().replace(" ", "") == station.lower().replace(" ", ""):
+                        if user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") == station.lower().replace(" ", ""):
                             log_command(user_response.author.id, 'game-station-guesser-correct')
                             if ultrahard:
                                 await ctx.channel.send(f"{user_response.author.mention} guessed it right!")
@@ -2726,7 +2726,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                         # Check if the user's response matches the correct station
                         if user_response.content[1:].lower().replace(" ", "") in station.lower().replace(" ", ""):
                             if not user_response.content[1:].lower().replace(" ", "") in guessed_list:
-                                guessed_list = guessed_list + user_response.content[1:].lower().replace(" ", "") # this is obviously broken, will be funny to see tho
+                                guessed_list = guessed_list + user_response.content.replace(f'<@{bot.user.id}>', '').strip().lower().replace(" ", "")
                                 await printlog(guessed_list)
                                 guessed = ""
                                 for letter in station.replace(" ", ""):
