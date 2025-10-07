@@ -4,7 +4,7 @@ import os
 import discord
 from utils.checktype import trainType
 from utils.colors import getMapEmoji
-from utils.locationFromNumber import convertTrainLocationToGoogle, getTrainLocation, makeMapv2
+from utils.locationFromNumber import GTFSgetTrainLocation, convertTrainLocationToGoogle, getTrainLocation, makeMapv2
 from utils.photo import getPhotoCredits
 from utils.routeName import get_route_name
 from utils.search import trainData
@@ -20,9 +20,9 @@ async def addmap(embed_update, mapEmbedUpdate, train, set, type, interchange_sta
         # After map generation, send it
         if type == "HCMT": # because ptv api lists hcmts like "9005M-9905M" for some fucking reason
             hcmtcar1 = set.split('-')
-            location = getTrainLocation(hcmtcar1[0]+'M')
+            location = GTFSgetTrainLocation(hcmtcar1[0]+'M')
         else:
-            location = getTrainLocation(set)
+            location = GTFSgetTrainLocation(set)
         line = ""
         print(f"Location: {location}")
         url = convertTrainLocationToGoogle(location)
@@ -249,8 +249,8 @@ async def searchTrainCommand(ctx, train: str, hide_run_info:bool=False, metro_co
             container = InfoContainer(id=1, accent_color=colour)
 
         embed_update = await ctx.edit_original_response(view=TestView())
-        
-        if type in metroTrains and not hide_run_info:
+
+        if type in metroTrains or type in vlineTrains and not hide_run_info:
             # map thing
             mapEmbed = discord.Embed(title=f"Trip Information for {train.upper()}:", color=metro_colour)
             mapEmbed.add_field(name='<a:botloading2:1261102206468362381> Loading Trip Data', value='⠀')

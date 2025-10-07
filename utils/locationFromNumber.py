@@ -1,3 +1,4 @@
+from utils.gtfs.realtime import getVehiclePositions
 from utils.checktype import trainType
 from utils.search import *
 import json
@@ -48,7 +49,6 @@ def find_vehicle_by_descriptor_id(data, search_string):
         return results
 
 def getTrainLocation(Tnumber):
-
     def process_route(route):
         json_data = runs_api_request(route["route_id"])
         results = find_vehicle_by_descriptor_id(json_data, Tnumber)
@@ -67,6 +67,15 @@ def getTrainLocation(Tnumber):
         thread.join()
     
     return all_results
+
+def GTFSgetTrainLocation(Tnumber, mode):
+    data = getVehiclePositions(mode)
+    for entity in data.get('entity', []):
+        if 'vehicle' in entity:
+            vehicle = entity['vehicle']
+            if 'position' in vehicle and 'vehicle' in vehicle and Tnumber in vehicle['vehicle']['id']:
+                return vehicle['position']
+
 
 
 tramRoutes = [

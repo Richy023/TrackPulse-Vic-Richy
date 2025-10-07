@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_920b9148297a1f8a4a366e9f06d9f450 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_920b9148297a1f8a4a366e9f06d9f450" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_920b9148297a1f8a4a366e9f06d9f450 = L.map(
+                "map_920b9148297a1f8a4a366e9f06d9f450",
+                {
+                    center: [-37.768442444444446, 144.84104133333332],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_afaa768ba4bd6a28f1ab90f11b3dea84 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_afaa768ba4bd6a28f1ab90f11b3dea84.addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+            var circle_marker_5819136b6839ebe2ca14c0993d11379c = L.circleMarker(
+                [-37.37518, 144.54756],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_0a3d80f54ece7576fd6615e286527d36 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29ec7bf508e8ea4b59cf4fa925296074 = $(`<div id="html_29ec7bf508e8ea4b59cf4fa925296074" style="width: 100.0%; height: 100.0%;">entity: 01-SWL--7-T0-8084 trip: 01-SWL--7-T0-8084 route: aus:vic:vic-01-SWL: start_time: 13:35:00 vehicle_ts: 2025-10-07 06:10:16 UTC</div>`)[0];
+                popup_0a3d80f54ece7576fd6615e286527d36.setContent(html_29ec7bf508e8ea4b59cf4fa925296074);
+            
+        
+
+        circle_marker_5819136b6839ebe2ca14c0993d11379c.bindPopup(popup_0a3d80f54ece7576fd6615e286527d36)
+        ;
+
+        
+    
+    
+            var circle_marker_860dda790d257a16dd0dee70ae627264 = L.circleMarker(
+                [-38.225815, 146.3668],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_0703c36d5af685b99ee4a2f7f4ae180f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0b1f60b3d391d1e4d73a4b9a819e681 = $(`<div id="html_b0b1f60b3d391d1e4d73a4b9a819e681" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8431 trip: 01-TRN--7-T0-8431 route: aus:vic:vic-01-TRN: start_time: 15:03:00 vehicle_ts: 2025-10-07 06:12:07 UTC</div>`)[0];
+                popup_0703c36d5af685b99ee4a2f7f4ae180f.setContent(html_b0b1f60b3d391d1e4d73a4b9a819e681);
+            
+        
+
+        circle_marker_860dda790d257a16dd0dee70ae627264.bindPopup(popup_0703c36d5af685b99ee4a2f7f4ae180f)
+        ;
+
+        
+    
+    
+            var circle_marker_cc36fab1a0d6710e566c05484d47b98e = L.circleMarker(
+                [-36.680508, 144.33415],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_20bbaa3218291668a1a61c7089abfd51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bbad4553108c7c3a7bc81e9b533a5bf2 = $(`<div id="html_bbad4553108c7c3a7bc81e9b533a5bf2" style="width: 100.0%; height: 100.0%;">entity: 01-ECH--7-T0-8077 trip: 01-ECH--7-T0-8077 route: aus:vic:vic-01-ECH: start_time: 15:06:00 vehicle_ts: 2025-10-07 06:12:16 UTC</div>`)[0];
+                popup_20bbaa3218291668a1a61c7089abfd51.setContent(html_bbad4553108c7c3a7bc81e9b533a5bf2);
+            
+        
+
+        circle_marker_cc36fab1a0d6710e566c05484d47b98e.bindPopup(popup_20bbaa3218291668a1a61c7089abfd51)
+        ;
+
+        
+    
+    
+            var circle_marker_eef38b9c8a22fdd7581a538713fd6daa = L.circleMarker(
+                [-37.89657, 145.0814],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_ce4b66c6edc94d86e9667fecc7b32d77 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f17a3d40cd2262a276b33bd0d226e74f = $(`<div id="html_f17a3d40cd2262a276b33bd0d226e74f" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8438 trip: 01-TRN--7-T0-8438 route: aus:vic:vic-01-TRN: start_time: 15:09:00 vehicle_ts: 2025-10-07 06:12:25 UTC</div>`)[0];
+                popup_ce4b66c6edc94d86e9667fecc7b32d77.setContent(html_f17a3d40cd2262a276b33bd0d226e74f);
+            
+        
+
+        circle_marker_eef38b9c8a22fdd7581a538713fd6daa.bindPopup(popup_ce4b66c6edc94d86e9667fecc7b32d77)
+        ;
+
+        
+    
+    
+            var circle_marker_e6e2564f5ffd1cbee15711d5ff4e4743 = L.circleMarker(
+                [-38.226902, 144.2546],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_f1b1481dc9b09464e6f7c82259bd9160 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_216adcefbe65cba342d8c8bac72a88e4 = $(`<div id="html_216adcefbe65cba342d8c8bac72a88e4" style="width: 100.0%; height: 100.0%;">entity: 01-WBL--7-T0-8866 trip: 01-WBL--7-T0-8866 route: aus:vic:vic-01-WBL: start_time: 15:10:00 vehicle_ts: 2025-10-07 06:12:45 UTC</div>`)[0];
+                popup_f1b1481dc9b09464e6f7c82259bd9160.setContent(html_216adcefbe65cba342d8c8bac72a88e4);
+            
+        
+
+        circle_marker_e6e2564f5ffd1cbee15711d5ff4e4743.bindPopup(popup_f1b1481dc9b09464e6f7c82259bd9160)
+        ;
+
+        
+    
+    
+            var circle_marker_5ebe1d7d59131c3b3fdea734ef2fb9da = L.circleMarker(
+                [-37.254154, 144.43526],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_c211fcab709c25fd0165d28e8185d154 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b7072d0d0649ce5e257d1eaec0d8d814 = $(`<div id="html_b7072d0d0649ce5e257d1eaec0d8d814" style="width: 100.0%; height: 100.0%;">entity: 01-ECH--7-T0-8076 trip: 01-ECH--7-T0-8076 route: aus:vic:vic-01-ECH: start_time: 15:15:00 vehicle_ts: 2025-10-07 06:12:43 UTC</div>`)[0];
+                popup_c211fcab709c25fd0165d28e8185d154.setContent(html_b7072d0d0649ce5e257d1eaec0d8d814);
+            
+        
+
+        circle_marker_5ebe1d7d59131c3b3fdea734ef2fb9da.bindPopup(popup_c211fcab709c25fd0165d28e8185d154)
+        ;
+
+        
+    
+    
+            var circle_marker_99c808e3360ad7628845e9be2a9927a5 = L.circleMarker(
+                [-37.793365, 144.83716],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_6092d1e4f3ff27060f2d384f47784a1b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_010c0a45b2f0709cb56b04578fcd8c64 = $(`<div id="html_010c0a45b2f0709cb56b04578fcd8c64" style="width: 100.0%; height: 100.0%;">entity: 01-BGO--7-T0-8038 trip: 01-BGO--7-T0-8038 route: aus:vic:vic-01-BGO: start_time: 15:26:00 vehicle_ts: 2025-10-07 06:12:26 UTC</div>`)[0];
+                popup_6092d1e4f3ff27060f2d384f47784a1b.setContent(html_010c0a45b2f0709cb56b04578fcd8c64);
+            
+        
+
+        circle_marker_99c808e3360ad7628845e9be2a9927a5.bindPopup(popup_6092d1e4f3ff27060f2d384f47784a1b)
+        ;
+
+        
+    
+    
+            var circle_marker_9252fc7cbeb44c9847d32d17201a8c59 = L.circleMarker(
+                [-37.807526, 144.94249],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_79d7e75b41debb0267dbc00391df4c05 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f949715b25d02445b037f47f2eff613 = $(`<div id="html_6f949715b25d02445b037f47f2eff613" style="width: 100.0%; height: 100.0%;">entity: 01-SER--7-T0-8326 trip: 01-SER--7-T0-8326 route: aus:vic:vic-01-SER: start_time: 15:41:00 vehicle_ts: 2025-10-07 06:12:39 UTC</div>`)[0];
+                popup_79d7e75b41debb0267dbc00391df4c05.setContent(html_6f949715b25d02445b037f47f2eff613);
+            
+        
+
+        circle_marker_9252fc7cbeb44c9847d32d17201a8c59.bindPopup(popup_79d7e75b41debb0267dbc00391df4c05)
+        ;
+
+        
+    
+    
+            var circle_marker_c8641bf5a453344ea08c469b68afed00 = L.circleMarker(
+                [-38.047047, 145.3551],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_03ddb78eb80259ccdb6899198f47d365 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_75228601f3b8ca0b129be9db8b7c2b10 = $(`<div id="html_75228601f3b8ca0b129be9db8b7c2b10" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8440 trip: 01-TRN--7-T0-8440 route: aus:vic:vic-01-TRN: start_time: 15:44:00 vehicle_ts: 2025-10-07 06:12:18 UTC</div>`)[0];
+                popup_03ddb78eb80259ccdb6899198f47d365.setContent(html_75228601f3b8ca0b129be9db8b7c2b10);
+            
+        
+
+        circle_marker_c8641bf5a453344ea08c469b68afed00.bindPopup(popup_03ddb78eb80259ccdb6899198f47d365)
+        ;
+
+        
+    
+    
+            var circle_marker_4fe75616dd20ddbb56500f39e848f2b4 = L.circleMarker(
+                [-37.798264, 144.85228],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_b9c222d6d471ff6b7b7a5726d75eff19 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7e98f4503997173fe52a69e8cacbfd0 = $(`<div id="html_d7e98f4503997173fe52a69e8cacbfd0" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8142 trip: 01-BAT--7-T0-8142 route: aus:vic:vic-01-BAT: start_time: 15:44:00 vehicle_ts: 2025-10-07 06:11:58 UTC</div>`)[0];
+                popup_b9c222d6d471ff6b7b7a5726d75eff19.setContent(html_d7e98f4503997173fe52a69e8cacbfd0);
+            
+        
+
+        circle_marker_4fe75616dd20ddbb56500f39e848f2b4.bindPopup(popup_b9c222d6d471ff6b7b7a5726d75eff19)
+        ;
+
+        
+    
+    
+            var circle_marker_161d0f6198d512c090652e09cb238602 = L.circleMarker(
+                [-38.12208, 145.79062],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_47ddaa7749aca154d82c36d2aaeabda5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b8da8beaf2c1d9786b1110c413b1aceb = $(`<div id="html_b8da8beaf2c1d9786b1110c413b1aceb" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8433 trip: 01-TRN--7-T0-8433 route: aus:vic:vic-01-TRN: start_time: 15:36:00 vehicle_ts: 2025-10-07 06:12:34 UTC</div>`)[0];
+                popup_47ddaa7749aca154d82c36d2aaeabda5.setContent(html_b8da8beaf2c1d9786b1110c413b1aceb);
+            
+        
+
+        circle_marker_161d0f6198d512c090652e09cb238602.bindPopup(popup_47ddaa7749aca154d82c36d2aaeabda5)
+        ;
+
+        
+    
+    
+            var circle_marker_7ffec653fdce99ee14bee1e8500fce33 = L.circleMarker(
+                [-37.56903, 143.91551],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_ff93b24d25accbe2cd740c033282afd0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a196f3f90e9922d9cea793a917ae455 = $(`<div id="html_8a196f3f90e9922d9cea793a917ae455" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8133 trip: 01-BAT--7-T0-8133 route: aus:vic:vic-01-BAT: start_time: 15:58:00 vehicle_ts: 2025-10-07 06:12:19 UTC</div>`)[0];
+                popup_ff93b24d25accbe2cd740c033282afd0.setContent(html_8a196f3f90e9922d9cea793a917ae455);
+            
+        
+
+        circle_marker_7ffec653fdce99ee14bee1e8500fce33.bindPopup(popup_ff93b24d25accbe2cd740c033282afd0)
+        ;
+
+        
+    
+    
+            var circle_marker_8e7dcf87c89e2a9494f13346476b09c7 = L.circleMarker(
+                [-37.02964, 145.12923],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_1d7f2466b4114bea49071dc3bd45f80c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a60afa41daaf0a3a3847336c8589a1fa = $(`<div id="html_a60afa41daaf0a3a3847336c8589a1fa" style="width: 100.0%; height: 100.0%;">entity: 01-SNH--7-T0-8368 trip: 01-SNH--7-T0-8368 route: aus:vic:vic-01-SNH: start_time: 16:04:00 vehicle_ts: 2025-10-07 06:12:40 UTC</div>`)[0];
+                popup_1d7f2466b4114bea49071dc3bd45f80c.setContent(html_a60afa41daaf0a3a3847336c8589a1fa);
+            
+        
+
+        circle_marker_8e7dcf87c89e2a9494f13346476b09c7.bindPopup(popup_1d7f2466b4114bea49071dc3bd45f80c)
+        ;
+
+        
+    
+    
+            var circle_marker_c9f17455a9b4bd8fbadab871b63b7ecd = L.circleMarker(
+                [-37.33715, 144.50581],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_e80e4d2c2ac1ba0ce231c319039afc1f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1287824edfffff80d101c56e6e120a77 = $(`<div id="html_1287824edfffff80d101c56e6e120a77" style="width: 100.0%; height: 100.0%;">entity: 01-BGO--7-T0-8029 trip: 01-BGO--7-T0-8029 route: aus:vic:vic-01-BGO: start_time: 16:06:00 vehicle_ts: 2025-10-07 06:11:59 UTC</div>`)[0];
+                popup_e80e4d2c2ac1ba0ce231c319039afc1f.setContent(html_1287824edfffff80d101c56e6e120a77);
+            
+        
+
+        circle_marker_c9f17455a9b4bd8fbadab871b63b7ecd.bindPopup(popup_e80e4d2c2ac1ba0ce231c319039afc1f)
+        ;
+
+        
+    
+    
+            var circle_marker_1fe239813cef507a7322d93985ea611e = L.circleMarker(
+                [-37.31634, 145.0085],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_1207837c78b8a2259e6ea07c2621ec79 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_61ce44b283bd17c8c8b7376b719a11d5 = $(`<div id="html_61ce44b283bd17c8c8b7376b719a11d5" style="width: 100.0%; height: 100.0%;">entity: 01-SNH--7-T0-8367 trip: 01-SNH--7-T0-8367 route: aus:vic:vic-01-SNH: start_time: 16:07:00 vehicle_ts: 2025-10-07 06:12:27 UTC</div>`)[0];
+                popup_1207837c78b8a2259e6ea07c2621ec79.setContent(html_61ce44b283bd17c8c8b7376b719a11d5);
+            
+        
+
+        circle_marker_1fe239813cef507a7322d93985ea611e.bindPopup(popup_1207837c78b8a2259e6ea07c2621ec79)
+        ;
+
+        
+    
+    
+            var circle_marker_f4ab5ec1e594f858d13fdb87e9e2715a = L.circleMarker(
+                [-37.800938, 144.9324],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_0980e05afb72a31577bbef95e34bf487 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_67766ad65fad98db77c388fc30e780cd = $(`<div id="html_67766ad65fad98db77c388fc30e780cd" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8786 trip: 01-GEL--7-T0-8786 route: aus:vic:vic-01-GEL: start_time: 16:10:00 vehicle_ts: 2025-10-07 06:12:24 UTC</div>`)[0];
+                popup_0980e05afb72a31577bbef95e34bf487.setContent(html_67766ad65fad98db77c388fc30e780cd);
+            
+        
+
+        circle_marker_f4ab5ec1e594f858d13fdb87e9e2715a.bindPopup(popup_0980e05afb72a31577bbef95e34bf487)
+        ;
+
+        
+    
+    
+            var circle_marker_c27c7cdffa953a28a0f68058d2c53bbe = L.circleMarker(
+                [-38.154274, 144.35341],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_1a89216286450dd74d785f62e35d6df0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f5a4c370de19b2dc12a76f2c5cb0357 = $(`<div id="html_9f5a4c370de19b2dc12a76f2c5cb0357" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8771 trip: 01-GEL--7-T0-8771 route: aus:vic:vic-01-GEL: start_time: 16:09:00 vehicle_ts: 2025-10-07 06:12:11 UTC</div>`)[0];
+                popup_1a89216286450dd74d785f62e35d6df0.setContent(html_9f5a4c370de19b2dc12a76f2c5cb0357);
+            
+        
+
+        circle_marker_c27c7cdffa953a28a0f68058d2c53bbe.bindPopup(popup_1a89216286450dd74d785f62e35d6df0)
+        ;
+
+        
+    
+    
+            var circle_marker_d23ddd3a960d3a78ff4d01ed719d263f = L.circleMarker(
+                [-37.64375, 144.2907],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_2865ba4adcb6bf00dac212e36b315c0b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_422f7c9547babd821842a73dfb77a9b2 = $(`<div id="html_422f7c9547babd821842a73dfb77a9b2" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8135 trip: 01-BAT--7-T0-8135 route: aus:vic:vic-01-BAT: start_time: 16:17:00 vehicle_ts: 2025-10-07 06:12:38 UTC</div>`)[0];
+                popup_2865ba4adcb6bf00dac212e36b315c0b.setContent(html_422f7c9547babd821842a73dfb77a9b2);
+            
+        
+
+        circle_marker_d23ddd3a960d3a78ff4d01ed719d263f.bindPopup(popup_2865ba4adcb6bf00dac212e36b315c0b)
+        ;
+
+        
+    
+    
+            var circle_marker_9a5e93af497797de802f3cb3636bc31b = L.circleMarker(
+                [-38.0394, 145.34491],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_a2d347389eaf953da658f535f5394ec2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a2818463057b7b201975064fa17ecc90 = $(`<div id="html_a2818463057b7b201975064fa17ecc90" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8435 trip: 01-TRN--7-T0-8435 route: aus:vic:vic-01-TRN: start_time: 16:17:00 vehicle_ts: 2025-10-07 06:12:00 UTC</div>`)[0];
+                popup_a2d347389eaf953da658f535f5394ec2.setContent(html_a2818463057b7b201975064fa17ecc90);
+            
+        
+
+        circle_marker_9a5e93af497797de802f3cb3636bc31b.bindPopup(popup_a2d347389eaf953da658f535f5394ec2)
+        ;
+
+        
+    
+    
+            var circle_marker_c28edba4da3c3c3aab47420783ed6b31 = L.circleMarker(
+                [-37.82871, 144.7185],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_5147249ee8201e23084009ebefed2b8f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_28ec2c0bf98e0ac44a99a6f69e61bc06 = $(`<div id="html_28ec2c0bf98e0ac44a99a6f69e61bc06" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8788 trip: 01-GEL--7-T0-8788 route: aus:vic:vic-01-GEL: start_time: 16:21:00 vehicle_ts: 2025-10-07 06:12:31 UTC</div>`)[0];
+                popup_5147249ee8201e23084009ebefed2b8f.setContent(html_28ec2c0bf98e0ac44a99a6f69e61bc06);
+            
+        
+
+        circle_marker_c28edba4da3c3c3aab47420783ed6b31.bindPopup(popup_5147249ee8201e23084009ebefed2b8f)
+        ;
+
+        
+    
+    
+            var circle_marker_d2c9da48111e85f67e297fceff39200d = L.circleMarker(
+                [-37.54775, 144.96706],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_73f1975825bcc637bded591d6607ecd1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9e20a3c4b7ef58ab3e82de4f723d46ee = $(`<div id="html_9e20a3c4b7ef58ab3e82de4f723d46ee" style="width: 100.0%; height: 100.0%;">entity: 01-SER--7-T0-8328 trip: 01-SER--7-T0-8328 route: aus:vic:vic-01-SER: start_time: 16:22:00 vehicle_ts: 2025-10-07 06:12:34 UTC</div>`)[0];
+                popup_73f1975825bcc637bded591d6607ecd1.setContent(html_9e20a3c4b7ef58ab3e82de4f723d46ee);
+            
+        
+
+        circle_marker_d2c9da48111e85f67e297fceff39200d.bindPopup(popup_73f1975825bcc637bded591d6607ecd1)
+        ;
+
+        
+    
+    
+            var circle_marker_4eab5314b77e62bdc8f062ead52b5865 = L.circleMarker(
+                [-38.136333, 145.85603],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_9db48dde92e516a2727faad86addc11c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_81bee605ec7ba0831a52f7e40e31d656 = $(`<div id="html_81bee605ec7ba0831a52f7e40e31d656" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8442 trip: 01-TRN--7-T0-8442 route: aus:vic:vic-01-TRN: start_time: 16:24:00 vehicle_ts: 2025-10-07 06:12:27 UTC</div>`)[0];
+                popup_9db48dde92e516a2727faad86addc11c.setContent(html_81bee605ec7ba0831a52f7e40e31d656);
+            
+        
+
+        circle_marker_4eab5314b77e62bdc8f062ead52b5865.bindPopup(popup_9db48dde92e516a2727faad86addc11c)
+        ;
+
+        
+    
+    
+            var circle_marker_d82cee4407e9afe7fb1b3f295ac17943 = L.circleMarker(
+                [-38.02109, 144.41562],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_ac3247abe6bdbc718d516d8115940cd7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6a7f08626b4e0efa7e638468ee421ab = $(`<div id="html_f6a7f08626b4e0efa7e638468ee421ab" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8773 trip: 01-GEL--7-T0-8773 route: aus:vic:vic-01-GEL: start_time: 16:25:00 vehicle_ts: 2025-10-07 06:12:33 UTC</div>`)[0];
+                popup_ac3247abe6bdbc718d516d8115940cd7.setContent(html_f6a7f08626b4e0efa7e638468ee421ab);
+            
+        
+
+        circle_marker_d82cee4407e9afe7fb1b3f295ac17943.bindPopup(popup_ac3247abe6bdbc718d516d8115940cd7)
+        ;
+
+        
+    
+    
+            var circle_marker_51b1f027def316e771edc2e739a9326d = L.circleMarker(
+                [-37.466938, 144.66475],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_f59d8e4ebbf87004b697c965f6103cd8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d884fafc29fe4b232291726cfa850acb = $(`<div id="html_d884fafc29fe4b232291726cfa850acb" style="width: 100.0%; height: 100.0%;">entity: 01-BGO--7-T0-8031 trip: 01-BGO--7-T0-8031 route: aus:vic:vic-01-BGO: start_time: 16:29:00 vehicle_ts: 2025-10-07 06:12:14 UTC</div>`)[0];
+                popup_f59d8e4ebbf87004b697c965f6103cd8.setContent(html_d884fafc29fe4b232291726cfa850acb);
+            
+        
+
+        circle_marker_51b1f027def316e771edc2e739a9326d.bindPopup(popup_f59d8e4ebbf87004b697c965f6103cd8)
+        ;
+
+        
+    
+    
+            var circle_marker_5952c4b9c80eeb2828f8581c4ba4219f = L.circleMarker(
+                [-37.955364, 144.51685],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_b2813618c9c1988771b87b4820f08096 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e75fd44fb1bb09c586b19868e2e4e30a = $(`<div id="html_e75fd44fb1bb09c586b19868e2e4e30a" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8775 trip: 01-GEL--7-T0-8775 route: aus:vic:vic-01-GEL: start_time: 16:31:00 vehicle_ts: 2025-10-07 06:11:59 UTC</div>`)[0];
+                popup_b2813618c9c1988771b87b4820f08096.setContent(html_e75fd44fb1bb09c586b19868e2e4e30a);
+            
+        
+
+        circle_marker_5952c4b9c80eeb2828f8581c4ba4219f.bindPopup(popup_b2813618c9c1988771b87b4820f08096)
+        ;
+
+        
+    
+    
+            var circle_marker_2ea740355db044cda83db141d15b8775 = L.circleMarker(
+                [-37.872734, 144.60832],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_6b7b7516bc39ea6071ec2f2934d89559 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c1d98e5dd0bac13efe309c98b3a15fd = $(`<div id="html_0c1d98e5dd0bac13efe309c98b3a15fd" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8937 trip: 01-GEL--7-T0-8937 route: aus:vic:vic-01-GEL: start_time: 16:36:00 vehicle_ts: 2025-10-07 06:12:05 UTC</div>`)[0];
+                popup_6b7b7516bc39ea6071ec2f2934d89559.setContent(html_0c1d98e5dd0bac13efe309c98b3a15fd);
+            
+        
+
+        circle_marker_2ea740355db044cda83db141d15b8775.bindPopup(popup_6b7b7516bc39ea6071ec2f2934d89559)
+        ;
+
+        
+    
+    
+            var circle_marker_295000f39d9bf0186d4e89de7dfb7283 = L.circleMarker(
+                [-37.68989, 144.9163],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_67111868b0317409f5db6b8a67804009 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d55093782201d07143942e56ce123b39 = $(`<div id="html_d55093782201d07143942e56ce123b39" style="width: 100.0%; height: 100.0%;">entity: 01-SER--7-T0-8325 trip: 01-SER--7-T0-8325 route: aus:vic:vic-01-SER: start_time: 16:37:00 vehicle_ts: 2025-10-07 06:12:13 UTC</div>`)[0];
+                popup_67111868b0317409f5db6b8a67804009.setContent(html_d55093782201d07143942e56ce123b39);
+            
+        
+
+        circle_marker_295000f39d9bf0186d4e89de7dfb7283.bindPopup(popup_67111868b0317409f5db6b8a67804009)
+        ;
+
+        
+    
+    
+            var circle_marker_f81323417b27ddfc6d59586cfe3d6ed2 = L.circleMarker(
+                [-37.719795, 144.62596],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_8b06ed7f6f4aac5ecfb1c5a384fabefb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_90a8db93823996b91a5fbba323b55881 = $(`<div id="html_90a8db93823996b91a5fbba323b55881" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8137 trip: 01-BAT--7-T0-8137 route: aus:vic:vic-01-BAT: start_time: 16:39:00 vehicle_ts: 2025-10-07 06:12:26 UTC</div>`)[0];
+                popup_8b06ed7f6f4aac5ecfb1c5a384fabefb.setContent(html_90a8db93823996b91a5fbba323b55881);
+            
+        
+
+        circle_marker_f81323417b27ddfc6d59586cfe3d6ed2.bindPopup(popup_8b06ed7f6f4aac5ecfb1c5a384fabefb)
+        ;
+
+        
+    
+    
+            var circle_marker_40920fe59c2142b6d44fd0b2bae9f6e7 = L.circleMarker(
+                [-37.59347, 144.14098],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_4ce7727ca2db5de2e4d3eac82684ad3f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_79f19665eede76a19d7942e40a11b6ad = $(`<div id="html_79f19665eede76a19d7942e40a11b6ad" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8144 trip: 01-BAT--7-T0-8144 route: aus:vic:vic-01-BAT: start_time: 16:40:00 vehicle_ts: 2025-10-07 06:12:11 UTC</div>`)[0];
+                popup_4ce7727ca2db5de2e4d3eac82684ad3f.setContent(html_79f19665eede76a19d7942e40a11b6ad);
+            
+        
+
+        circle_marker_40920fe59c2142b6d44fd0b2bae9f6e7.bindPopup(popup_4ce7727ca2db5de2e4d3eac82684ad3f)
+        ;
+
+        
+    
+    
+            var circle_marker_e43a427e870633c06f22a2609fc2ec20 = L.circleMarker(
+                [-37.74637, 144.69026],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_e7d0b0b4fa0fe25fc7d2cdc2e2e2e442 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d83f5aba2e3789de45c6befaa97ac776 = $(`<div id="html_d83f5aba2e3789de45c6befaa97ac776" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8237 trip: 01-BAT--7-T0-8237 route: aus:vic:vic-01-BAT: start_time: 16:42:00 vehicle_ts: 2025-10-07 06:12:40 UTC</div>`)[0];
+                popup_e7d0b0b4fa0fe25fc7d2cdc2e2e2e442.setContent(html_d83f5aba2e3789de45c6befaa97ac776);
+            
+        
+
+        circle_marker_e43a427e870633c06f22a2609fc2ec20.bindPopup(popup_e7d0b0b4fa0fe25fc7d2cdc2e2e2e442)
+        ;
+
+        
+    
+    
+            var circle_marker_3214260e15f4f9959389d26bdd0ea36e = L.circleMarker(
+                [-37.830914, 144.71469],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_672f1894cb6727034168d817f4fc47d9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_98bf52191e6dec6d5fb0f654de8e5da6 = $(`<div id="html_98bf52191e6dec6d5fb0f654de8e5da6" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8777 trip: 01-GEL--7-T0-8777 route: aus:vic:vic-01-GEL: start_time: 16:46:00 vehicle_ts: 2025-10-07 06:12:16 UTC</div>`)[0];
+                popup_672f1894cb6727034168d817f4fc47d9.setContent(html_98bf52191e6dec6d5fb0f654de8e5da6);
+            
+        
+
+        circle_marker_3214260e15f4f9959389d26bdd0ea36e.bindPopup(popup_672f1894cb6727034168d817f4fc47d9)
+        ;
+
+        
+    
+    
+            var circle_marker_01def39bb8dad6219d9147d47ac93b87 = L.circleMarker(
+                [-37.77358, 144.75725],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_c83fbd5dd1090943681eafefd35a81ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e2f38e3b2a066135c54e79601d67aec8 = $(`<div id="html_e2f38e3b2a066135c54e79601d67aec8" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8779 trip: 01-GEL--7-T0-8779 route: aus:vic:vic-01-GEL: start_time: 16:49:00 vehicle_ts: 2025-10-07 06:12:09 UTC</div>`)[0];
+                popup_c83fbd5dd1090943681eafefd35a81ea.setContent(html_e2f38e3b2a066135c54e79601d67aec8);
+            
+        
+
+        circle_marker_01def39bb8dad6219d9147d47ac93b87.bindPopup(popup_c83fbd5dd1090943681eafefd35a81ea)
+        ;
+
+        
+    
+    
+            var circle_marker_2e423ba8b180b97b6c4cf5f934cfc5a6 = L.circleMarker(
+                [-37.96298, 144.49838],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_219a20a51e48f193c02bb5e5e554bf21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_598806393f47468457c2bef228916f7e = $(`<div id="html_598806393f47468457c2bef228916f7e" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8790 trip: 01-GEL--7-T0-8790 route: aus:vic:vic-01-GEL: start_time: 16:49:00 vehicle_ts: 2025-10-07 06:12:44 UTC</div>`)[0];
+                popup_219a20a51e48f193c02bb5e5e554bf21.setContent(html_598806393f47468457c2bef228916f7e);
+            
+        
+
+        circle_marker_2e423ba8b180b97b6c4cf5f934cfc5a6.bindPopup(popup_219a20a51e48f193c02bb5e5e554bf21)
+        ;
+
+        
+    
+    
+            var circle_marker_d0e512698f4df2b9a8c5632e92fd23f8 = L.circleMarker(
+                [-37.747173, 144.80164],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_c64ed297182f157c2b5f876fb2f14f73 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f603f660ae311e7cad79181bf3e5df8d = $(`<div id="html_f603f660ae311e7cad79181bf3e5df8d" style="width: 100.0%; height: 100.0%;">entity: 01-BGO--7-T0-8033 trip: 01-BGO--7-T0-8033 route: aus:vic:vic-01-BGO: start_time: 16:52:00 vehicle_ts: 2025-10-07 06:12:44 UTC</div>`)[0];
+                popup_c64ed297182f157c2b5f876fb2f14f73.setContent(html_f603f660ae311e7cad79181bf3e5df8d);
+            
+        
+
+        circle_marker_d0e512698f4df2b9a8c5632e92fd23f8.bindPopup(popup_c64ed297182f157c2b5f876fb2f14f73)
+        ;
+
+        
+    
+    
+            var circle_marker_f16da0b59b154fe79468d9850243d6f3 = L.circleMarker(
+                [-37.783646, 144.8081],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_6a991e759e851fbab394914d0d67817b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_844e5ce041208a78a9e3cd12d0ba497a = $(`<div id="html_844e5ce041208a78a9e3cd12d0ba497a" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8939 trip: 01-GEL--7-T0-8939 route: aus:vic:vic-01-GEL: start_time: 16:55:00 vehicle_ts: 2025-10-07 06:12:41 UTC</div>`)[0];
+                popup_6a991e759e851fbab394914d0d67817b.setContent(html_844e5ce041208a78a9e3cd12d0ba497a);
+            
+        
+
+        circle_marker_f16da0b59b154fe79468d9850243d6f3.bindPopup(popup_6a991e759e851fbab394914d0d67817b)
+        ;
+
+        
+    
+    
+            var circle_marker_4470acfa4a5c834569395ca0f60ae8ea = L.circleMarker(
+                [-37.845036, 145.00308],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_52457dd04f053d703892fc3797ac20e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b8c0a9db7e4a4f0cdbbe1da25ccb98e9 = $(`<div id="html_b8c0a9db7e4a4f0cdbbe1da25ccb98e9" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8441 trip: 01-TRN--7-T0-8441 route: aus:vic:vic-01-TRN: start_time: 16:57:00 vehicle_ts: 2025-10-07 06:12:39 UTC</div>`)[0];
+                popup_52457dd04f053d703892fc3797ac20e6.setContent(html_b8c0a9db7e4a4f0cdbbe1da25ccb98e9);
+            
+        
+
+        circle_marker_4470acfa4a5c834569395ca0f60ae8ea.bindPopup(popup_52457dd04f053d703892fc3797ac20e6)
+        ;
+
+        
+    
+    
+            var circle_marker_04a7884b9ba0873af6f57144009e6f51 = L.circleMarker(
+                [-37.78842, 144.83258],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_02840ab5aa76e1f0a7dd7560c52e745a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3901e0d24f0ddf4d1b4f9d5ac868c0a0 = $(`<div id="html_3901e0d24f0ddf4d1b4f9d5ac868c0a0" style="width: 100.0%; height: 100.0%;">entity: 01-ART--7-T0-8187 trip: 01-ART--7-T0-8187 route: aus:vic:vic-01-ART: start_time: 16:58:00 vehicle_ts: 2025-10-07 06:12:42 UTC</div>`)[0];
+                popup_02840ab5aa76e1f0a7dd7560c52e745a.setContent(html_3901e0d24f0ddf4d1b4f9d5ac868c0a0);
+            
+        
+
+        circle_marker_04a7884b9ba0873af6f57144009e6f51.bindPopup(popup_02840ab5aa76e1f0a7dd7560c52e745a)
+        ;
+
+        
+    
+    
+            var circle_marker_5bd6b05ff4778c8327d5eb9aae79b8d2 = L.circleMarker(
+                [-38.142696, 144.35487],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_e29195a90d22b3bc2b224ce9b1d055aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6780ea4a9b096395627ae965497aea13 = $(`<div id="html_6780ea4a9b096395627ae965497aea13" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8792 trip: 01-GEL--7-T0-8792 route: aus:vic:vic-01-GEL: start_time: 16:58:00 vehicle_ts: 2025-10-07 06:12:26 UTC</div>`)[0];
+                popup_e29195a90d22b3bc2b224ce9b1d055aa.setContent(html_6780ea4a9b096395627ae965497aea13);
+            
+        
+
+        circle_marker_5bd6b05ff4778c8327d5eb9aae79b8d2.bindPopup(popup_e29195a90d22b3bc2b224ce9b1d055aa)
+        ;
+
+        
+    
+    
+            var circle_marker_53b9279f0416c60922380e3eee2f047e = L.circleMarker(
+                [-37.800762, 144.87442],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_f4466e2b86c9a5e5fbcff866c734f109 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9d3ae785ef0f33b0495876e61f736a5d = $(`<div id="html_9d3ae785ef0f33b0495876e61f736a5d" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8239 trip: 01-BAT--7-T0-8239 route: aus:vic:vic-01-BAT: start_time: 17:01:00 vehicle_ts: 2025-10-07 06:12:13 UTC</div>`)[0];
+                popup_f4466e2b86c9a5e5fbcff866c734f109.setContent(html_9d3ae785ef0f33b0495876e61f736a5d);
+            
+        
+
+        circle_marker_53b9279f0416c60922380e3eee2f047e.bindPopup(popup_f4466e2b86c9a5e5fbcff866c734f109)
+        ;
+
+        
+    
+    
+            var circle_marker_3ee50bc44f9efd97ed6c0357d67f6b60 = L.circleMarker(
+                [-37.736214, 144.66699],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_f8c8e4b2de56a1621c785bb73764f9cb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_264b021ce15e870d19f2168d137b5b25 = $(`<div id="html_264b021ce15e870d19f2168d137b5b25" style="width: 100.0%; height: 100.0%;">entity: 01-BAT--7-T0-8250 trip: 01-BAT--7-T0-8250 route: aus:vic:vic-01-BAT: start_time: 17:03:00 vehicle_ts: 2025-10-07 06:12:44 UTC</div>`)[0];
+                popup_f8c8e4b2de56a1621c785bb73764f9cb.setContent(html_264b021ce15e870d19f2168d137b5b25);
+            
+        
+
+        circle_marker_3ee50bc44f9efd97ed6c0357d67f6b60.bindPopup(popup_f8c8e4b2de56a1621c785bb73764f9cb)
+        ;
+
+        
+    
+    
+            var circle_marker_47025933709ad6ed1961adf12fda6d72 = L.circleMarker(
+                [-37.801945, 144.90146],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_d012efed031e2545cd0140e7adfc031b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_49aa930c844a592e7a7c4ea04beff065 = $(`<div id="html_49aa930c844a592e7a7c4ea04beff065" style="width: 100.0%; height: 100.0%;">entity: 01-BGO--7-T0-8035 trip: 01-BGO--7-T0-8035 route: aus:vic:vic-01-BGO: start_time: 17:04:00 vehicle_ts: 2025-10-07 06:12:19 UTC</div>`)[0];
+                popup_d012efed031e2545cd0140e7adfc031b.setContent(html_49aa930c844a592e7a7c4ea04beff065);
+            
+        
+
+        circle_marker_47025933709ad6ed1961adf12fda6d72.bindPopup(popup_d012efed031e2545cd0140e7adfc031b)
+        ;
+
+        
+    
+    
+            var circle_marker_3e2424b35bfebe95360a85609bf2e7dd = L.circleMarker(
+                [-38.23672, 146.39676],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_3f6dfc662d9f334538012db55b509aad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_068163745bcdf687db847b46e5ba84ca = $(`<div id="html_068163745bcdf687db847b46e5ba84ca" style="width: 100.0%; height: 100.0%;">entity: 01-TRN--7-T0-8444 trip: 01-TRN--7-T0-8444 route: aus:vic:vic-01-TRN: start_time: 17:04:00 vehicle_ts: 2025-10-07 06:12:34 UTC</div>`)[0];
+                popup_3f6dfc662d9f334538012db55b509aad.setContent(html_068163745bcdf687db847b46e5ba84ca);
+            
+        
+
+        circle_marker_3e2424b35bfebe95360a85609bf2e7dd.bindPopup(popup_3f6dfc662d9f334538012db55b509aad)
+        ;
+
+        
+    
+    
+            var circle_marker_72f6b09a3341e487a79a36ef4065303b = L.circleMarker(
+                [-37.804127, 144.93924],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_901196ff3edde80efe1f05b24e64f47c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fa14aae5c7082bf9991707f38c5d5e0e = $(`<div id="html_fa14aae5c7082bf9991707f38c5d5e0e" style="width: 100.0%; height: 100.0%;">entity: 01-SER--7-T0-8327 trip: 01-SER--7-T0-8327 route: aus:vic:vic-01-SER: start_time: 17:05:00 vehicle_ts: 2025-10-07 06:12:01 UTC</div>`)[0];
+                popup_901196ff3edde80efe1f05b24e64f47c.setContent(html_fa14aae5c7082bf9991707f38c5d5e0e);
+            
+        
+
+        circle_marker_72f6b09a3341e487a79a36ef4065303b.bindPopup(popup_901196ff3edde80efe1f05b24e64f47c)
+        ;
+
+        
+    
+    
+            var circle_marker_130ede8a8950a16781cea180aa6d8dbd = L.circleMarker(
+                [-37.81376, 144.94844],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_29b153076e1fe2300adf7cf5ae5c7751 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6ec06466b2fa774c9916c41eb2ed43a = $(`<div id="html_c6ec06466b2fa774c9916c41eb2ed43a" style="width: 100.0%; height: 100.0%;">entity: 01-WBL--7-T0-8867 trip: 01-WBL--7-T0-8867 route: aus:vic:vic-01-WBL: start_time: 17:09:00 vehicle_ts: 2025-10-07 06:12:32 UTC</div>`)[0];
+                popup_29b153076e1fe2300adf7cf5ae5c7751.setContent(html_c6ec06466b2fa774c9916c41eb2ed43a);
+            
+        
+
+        circle_marker_130ede8a8950a16781cea180aa6d8dbd.bindPopup(popup_29b153076e1fe2300adf7cf5ae5c7751)
+        ;
+
+        
+    
+    
+            var circle_marker_b083989a922e64fd87a80ee7c2f4fb4a = L.circleMarker(
+                [-37.81556, 144.95044],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_920b9148297a1f8a4a366e9f06d9f450);
+        
+    
+        var popup_e01f5514fab72d21291808125b94695e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9937573bc158921f23f6fd7477e1ea8 = $(`<div id="html_d9937573bc158921f23f6fd7477e1ea8" style="width: 100.0%; height: 100.0%;">entity: 01-GEL--7-T0-8781 trip: 01-GEL--7-T0-8781 route: aus:vic:vic-01-GEL: start_time: 17:12:00 vehicle_ts: 2025-10-07 06:12:01 UTC</div>`)[0];
+                popup_e01f5514fab72d21291808125b94695e.setContent(html_d9937573bc158921f23f6fd7477e1ea8);
+            
+        
+
+        circle_marker_b083989a922e64fd87a80ee7c2f4fb4a.bindPopup(popup_e01f5514fab72d21291808125b94695e)
+        ;
+
+        
+    
+</script>
+</html>
