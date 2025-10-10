@@ -1,4 +1,3 @@
-from utils.gtfs.realtime import getVehiclePositions
 from utils.checktype import trainType
 from utils.search import *
 import json
