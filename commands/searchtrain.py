@@ -20,9 +20,9 @@ async def addmap(embed_update, mapEmbedUpdate, train, set, type, interchange_sta
         # After map generation, send it
         if type == "HCMT": # because ptv api lists hcmts like "9005M-9905M" for some fucking reason
             hcmtcar1 = set.split('-')
-            location = GTFSgetTrainLocation(hcmtcar1[0]+'M')
+            location = getTrainLocation(hcmtcar1[0]+'M')
         else:
-            location = GTFSgetTrainLocation(set)
+            location = getTrainLocation(set)
         line = ""
         print(f"Location: {location}")
         url = convertTrainLocationToGoogle(location)
