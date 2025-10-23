@@ -2724,8 +2724,8 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
                     if await check(user_response) == True:  # fixed cause check broke    
                         # Check if the user's response matches the correct station
-                        if user_response.content[1:].lower().replace(" ", "") in station.lower().replace(" ", ""):
-                            if not user_response.content[1:].lower().replace(" ", "") in guessed_list:
+                        if user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") in station.lower().replace(" ", ""):
+                            if not user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") in guessed_list:
                                 guessed_list = guessed_list + user_response.content.replace(f'<@{bot.user.id}>', '').strip().lower().replace(" ", "")
                                 await printlog(guessed_list)
                                 guessed = ""
