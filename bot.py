@@ -3995,7 +3995,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
         log_command(ctx.user.id, 'view-log')
         
         if mode == 'train' and id == None and send == 'web':
-            await ctx.response.send_message('[Click here to view your logs online](https://trackpulse.xm9g.net/logs/viewer)', ephemeral=False)
+            await ctx.response.send_message('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
             return
         
         if user == None:
@@ -4146,7 +4146,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                 embed=discord.Embed(title='Train Logs', colour=vline_colour)
                 embed.set_author(name=userid.name, url='https://victorianrailphotos.com', icon_url=pfp)
                 embed.add_field(name='Click here to view your logs:', value=f'<#{logsthread.id}>')
-                embed.add_field(name='Click here to view your own logs on the website:', value=f'[Trackpulse Vic Website](https://discord.com/oauth2/authorize?client_id=1214144664513417218&redirect_uri=https%3A%2F%2Ftrackpulse.xm9g.net%2Flogs%2Fviewer&response_type=code&scope=identify)')
+                embed.add_field(name='Click here to view your own logs on the website:', value=f'[Trackpulse Vic Website](https://discord.com/oauth2/authorize?client_id=1214144664513417218&redirect_uri=https%3A%2F%2Ftrackpulsevic.xm9g.net%2Flogs%2Fviewer&response_type=code&scope=identify)')
                 await ctx.response.send_message(embed=embed)
                 await logsthread.send(f'# <:train:1241164967789727744> {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# {userid.name}\'s Train Logs')
@@ -5907,7 +5907,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
-                imageURL = f"https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
+                imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
                 embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
@@ -5935,7 +5935,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
-                imageURL = f'https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
+                imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
                 embed = discord.Embed(title=f"Post Metro Tunnel Map of logs with </log train:1289843416628330506> for @{username}{year_str}{line_str}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
@@ -5963,7 +5963,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
-                imageURL = f'https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
+                imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
                 embed = discord.Embed(title=f"Map of logs with </log sydney-tram:1289843416628330506> for @{username}{year_str}{line_str}", 
                                     color=0xb8b8b8, 
                                     description=f"THIS MAP IS NOT FINISHED [Click here to view in your browser]({imageURL})")
@@ -6258,7 +6258,7 @@ async def about(ctx):
     embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\nAperture',inline=True)
     embed.add_field(name='Photos sourced from',value="[Victorian Rail Photos](https://victorianrailphotos.com/)")
     embed.add_field(name="Data Sources", value="[Transport Victoria](https://www.ptv.vic.gov.au/)\n", inline=True)
-    embed.add_field(name='Website', value='https://trackpulse.xm9g.net')
+    embed.add_field(name='Website', value='https://trackpulsevic.xm9g.net')
     embed.add_field(name='Discord Server', value='https://discord.gg/nfAqAnceQ5')
     embed.add_field(name='Report issues', value='[Report a bug on github](https://github.com/TrackPulse-Vic/TrackPulse-Vic/issues)')
     embed.set_footer(text=f"{getTotalTrips()} trips logged with TrackPulse Vic", icon_url="https://xm9g.net/discord-bot-assets/logo.png")

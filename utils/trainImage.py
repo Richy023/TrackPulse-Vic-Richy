@@ -25,6 +25,13 @@ def getImage(number, thumbnail=False):
             photographer = photo.get('photographer', 'Unknown')
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
+                try:
+                    response = requests.get(f'https://victorianrailphotos.com/api/view/{photo["id"]}/train')
+                    print('added view count api')
+                    print('response: ', response.text)
+                except Exception as e:
+                    print('couldnt add view count api')
+                    print('error: ', e)
                 return photo_url, photographer
             return None, None
         
@@ -34,6 +41,13 @@ def getImage(number, thumbnail=False):
             photographer = photo.get('photographer', 'Unknown')
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
+                try:
+                    requests.get(f'https://victorianrailphotos.com/api/view/{photo["id"]}/train')
+                    print('added view count api')
+                    print('response: ', response.text)
+                except Exception as e:
+                    print('couldnt add view count api')
+                    print('error: ', e)
                 return photo_url, photographer
             return None, None
         
@@ -41,6 +55,7 @@ def getImage(number, thumbnail=False):
     
     except requests.RequestException:
         return None, None
+    
     
 def getNSWImage(number):
     photo_url = f"https://victorianrailphotos.com/photos/nsw/{number}.webp"
