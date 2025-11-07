@@ -838,7 +838,7 @@ async def help_autocompletion(
 @app_commands.autocomplete(command=help_autocompletion)
 
 async def help(ctx, category: app_commands.Choice[str] = None, command:str=None):
-    log_command(ctx.user.id, 'help')
+    log_command(ctx.user.id, 'help', ctx.guild.id)
     await helpCommand(ctx, category, command)
 
 
@@ -868,7 +868,7 @@ async def help(ctx, category: app_commands.Choice[str] = None, command:str=None)
 )
 async def line_info(ctx, line: str):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'line_info')
+    log_command(ctx.user.id, 'line_info', ctx.guild.id)
 
     # Retrieve line information from API
     json_info_str = route_api_request(line, "0")
@@ -939,7 +939,7 @@ async def line_info(ctx, line: str):
 @app_commands.describe(number = "What route number to show info about?")
 
 async def route(ctx, mode: str, number: int):  
-    log_command(ctx.user.id, 'route_search')
+    log_command(ctx.user.id, 'route_search', ctx.guild.id)
     try:
         json_info_str = route_api_request(number, mode)
         json_info_str = json_info_str.replace("'", "\"")  # Replace single quotes with double quotes
@@ -1018,7 +1018,7 @@ async def route(ctx, mode: str, number: int):
 @search.command(name="train-photo", description="Search for xm9g's railway photos")
 @app_commands.describe(number="Carriage number", search_set="Search the full set instead of the train number")
 async def line_info(ctx, number: str, search_set:bool=False):
-    log_command(ctx.user.id, 'train-photo')
+    log_command(ctx.user.id, 'train-photo', ctx.guild.id)
     await searchTrainPhoto(ctx, number, search_set)
 
 # Station search station
@@ -1037,7 +1037,7 @@ async def station_autocompletion(
 async def stationphoto(ctx, station:str):
     async def searchstationpic():
         await ctx.response.defer()
-        log_command(ctx.user.id, 'search-station')
+        log_command(ctx.user.id, 'search-station', ctx.guild.id)
         
         data = stationInfoAPIRequest(nameToStopID(station, '0'), 0)
         mode = 0
@@ -1094,7 +1094,7 @@ async def stationphoto(ctx, station:str):
 async def calculate_fair(ctx, start_zone:int, end_zone:int):
     async def calc():
         await ctx.response.defer()
-        log_command(ctx.user.id, 'calculate-fare')
+        log_command(ctx.user.id, 'calculate-fare', ctx.guild.id)
     
         start = start_zone
         end = end_zone
@@ -1148,7 +1148,7 @@ async def calculate_fair(ctx, start_zone:int, end_zone:int):
 @app_commands.describe(ptvusername = "PTV accpunt username", ptvpassword = "PTV account password", encryptionpassword = "A password to encrypt your PTV password")
 async def login(ctx, ptvusername: str, ptvpassword: str, encryptionpassword: str):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'save-login')
+    log_command(ctx.user.id, 'save-login', ctx.guild.id)
     encryptedPassword = encryptPW(encryptionpassword, ptvpassword)
     savelogin(ptvusername, str(encryptedPassword).split("'")[1], ctx.user.id) # the split is so it dosnt include the b' part
     await ctx.edit_original_response(content=f'Saved username and password to bot.\nUsername: `{ptvusername}`\nPassword: `{ptvpassword}`\nYour password is encrypted and cannot be seen by anyone. You will need to enter your encryption password to view your mykis with the bot.\nEncryption password: `{encryptionpassword}`')
@@ -1160,7 +1160,7 @@ async def login(ctx, ptvusername: str, ptvpassword: str, encryptionpassword: str
 async def viewmykis(ctx, encriptionpassword: str):
     loop = asyncio.get_event_loop()
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'view-myki')
+    log_command(ctx.user.id, 'view-myki', ctx.guild.id)
     async def viewcards():
         # decrypt the password
         
@@ -1212,7 +1212,7 @@ async def viewmykis(ctx, encriptionpassword: str):
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def line_info(ctx, search: str):
-    log_command(ctx.user.id, 'wongm-search')
+    log_command(ctx.user.id, 'wongm-search', ctx.guild.id)
     channel = ctx.channel
     await printlog(f"removing spaces in search {search}")
     spaces_removed = search.replace(' ', '%20')
@@ -1279,7 +1279,7 @@ async def train_search(ctx, train: str, state:str='auto', hide_run_info:bool=Fal
 ])
 async def runidsearch(ctx, number:str, mode:str='metro'):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'runid-search')
+    log_command(ctx.user.id, 'runid-search', ctx.guild.id)
     async def addmap():
         try:
             line = ""
@@ -1441,7 +1441,7 @@ async def runidsearch(ctx, number:str, mode:str='metro'):
 @app_commands.describe(tram="tram")
 async def tramsearch(ctx, tram: str):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'tram-search')
+    log_command(ctx.user.id, 'tram-search', ctx.guild.id)
     channel = ctx.channel
     type = tramType(tram)
     set = tram.upper()
@@ -1519,7 +1519,7 @@ async def stop_autocompletion(
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def favourite(ctx, stop: str):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'favourite-stop')
+    log_command(ctx.user.id, 'favourite-stop', ctx.guild.id)
     
     # add the stop to the favourites
     message = save_favourites(ctx.user.id, stop)
@@ -1547,7 +1547,7 @@ async def stop_autocompletion(
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def remove(ctx, stop: str):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'remove-favourite-stop')
+    log_command(ctx.user.id, 'remove-favourite-stop', ctx.guild.id)
     
     # remove the stop from favourites
     message = remove_favourite(ctx.user.id, stop)
@@ -1624,7 +1624,7 @@ async def departures(ctx, stop: str, time:str="none", line:str='all'):
     async def nextdeps(station, time):
         channel = ctx.channel
         await ctx.response.defer()
-        log_command(ctx.user.id, 'departures-search')
+        log_command(ctx.user.id, 'departures-search', ctx.guild.id)
         station = station.strip('⭐ ')
         try:
             await printlog(f'{ctx.user.name} ran departures for {station} at time {datetime.today()} in channel {ctx.channel.mention}')
@@ -1885,7 +1885,7 @@ async def departures(ctx, stop: str, time:str="none", line:str='all'):
 async def search(ctx, search:str, type:str, maximum_responses:int=3):
     async def ptvsearch(search):
         await ctx.response.defer()
-        log_command(ctx.user.id, 'ptv-search')
+        log_command(ctx.user.id, 'ptv-search', ctx.guild.id)
         fmtSearch = search.replace(" ", "%20")
         data = search_api_request(fmtSearch)
         if type == 'stops':
@@ -2134,7 +2134,7 @@ async def train_line(ctx):
 ])
 async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
     channel = ctx.channel
-    log_command(ctx.user.id, 'game-station-guesser')
+    log_command(ctx.user.id, 'game-station-guesser', ctx.guild.id)
     async def run_game(): 
 
         # Check if a game is already running in this channel
@@ -2256,7 +2256,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                     
                         # Check if the user's response matches the correct station
                         if user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") == station.lower().replace(" ", ""):
-                            log_command(user_response.author.id, 'game-station-guesser-correct')
+                            log_command(user_response.author.id, 'game-station-guesser-correct', ctx.guild.id)
                             if ultrahard:
                                 await ctx.channel.send(f"{user_response.author.mention} guessed it right!")
                             else:
@@ -2276,7 +2276,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                         elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station.title()}||" if not ultrahard else f"Round {round+1} skipped.")
-                                log_command(user_response.author.id, 'game-station-guesser-skip')
+                                log_command(user_response.author.id, 'game-station-guesser-skip', ctx.guild.id)
                                 skippedGames += 1
                                 roundResponse = True
                                 break
@@ -2286,7 +2286,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                         elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
-                                log_command(user_response.author.id, 'game-station-guesser-stop')
+                                log_command(user_response.author.id, 'game-station-guesser-stop', ctx.guild.id)
                                 embed = discord.Embed(title=f"Game Summary | {setLine}")
                                 embed.add_field(name="Rounds played", value=f'{skippedGames} skipped, {rounds} total.', inline=True)
                                 embed.add_field(name="Correct Guesses", value=correctAnswers, inline=True)
@@ -2310,7 +2310,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                         
                         else:
                             await user_response.add_reaction('❌')
-                            log_command(user_response.author.id, 'game-station-guesser-incorrect')
+                            log_command(user_response.author.id, 'game-station-guesser-incorrect', ctx.guild.id)
                             roundResponse = True
                             incorrectAnswers += 1
                             if ultrahard:
@@ -2377,7 +2377,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
         app_commands.Choice(name="Server", value="server")
 ])
 async def lb(ctx, game:str, scope:str='global'):
-    log_command(ctx.user.id, 'view-leaderboard')
+    log_command(ctx.user.id, 'view-leaderboard', ctx.guild.id)
     channel = ctx.channel
     try:
         guild = bot.get_guild(ctx.guild.id)
@@ -2457,7 +2457,7 @@ linelist = [
 
 async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='all'):
     channel = ctx.channel
-    log_command(ctx.user.id, 'game-station-order')
+    log_command(ctx.user.id, 'game-station-order', ctx.guild.id)
     async def run_game(line):
         # Check if a game is already running in this channel
         if channel in channel_game_status and channel_game_status[channel]:
@@ -2546,7 +2546,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                         if response == correct_list1:
                             await ctx.channel.send(f"{user_response.author.mention} guessed it correctly!")
                             addLb(user_response.author.id, user_response.author.name, 'domino')
-                            log_command(user_response.author.id, 'game-station-order-correct')
+                            log_command(user_response.author.id, 'game-station-order-correct', ctx.guild.id)
                             correctAnswers += 1
                             ignoredRounds = 0
                             roundResponse = True
@@ -2554,7 +2554,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                         elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{correct_list[0]}, {correct_list[1]}{f', {correct_list[2]}' if len(correct_list) >=3 else ''}{f', {correct_list[3]}' if len(correct_list) >=4 else ''}{f', {correct_list[4]}' if len(correct_list) >=5 else ''}||")
-                                log_command(user_response.author.id, 'game-station-order-skip')
+                                log_command(user_response.author.id, 'game-station-order-skip', ctx.guild.id)
                                 skippedGames += 1
                                 roundResponse = True
                                 break
@@ -2563,7 +2563,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                         elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
-                                log_command(user_response.author.id, 'game-station-order-stop')
+                                log_command(user_response.author.id, 'game-station-order-stop', ctx.guild.id)
                                 embed = discord.Embed(title=f"Game Summary | {setLine}")
                                 embed.add_field(name="Rounds played", value=f'{skippedGames} skipped, {rounds} total.', inline=True)
                                 embed.add_field(name="Correct Guesses", value=correctAnswers, inline=True)
@@ -2584,7 +2584,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                                 await ctx.channel.send(f"{user_response.author.mention} you can only reveal the image if you are an admin.")
                         else:
                             await user_response.add_reaction('❌')
-                            log_command(user_response.author.id, 'game-station-order-incorrect')
+                            log_command(user_response.author.id, 'game-station-order-incorrect', ctx.guild.id)
                             roundResponse = True
                             incorrectAnswers += 1
                             addLoss(user_response.author.id, user_response.author.name, 'domino')
@@ -2656,7 +2656,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
 async def hangman(ctx, rounds: int = 1, attempts: int = 10):
     channel = ctx.channel
-    log_command(ctx.user.id, 'game-station-hangman')
+    log_command(ctx.user.id, 'game-station-hangman', ctx.guild.id)
     async def run_game(line):
         # Check if a game is already running in this channel
         if channel in channel_game_status and channel_game_status[channel]:
@@ -2736,7 +2736,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                         guessed = guessed + "- "
                                 await user_response.add_reaction('✅')
                                 addLb(user_response.author.id, user_response.author.name, 'hangman')
-                                log_command(user_response.author.id, 'game-station-hangman-correct')
+                                log_command(user_response.author.id, 'game-station-hangman-correct', ctx.guild.id)
                                 correctAnswers += 1
                                 ignoredRounds = 0
                                 roundResponse = True
@@ -2746,7 +2746,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 await ctx.channel.send(f'# Letters: `{guessed}`\n\n**Incorrect guesses: {failed}**\n\nIncorrect guesses left: {attempts - incorrectGuesses}')
                             else:
                                 await ctx.channel.send(f'Already guessed {user_response.author.mention}! Try again.')
-                                log_command(user_response.author.id, 'game-station-hangman-neutral')
+                                log_command(user_response.author.id, 'game-station-hangman-neutral', ctx.guild.id)
                                 roundResponse = True
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
@@ -2754,7 +2754,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                         elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station}||")
-                                log_command(user_response.author.id, 'game-station-hangman-skip')
+                                log_command(user_response.author.id, 'game-station-hangman-skip', ctx.guild.id)
                                 skippedGames += 1
                                 roundResponse = True
                                 break
@@ -2763,7 +2763,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                         elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
-                                log_command(user_response.author.id, 'game-station-hangman-stop')
+                                log_command(user_response.author.id, 'game-station-hangman-stop', ctx.guild.id)
                                 embed = discord.Embed(title=f"Game Summary | {setLine}")
                                 embed.add_field(name="Rounds played", value=f'{skippedGames} skipped, {rounds} total.', inline=True)
                                 embed.add_field(name="Correct Guesses", value=correctAnswers, inline=True)
@@ -2785,7 +2785,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                         else:
                             if not user_response.content[1:].lower().replace(" ", "") in failed:
                                 await user_response.add_reaction('❌')
-                                log_command(user_response.author.id, 'game-station-hangman-incorrect')
+                                log_command(user_response.author.id, 'game-station-hangman-incorrect', ctx.guild.id)
                                 roundResponse = True
                                 incorrectAnswers += 1
                                 incorrectGuesses += 1
@@ -2804,7 +2804,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                     break
                             else:
                                 await ctx.channel.send(f'Already guessed {user_response.author.mention}! Try again.')
-                                log_command(user_response.author.id, 'game-station-hangman-neutral')
+                                log_command(user_response.author.id, 'game-station-hangman-neutral', ctx.guild.id)
                                 roundResponse = True
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
@@ -2885,7 +2885,7 @@ async def type_autocompletion(
 async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='today', type:str='auto', notes:str=None, hidemessage:bool=False):
     channel = ctx.channel
     await ctx.response.defer(ephemeral=hidemessage)
-    log_command(ctx.user.id, 'log-train')
+    log_command(ctx.user.id, 'log-train', ctx.guild.id)
     await printlog(date)
     async def log(notes, ctx,line, number, start, end, date, type):
         await printlog("logging the thing")
@@ -3077,7 +3077,7 @@ async def deleteLog(ctx, mode:str, id:str='LAST'):
                 child.disabled = True
 
     async def deleteLogFunction():
-        log_command(ctx.user.id, 'log-delete')
+        log_command(ctx.user.id, 'log-delete', ctx.guild.id)
         
         nonlocal idformatted, dataToDelete  # Make these accessible in button callbacks
         
@@ -3132,7 +3132,7 @@ async def deleteLog(ctx, mode:str, id:str='LAST'):
 @app_commands.autocomplete(type=type_autocompletion)
 async def editrow(ctx, id:str, mode:str='train', line:str='nochange', number:str='nochange', start:str='nochange', end:str='nochange', date:str='nochange', type:str='auto', notes:str='nochange'):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'edit-row')
+    log_command(ctx.user.id, 'edit-row', ctx.guild.id)
     
     username = ctx.user.name
     logid = id
@@ -3226,7 +3226,7 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
     channel = ctx.channel
     await printlog(date)
     async def log(notes):
-        log_command(ctx.user.id, 'log-tram')
+        log_command(ctx.user.id, 'log-tram', ctx.guild.id)
         await printlog("logging the thing")
 
         savedate = date.split('/')
@@ -3352,7 +3352,7 @@ async def logNSWTrain(ctx,  line:str, number: str, start:str, end:str, type:str=
     channel = ctx.channel
     await ctx.response.defer(ephemeral=hidemessage)
     async def log(type):
-        log_command(ctx.user.id, 'log-nsw-train')
+        log_command(ctx.user.id, 'log-nsw-train', ctx.guild.id)
         await printlog("logging the nsw sydney train")
 
         savedate = date.split('/')
@@ -3440,7 +3440,7 @@ async def Adelaideline_autocompletion(
 # Adelaide train logger journey beyond too
 async def logSATrain(ctx, line:str, number: str, start:str, end:str, date:str='today', hidemessage:bool=False):
     channel = ctx.channel
-    log_command(ctx.user.id, 'log-adelaide-train')
+    log_command(ctx.user.id, 'log-adelaide-train', ctx.guild.id)
     await printlog(date)
     async def log():
         await printlog("logging the adelaide train")
@@ -3528,7 +3528,7 @@ async def logSATram(ctx, line:str, number: str, type:str, start:str, end:str, da
     channel = ctx.channel
     await printlog(date)
     async def log():
-        log_command(ctx.user.id, 'log-adelaide-tram')
+        log_command(ctx.user.id, 'log-adelaide-tram', ctx.guild.id)
         await printlog("logging the adelaide tram")
 
         savedate = date.split('/')
@@ -3599,7 +3599,7 @@ async def Perthline_autocompletion(
 # Perth logger
 async def logPerthTrain(ctx, number: str, line:str, start:str, end:str, date:str='today', hidemessage:bool=False):
     channel = ctx.channel
-    log_command(ctx.user.id, 'log-perth-train')
+    log_command(ctx.user.id, 'log-perth-train', ctx.guild.id)
     await printlog(date)
     async def log():
         await printlog("logging the perth train")
@@ -3668,7 +3668,7 @@ async def logPerthTrain(ctx, number: str, line:str, start:str, end:str, date:str
 
 # plane logger
 async def logFlght(ctx, registration:str, type:str, start:str, end:str, airline:str, flightnumber: str='None', date:str='today', hidemessage:bool=False):
-    log_command(ctx.user.id, 'log-flight')
+    log_command(ctx.user.id, 'log-flight', ctx.guild.id)
     await ctx.response.defer(ephemeral=hidemessage)
     await printlog(date)
     async def log():
@@ -3762,7 +3762,7 @@ async def logNSWTram(ctx, line:str, number: str, type:str, start:str, end:str, d
     channel = ctx.channel
     await printlog(date)
     async def log():
-        log_command(ctx.user.id, 'log-nsw-tram')
+        log_command(ctx.user.id, 'log-nsw-tram', ctx.guild.id)
         await printlog("logging the sydney tram")
 
         savedate = date.split('/')
@@ -3848,7 +3848,7 @@ async def logCanberraTram(ctx, line:str, number: str, type:str, start:str, end:s
     channel = ctx.channel
     await printlog(date)
     async def log():
-        log_command(ctx.user.id, 'log-canberra-tram')
+        log_command(ctx.user.id, 'log-canberra-tram', ctx.guild.id)
         await printlog("logging the canberra tram")
 
         savedate = date.split('/')
@@ -3919,7 +3919,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
     channel = ctx.channel
     await printlog(date)
     async def log(notes):
-        log_command(ctx.user.id, 'log-bus')
+        log_command(ctx.user.id, 'log-bus', ctx.guild.id)
         await printlog("logging the bus")
 
         savedate = date.split('/')
@@ -3992,7 +3992,7 @@ vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Ben
 
 async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, send:str='web'):
     async def sendLogs():
-        log_command(ctx.user.id, 'view-log')
+        log_command(ctx.user.id, 'view-log', ctx.guild.id)
         
         if mode == 'train' and id == None and send == 'web':
             await ctx.response.send_message('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
@@ -4783,7 +4783,7 @@ async def export(ctx, format:str, mode:str, hidemessage:bool=False):
 ])
 async def importlogs(ctx, mode:str, file:discord.Attachment):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'import-log')
+    log_command(ctx.user.id, 'import-log', ctx.guild.id)
 
     class ImportConfirmation(discord.ui.View):
         def __init__(self):
@@ -4884,7 +4884,7 @@ async def importlogs(ctx, mode:str, file:discord.Attachment):
 async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&g', global_stats:bool=False, user: discord.User = None, year:int=0):
     async def sendLogs():
         await ctx.response.defer()
-        log_command(ctx.user.id, 'log-stats')
+        log_command(ctx.user.id, 'log-stats', ctx.guild.id)
         statSearch = stat
         userid = user if user else ctx.user
         
@@ -5069,7 +5069,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
 @stats.command(name='termini', description='View which line termini you have been to')
 async def termini(ctx):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'log-termini')
+    log_command(ctx.user.id, 'log-termini', ctx.guild.id)
     try:
         data =terminiList(ctx.user.name)
     except:
@@ -5115,7 +5115,7 @@ async def sets(ctx, train:str):
     userid = ctx.user
     trainTypes = ["X'Trapolis 100", "Comeng", 'Siemens Nexas', 'HCMT', 'VLocity', 'Sprinter', 'N Class']
     await ctx.response.defer()
-    log_command(ctx.user.id, 'log-sets')
+    log_command(ctx.user.id, 'log-sets', ctx.guild.id)
     
     # summary:
     if train == 'summary':
@@ -5186,7 +5186,7 @@ async def sets(ctx, train:str):
 async def sets(ctx, state:str):
     userid = ctx.user
     await ctx.response.defer()
-    log_command(ctx.user.id, 'log-stations')
+    log_command(ctx.user.id, 'log-stations', ctx.guild.id)
     try:
         data =stationlist(ctx.user.name, state)
     except Exception as e:
@@ -5242,7 +5242,7 @@ async def sets(ctx, state:str):
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str, location: str, photofor:str, number: str=''):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'submit-photo-retired')
+    log_command(ctx.user.id, 'submit-photo-retired', ctx.guild.id)
     async def submitPhoto():
         await ctx.followup.send('This command has been retired. Please submit photos via the VictorianRailPhotos website: https://victorianrailphotos.com/upload')
     await submitPhoto()
@@ -5380,7 +5380,7 @@ async def queue(ctx: discord.Interaction):
     
 @stats.command(name='profile', description="Shows a users trip log stats, and leaderboard wins")    
 async def profile(ctx, user: discord.User = None):
-    log_command(ctx.user.id, 'view-profile')
+    log_command(ctx.user.id, 'view-profile', ctx.guild.id)
     try:
         await ctx.response.defer()
         async def profiles():
@@ -5791,7 +5791,7 @@ async def profile(ctx, user: discord.User = None):
 ])
 async def viewMaps(ctx, mode: str):
     await ctx.response.defer()
-    log_command(ctx.user.id,'map-view')
+    log_command(ctx.user.id,'map-view', ctx.guild.id)
     try:
         uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
         legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
@@ -5863,7 +5863,7 @@ async def viewMaps(ctx, mode: str):
 ])
 async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'maps-trips')
+    log_command(ctx.user.id, 'maps-trips', ctx.guild.id)
     await printlog(f"Making trip map for {str(ctx.user.id)}")
 
     async def generate_map():
@@ -5993,7 +5993,7 @@ async def testfind(ctx):
 # achievement commands
 @bot.command()
 async def refreshachievements(ctx):
-    log_command(ctx.author.id, 'refresh-achievements')
+    log_command(ctx.author.id, 'refresh-achievements', ctx.guild.id)
     response = await ctx.send('Checking for new Achievements...')
     await addAchievement(ctx.author.name,ctx.channel.id, ctx.author.mention)
     new = checkGameAchievements(ctx.author.name)
@@ -6006,7 +6006,7 @@ async def refreshachievements(ctx):
 @bot.command()
 async def award(ctx, user: discord.User, achievement:int):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'award-achievement')
+        log_command(ctx.author.id, 'award-achievement', ctx.guild.id)
         await ctx.send(f'Awarding achievement id `{achievement}` to {user.mention}...')
         awardAchievement(user.name, achievement)
         info = getAchievementInfo(str(achievement))
@@ -6021,7 +6021,7 @@ async def award(ctx, user: discord.User, achievement:int):
 @app_commands.describe(user="Who's achievements to show?")
 async def viewAchievements(ctx, user: discord.User = None):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'view-achievements')
+    log_command(ctx.user.id, 'view-achievements', ctx.guild.id)
 
     if user is None:
         user = ctx.user
@@ -6125,7 +6125,7 @@ async def viewAchievements(ctx, user: discord.User = None):
 async def checklines(ctx, operator: str):
     # Defer the response to avoid timeout
     await ctx.response.defer()
-    log_command(ctx.user.id, 'line-status')
+    log_command(ctx.user.id, 'line-status', ctx.guild.id)
 
     # Run the async function in the background
     asyncio.create_task(run_in_thread(ctx, operator))
@@ -6224,7 +6224,7 @@ async def run_in_thread(ctx, operator):
 @app_commands.describe(train="A carriage number on the train to send, eg 860M", channel="The channel to send the run to")
 async def add_schedule(ctx, train: str, channel: discord.TextChannel):
     if ctx.user.guild_permissions.administrator:
-        log_command(ctx.user.id, 'add-schedule')
+        log_command(ctx.user.id, 'add-schedule', ctx.guild.id)
         await ctx.response.defer()
         await trainTimleyFetcherAdd(ctx, train, channel, 10)
     else:
@@ -6235,7 +6235,7 @@ async def add_schedule(ctx, train: str, channel: discord.TextChannel):
 @app_commands.describe(train="The carriage number of the train to stop sending, eg 860M", channel="The channel to stop sending the run to.")
 async def add_schedule(ctx, train: str, channel: discord.TextChannel):
     if ctx.user.guild_permissions.administrator:
-        log_command(ctx.user.id, 'remove-schedule')
+        log_command(ctx.user.id, 'remove-schedule', ctx.guild.id)
         await ctx.response.defer()
         await trainTimleyFetcherRemove(ctx, train, channel)
     else:
@@ -6244,7 +6244,7 @@ async def add_schedule(ctx, train: str, channel: discord.TextChannel):
     
 @schedule.command(name="list", description="List all trains that are being sent in a channel.")
 async def list_schedule(ctx, channel: discord.TextChannel):
-    log_command(ctx.user.id, 'view-schedule-list')
+    log_command(ctx.user.id, 'view-schedule-list', ctx.guild.id)
     await ctx.response.defer()
     await trainTimleyFetcherList(ctx, channel)
 
@@ -6252,7 +6252,7 @@ async def list_schedule(ctx, channel: discord.TextChannel):
 @bot.tree.command(name="about", description="View information about the bot.")
 async def about(ctx):
     await ctx.response.defer()
-    log_command(ctx.user.id, 'about')
+    log_command(ctx.user.id, 'about', ctx.guild.id)
     embed = discord.Embed(title="About", description=f"TrackPulse Vic is a Discord bot that allows users to log their train, and tram trips in Victoria, New South Wales, South Australia and Western Australia, along with any bus trips. It also provides the ability to get real-time line status updates for Metro Trains Melbourne, upcoming departures from Melbourne stations and the ability to search for information about a specific train, as well as a range of other features.\nOnline Since <t:{uptime}:R>", color=discord.Color.blue())
     embed.add_field(name="Developed by", value="[Xm9G](https://xm9g.net/)\n[Comeng17](https://github.com/Comeng17)", inline=True)
     embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\nAperture',inline=True)
@@ -6272,7 +6272,7 @@ async def about(ctx):
 async def yearinreview(ctx, year: int=2024):
     async def yir():
         await ctx.response.defer()
-        log_command(ctx.user.id, 'year-in-review')
+        log_command(ctx.user.id, 'year-in-review', ctx.guild.id)
         current_year = datetime.now().year
         unix_time = int(time.time())
         if current_year == year:
@@ -6354,7 +6354,7 @@ async def sync(ctx: commands.Context, guilds: commands.Greedy[discord.Object], s
 @bot.command()
 async def send(ctx, user: discord.Member, *, message: str):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'send')
+        log_command(ctx.author.id, 'send', ctx.guild.id)
         try:
             await user.send(message)
             await ctx.send(f"Sent message to {user.mention}.")
@@ -6372,7 +6372,7 @@ async def exporthistory(ctx, train:str):
             await ctx.send(f"No history found for train {train}.")
             return
     
-        log_command(ctx.author.id, 'export-history')
+        log_command(ctx.author.id, 'export-history', ctx.guild.id)
         await ctx.send(file=discord.File(filepath, filename=f"{train}.csv"))
     else:
         await ctx.send("Currently only admins can export train history, in the future this data may become available to all users.")
@@ -6381,7 +6381,7 @@ async def exporthistory(ctx, train:str):
 @bot.command()
 async def analytics(ctx,mode: str=None, user: discord.Member=None):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id,'analytics')
+        log_command(ctx.author.id,'analytics', ctx.guild.id)
         
         if mode == "commands":
             # Dictionary to store total command counts across all users
@@ -6491,7 +6491,7 @@ async def analytics(ctx,mode: str=None, user: discord.Member=None):
 async def select_train(ctx, train: str):
     await ctx.response.defer()
     if ctx.user.id in admin_users:
-        log_command(ctx.user.id, 'select-train-for-editing')
+        log_command(ctx.user.id, 'select-train-for-editing', ctx.guild.id)
         with open('utils/trainsets.csv', 'r', newline='', encoding='utf-8') as csvfile:
                     reader = csv.reader(csvfile)
                     collumheadings = next(reader)
@@ -6593,12 +6593,12 @@ async def select_train(ctx, train: str):
 async def ping(ctx):
     latency = round(bot.latency * 1000)  # Convert latency to ms
     await ctx.send(f"Pong! Latency: {latency} ms")
-    log_command(ctx.author.id, 'ping')
+    log_command(ctx.author.id, 'ping', ctx.guild.id)
     
 @bot.command()
 async def syncdb(ctx, url='https://victorianrailphotos.com/api/trainsets.csv'):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'sync-db')
+        log_command(ctx.author.id, 'sync-db', ctx.guild.id)
         csv_url = url
         save_location = "utils/trainsets.csv"
         await ctx.send(f"Downloading trainset data from {csv_url} to {save_location}")
@@ -6615,7 +6615,7 @@ async def syncdb(ctx, url='https://victorianrailphotos.com/api/trainsets.csv'):
 @bot.command()
 async def synclists(ctx):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'sync-lists')
+        log_command(ctx.author.id, 'sync-lists', ctx.guild.id)
         await printlog("Downloading stop name data from TV")
         await ctx.send("Downloading stop name data from TV")
         try:
@@ -6638,7 +6638,7 @@ async def synclists(ctx):
 @bot.command()
 async def restart(ctx):
     if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'restart')
+        log_command(ctx.author.id, 'restart', ctx.guild.id)
         await ctx.send(f"Restarting bot")
         await printlog("Restarting bot")
         
@@ -6656,7 +6656,7 @@ async def restart(ctx):
 async def update(ctx):
     if automatic_updates == True:
         if ctx.author.id in admin_users:
-            log_command(ctx.author.id, 'update')
+            log_command(ctx.author.id, 'update', ctx.guild.id)
             await ctx.send("Updating bot...")
             await printlog("Pulling from git...")
         
