@@ -18,7 +18,7 @@ def log_command(user_id, command_name, guild_id=None):
     "client_id": client_id,
     "events": [
         {
-            "name": command_name.replace('-', '_'),
+            "name": 'dc_' + command_name.replace('-', '_'),
             "params": {
                 "guild_hash": hash_id(guild_id) if guild_id else 'None',
                 "user_hash": hash_id(user_id),
