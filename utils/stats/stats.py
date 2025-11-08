@@ -18,10 +18,9 @@ def log_command(user_id, command_name, guild_id=None):
     "client_id": client_id,
     "events": [
         {
-            "name": "discord_command",
+            "name": 'dc_' + command_name.replace('-', '_'),
             "params": {
-                "command_name": command_name,
-                "guild_hash": hash_id(guild_id),
+                "guild_hash": hash_id(guild_id) if guild_id else 'None',
                 "user_hash": hash_id(user_id),
                 "timestamp_ms": int(time.time() * 1000)
             }
