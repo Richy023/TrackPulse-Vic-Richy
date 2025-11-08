@@ -3239,8 +3239,11 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(f'Invalid date: {date}\nMake sure to use a possible date.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`')
                 return
@@ -3365,8 +3368,11 @@ async def logNSWTrain(ctx,  line:str, number: str, start:str, end:str, type:str=
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3455,8 +3461,11 @@ async def logSATrain(ctx, line:str, number: str, start:str, end:str, date:str='t
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3541,8 +3550,11 @@ async def logSATram(ctx, line:str, number: str, type:str, start:str, end:str, da
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3614,8 +3626,11 @@ async def logPerthTrain(ctx, number: str, line:str, start:str, end:str, date:str
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3684,8 +3699,11 @@ async def logFlght(ctx, registration:str, type:str, start:str, end:str, airline:
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3775,8 +3793,11 @@ async def logNSWTram(ctx, line:str, number: str, type:str, start:str, end:str, d
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3861,8 +3882,11 @@ async def logCanberraTram(ctx, line:str, number: str, type:str, start:str, end:s
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nUse the format `dd/mm/yyyy`', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the format `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3932,8 +3956,11 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
