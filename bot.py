@@ -2875,7 +2875,7 @@ async def type_autocompletion(
     
 #log train logger
 @trainlogs.command(name="train", description="Log a train you have been on")
-@app_commands.describe(number = "Carrige Number", date = "Date in DD/MM/YYYY format", line = 'Train Line', start='Starting Station', end = 'Ending Station', type='Type of train (will be autofilled if a train number is entered)', notes='Any notes you want to add to the log', hidemessage='Hide the message from other users, note this will not make the log private.')
+@app_commands.describe(number = "Carrige Number", date = "Date in DD/MM/YYYY or YYYY-MM-DD format", line = 'Train Line', start='Starting Station', end = 'Ending Station', type='Type of train (will be autofilled if a train number is entered)', notes='Any notes you want to add to the log', hidemessage='Hide the message from other users, note this will not make the log private.')
 @app_commands.autocomplete(start=station_autocompletion)
 @app_commands.autocomplete(end=station_autocompletion)
 @app_commands.autocomplete(line=line_autocompletion)
@@ -2899,8 +2899,11 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
                 return
@@ -2930,9 +2933,9 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                     set = number.upper()
         else:
             # if the user puts a vlocity with he letters VL
-            if number.upper().startswith('VL') and len(number) == 6:
-                print('vlocity with vl')
-                number = number.strip('VL').replace(' ', '')
+            if number.upper().startswith('VL') or number.upper().startswith('VS') and len(number) == 6:
+                print('vlocity with vl/vs')
+                number = number.strip('VL').replace(' ', '') if number.upper().startswith('VL') else number.strip('VS').replace(' ', '')
             
             # checking if train number is valid
             if number != 'Unknown':
@@ -2942,11 +2945,9 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 return
             type_final = trainType(number.upper())
             
-        # Strip emojis and newlines from notes if provided
+        # Strip emojis and newlines from note
         if notes:
-            # Remove emojis using regex
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
-            # Remove newlines
             notes = notes.replace('\n', ' ')
             #add quotes so the csv dosn't break when u use a comma
             notes = f'"{notes}"'
@@ -4900,6 +4901,8 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 return
             
         if global_stats:
+            if stat == 'distanceovertime':
+                data = distanceOverTime(userid.name, year, True)
             data = globalTopStats(statSearch)
         else:
             try:
