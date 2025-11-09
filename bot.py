@@ -5086,7 +5086,6 @@ async def termini(ctx):
         start = 0
         
         while start < len(data):
-            # Find the index where the string should be split
             if start + 2000 < len(data):
                 split_index = data.rfind('\n', start, start + 2000)
                 if split_index == -1:
@@ -5095,7 +5094,7 @@ async def termini(ctx):
                 split_index = len(data)
             
             split_strings.append(data[start:split_index])
-            start = split_index + 1  # Move past the newline or split point
+            start = split_index + 1
             
         for item in split_strings:
             await ctx.channel.send(item)

@@ -965,7 +965,7 @@ def stationlist(user, state):
 
 def terminiList(user):
     termini = [
-        "Lilydale", "Belgrave", "Alamein", "Glen Waverley", "Bairnsdale", "Traralgon", 'East Pakenham', 'Cranbourne', 'Frankston', 'Stony Point', 'Sandringham', 'Williamstown', 'Werribee', 'Waurn Ponds', "Warrnambool", "Wendouree", 'Ararat','Sunbury', 'Maryborough', 'Epsom','Eaglehawk', 'Swan Hill', 'Echuca','Flemington Racecourse','Craigieburn','Upfield', 'Seymour', 'Shepparton', 'Albury', "Mernda", 'Hurstbridge' 
+        "Alamein", "Albury", "Ararat", "Bairnsdale", "Belgrave", "Cranbourne", "Craigieburn", "East Pakenham", "Eaglehawk", "Echuca", "Epsom", "Flemington Racecourse", "Frankston", "Glen Waverley", "Hurstbridge", "Lilydale", "Maryborough", "Mernda", "Sandringham", "Seymour", "Shepparton", "Stony Point", "Sunbury", "Swan Hill", "Traralgon", "Upfield", "Waurn Ponds", "Warrnambool", "Wendouree", "Werribee", "Williamstown"
     ]
     
     with open(f'utils/trainlogger/userdata/{user}.csv', 'r') as csvfile:
