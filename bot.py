@@ -3163,8 +3163,11 @@ async def editrow(ctx, id:str, mode:str='train', line:str='nochange', number:str
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use the format DD/MM/YYYY.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
                 return
