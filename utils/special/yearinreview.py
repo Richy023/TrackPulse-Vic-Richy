@@ -84,7 +84,7 @@ def year_in_review(csv_file, year):
 def vline_metroprecent(csv_file, year):
     metroTrains = ["X'Trapolis 100", "HCMT", 'EDI Comeng', 'Alstom Comeng', 'Siemens Nexas', "X'Trapolis 2.0"]
     vlineTrains = ['VLocity', 'N Class', 'Sprinter']
-    heritage = ['Tait', 'K Class', 'S Class', 'A Class', 'R Class']
+    heritage = ['Tait', 'K Class', 'S Class', 'A Class', 'R Class', 'D2 Class', 'Y Class']
     
     metro_count = 0
     vline_count = 0
