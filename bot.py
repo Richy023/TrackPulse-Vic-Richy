@@ -6301,7 +6301,7 @@ async def about(ctx):
 @bot.tree.command(name="year-in-review", description="View your year in review for a specific year.")
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-async def yearinreview(ctx, year: int=2024):
+async def yearinreview(ctx, year: int=2025):
     async def yir():
         await ctx.response.defer()
         log_command(ctx.user.id, 'year-in-review')
@@ -6309,7 +6309,7 @@ async def yearinreview(ctx, year: int=2024):
         unix_time = int(time.time())
         if current_year == year:
             if unix_time < 1764507600:
-                await ctx.edit_original_response(content=f"Your {current_year} year in review will be available <t:1732971600:R>.")
+                await ctx.edit_original_response(content=f"Your {current_year} year in review will be available <t:1764507600:R>.")
                 return
                 # pass
         try:
