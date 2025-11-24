@@ -5815,7 +5815,7 @@ async def profile(ctx, user: discord.User = None):
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5876,7 +5876,7 @@ async def viewMaps(ctx, mode: str):
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
