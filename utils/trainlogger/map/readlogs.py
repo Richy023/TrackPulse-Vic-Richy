@@ -20,11 +20,9 @@ def precompat(data:list, lines_dictionary:dict):
             station2=cols[6]
             trip_year = int(trip_date.split('-')[0])
             trip_month = int(trip_date.split('-')[1])
-            trip_day = int(trip_date.split('-')[2])
             metro_year = int(metro_date.split('-')[0])
             metro_month = int(metro_date.split('-')[1])
-            metro_day = int(metro_date.split('-')[2])
-            if trip_year >= metro_year + 1 or (trip_year == metro_year and trip_month >= metro_month + 1) or (trip_year == metro_year and trip_month == metro_month and trip_day >= metro_day):
+            if trip_year > metro_year or (trip_year == metro_year and trip_month > metro_month):
                 if group == 'Frankston':
                     if station1 in ['Flagstaff','Parliament','Melbourne Central'] and station2 in ['Flagstaff','Parliament','Melbourne Central']:
                         group = 'Unknown'
@@ -255,11 +253,11 @@ def postcompat(data:list, lines_dictionary:dict):
             station2=cols[6]
             trip_year = int(trip_date.split('-')[0])
             trip_month = int(trip_date.split('-')[1])
-            trip_day = int(trip_date.split('-')[2])
             metro_year = int(metro_date.split('-')[0])
             metro_month = int(metro_date.split('-')[1])
-            metro_day = int(metro_date.split('-')[2])
-            if trip_year <= metro_year - 1 or (trip_year == metro_year and trip_month <= metro_month - 1) or (trip_year == metro_year and trip_month == metro_month and trip_day <= metro_day - 1):
+            if trip_year < metro_year or (trip_year == metro_year and trip_month < metro_month):
+                if group == 'Summer Start Metro Tunnel Service':
+                    group = 'Pakenham'
                 if group == 'Frankston':
                     if station1 in lines_dictionary['Werribee'][0] and station1 not in lines_dictionary['Frankston'][0] and station2 in lines_dictionary['Werribee'][0] and station2 not in lines_dictionary['Frankston'][0]:
                         group = 'Werribee'

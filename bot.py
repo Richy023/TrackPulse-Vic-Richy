@@ -167,6 +167,7 @@ for line in file:
     line = line.strip()
     lines_list.append(line)
 file.close()
+lines_list.append("Summer Start Metro Tunnel Service")
 
 file = open('utils\\datalists\\types.txt','r')
 types_list = []
@@ -401,6 +402,7 @@ lines_dictionary_main = {
     'Pakenham': [['Richmond', 'South Yarra', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham'],0x00a8e4],
     'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
     'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
+    'Summer Start Metro Tunnel Service': [['West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall'],0x00a8e4],
     'Sunbury': [['North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
     'Upfield': [['North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
     'Werribee': [['Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
@@ -2906,6 +2908,13 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                     return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
+                return
+        
+        if line == "Summer Start Metro Tunnel Service":
+            log_year = int(savedate.split('-')[0])
+            log_month = int(savedate.split('-')[1])
+            if log_year > 2026 or log_year == 2026 and log_month >= 2:
+                await ctx.edit_original_response(content='''Invalid line: The `Summer Start Metro Tunnel Service` refers to the service between Westall and West Footscray that ran between the 30th of November 2025 and the 31st of January 2026. The date you have selected, `''' + savedate + '''`, is outside that range and the line no longer in operation. Please try again and choose an operational line, the Sunbury, Pakenham and Cranbourne Lines all run via the Metro Tunnel.''')
                 return
 
         if 'overland' in line.lower():
@@ -5964,7 +5973,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
