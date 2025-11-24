@@ -7,7 +7,7 @@ from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import lin
 from utils.trainlogger.map.station_coordinates_log_sydney_tram_map import x_offset as x_offset_log_sydney_tram, y_offset as y_offset_log_sydney_tram, station_coordinates as station_coordinates_log_sydney_tram
 from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import line_coordinates as lines_coordinates_log_sydney_tram
 
-metro_date = '2025-12-31' # this is just a placeholder date, replace when the metro tunnel date is confirmed
+metro_date = '2026-02-01' # this refers to the big switch date, which was assumed to be the opening date when this was coded in march. any "pre munnel" "post munnel" stuff refers to the big switch and not the acutal munnel
 
 def precompat(data:list, lines_dictionary:dict):
     newdata = []
