@@ -3,6 +3,9 @@ import sqlite3
 from PIL import Image
 import asyncio
 
+import discord
+
+from photosubmissions.manager import addSubmission
 from utils.vicrailphotosapi.vrfAPI import upload_image
 
 
@@ -26,6 +29,9 @@ async def acceptPhoto(id, username, trainType, featured:bool, note, number, loca
             location = rows[0][5]
         if date == None:
             date = rows[0][4]
+        if note == None:
+            note = rows[0][10]
+        exif = rows[0][9]
         
         image_filename = rows[0][2]
         image_extension = os.path.splitext(image_filename)[1].lower()
@@ -48,6 +54,7 @@ async def acceptPhoto(id, username, trainType, featured:bool, note, number, loca
             featured='Y' if featured else 'N',
             note=note,
             mode=mode,
+            exif=exif,
         )
 
         if 'error' in url:
@@ -76,4 +83,16 @@ def convertToWEBP(input_path, output_path, quality=100):
         
     except Exception as e:
         print(f"Error: {e}")
-        
+
+async def webAddImage(target_guild, target_channel_id, showcase_channel, data):
+    print('recieved web image submission, processing...')
+    channel = target_guild.get_channel(target_channel_id)
+    if channel:
+        try:
+            await channel.send(f"New submission received <@&1402142767060221997>\nhttps://victorianrailphotos.com/profile") # type: ignore
+            await channel.send(f'https://victorianrailphotos.com/api/queue/{data["filename"]}')
+        except Exception as e:
+            await channel.send(content=f"An error occurred while processing a photo: {str(e)}")
+
+    else:
+        print(f"Channel with ID {target_channel_id} not found in guild {target_guild.name}")

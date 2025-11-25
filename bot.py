@@ -21,6 +21,7 @@ from numbers import Number
 import operator
 from shutil import ExecError
 import shutil
+import sqlite3
 from tracemalloc import stop
 from cycler import V
 from discord.ext import commands, tasks
@@ -53,11 +54,13 @@ from commands.searchPhoto import searchTrainPhoto
 from commands.searchtrain import searchTrainCommand
 from commands.traintimleyfetcher import getchannelstocheck, seeWhereTrainsAre, trainTimleyFetcherAdd, trainTimleyFetcherList, trainTimleyFetcherRemove
 from photosubmissions.manager import addSubmission, getUserID, removeSubmission, returnQueue
+from utils.alias import setWebAlias
 from utils.aviationAPIs.airportdata import get_airport_data
 from utils.aviationAPIs.aircraftphoto import getplaneimage
+from utils.game.imageadder import acceptGuesserPhoto
 from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines
-from utils.vicrailphotosapi.accepter import acceptPhoto
-sys.stdout = sys.__stdout__  # Reset stdout if needed
+from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
+sys.stdout = sys.__stdout__ 
 
 original_open = builtins.open
 
@@ -164,6 +167,7 @@ for line in file:
     line = line.strip()
     lines_list.append(line)
 file.close()
+lines_list.append("Summer Start Metro Tunnel Service")
 
 file = open('utils\\datalists\\types.txt','r')
 types_list = []
@@ -299,7 +303,7 @@ bus_coach_stops = bus_stops + vline_coach_stops
 bus_coach_stops = sorted(set(bus_coach_stops))
 
 # Create required folders cause their not on github
-required_folders = ['utils/trainlogger/userdata','temp','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
+required_folders = ['utils/trainlogger/userdata','temp','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
                     'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data','utils/trainlogger/userdata/maps', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
 for folder in required_folders:
     if os.path.exists(folder) and os.path.isdir(folder):
@@ -350,10 +354,9 @@ config = dotenv_values(".env")
 BOT_TOKEN = config['BOT_TOKEN']
 STARTUP_CHANNEL_ID = int(config['STARTUP_CHANNEL_ID']) # channel id to send the startup message
 RARE_SERVICE_CHANNEL_ID = int(config['RARE_SERVICE_CHANNEL_ID'])
-COMMAND_PREFIX = config['COMMAND_PREFIX']
 USER_ID = config['USER_ID']
 
-bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=discord.Intents.all())
+bot = commands.Bot(command_prefix=commands.when_mentioned, intents=discord.Intents.default())
 log_channel = bot.get_channel(STARTUP_CHANNEL_ID)
 
 async def printlog(text):
@@ -365,7 +368,7 @@ async def printlog(text):
 # check if these things are on in the .env
 rareCheckerOn = False
 automatic_updates = False
-admin_users = [1002449671224041502, 780303451980038165, int(USER_ID)]
+admin_users = [1002449671224041502, 780303451980038165, 634620519500480512, int(USER_ID)]
 if config['RARE_SERVICE_CHECKER'] == 'ON':
     rareCheckerOn = True
 startupAchievements = False
@@ -399,6 +402,7 @@ lines_dictionary_main = {
     'Pakenham': [['Richmond', 'South Yarra', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham'],0x00a8e4],
     'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
     'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
+    'Summer Start Metro Tunnel Service': [['West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall'],0x00a8e4],
     'Sunbury': [['North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
     'Upfield': [['North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
     'Werribee': [['Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
@@ -431,11 +435,100 @@ async def download_csv(url, save_path):
             await printlog(f"CSV downloaded successfully and saved as {save_path}")
         else:
             raise Exception(f"Failed to download CSV. Status code: {response.status_code}")
+        
+# web server thing for recieving submissions
+from aiohttp import web
+
+async def handle_submission(request):
+    data = await request.post()
+    # put the thing to add it to queue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    target_guild_id = 1214139268725870602
+    target_channel_id = 1238821549352685568
+    showcase_channel = 1322889624250486848
+    target_guild = bot.get_guild(target_guild_id)
+    if target_guild:
+        await webAddImage(target_guild, target_channel_id, showcase_channel, data)
+
+    
+    return web.Response(text="Submission received!")
+
+async def returnAlias(request):
+    userid = request.query.get('username')
+    if not userid:
+        return web.json_response({'error': 'Username is required'}, status=400)
+    try:
+        conn = sqlite3.connect('userdata/aliases.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT alias FROM aliases WHERE userid = ?', (userid,))
+        result = cursor.fetchone()
+        conn.close()
+        if result:
+            return web.json_response({'alias': result[0]})
+        else:
+            return web.json_response({'alias': None})
+            
+    except sqlite3.Error as e:
+        return web.json_response({'error': f'Database error: {str(e)}'}, status=500)
+
+async def setAlias(request):
+    try:
+        data = await request.json()
+        discord_id = data.get("discord_id")
+        name = data.get("name")
+
+        if not discord_id or not name:
+            return web.json_response({"error": "Missing discord_id or name"}, status=400)
+
+        print(f"Received data: Discord ID = {discord_id}, Name = {name}")
+        worked = setWebAlias(discord_id, name)
+        if worked:
+            return web.json_response({
+                "message": "Data received successfully",
+                "received_data": {
+                    "discord_id": discord_id,
+                    "name": name
+                }
+            }, status=200)
+        else:
+            return web.json_response({
+                "message": "There is already another user with this alias!"
+            }, status=400)
+
+    except json.JSONDecodeError:
+        return web.json_response({"error": "Invalid JSON payload"}, status=400)
+    except Exception as e:
+        print(f'Error setting alias: {e}')  
+        return web.json_response({"error": f"Failed to process request: {str(e)}"}, status=500)
+
+app = web.Application()
+app.add_routes([web.post('/submit_photo', handle_submission)])
+app.add_routes([web.get('/alias', returnAlias)])
+app.add_routes([web.post('/set-alias', setAlias)])
+
+web_runner = None
+# start aiohttp server in background when bot starts
+async def start_webserver():
+    global web_runner
+    web_runner = web.AppRunner(app)
+    await web_runner.setup()
+    site = web.TCPSite(web_runner, '0.0.0.0', 1237)
+    await site.start()
+    print('Web server on!')
+    
+async def stop_webserver():
+    global web_runner
+    if web_runner:
+        await web_runner.cleanup()
+        print('Web server stopped!')
+        web_runner = None
+
+
+
 
 @bot.event
 async def on_ready():
     # download the trainset data     
-    csv_url = "https://victorianrailphotos.com/trainsets.csv"
+    csv_url = "https://victorianrailphotos.com/api/trainsets.csv"
     save_location = "utils/trainsets.csv"
     # await printlog(f"Downloading trainset data from {csv_url} to {save_location}")
     # await download_csv(csv_url, save_location)
@@ -517,6 +610,10 @@ async def on_ready():
     global uptime
     uptime = int(time.time())
     healthcheck.pinghealthcheck() # ping to the monitoring thing
+    
+    # start webserver
+    bot.loop.create_task(start_webserver())
+
     
     # restart or normal start
     file = open('restart.txt','r')
@@ -609,6 +706,13 @@ async def task_loop():
         healthcheck.pinghealthcheck(fail=True)
         
     await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs} trips logged'))
+    try:
+        # write totalLogs to a csv with current date time in iso format
+            with open('utils/trainlogger/totalLogs.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([totalLogs, datetime.now().isoformat()])
+    except Exception as e:
+        await printlog(f'Error writing totalLogs to CSV: {e}')
     
     if rareCheckerOn:
         log_channel = bot.get_channel(RARE_SERVICE_CHANNEL_ID)
@@ -650,7 +754,13 @@ async def trainTimleyCheckerLoop():
                     if str(train[0]) == str(channel[1]):
                         print(f"channele: {channel[0]}")
                         channelID = bot.get_channel(int(channel[0]))
-                        await channelID.send(f"{train[0]} is not currently running")
+                        try:
+                            await channelID.send(f"{train[0]} is not currently running")
+                        except:
+                            try:
+                                print(f'couldnt send message to {channelID}')
+                            except:
+                                print('couldnt send th message to the channel id which i also cant fucking say cause it is also broken ffs')
                     else:
                         print(f'{train[0]} not {channel[1]}')
             else:
@@ -678,7 +788,14 @@ async def trainTimleyCheckerLoop():
                             embed.set_image(url="attachment://map.png")
                             
                             channelID = bot.get_channel(int(channel[0]))
-                            await channelID.send(embed=embed, file=image)
+                            try:
+                                await channelID.send(embed=embed, file=image)
+                            except:
+                                try:
+                                    print(f'Couldnt sent message to {channelID}')
+                                    print(f'Couldnt sent message to {channelID.id}')
+                                except:
+                                    print('Couldnt sent message to the channel id which i also cant fucking say cause it is also broken ffs')
                         else:
                             print(f'{train[4]} not {channel[1]}')
                 else:
@@ -699,7 +816,7 @@ async def trainTimleyCheckerLoop():
 
 
 # Help command
-help_commands = ['Which /log command should I use?','/about','/achievements view','/completion sets','/completion stations','/departures','/favourite add','/favourite remove','/games station-guesser','/games station-hangman','/games station-order','/help','/line-status','/log adelaide-train','/log adelaide-tram','/log bus','/log delete','/log edit','/log export','/log import','/log perth-train','/log stats','/log sydney-train','/log sydney-tram','/log train','/log tram','/log view','/disruptions','/maps trips','/maps view','/myki calculate-fare','/search tv','/search route','/search station','/search run','/search train','/search train-photo','/search tram','/stats leaderboard','/stats profile','/stats termini','/submit-photo','/wongm','/year-in-review']
+help_commands = ['Which /log command should I use?','/about','/achievements view','/completion sets','/completion stations','/departures','/favourite add','/favourite remove','/games station-guesser','/games station-hangman','/games station-order','/help','/line-status','/log adelaide-train','/log adelaide-tram','/log bus','/log delete','/log edit','/log export','/log import','/log perth-train','/log stats','/log sydney-train','/log sydney-tram','/log train','/log tram','/log view','/disruptions','/maps trips','/maps view','/myki calculate-fare','/search tv','/search route','/search station','/search run','/search train','/search train-photo','/search tram','/search victorianrailphotos','/stats leaderboard','/stats profile','/stats termini','/submit-photo','/wongm','/year-in-review']
 
 async def help_autocompletion(
     interaction: discord.Interaction,
@@ -1104,6 +1221,14 @@ async def line_info(ctx, search: str):
     await printlog(spaces_removed)
     url = f"https://railgallery.wongm.com/page/search/?s={spaces_removed}"
     await ctx.response.send_message(url)
+    
+# my photo site search
+@search.command(name="victorianrailphotos", description="Search for photos on victorianrailphotos.com")
+@app_commands.describe(number='Carriage/Loco number', traintype='Type of train', location='Location of photo', photographer='Photographer of photo', featured='Featured photos only.')
+async def victorianrailphotos(ctx, number: str = '', traintype: str = '', location: str = '', photographer: str = '', featured:bool=False):
+    if featured:
+        featured = 'featured'
+    await ctx.response.send_message(f'[View results](https://victorianrailphotos.com/search?number={number}&type={traintype}&location={location}&photographer={photographer})')
 
 
 
@@ -1365,10 +1490,12 @@ async def tramsearch(ctx, tram: str):
         else:
             embed.add_field(name='Information', value='None available')
             
+        imageURL, credits = getTramImage(tram.upper())
+        if imageURL is not None:
+            embed.set_image(url=imageURL)
+            embed.add_field(name='Photo by:', value=credits, inline=False)
         
-        embed.set_image(url=getTramImage(tram.upper()))
-        
-        embed.add_field(name="Source:", value=f'[{getPhotoCredits(tram.upper())} (Photo)](https://victorianrailphotos.com?number={tram.upper()}), [MPTG (Icon)](https://melbournesptgallery.weebly.com/melbourne-train-and-tram-fronts.html), [Vicsig (Other info)](https://vicsig.net)', inline=False)
+        embed.add_field(name="Source:", value=f'[MPTG (Icon)](https://melbournesptgallery.weebly.com/melbourne-train-and-tram-fronts.html), [Vicsig (Other info)](https://vicsig.net)', inline=False)
         
         # embed.add_field(name='<a:botloading2:1261102206468362381> Loading trip data', value='⠀')
         embed_update = await ctx.edit_original_response(embed=embed)
@@ -2089,9 +2216,9 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
             credit = random_row[3]
 
             if ultrahard:
-                embed = discord.Embed(title=f"Guess the station! | {setLine}", color=ultrahard_colour, description=f"Type ! before your answer, e.g. !Lilydale. You have 30 seconds to answer.\n\n**Difficulty:** `{difficulty.upper()}`")
+                embed = discord.Embed(title=f"Guess the station! | {setLine}", color=ultrahard_colour, description=f"Mention the bot at the start of you message e.g. `@TrackPulse Vic Lilydale`. You have 30 seconds to answer.\n\n**Difficulty:** `{difficulty.upper()}`")
             else:
-                embed = discord.Embed(title=f"Guess the station! | {setLine}", description=f"Type ! before your answer. You have 30 seconds!\n\n**Difficulty:** `{difficulty}`")
+                embed = discord.Embed(title=f"Guess the station! | {setLine}", description=f"Mention the bot at the start of you message e.g. `@TrackPulse Vic Lilydale`. You have 30 seconds!\n\n**Difficulty:** `{difficulty}`")
                 if difficulty == 'Very Easy':
                     embed.color = very_easy_colour
                 elif difficulty == 'Easy':
@@ -2104,7 +2231,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                     embed.color = very_hard_colour
             
             embed.set_image(url=url)
-            embed.set_footer(text=f"Photo by {credit}. Use the submit photo command to submit a photo | {len(data)} photos in set")
+            embed.set_footer(text=f"Photo by {credit}. DM @xm9g to submit a photo | {len(data)} photos in set | Started by {ctx.user.name}")
             embed.set_author(name=f"Round {round+1}/{rounds}")
 
             # Send the embed message
@@ -2115,9 +2242,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
 
             # Define a check function to validate user input
             async def check(m):
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
-            async def funnyCheck(m):    
-                return m.channel == channel and m.author != bot.user
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
             try:
                 correct = False
                 if ultrahard:
@@ -2132,7 +2257,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                     if await check(user_response) == True:  # fixed cause check broke
                     
                         # Check if the user's response matches the correct station
-                        if user_response.content[1:].lower().replace(" ", "") == station.lower().replace(" ", ""):
+                        if user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") == station.lower().replace(" ", ""):
                             log_command(user_response.author.id, 'game-station-guesser-correct')
                             if ultrahard:
                                 await ctx.channel.send(f"{user_response.author.mention} guessed it right!")
@@ -2149,8 +2274,8 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 addLb(user_response.author.id, user_response.author.name, 'guesser')
                             if user_response.author not in participants:
                                 participants.append(user_response.author)
-                                
-                        elif user_response.content.lower() == '!skip':
+
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station.title()}||" if not ultrahard else f"Round {round+1} skipped.")
                                 log_command(user_response.author.id, 'game-station-guesser-skip')
@@ -2160,7 +2285,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
                                 roundResponse = True
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-guesser-stop')
@@ -2178,7 +2303,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")  
                         
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Station Name: `{station}`\nUrl: `{url}`")
                             else:
@@ -2196,30 +2321,6 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
                                 addLoss(user_response.author.id, user_response.author.name, 'guesser')
                             if user_response.author not in participants:
                                 participants.append(user_response.author)
-                    
-                    # checker for the funnies ( no ! needed)       
-                    if await funnyCheck(user_response) == True:
-                        # funny ones
-                        if 'idk' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'i dont know' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'sorry' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'my bad' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.") 
-                        elif 'oops' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'bruh' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} 💀")
-                        elif 'shit' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'fuck' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'what' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} its a station.")
-                        elif 'wtf' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} what?")
                           
             except asyncio.TimeoutError:
                 if ultrahard:
@@ -2411,7 +2512,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             embed = discord.Embed(
                 title=f"Which __**{numdirection if numdirection > 0 else numdirection*-1}**__ stations are __**{direction1}**__ from __**{station}**__ station on the __**{line} line**__?",
-                description=f"**Answers must be in the correct order!** Answer using this format:\n!`station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use !skip to skip to the next round.*",
+                description=f"**Answers must be in the correct order!** Answer using this format:\n<@{bot.user.id}> `station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
                 colour=lines_dictionary_main[line][1])
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
@@ -2421,7 +2522,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             # Define a check function to validate user input
             async def check(m): 
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
             async def funnyCheck(m):    
                 return m.channel == channel and m.author != bot.user
 
@@ -2452,7 +2553,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                             ignoredRounds = 0
                             roundResponse = True
                             correct = True 
-                        elif user_response.content.lower() == '!skip':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{correct_list[0]}, {correct_list[1]}{f', {correct_list[2]}' if len(correct_list) >=3 else ''}{f', {correct_list[3]}' if len(correct_list) >=4 else ''}{f', {correct_list[4]}' if len(correct_list) >=5 else ''}||")
                                 log_command(user_response.author.id, 'game-station-order-skip')
@@ -2461,7 +2562,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                                 break
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-order-stop')
@@ -2478,7 +2579,7 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Stations: `{correct_list1}`")
                             else:
@@ -2604,7 +2705,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
             embed = discord.Embed(
                 title=f"Guess the station! It has {len(station)} letters",
-                description=f"**Guess either letters or station names.\nNote you only have {attempts} incorrect guesses until you lose**\nAnswer using this format:\n!`Letter` or !`Station name or part of station name`\n\n*Use !skip to skip to the next round.*",
+                description=f"**Guess either letters or station names.\nNote you only have {attempts} incorrect guesses until you lose**\nAnswer using this format:\n<@{bot.user.id}> `Letter` or <@{bot.user.id}> `Station name or part of station name`\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
                 colour=metro_colour)
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
@@ -2614,9 +2715,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
             # Define a check function to validate user input
             async def check(m): 
-                return m.channel == channel and m.author != bot.user and m.content.startswith('!')
-            async def funnyCheck(m):    
-                return m.channel == channel and m.author != bot.user
+                return m.channel == channel and m.author != bot.user and m.content.startswith(f'<@{bot.user.id}>')
 
             # the actual input part
             try:
@@ -2627,9 +2726,9 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
 
                     if await check(user_response) == True:  # fixed cause check broke    
                         # Check if the user's response matches the correct station
-                        if user_response.content[1:].lower().replace(" ", "") in station.lower().replace(" ", ""):
-                            if not user_response.content[1:].lower().replace(" ", "") in guessed_list:
-                                guessed_list = guessed_list + user_response.content[1:].lower().replace(" ", "") # this is obviously broken, will be funny to see tho
+                        if user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") in station.lower().replace(" ", ""):
+                            if not user_response.content[len(f'<@{bot.user.id}>'):].lower().replace(" ", "") in guessed_list:
+                                guessed_list = guessed_list + user_response.content.replace(f'<@{bot.user.id}>', '').strip().lower().replace(" ", "")
                                 await printlog(guessed_list)
                                 guessed = ""
                                 for letter in station.replace(" ", ""):
@@ -2654,7 +2753,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
                                 await ctx.channel.send(f'# Letters: `{guessed}`\n\n**Incorrect guesses: {failed}**\n\nIncorrect guesses left: {attempts - incorrectGuesses}')
-                        elif user_response.content.lower() == '!skip':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> skip':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Round {round+1} skipped. The answer was ||{station}||")
                                 log_command(user_response.author.id, 'game-station-hangman-skip')
@@ -2663,7 +2762,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 break
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only skip the round if you were the one who started it.")
-                        elif user_response.content.lower() == '!stop':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> stop':
                             if user_response.author.id == ctx.user.id or user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Game ended.")
                                 log_command(user_response.author.id, 'game-station-hangman-stop')
@@ -2680,7 +2779,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                             else:
                                 await ctx.channel.send(f"{user_response.author.mention} you can only stop the game if you were the one who started it.")
                         # view the image info (admin only) 
-                        elif user_response.content.lower() == '!reveal' or user_response.content.lower() == '!release':
+                        elif user_response.content.lower() == f'<@{bot.user.id}> reveal' or user_response.content.lower() == f'<@{bot.user.id}> release':
                             if user_response.author.id in admin_users :
                                 await ctx.channel.send(f"Station: `{station}`")
                             else:
@@ -2712,31 +2811,6 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
                                 if user_response.author not in participants:
                                     participants.append(user_response.author)
                                 await ctx.channel.send(f'# Letters: `{guessed}`\n\n**Incorrect guesses: {failed}**\n\nIncorrect guesses left: {attempts - incorrectGuesses}')
-
-                
-                    # checker for the funnies ( no ! needed)       
-                    if await funnyCheck(user_response) == True:
-                        # funny ones
-                        if 'idk' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'i dont know' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} I don't know either.")
-                        elif 'sorry' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'my bad' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.") 
-                        elif 'oops' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} Its ok.")
-                        elif 'bruh' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} 💀")
-                        elif 'shit' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'fuck' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} :(")
-                        elif 'what' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} its station.")
-                        elif 'wtf' in user_response.content.lower():
-                            await ctx.channel.send(f"{user_response.author.mention} what?")
                         
             except asyncio.TimeoutError:
                 await ctx.channel.send(f"Times up. The answer was ||{station}||")
@@ -2803,7 +2877,7 @@ async def type_autocompletion(
     
 #log train logger
 @trainlogs.command(name="train", description="Log a train you have been on")
-@app_commands.describe(number = "Carrige Number", date = "Date in DD/MM/YYYY format", line = 'Train Line', start='Starting Station', end = 'Ending Station', type='Type of train (will be autofilled if a train number is entered)', notes='Any notes you want to add to the log', hidemessage='Hide the message from other users, note this will not make the log private.')
+@app_commands.describe(number = "Carrige Number", date = "Date in DD/MM/YYYY or YYYY-MM-DD format", line = 'Train Line', start='Starting Station', end = 'Ending Station', type='Type of train (will be autofilled if a train number is entered)', notes='Any notes you want to add to the log', hidemessage='Hide the message from other users, note this will not make the log private.')
 @app_commands.autocomplete(start=station_autocompletion)
 @app_commands.autocomplete(end=station_autocompletion)
 @app_commands.autocomplete(line=line_autocompletion)
@@ -2827,10 +2901,20 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
+                return
+        
+        if line == "Summer Start Metro Tunnel Service":
+            log_year = int(savedate.split('-')[0])
+            log_month = int(savedate.split('-')[1])
+            if log_year > 2026 or log_year == 2026 and log_month >= 2:
+                await ctx.edit_original_response(content='''Invalid line: The `Summer Start Metro Tunnel Service` refers to the service between Westall and West Footscray that ran between the 30th of November 2025 and the 31st of January 2026. The date you have selected, `''' + savedate + '''`, is outside that range and the line no longer in operation. Please try again and choose an operational line, the Sunbury, Pakenham and Cranbourne Lines all run via the Metro Tunnel.''')
                 return
 
         if 'overland' in line.lower():
@@ -2858,9 +2942,9 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                     set = number.upper()
         else:
             # if the user puts a vlocity with he letters VL
-            if number.upper().startswith('VL') and len(number) == 6:
-                print('vlocity with vl')
-                number = number.strip('VL').replace(' ', '')
+            if number.upper().startswith('VL') or number.upper().startswith('VS') and len(number) == 6:
+                print('vlocity with vl/vs')
+                number = number.strip('VL').replace(' ', '') if number.upper().startswith('VL') else number.strip('VS').replace(' ', '')
             
             # checking if train number is valid
             if number != 'Unknown':
@@ -2870,11 +2954,9 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 return
             type_final = trainType(number.upper())
             
-        # Strip emojis and newlines from notes if provided
+        # Strip emojis and newlines from note
         if notes:
-            # Remove emojis using regex
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
-            # Remove newlines
             notes = notes.replace('\n', ' ')
             #add quotes so the csv dosn't break when u use a comma
             notes = f'"{notes}"'
@@ -2910,7 +2992,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         try:
             credits = None
             if not '-' in set:
-                imagec = getImage(set)
+                imagec = getImage(set, thumbnail=True)
                 image = imagec[0]
                 credits = imagec[1]
 
@@ -2922,7 +3004,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                     first_car = set[:hyphen_index]
                     await printlog(f'First car: {first_car}')
                     
-                    imagec = getImage(first_car)
+                    imagec = getImage(first_car, thumbnail=True)
                     image, credits = imagec
                     
                     if image is None:
@@ -2931,7 +3013,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                             last_car = set[last_hyphen + 1 :]
                             await printlog(f'Last car: {last_car}')
                             
-                            imagec = getImage(last_car)
+                            imagec = getImage(last_car, thumbnail=True)
                             image, credits = imagec
                             
                             if image is None:
@@ -2967,6 +3049,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
     app_commands.Choice(name="Adelaide Train", value="adelaide-trains"),
     app_commands.Choice(name="Adelaide Tram", value="adelaide-trams"),
     app_commands.Choice(name="Perth Train", value="perth-trains"),
+    app_commands.Choice(name="Canberra Light Rail", value="canberra-trams"),
     app_commands.Choice(name="Bus", value="bus"),
     app_commands.Choice(name="Flight", value="flights"),
 ])
@@ -3089,8 +3172,11 @@ async def editrow(ctx, id:str, mode:str='train', line:str='nochange', number:str
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use the format DD/MM/YYYY.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
                 return
@@ -3165,8 +3251,11 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.edit_original_response(f'Invalid date: {date}\nMake sure to use a possible date.')
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.edit_original_response(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`')
                 return
@@ -3198,14 +3287,14 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
         embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
         if notes != None:
             embed.add_field(name="Notes", value=notes.strip('"'))
-        embed.set_footer(text=f"Log ID #{id}")
 
         # thing to find image:
         await printlog(f"Finding image for {number}")
-        image = getTramImage(number)
-        if image != None:
-            embed.set_thumbnail(url=image)
-
+        imageURL, credits = getTramImage(number.upper())
+        if imageURL != None:
+            embed.set_thumbnail(url=imageURL)
+        credits = f' | Photo by {credits}' if credits != None else ''
+        embed.set_footer(text=f"Log ID #{id}{credits}")
         await ctx.edit_original_response(embed=embed)
         
                 
@@ -3291,8 +3380,11 @@ async def logNSWTrain(ctx,  line:str, number: str, start:str, end:str, type:str=
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3381,8 +3473,11 @@ async def logSATrain(ctx, line:str, number: str, start:str, end:str, date:str='t
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3467,8 +3562,11 @@ async def logSATram(ctx, line:str, number: str, type:str, start:str, end:str, da
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3540,8 +3638,11 @@ async def logPerthTrain(ctx, number: str, line:str, start:str, end:str, date:str
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3610,8 +3711,11 @@ async def logFlght(ctx, registration:str, type:str, start:str, end:str, airline:
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3701,8 +3805,11 @@ async def logNSWTram(ctx, line:str, number: str, type:str, start:str, end:str, d
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3719,6 +3826,93 @@ async def logNSWTram(ctx, line:str, number: str, type:str, start:str, end:str, d
         embed = discord.Embed(title="Tram Logged",colour=sydney_tram_colour)
         
         embed.add_field(name="Number", value=f'{set} ({type})')
+        embed.add_field(name="Line", value=line)
+        embed.add_field(name="Date", value=savedate)
+        embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
+        embed.set_footer(text=f"Log ID #{id}")
+
+        await ctx.response.send_message(embed=embed, ephemeral=hidemessage)
+        
+                
+    # Run in a separate task
+    asyncio.create_task(log())
+    
+@trainlogs.command(name="canberra-tram", description="Log a Canberra Tram/Light Rail trip you have been on")
+@app_commands.describe(number = "Carrige Number", type = 'Type of tram', date = "Date in DD/MM/YYYY format", line = 'Light Rail Line', start='Starting Stop', end = 'Ending Stop', hidemessage='Hide the message from other users, note this will not make the log private.')
+@app_commands.choices(line=[
+        app_commands.Choice(name="R1", value="R1"),
+])
+@app_commands.choices(type=[
+        app_commands.Choice(name="Urbos 3", value="Urbos 3"),
+])
+@app_commands.choices(start=[
+        app_commands.Choice(name='Alinga Street', value='Alinga Street'),
+        app_commands.Choice(name='Elouera Street', value='Elouera Street'),
+        app_commands.Choice(name='Ipima Street', value='Ipima Street'),
+        app_commands.Choice(name='Macarthur Avenue', value='Macarthur Avenue'),
+        app_commands.Choice(name='Dickson Interchange', value='Dickson Interchange'),
+        app_commands.Choice(name='Swinden Street', value='Swinden Street'),
+        app_commands.Choice(name='Phillip Avenue', value='Phillip Avenue'),
+        app_commands.Choice(name='EPIC and Racecourse', value='EPIC and Racecourse'),
+        app_commands.Choice(name='Sandford Street', value='Sandford Street'),
+        app_commands.Choice(name='Well Station Drive', value='Well Station Drive'),
+        app_commands.Choice(name='Nullarbor Avenue', value='Nullarbor Avenue'),
+        app_commands.Choice(name='Mapleton Avenue', value='Mapleton Avenue'),
+        app_commands.Choice(name='Manning Clark North', value='Manning Clark North'),
+        app_commands.Choice(name='Gungahlin Place', value='Gungahlin Place'),
+])
+@app_commands.choices(end=[
+        app_commands.Choice(name='Alinga Street', value='Alinga Street'),
+        app_commands.Choice(name='Elouera Street', value='Elouera Street'),
+        app_commands.Choice(name='Ipima Street', value='Ipima Street'),
+        app_commands.Choice(name='Macarthur Avenue', value='Macarthur Avenue'),
+        app_commands.Choice(name='Dickson Interchange', value='Dickson Interchange'),
+        app_commands.Choice(name='Swinden Street', value='Swinden Street'),
+        app_commands.Choice(name='Phillip Avenue', value='Phillip Avenue'),
+        app_commands.Choice(name='EPIC and Racecourse', value='EPIC and Racecourse'),
+        app_commands.Choice(name='Sandford Street', value='Sandford Street'),
+        app_commands.Choice(name='Well Station Drive', value='Well Station Drive'),
+        app_commands.Choice(name='Nullarbor Avenue', value='Nullarbor Avenue'),
+        app_commands.Choice(name='Mapleton Avenue', value='Mapleton Avenue'),
+        app_commands.Choice(name='Manning Clark North', value='Manning Clark North'),
+        app_commands.Choice(name='Gungahlin Place', value='Gungahlin Place'),
+])
+# Canberra Tram Logger
+async def logCanberraTram(ctx, line:str, number: str, type:str, start:str, end:str, date:str='today', hidemessage:bool=False):
+    channel = ctx.channel
+    await printlog(date)
+    async def log():
+        log_command(ctx.user.id, 'log-canberra-tram')
+        await printlog("logging the canberra tram")
+
+        savedate = date.split('/')
+        if date.lower() == 'today':
+            current_time = time.localtime()
+            savedate = time.strftime("%Y-%m-%d", current_time)
+        else:
+            try:
+                savedate = time.strptime(date, "%d/%m/%Y")
+                savedate = time.strftime("%Y-%m-%d", savedate)
+            except ValueError:
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
+            except TypeError:
+                await ctx.response.send_message(f'Invalid date: {date}\nUse the format `dd/mm/yyyy`', ephemeral=True)
+                return
+        set = number
+        if set == None:
+            await ctx.response.send_message(f'Invalid train number: {number.upper()}',ephemeral=True)
+            return
+
+        # Add train to the list
+        id = addSydneyTram(ctx.user.name, number, type, savedate, line, start.title(), end.title())
+
+        embed = discord.Embed(title="Tram Logged",colour=sydney_tram_colour)
+        
+        embed.add_field(name="Number", value=f'{number} ({type})')
         embed.add_field(name="Line", value=line)
         embed.add_field(name="Date", value=savedate)
         embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
@@ -3774,8 +3968,11 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                 savedate = time.strptime(date, "%d/%m/%Y")
                 savedate = time.strftime("%Y-%m-%d", savedate)
             except ValueError:
-                await ctx.response.send_message(f'Invalid date: {date}\nMake sure to use a possible date.', ephemeral=True)
-                return
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
             except TypeError:
                 await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
@@ -3824,6 +4021,7 @@ vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Ben
         app_commands.Choice(name="Adelaide Trains & Journey Beyond", value="adelaide-trains"),
         app_commands.Choice(name="Adelaide Trams", value="adelaide-trams"),
         app_commands.Choice(name="Perth Trains", value="perth-trains"),
+        app_commands.Choice(name="Canberra Light Rail", value="canberra-trams"),
         app_commands.Choice(name="Flights", value="flights"),
 
 ])
@@ -3837,7 +4035,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
         log_command(ctx.user.id, 'view-log')
         
         if mode == 'train' and id == None and send == 'web':
-            await ctx.response.send_message('[Click here to view your logs online](https://trackpulse.xm9g.net/logs/viewer)', ephemeral=False)
+            await ctx.response.send_message('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
             return
         
         if user == None:
@@ -3874,6 +4072,8 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                 file_path = f'utils/trainlogger/userdata/perth-trains/{userid.name}.csv'   
             if mode == 'flights':
                 file_path = f'utils/trainlogger/userdata/flights/{userid.name}.csv'  
+            if mode == 'canberra-trams':
+                file_path = f'utils/trainlogger/userdata/canberra-trams/{userid.name}.csv'
                 
             
             
@@ -3888,31 +4088,31 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                     if row[0] == cleaned_id.upper():
                         
                         # thing to find image:
-                        if row[2] == 'Tait':
-                            image = 'https://victorianrailphotos.com/photos/317M-6.webp'
-                        
-                        if not '-' in row[1]:
-                            image = getImage(row[1])
+                        image, credits = None, None
 
+                        train_number = row[1]
+
+                        if "-" not in train_number:
+                            image, credits = getImage(train_number)
                         else:
-                            hyphen_index = row[1].find("-")
+                            hyphen_index = train_number.find("-")
                             if hyphen_index != -1:
-                                first_car = row[1][:hyphen_index]
+                                first_car = train_number[:hyphen_index]
                                 await printlog(f'First car: {first_car}')
-                                image = getImage(first_car)
-                                if image == None:
-                                    last_hyphen = row[1].rfind("-")
+                                
+                                image, credits = getImage(first_car)
+                                
+                                if image is None:
+                                    last_hyphen = train_number.rfind("-")
                                     if last_hyphen != -1:
-                                        last_car = row[1][last_hyphen + 1 :]  # Use last_hyphen instead of hyphen_index
+                                        last_car = train_number[last_hyphen + 1 :]
                                         await printlog(f'Last car: {last_car}')
-                                        image = getImage(last_car)
-                                        if image == None:
-                                            image = getImage(row[2])
-                                            await printlog(f'the loco number is: {row[1]}')
-                        if image == None:
-                            # thing to find image:
-                            await printlog(f"Finding image for {row[2].replace('-Class','')}.{row[1]}")
-                            image = getTramImage(f'{row[2].replace("-Class","")}.{row[1]}')
+                                        
+                                        image, credits = getImage(last_car)
+                                        
+                                        if image is None:
+                                            image, credits = getImage(row[2])
+                                            await printlog(f'the loco number is: {train_number}')
                                         
                         # Make the embed
                         if row[4] in vLineLines:
@@ -3986,7 +4186,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                 embed=discord.Embed(title='Train Logs', colour=vline_colour)
                 embed.set_author(name=userid.name, url='https://victorianrailphotos.com', icon_url=pfp)
                 embed.add_field(name='Click here to view your logs:', value=f'<#{logsthread.id}>')
-                embed.add_field(name='Click here to view your own logs on the website:', value=f'[Trackpulse Vic Website](https://discord.com/oauth2/authorize?client_id=1214144664513417218&redirect_uri=https%3A%2F%2Ftrackpulse.xm9g.net%2Flogs%2Fviewer&response_type=code&scope=identify)')
+                embed.add_field(name='Click here to view your own logs on the website:', value=f'[Trackpulse Vic Website](https://discord.com/oauth2/authorize?client_id=1214144664513417218&redirect_uri=https%3A%2F%2Ftrackpulsevic.xm9g.net%2Flogs%2Fviewer&response_type=code&scope=identify)')
                 await ctx.response.send_message(embed=embed)
                 await logsthread.send(f'# <:train:1241164967789727744> {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# {userid.name}\'s Train Logs')
@@ -4532,6 +4732,54 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, 
                         embed.add_field(name='Photo', value=f'Photo by {photographer} on [planespotters.net]({url})')
     
                         await logsthread.send(embed=embed)
+                        time.sleep(2)  
+            # for canberra tram:
+            if mode == 'canberra-trams':
+                if user == None:
+                    userid = ctx.user
+                else:
+                    userid = user
+                
+                try:
+                    file = discord.File(f'utils/trainlogger/userdata/canberra-trams/{userid.name}.csv')
+                except FileNotFoundError:
+                    if userid == ctx.user:
+                        await ctx.response.send_message("You have no trips logged!",ephemeral=True)
+                    else:
+                        await ctx.response.send_message("This user has no trips logged!",ephemeral=True)
+                    return
+                await printlog(userid.name)
+                data = universalReadLogs(userid.name, mode='canberra-trams')
+                if data == 'no data':
+                    if userid == ctx.user:
+                        await ctx.response.send_message("You have no trips logged!",ephemeral=True)
+                    else:
+                        await ctx.response.send_message("This user has no trips logged!",ephemeral=True)
+                    return
+            
+                # create thread
+                logsthread = await ctx.channel.create_thread(
+                    name=f'{userid.name}\'s Canberra Light Rail Logs',
+                    auto_archive_duration=60,
+                    type=discord.ChannelType.public_thread
+                )
+                
+                # send reponse message
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
+                await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
+                await logsthread.send(f' # {userid.name}\'s Canberra Light Rail Logs')
+                formatted_data = ""
+                for sublist in data:
+                    if len(sublist) >= 7:  # Ensure the sublist has enough items                                         
+                        #send in thread to reduce spam!
+                            # Make the embed
+                        embed = discord.Embed(title=f"Log {sublist[0]}",colour=sydney_tram_colour)
+                        embed.add_field(name=f'Tram', value=f"{sublist[2]} {sublist[1]}")
+                        embed.add_field(name=f'Date', value="{}".format(sublist[3]))
+                        embed.add_field(name=f'Line', value="{}".format(sublist[4]))
+                        embed.add_field(name=f'Trip Start', value="{}".format(sublist[5]))
+                        embed.add_field(name=f'Trip End', value="{}".format(sublist[6]))
+                        await logsthread.send(embed=embed)
                         time.sleep(2)   
     asyncio.create_task(sendLogs())
 
@@ -4669,6 +4917,7 @@ async def importlogs(ctx, mode:str, file:discord.Attachment):
     app_commands.Choice(name="Adelaide Trains", value="adelaide-trains"),
     app_commands.Choice(name="Adelaide Trams", value="adelaide-trams"),
     app_commands.Choice(name="Perth Trains", value="perth-trains"),
+    app_commands.Choice(name="Canberra Light Rail", value="canberra-trams"),
     app_commands.Choice(name="Flights", value="flights"),
 
 ])
@@ -4691,6 +4940,8 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 return
             
         if global_stats:
+            if stat == 'distanceovertime':
+                data = distanceOverTime(userid.name, year, True)
             data = globalTopStats(statSearch)
         else:
             try:
@@ -4776,7 +5027,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         # make temp csv
         csv_filename = f'temp/top{stat.title()}.{userid}-t{time.time()}.csv'
         with open(csv_filename, mode='w', newline='') as csv_file:
-            writer = csv.writer(csv_file)  # Use csv.writer on csv_file, not csvs
+            writer = csv.writer(csv_file)
             for item in data:
                 station, times = item.split(': ')
                 writer.writerow([station, times.split()[0]])
@@ -4877,7 +5128,6 @@ async def termini(ctx):
         start = 0
         
         while start < len(data):
-            # Find the index where the string should be split
             if start + 2000 < len(data):
                 split_index = data.rfind('\n', start, start + 2000)
                 if split_index == -1:
@@ -4886,7 +5136,7 @@ async def termini(ctx):
                 split_index = len(data)
             
             split_strings.append(data[start:split_index])
-            start = split_index + 1  # Move past the newline or split point
+            start = split_index + 1
             
         for item in split_strings:
             await ctx.channel.send(item)
@@ -5023,7 +5273,7 @@ async def sets(ctx, state:str):
         for item in split_strings:
             await logsthread.send(item)
 
-@bot.tree.command(name='submit-photo', description="Submit a photo to victorianrailphotos.com and the bot.")
+@bot.tree.command(name='submit-photo', description="This command has been retired.")
 @app_commands.choices(photofor=[
     app_commands.Choice(name="Railway Photo & Bot train search", value="website"),
     app_commands.Choice(name="Bot/Website Station Photo Guessing Game", value="guesser"),
@@ -5033,82 +5283,122 @@ async def sets(ctx, state:str):
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def submit(ctx: discord.Interaction, photo: discord.Attachment, date: str, location: str, photofor:str, number: str=''):
     await ctx.response.defer(ephemeral=True)
-    log_command(ctx.user.id, 'submit-photo')
+    log_command(ctx.user.id, 'submit-photo-retired')
     async def submitPhoto():
-        # see if they diddnt put a car number
-        # if photofor == 'website' and number == '':
-        #     await ctx.edit_original_response(content="Please provide the number for the train in the photo.")
-        #     return
-        
-        target_guild_id = 1214139268725870602
-        target_channel_id = 1238821549352685568
-        
-        showcase_channel = 1322889624250486848
-        
-        target_guild = bot.get_guild(target_guild_id)
-        if target_guild:
-            channel = target_guild.get_channel(target_channel_id)
-            public_channel = target_guild.get_channel(showcase_channel)
-            if channel:
-                if photo.content_type.startswith('image/'):
-                    await photo.save(f"./photosubmissions/photos/{photo.filename}")
-                    file = discord.File(f"./photosubmissions/photos/{photo.filename}")
-                    subid, queue = await addSubmission(photo.filename, ctx.user.id, date, location, photofor, number)
-                    await channel.send(f'# Photo submitted for {photofor} by <@{ctx.user.id}>:\n- Number {number}\n- Date: {date}\n- Location: {location}\n<@780303451980038165> ID = `{subid}`', file=file) # type: ignore
-                    
-                    # publically send embed
-                    embed = discord.Embed(title='Photo Submission', 
-                      description=f'Photo submitted by <@{ctx.user.id}> for {photofor}:\n- Number {number}\n- Date: {date}\n- Location: {location}')
-                    file = discord.File(f"./photosubmissions/photos/{photo.filename}", filename=f'{photo.filename}')
-                    embed.set_image(url=f"attachment://{photo.filename}")
-                    embed.set_footer(text=f'Position in queue: {queue} | ID: {subid}')
-                    await public_channel.send(embed=embed, file=file) # type: ignore
-                    await ctx.edit_original_response(content=f'Your photo has been submitted! `Position in queue: {queue}`\nSubmitted photos can be used in their original form with proper attribution to represent trains, trams, groupings, stations, and stops. They will be featured on the Discord bot and on https://victorianrailphotos.com.\n[Join the Discord server to be notified when you photo is accepted.](https://discord.gg/nfAqAnceQ5)\nTo ensure your photo is on the website it must follow [these guidelines](https://docs.google.com/document/d/e/2PACX-1vRd6gGTd-hWTjT-eyorgvnm9asDlBTzy8nKPfBdxl2_W_qzSPKj1G7stPEtgxGN3s4Mrplz63cA3L8h/pub).')
-                else:
-                    await ctx.edit_original_response(content="Please upload a valid image file.")
-            else:
-                await ctx.edit_original_response(content="Error: Target channel not found.")
-        else:
-            await ctx.edit_original_response(content="Error: Target guild not found.")
-
+        await ctx.followup.send('This command has been retired. Please submit photos via the VictorianRailPhotos website: https://victorianrailphotos.com/upload')
     await submitPhoto()
     
-@bot.tree.command(name='accept', description="Accept a photo submission from the queue")
-async def accept(ctx, id: int, traintype:str, mode:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None):
+@bot.tree.command(name='alias', description='Set or update an alias for your photos to be displayed on VictorianRailPhotos')
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+async def alias(ctx: discord.Interaction, name: str):
     await ctx.response.defer()
-    if ctx.user.id in admin_users:
-        userid = await getUserID(id)
-        userid = bot.get_user(int(userid))
-        apiResponse = await acceptPhoto(id, userid.name, traintype, featured, note, number, location, date, mode.lower())
+    worked = setWebAlias(ctx.user.id, name)
+    if worked:
+        await ctx.followup.send(f'Set alias to `{name}`')
+    else:
+        await ctx.followup.send('There was an error changing your alias, please try again later.')
+    
+
+@bot.tree.command(name='accept', description="ADMIN ONLY Accept a photo submission from the queue")
+@app_commands.choices(mode=[
+    app_commands.Choice(name='train', value='train'),
+    app_commands.Choice(name='tram', value='tram'),
+    app_commands.Choice(name='bus', value='bus'),
+])
+
+async def accept(ctx, id: int, mode:str, traintype:str, featured:bool=False, note:str=None, number:str=None, location:str=None, date:str=None, reason:str=None):
+    await ctx.response.defer()
+    if ctx.user.id in admin_users:            
+        try:
+            userid = await getUserID(id)
+        except TypeError:
+            await ctx.followup.send('i cant find that id')
+            return
+
+        # see if thers an alias
+        conn = sqlite3.connect('userdata/aliases.db')
+        cursor = conn.cursor()
+        # If userid is an email, skip alias lookup
+        if isinstance(userid, str) and '@' in userid:
+            userName = userid[:-12]
+        else:
+            cursor.execute('SELECT alias FROM aliases WHERE userid = ?', (int(userid),))
+            result = cursor.fetchone()
+            if result:
+                userName = result[0]
+            else:
+                userName = bot.get_user(int(userid)).name
+        conn.close()
+
+        apiResponse = await acceptPhoto(id, userName, traintype, featured, note, number, location, date, mode.lower())
 
         print(apiResponse)
         if 'error' in apiResponse.lower():
             await ctx.followup.send(apiResponse)
             return
         
-        await removeSubmission(id)
-        
-        m = f'sent message confirming to user ID: {userid.mention}'
-        try:
-            await userid.send(f"Your photo with id {id} of your photos has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.")
-        except:
-            m = (f"Could not send message to user ID: {userid.id}. They may have DMs disabled.")
+        user_id, msgid = await removeSubmission(id)
+
+        # If user_id is an email, don't send DM
+        if isinstance(user_id, str) and '@' in user_id:
+            m = f'Did not send a message as that user is not from Discord.'
+        else:
+            user = bot.get_user(int(user_id))
+            m = f'sent message confirming to user ID: {user.mention}'
+            try:
+                if reason is None:
+                    await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}")
+                else:
+                    await user.send(f"Your photo with id {id} has been accepted and removed from the queue. You can see it shortly in the bot and on the website/game.\nView photo in the TrackPulse server: https://discord.com/channels/1214139268725870602/1322889624250486848/{msgid}. Note that {reason}.")
+            except:
+                m = (f"Could not send message to user ID: {user.id}. They may have DMs disabled.")
         await ctx.followup.send(f"Submission with queue number {id} has been accepted and removed from the queue. {m}")
     else:
         await ctx.followup.send("You do not have permission to use this command.")
 
+@bot.tree.command(name='accept-guesser', description="ADMIN ONLY Accept a photo submission for the station photo guessing game")
+@app_commands.describe(station="only put in the name of the station, not 'station' or anything else")
+@app_commands.choices(mode=[
+    app_commands.Choice(name="Normal", value="guesser"),
+    app_commands.Choice(name="Ultra hard", value="ultrahard"),
+])
+    
+async def accept_guesser(ctx, id: int, station:str, difficulty:str, mode:str='guesser'):
+    if ctx.user.id in admin_users:
+        await ctx.response.defer()
+        try:
+            try:
+                userid = await getUserID(id)
+                userid = bot.get_user(int(userid))
+            except TypeError:
+                raise Exception('Could not find user ID for that submission')
+            await acceptGuesserPhoto(id, station, difficulty, mode, userid.name)
+        except Exception as e:
+            await ctx.followup.send(f'Couldnt add guesser image: `{e}`')
+            return
+        await removeSubmission(id) # remove from queue
+        await ctx.followup.send(f"Submission with queue number {id} has been accepted and added to the guessing game.")
+    else:
+        await ctx.response.send_message("You do not have permission to use this command.")
+        return
+    
 @bot.command(name='reject', description="Reject a photo submission from the queue")
 async def reject(ctx, id: int, *, reason: str):
     if ctx.author.id in admin_users:
-        userid = await removeSubmission(id)
-        user = bot.get_user(int(userid))
-        
-        m = f'Sent message confirming to user ID: {user.mention}'
-        try:
-            await user.send(f"One of your photos has been rejected and removed from the queue.\nReason: {reason}")
-        except:
-            m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
-        await ctx.send(f"Submission with queue number {id} has been rejected and removed from the queue. {m}")
+        userid, msgid = await removeSubmission(id)
+        if '@' in userid:
+            await ctx.send(f'Submission with queue number `{id}` has been rejected and removed from the queue. Did not send a message as that user is not from Discord.')
+            return
+        else:
+            user = bot.get_user(int(userid))
+            
+            m = f'Sent message confirming to user ID: {user.mention}'
+            try:
+                await user.send(f"Your photo with id `{id}` has been rejected and removed from the queue.\nReason: {reason}")
+            except:
+                m = (f"Could not send message to user ID: {userid}. They may have DMs disabled.")
+            await ctx.send(f"Submission with queue number `{id}` has been rejected and removed from the queue. {m}")
     
 @bot.tree.command(name='queue', description="View the current photo submission queue")
 async def queue(ctx: discord.Interaction):
@@ -5144,12 +5434,14 @@ async def profile(ctx, user: discord.User = None):
                 userid =user.id
                 pfp = user.avatar.url
 
-            embed = discord.Embed(title=f"Profile")
-            embed.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
+            pages = []
+            current_page = 0
 
-            
-            # train logger
+            # Victoria Trains and Trams
+            embed1 = discord.Embed(title=f"Profile | Victoria - Page 1/5")
+            embed1.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
             try:
+                # Victoria Trains
                 lines = topStats(username, 'lines', 0, 'train')
                 stations = topStats(username, 'stations', 0, 'train')
                 sets = topStats(username, 'sets', 0, 'train')
@@ -5162,7 +5454,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'train')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed1.add_field(
         name='<:train:1241164967789727744><:vline:1241165814258729092> Train Log Stats:',
         value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Station:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5176,13 +5468,11 @@ async def profile(ctx, user: discord.User = None):
             f'**Stations visited:** `{stationPercent(username)}`\n'
             f'**Lines visited:** `{linePercent(username)}`\n'
             f'**Distance:** `{round(getTotalTravelDistance(username))}km`'
-    )
-
-                            
+    )       
             except FileNotFoundError:
-                embed.add_field(name="<:train:1241164967789727744><:vline:1241165814258729092> Train Log Stats", value=f'{username} has no logged trips!')
-                    
-            # Tram Logger
+                embed1.add_field(name="<:train:1241164967789727744><:vline:1241165814258729092> Train Log Stats", value=f'{username} has no logged trips!')
+
+            # Victoria Trams
             try:
                 lines = topStats(username, 'lines', 0, 'tram')
                 stations = topStats(username, 'stations', 0, 'tram')
@@ -5196,7 +5486,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'tram')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed1.add_field(
         name='<:tram:1241165701390012476> Tram Log Stats:',
         value=f'**Top Route:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Stop:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5207,12 +5497,14 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "tram")}'
     )
-
-    
             except FileNotFoundError:
-                embed.add_field(name="<:tram:1241165701390012476> Tram Log Stats", value=f'{username} has no logged trips!')
+                embed1.add_field(name="<:tram:1241165701390012476> Tram Log Stats", value=f'{username} has no logged trips!')
+            pages.append(embed1)
 
-    # sydney trains Logger
+            # NSW Trains and Light Rail
+            embed2 = discord.Embed(title=f"Profile | NSW - Page 2/5")
+            embed2.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
+            # NSW Trains
             try:
                 lines = topStats(username, 'lines', 0, 'sydney-trains')
                 stations = topStats(username, 'stations', 0, 'sydney-trains')
@@ -5226,7 +5518,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'sydney-trains')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed2.add_field(
         name='<:NSWTrains:1255084911103184906><:NSWMetro:1255084902748000299> Train Log Stats:',
         value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Station:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5238,12 +5530,10 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "sydney-trains")}'
     )
-
-                                    
             except FileNotFoundError:
-                embed.add_field(name="<:NSWTrains:1255084911103184906><:NSWMetro:1255084902748000299> Train Log Stats", value=f'{username} has no logged trips in NSW!')
+                embed2.add_field(name="<:NSWTrains:1255084911103184906><:NSWMetro:1255084902748000299> Train Log Stats", value=f'{username} has no logged trips in NSW!')
 
-    # sydney tram Logger
+            # NSW Light Rail
             try:
                 lines = topStats(username, 'lines', 0, 'sydney-trams')
                 stations = topStats(username, 'stations', 0, 'sydney-trams')
@@ -5257,7 +5547,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'sydney-trams')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed2.add_field(
         name='<:NSWLightRail:1255084906053369856> Light Rail Log Stats:',
         value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Stop:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5269,13 +5559,14 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "sydney-trams")}'
     )
-
-                                    
             except FileNotFoundError:
-                embed.add_field(name="<:NSWLightRail:1255084906053369856> Light Rail Log Stats", value=f'{username} has no logged trips in NSW!')
-    
-    
-    # adelaide Logger
+                embed2.add_field(name="<:NSWLightRail:1255084906053369856> Light Rail Log Stats", value=f'{username} has no logged trips in NSW!')
+            pages.append(embed2)
+
+            # Adelaide Trains and Trams
+            embed3 = discord.Embed(title=f"Profile | Adelaide - Page 3/5")
+            embed3.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
+            # Adelaide Trains
             try:
                 lines = topStats(username, 'lines', 0, 'adelaide-trains')
                 stations = topStats(username, 'stations', 0, 'adelaide-trains')
@@ -5289,7 +5580,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'adelaide-trains')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed3.add_field(
         name='<:Adelaide_train_:1300008231510347807><:journeybeyond:1300021503093510155> Adelaide Train Log Stats:',
         value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Station:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5302,10 +5593,9 @@ async def profile(ctx, user: discord.User = None):
             f'Total logs: {logAmounts(username, "adelaide-trains")}'
     )
             except FileNotFoundError:
-                embed.add_field(name="<:Adelaide_train_:1300008231510347807><:journeybeyond:1300021503093510155> Adelaide Train Log Stats:", value=f'{username} has no logged trips in Adelaide!')
+                embed3.add_field(name="<:Adelaide_train_:1300008231510347807><:journeybeyond:1300021503093510155> Adelaide Train Log Stats:", value=f'{username} has no logged trips in Adelaide!')
 
-
-        # adelaide tram Logger
+            # Adelaide Trams
             try:
                 lines = topStats(username, 'lines', 0, 'adelaide-trams')
                 stations = topStats(username, 'stations', 0, 'adelaide-trams')
@@ -5319,7 +5609,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'adelaide-trams')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed3.add_field(
         name='<:adelaidetram:1357271311021379644> Adelaide Tram Log Stats:',
         value=f'**Top Route:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Stop:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5331,12 +5621,14 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "adelaide-trams")}'
     )
-
-                                    
             except FileNotFoundError:
-                embed.add_field(name="<:adelaidetram:1357271311021379644> Adelaide Tram Log Stats", value=f'{username} has no logged trips in Adelaide!')
+                embed3.add_field(name="<:adelaidetram:1357271311021379644> Adelaide Tram Log Stats", value=f'{username} has no logged trips in Adelaide!')
+            pages.append(embed3)
 
-        # perth Logger
+            # Perth, Canberra, Buses, Flights20
+            embed4 = discord.Embed(title=f"Profile | Other States & Modes - Page 4/5")
+            embed4.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
+            # Perth Trains
             try:
                 lines = topStats(username, 'lines', 0, 'perth-trains')
                 stations = topStats(username, 'stations', 0, 'perth-trains')
@@ -5350,7 +5642,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'perth-trains')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed4.add_field(
         name='<:transperthtrain:1335396329798631477><:TransWA:1335397360255373392> Perth Train Log Stats:',
         value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Station:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5362,11 +5654,39 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "perth-trains")}'
     )
-                                    
             except FileNotFoundError:
-                embed.add_field(name="<:transperthtrain:1335396329798631477><:TransWA:1335397360255373392> Perth Train Log Stats", value=f'{username} has no logged trips in Perth!')
-            
-    # bus Logger
+                embed4.add_field(name="<:transperthtrain:1335396329798631477><:TransWA:1335397360255373392> Perth Train Log Stats", value=f'{username} has no logged trips in Perth!')
+
+            # Canberra Light Rail
+            try:
+                lines = topStats(username, 'lines', 0, 'canberra-trams')
+                stations = topStats(username, 'stations', 0, 'canberra-trams')
+                sets = topStats(username, 'sets', 0, 'canberra-trams')
+                trains = topStats(username, 'types', 0, 'canberra-trams')
+                dates = topStats(username, 'dates', 0, 'canberra-trams')
+                trips = topStats(username, 'pairs', 0, 'canberra-trams')
+
+                #other stats stuff:
+                eDate =lowestDate(username, 'canberra-trams')
+                LeDate =highestDate(username, 'canberra-trams')
+                joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
+                last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
+                embed4.add_field(
+        name='<:canberraLightRail:1422730624426573854> Canberra Light Rail Log Stats:',
+        value=f'**Top Line:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
+            f'**Top Station:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
+            f'**Top Type:** {trains[1] if len(trains) > 1 and trains[0].startswith("Unknown") else trains[0]}\n'
+            f'**Top Number:** {sets[1] if len(sets) > 1 and sets[0].startswith("Unknown") else sets[0]}\n'
+            f'**Top Trip:** {trips[1] if len(trips) > 1 and trips[0].startswith("Unknown") else trips[0]}\n'
+            f'**Top Date:** {dates[1] if len(dates) > 1 and dates[0].startswith("Unknown") else dates[0]}\n\n'
+            f'User started logging {joined}\n'
+            f'Last log {last}\n'
+            f'Total logs: {logAmounts(username, "canberra-trams")}'
+    )
+            except FileNotFoundError:
+                embed4.add_field(name="<:canberraLightRail:1422730624426573854> Canberra Light Rail Log Stats", value=f'{username} has no logged trips in Canberra!')
+
+            # Buses
             try:
                 lines = topStats(username, 'lines', 0, 'bus')
                 stations = topStats(username, 'stations', 0, 'bus')
@@ -5380,7 +5700,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'bus')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed4.add_field(
         name='<:bus:1241165769241530460><:coach:1241165858274021489><:skybus:1241165983083925514><:NSW_Bus:1264885653922123878><:transperthbus:1335396307510235217><:Canberra_Bus:1264885650826465311> Bus Log Stats:',
         value=f'**Top Route:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Stop:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5392,11 +5712,10 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "bus")}'
     )
-
-                                    
             except FileNotFoundError:
-                embed.add_field(name="<:bus:1241165769241530460><:coach:1241165858274021489><:skybus:1241165983083925514><:NSW_Bus:1264885653922123878><:transperthbus:1335396307510235217><:Canberra_Bus:1264885650826465311> Bus Log Stats", value=f'{username} has no logged bus trips!')
-    # plane Logger
+                embed4.add_field(name="<:bus:1241165769241530460><:coach:1241165858274021489><:skybus:1241165983083925514><:NSW_Bus:1264885653922123878><:transperthbus:1335396307510235217><:Canberra_Bus:1264885650826465311> Bus Log Stats", value=f'{username} has no logged bus trips!')
+
+            # Flights
             try:
                 lines = topStats(username, 'lines', 0, 'flights')
                 stations = topStats(username, 'stations', 0, 'flights')
@@ -5410,7 +5729,7 @@ async def profile(ctx, user: discord.User = None):
                 LeDate =highestDate(username, 'flights')
                 joined = convert_iso_to_unix_time(f"{eDate}T00:00:00Z") 
                 last = convert_iso_to_unix_time(f"{LeDate}T00:00:00Z")
-                embed.add_field(
+                embed4.add_field(
         name='✈️ Flight Log Stats:',
         value=f'**Top Route:** {lines[1] if len(lines) > 1 and lines[0].startswith("Unknown") else lines[0]}\n'
             f'**Top Airport:** {stations[1] if len(stations) > 1 and stations[0].startswith("Unknown") else stations[0]}\n'
@@ -5422,43 +5741,79 @@ async def profile(ctx, user: discord.User = None):
             f'Last log {last}\n'
             f'Total logs: {logAmounts(username, "flights")}'
     )
+            except FileNotFoundError:
+                embed4.add_field(name="✈️ Flight Log Stats", value=f'{username} has no logged plane trips!')
+            pages.append(embed4)
 
-                                    
-            except FileNotFoundError as e:
-                embed.add_field(name="✈️ Flight Log Stats", value=f'{username} has no logged plane trips!')
-                print(f'ERROR: {e}')
+            # Page 5: Game Stats
+            embed5 = discord.Embed(title=f"Profile | Game Stats - Page 5/5")
+            embed5.set_author(name=username, url='https://xm9g.net', icon_url=pfp)
             
             #games
             stats = fetchUserStats(username)
             
             if stats[0] != 'no stats':
                 item, wins, losses = stats[0]
-                embed.add_field(name=':question: Station Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%')
+                embed5.add_field(name=':question: Station Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%')
             else:
-                embed.add_field(name=':question: Station Guesser', value='No data',inline=False)
+                embed5.add_field(name=':question: Station Guesser', value='No data',inline=False)
             if stats[1] != 'no stats':
                 item, wins, losses = stats[1]
-                embed.add_field(name=':interrobang: Ultrahard Station Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%')
+                embed5.add_field(name=':interrobang: Ultrahard Station Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%')
             else:
-                embed.add_field(name=':interrobang: Ultrahard Station Guesser', value='No data',inline=False)
+                embed5.add_field(name=':interrobang: Ultrahard Station Guesser', value='No data',inline=False)
             if stats[2] != 'no stats':
                 item, wins, losses = stats[2]
-                embed.add_field(name=':left_right_arrow: Station Order Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%', inline=False)
+                embed5.add_field(name=':left_right_arrow: Station Order Guesser', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%', inline=False)
             else:
-                embed.add_field(name=':left_right_arrow: Station Order Guesser', value='No data',inline=False)
+                embed5.add_field(name=':left_right_arrow: Station Order Guesser', value='No data',inline=False)
             if stats[3] != 'no stats':
                 item, wins, losses = stats[3]
-                embed.add_field(name=':grey_question: Station Hangman', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%', inline=False)
+                embed5.add_field(name=':grey_question: Station Hangman', value=f'Wins: {str(wins)}\nLosses: {str(losses)}\nAccuracy: {str(round((wins/(wins+losses))*100, 1))}%', inline=False)
             else:
-               embed.add_field(name=':grey_question: Station Hangman', value='No data',inline=False)
+               embed5.add_field(name=':grey_question: Station Hangman', value='No data',inline=False)
             
             # other stats
             try:
-                embed.set_footer(text=f"favourite command: {getFavoriteCommand(userid)[0]}")
+                embed5.set_footer(text=f"favourite command: {getFavoriteCommand(userid)[0]}")
             except FileNotFoundError:
                 await printlog('user has no commands used')
             
-            await ctx.edit_original_response(embed=embed)
+            pages.append(embed5)
+
+            class ProfileView(discord.ui.View):
+                def __init__(self, pages, current_page=0):
+                    super().__init__(timeout=300)
+                    self.pages = pages
+                    self.current_page = current_page
+
+                @discord.ui.button(label="Previous", style=discord.ButtonStyle.gray)
+                async def previous_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+                    if interaction.user != ctx.user:
+                        await interaction.response.send_message("This isn't your profile!", ephemeral=True)
+                        return
+                    if self.current_page > 0:
+                        self.current_page -= 1
+                        await interaction.response.edit_message(embed=self.pages[self.current_page], view=self)
+                    else:
+                        await interaction.response.defer()
+
+                @discord.ui.button(label="Next", style=discord.ButtonStyle.gray)
+                async def next_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+                    if interaction.user != ctx.user:
+                        await interaction.response.send_message("This isn't your profile!", ephemeral=True)
+                        return
+                    if self.current_page < len(self.pages) - 1:
+                        self.current_page += 1
+                        await interaction.response.edit_message(embed=self.pages[self.current_page], view=self)
+                    else:
+                        await interaction.response.defer()
+
+            if pages:
+                view = ProfileView(pages, current_page)
+                await ctx.edit_original_response(embed=pages[0], view=view)
+            else:
+                await ctx.edit_original_response(content="No profile data available.")
             
         await profiles()
         
@@ -5469,7 +5824,7 @@ async def profile(ctx, user: discord.User = None):
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5530,7 +5885,7 @@ async def viewMaps(ctx, mode: str):
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
@@ -5593,7 +5948,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
-                imageURL = f"https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
+                imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
                 embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
@@ -5618,10 +5973,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
-                imageURL = f'https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
+                imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
                 embed = discord.Embed(title=f"Post Metro Tunnel Map of logs with </log train:1289843416628330506> for @{username}{year_str}{line_str}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
@@ -5649,7 +6004,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
-                imageURL = f'https://trackpulse.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
+                imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
                 embed = discord.Embed(title=f"Map of logs with </log sydney-tram:1289843416628330506> for @{username}{year_str}{line_str}", 
                                     color=0xb8b8b8, 
                                     description=f"THIS MAP IS NOT FINISHED [Click here to view in your browser]({imageURL})")
@@ -5944,7 +6299,7 @@ async def about(ctx):
     embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\nAperture',inline=True)
     embed.add_field(name='Photos sourced from',value="[Victorian Rail Photos](https://victorianrailphotos.com/)")
     embed.add_field(name="Data Sources", value="[Transport Victoria](https://www.ptv.vic.gov.au/)\n", inline=True)
-    embed.add_field(name='Website', value='https://trackpulse.xm9g.net')
+    embed.add_field(name='Website', value='https://trackpulsevic.xm9g.net')
     embed.add_field(name='Discord Server', value='https://discord.gg/nfAqAnceQ5')
     embed.add_field(name='Report issues', value='[Report a bug on github](https://github.com/TrackPulse-Vic/TrackPulse-Vic/issues)')
     embed.set_footer(text=f"{getTotalTrips()} trips logged with TrackPulse Vic", icon_url="https://xm9g.net/discord-bot-assets/logo.png")
@@ -5955,7 +6310,7 @@ async def about(ctx):
 @bot.tree.command(name="year-in-review", description="View your year in review for a specific year.")
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-async def yearinreview(ctx, year: int=2024):
+async def yearinreview(ctx, year: int=2025):
     async def yir():
         await ctx.response.defer()
         log_command(ctx.user.id, 'year-in-review')
@@ -5963,7 +6318,7 @@ async def yearinreview(ctx, year: int=2024):
         unix_time = int(time.time())
         if current_year == year:
             if unix_time < 1764507600:
-                await ctx.edit_original_response(content=f"Your {current_year} year in review will be available <t:1732971600:R>.")
+                await ctx.edit_original_response(content=f"Your {current_year} year in review will be available <t:1764507600:R>.")
                 return
                 # pass
         try:
@@ -5972,7 +6327,7 @@ async def yearinreview(ctx, year: int=2024):
             data = year_in_review(f'utils/trainlogger/userdata/{ctx.user.name}.csv', year)
             
             (lilydale_value, ringwood_value), count = data.get("top_pair")
-            embed.add_field(name=f"In {year} {ctx.user.name} went on {str(data['total_trips'])} train trips :chart_with_upwards_trend:", value=f"\n**First Trip:** {data['first_trip'][5]} to {data['first_trip'][6]} on {data['first_trip'][3]} :calendar_spiral: \n**Last Trip:** {data['last_trip'][5]} to {data['last_trip'][6]} on {data['last_trip'][3]} :calendar_spiral: \n\n:star: **favourite Trip:** {lilydale_value} to {ringwood_value} - {count} times\n:metro: {vline_metroprecent(ctx.user.name, year)}", inline=False)
+            embed.add_field(name=f"In {year} {ctx.user.name} went on {str(data['total_trips'])} train trips :chart_with_upwards_trend:", value=f"\n**First Trip:** {data['first_trip'][5]} to {data['first_trip'][6]} on {data['first_trip'][3]} :calendar_spiral: \n**Last Trip:** {data['last_trip'][5]} to {data['last_trip'][6]} on {data['last_trip'][3]} :calendar_spiral: \n\n:star: **Favourite Trip:** {lilydale_value} to {ringwood_value} - {count} times\n:metro: {vline_metroprecent(ctx.user.name, year)}", inline=False)
             
             top_lines = data['top_5_lines']
             formatted_lines = "\n".join([f"{i + 1}. {line[0]}: {line[1]} trips" for i, line in enumerate(top_lines)])
@@ -6282,39 +6637,12 @@ async def ping(ctx):
     log_command(ctx.author.id, 'ping')
     
 @bot.command()
-async def syncdb(ctx, url='https://victorianrailphotos.com/trainsets.csv'):
+async def syncdb(ctx, url='https://victorianrailphotos.com/api/trainsets.csv'):
     if ctx.author.id in admin_users:
         log_command(ctx.author.id, 'sync-db')
         csv_url = url
         save_location = "utils/trainsets.csv"
         await ctx.send(f"Downloading trainset data from {csv_url} to {save_location}")
-        await printlog(f"Downloading trainset data from {csv_url} to `{save_location}`")
-        try:
-            await download_csv(csv_url, save_location)
-            await ctx.send(f"Success!")
-        except Exception as e:
-            await ctx.send(f"Error: `{e}`")
-    else:
-        await printlog(f'{str(ctx.author.id)} tried to sync the database.')
-        await ctx.send("You are not authorized to use this command.")
-        
-@bot.command()
-async def syncgame(ctx):
-    if ctx.author.id in admin_users:
-        log_command(ctx.author.id, 'sync-db')
-        csv_url = 'https://victorianrailphotos.com/botgames/guesser.csv'
-        save_location = "utils/game/images/guesser.csv"
-        await ctx.send(f"Downloading guesser data from {csv_url} to {save_location}")
-        await printlog(f"Downloading trainset data from {csv_url} to `{save_location}`")
-        try:
-            await download_csv(csv_url, save_location)
-            await ctx.send(f"Success!")
-        except Exception as e:
-            await ctx.send(f"Error: `{e}`")
-            
-        csv_url = 'https://victorianrailphotos.com/botgames/ultrahard.csv'
-        save_location = "utils/game/images/ultrahard.csv"
-        await ctx.send(f"Downloading ultrahard data from {csv_url} to {save_location}")
         await printlog(f"Downloading trainset data from {csv_url} to `{save_location}`")
         try:
             await download_csv(csv_url, save_location)
@@ -6358,6 +6686,7 @@ async def restart(ctx):
         with open('restart.txt', 'w') as file:
             file.write(str(ctx.channel.id))
         await bot.close()
+        await stop_webserver()
         os.system('python bot.py')
 
     else:

@@ -114,13 +114,13 @@ def tramType(number):
         return(f"Tram type not found for {number}")
     
     if car >= 116 and car <= 230:
-        return('Z Class')
+        return('Z-Class')
     elif car >= 231 and car <= 300:
         return('A-Class')
     elif car >= 2003 and car <= 2132:
         return('B-Class')
     elif car >= 3001 and car <= 3036:
-        return('C-Class')
+        return('C1-Class')
     elif car >= 3501 and car <= 3538:
         return('D1-Class')
     elif car >= 5001 and car <= 5021:
@@ -128,9 +128,9 @@ def tramType(number):
     elif car in [5103, 5106, 5111, 5113, 5123]:
         return('C2-Class')
     elif car >= 6001 and car <= 6050:
-        return('E-Class')
+        return('E1-Class')
     elif car in [856, 888, 925, 928, 946, 957, 959, 961, 981, 983, 1000, 1010]:
-        return('C2-Class')
+        return('W8-Class')
     elif car >= 6051 and car <= 6100:
         return('E2-Class')
     else:

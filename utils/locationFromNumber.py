@@ -48,7 +48,6 @@ def find_vehicle_by_descriptor_id(data, search_string):
         return results
 
 def getTrainLocation(Tnumber):
-
     def process_route(route):
         json_data = runs_api_request(route["route_id"])
         results = find_vehicle_by_descriptor_id(json_data, Tnumber)
@@ -67,6 +66,15 @@ def getTrainLocation(Tnumber):
         thread.join()
     
     return all_results
+
+def GTFSgetTrainLocation(Tnumber, mode):
+    data = getVehiclePositions(mode)
+    for entity in data.get('entity', []):
+        if 'vehicle' in entity:
+            vehicle = entity['vehicle']
+            if 'position' in vehicle and 'vehicle' in vehicle and Tnumber in vehicle['vehicle']['id']:
+                return vehicle['position']
+
 
 
 tramRoutes = [
@@ -158,7 +166,7 @@ async def makeMapv2(lat, long, name, geopath):
         print('started map gen')
         
         # Create a static map centered at the coordinates with the desired zoom level
-        m = StaticMap(1024, 1024, 12, url_template='https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey='+key)
+        m = StaticMap(1024, 1024, 12, url_template='https://tile.openstreetmap.org/{z}/{x}/{y}.png')
         print('created base map')
         
         # Split the coordinates into individual pairs

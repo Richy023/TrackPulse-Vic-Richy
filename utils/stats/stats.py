@@ -1,15 +1,48 @@
-import os
+import os, requests, hmac, hashlib, time
+import dotenv
 import csv
 
-def log_command(user_id, command_name):
-    # Ensure the CSV file exists for the user
+dotenv.load_dotenv()
+
+MEASUREMENT_ID = os.getenv("GOOGLE_ANALYTICS_MEASUREMENT_ID")
+API_SECRET = os.getenv('GOOGLE_ANALYTICS_API_SECRET')
+HMAC_SECRET = 'because it is my name, because i cannot have another in my life!'.encode()
+
+def log_command(user_id, command_name, guild_id=None):
+    def hash_id(id_str):
+        return hmac.new(HMAC_SECRET, str(id_str).encode(), hashlib.sha256).hexdigest()
+    url = f"https://www.google-analytics.com/mp/collect?measurement_id={MEASUREMENT_ID}&api_secret={API_SECRET}"
+    client_id = hash_id(user_id)[:32]
+    
+    event = {
+    "client_id": client_id,
+    "events": [
+        {
+            "name": 'dc_' + command_name.replace('-', '_'),
+            "params": {
+                "guild_hash": hash_id(guild_id) if guild_id else 'None',
+                "user_hash": hash_id(user_id),
+                "timestamp_ms": int(time.time() * 1000)
+            }
+        }
+    ]
+    }
+    
+    try:
+        r = requests.post(url, json=event, timeout=3)
+        if not r.ok:
+            print(f"GA tracking failed: {r.status_code} {r.text}")
+        else:
+            print(f"GA tracking succeeded for command: {command_name}, response: {r.text}")
+    except Exception as e:
+        print("GA tracking error:", e)
+        
     file_path = f"utils/stats/data/{user_id}.csv"
     if not os.path.exists(file_path):
         with open(file_path, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Command', 'Count'])
 
-    # Read existing data
     existing_data = {}
     if os.path.exists(file_path):
         with open(file_path, 'r', newline='') as csvfile:
@@ -18,11 +51,9 @@ def log_command(user_id, command_name):
             for row in reader:
                 existing_data[row[0]] = int(row[1])
     
-    # Update or add the command count
     current_count = existing_data.get(command_name, 0)
     existing_data[command_name] = current_count + 1
 
-    # Write back to the CSV file
     with open(file_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Command', 'Count'])  # Write header
