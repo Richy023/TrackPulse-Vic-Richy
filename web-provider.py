@@ -18,7 +18,7 @@ CORS(app, resources={
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["200 per day", "50 per hour"]
+    default_limits=["1000 per day", "300 per hour"]
 )
 
 # Configuration
@@ -33,6 +33,7 @@ DISCORD_CLIENT_ID = os.getenv("DISCORD_CLIENT_ID")
 DISCORD_CLIENT_SECRET = os.getenv("DISCORD_CLIENT_SECRET")
 CSV_DIR = os.getenv("CSV_DIR")
 MAP_DIR = os.getenv("MAP_DIR")
+GUESSER_DIR = os.getenv("GUESSER_DIR")
 
 @app.route('/', methods=['GET'])
 @limiter.limit("10000/day;100/hour")
@@ -82,14 +83,43 @@ def serve_map(filename):
     print(f"Requested file: {filename}")
     print(f"Full path: {file_path}")
     print(f"Path exists: {os.path.exists(file_path)}")
-    print(f"Is PNG: {file_path.endswith('.png')}")
     
-    if os.path.exists(file_path) and file_path.endswith('.png'):
+    if os.path.exists(file_path):
         response = send_file(file_path, mimetype='image/png')
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
     else:
-        response = make_response(f"File not found or not a PNG at {file_path}", 404)
+        response = make_response(f"File not found at {file_path}", 404)
+        response.headers.update({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Accept, ngrok-skip-browser-warning, access-control-allow-methods',
+            'ngrok-skip-browser-warning': '*'
+        })
+        return response
+    
+@app.route('/guesser/<filename>', methods=['GET', 'OPTIONS'])
+def serve_guesser(filename):
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Accept, ngrok-skip-browser-warning, access-control-allow-methods'
+        response.headers['ngrok-skip-browser-warning'] = '*'
+        print("Handled OPTIONS preflight request for /map")
+        return response
+
+    file_path = os.path.join(GUESSER_DIR, filename)
+    print(f"Requested file: {filename}")
+    print(f"Full path: {file_path}")
+    print(f"Path exists: {os.path.exists(file_path)}")
+    
+    if os.path.exists(file_path):
+        response = send_file(file_path, mimetype='image/webp')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+    else:
+        response = make_response(f"File not found {file_path}", 404)
         response.headers.update({
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, OPTIONS',

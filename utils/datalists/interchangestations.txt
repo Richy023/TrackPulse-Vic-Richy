@@ -2,6 +2,7 @@ Ringwood
 Camberwell
 Burnley
 South Yarra
+Malvern
 Caulfield
 Clayton
 Dandenong
@@ -17,7 +18,7 @@ North Melbourne
 Footscray
 Newport
 Laverton
-Sumshine
+Sunshine
 Watergardens
 Sunbury
 Broadmeadows
