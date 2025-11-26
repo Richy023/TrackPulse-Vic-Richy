@@ -485,7 +485,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:
@@ -626,7 +626,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:

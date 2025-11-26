@@ -1,7 +1,7 @@
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset, y_offset
 
 line_coordinates = {
-    'standard_guage': {
+    'standard_gauge': {
         ('Albury', 'Wodonga'): [
             (6000 + x_offset, -5400 + y_offset, 6300 + x_offset, -5200 + y_offset),
         ],
@@ -1146,7 +1146,7 @@ line_coordinates = {
     'vline_intercity':{
         # traralgon line
         ('Traralgon','Morwell'): [
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
             (21450 + x_offset, 4500 + y_offset, 21850 + x_offset, 4600 + y_offset),
         ],
         ('Morwell','Moe'): [
@@ -1492,11 +1492,11 @@ line_coordinates = {
 
         ('Rosedale','Traralgon'): [
             (22000 + x_offset, 4600 + y_offset, 22450 + x_offset, 4700 + y_offset),
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
         ],
 
         ('Traralgon','Morwell'): [
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
             (21450 + x_offset, 4600 + y_offset, 21850 + x_offset, 4700 + y_offset),
         ],
         ('Morwell','Moe'): [

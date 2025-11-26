@@ -1,7 +1,7 @@
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset, y_offset
 
 line_coordinates = {
-    'standard_guage': {
+    'standard_gauge': {
         ('Albury', 'Wodonga'): [
             (6000 + x_offset, -5400 + y_offset, 6300 + x_offset, -5200 + y_offset),
         ],
