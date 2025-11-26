@@ -2005,9 +2005,11 @@ line_coordinates = {
     },
 }
 
-def getTotalLines():
+def getTotalLines_pre_munnel():
     total_lines = 0
     for line_type in line_coordinates.values():
         for station_pair in line_type.values():
             total_lines += len(station_pair)
     return total_lines
+
+print(getTotalLines_pre_munnel())
