@@ -1,6 +1,91 @@
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset, y_offset
 
 line_coordinates = {
+    'Summer Start Metro Tunnel Service': {
+        ('Westall', 'Clayton'): [
+            (8650 + x_offset, 4300 + y_offset, 8950 + x_offset, 4400 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+            (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
+        ],
+        ('Clayton','Huntingdale'): [
+            (8050 + x_offset, 4300 + y_offset, 8500 + x_offset, 4400 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+        ],
+        ('Huntingdale','Oakleigh'): [
+            (7500 + x_offset, 4300 + y_offset, 8100 + x_offset, 4400 + y_offset),
+        ],
+        ('Oakleigh','Hughesdale'): [
+            (6950 + x_offset, 4300 + y_offset, 7550 + x_offset, 4400 + y_offset),
+        ],
+        ('Hughesdale','Murrumbeena'): [
+            (6300 + x_offset, 4300 + y_offset, 7000 + x_offset, 4400 + y_offset),
+        ],
+        ('Murrumbeena','Carnegie'): [
+            (5700 + x_offset, 4300 + y_offset, 6350 + x_offset, 4400 + y_offset),
+        ],
+        ('Carnegie','Caulfield'): [
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (5330 + x_offset, 4300 + y_offset, 5450 + x_offset, 4400 + y_offset),
+            (5400 + x_offset, 4300 + y_offset, 5750 + x_offset, 4400 + y_offset),
+        ],
+        ('Caulfield','Malvern'): [
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
+            (5350 + x_offset, 4000 + y_offset, 5450 + x_offset, 4150 + y_offset),
+        ],
+        ('Malvern','Anzac'): [
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
+            (5300 + x_offset, 2950 + y_offset, 5450 + x_offset, 4050 + y_offset),
+            (3900 + x_offset, 2950 + y_offset, 4850 + x_offset, 3050 + y_offset),
+        ],
+        ('Anzac','Town Hall'): [
+            (2750 + x_offset, 3000 + y_offset, 3950 + x_offset, 3050 + y_offset),
+            (3900 + x_offset, 2950 + y_offset, 3950 + x_offset, 3050 + y_offset),
+            (2750 + x_offset, 2650 + y_offset, 2850 + x_offset, 3050 + y_offset),
+            (2800 + x_offset, 2450 + y_offset, 2850 + x_offset, 2600 + y_offset),
+            (2750 + x_offset, 1600 + y_offset, 2850 + x_offset, 1800 + y_offset),
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        ],
+        ('Town Hall','State Library'): [
+            (2750 + x_offset, 1100 + y_offset, 2850 + x_offset, 1500 + y_offset),
+            (2750 + x_offset, 950 + y_offset, 2850 + x_offset, 1050 + y_offset),
+            (2800 + x_offset, 550 + y_offset, 2850 + x_offset, 700 + y_offset),
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        ],
+        ('State Library', 'Parkville'): [
+            (2600 + x_offset, -300 + y_offset, 2850 + x_offset, 400 + y_offset),
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        ],
+        ('Parkville', 'Arden'): [
+            (2150 + x_offset, -300 + y_offset, 2650 + x_offset, -200 + y_offset),
+        ],
+        ('Arden', 'Footscray'): [
+            (2000 + x_offset, -300 + y_offset, 2250 + x_offset, -200 + y_offset),
+            (-450 + x_offset, -300 + y_offset, 1650 + x_offset, -200 + y_offset),
+            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
+            (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
+        ],
+        ('Middle Footscray', 'Footscray'): [
+            (-1150 + x_offset, -300 + y_offset, -600 + x_offset, -200 + y_offset),
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
+            (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
+        ],
+        ('West Footscray', 'Middle Footscray'): [
+            (-1750 + x_offset, -300 + y_offset, -1100 + x_offset, -200 + y_offset),
+            (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
+        ],
+    },
     'standard_gauge': {
         ('Albury', 'Wodonga'): [
             (6000 + x_offset, -5400 + y_offset, 6300 + x_offset, -5200 + y_offset),
