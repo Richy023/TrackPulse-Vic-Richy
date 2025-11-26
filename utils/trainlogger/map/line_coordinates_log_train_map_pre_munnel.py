@@ -278,13 +278,13 @@ line_coordinates = {
             (-750 + x_offset, 350 + y_offset, -651 + x_offset, 599 + y_offset),
         ],
         ('Seddon', 'Footscray'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-750 + x_offset, 250 + y_offset, -601 + x_offset, 399 + y_offset),
         ],
         ('Footscray','South Kensington'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 250 + y_offset, 99 + x_offset, 349 + y_offset),
@@ -397,7 +397,7 @@ line_coordinates = {
             (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
         ],
         ('Armadale', 'Toorak'):[
-            (4900 + x_offset, 3550 + y_offset, 5000 + x_offset, 3850 + y_offset),
+            (4900 + x_offset, 3600 + y_offset, 5000 + x_offset, 3850 + y_offset),
         ],
         ('Toorak', 'Hawksburn'):[
             (4900 + x_offset, 3400 + y_offset, 5000 + x_offset, 3650 + y_offset)
@@ -680,7 +680,7 @@ line_coordinates = {
         ('Westall','Clayton'): [
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
             (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
-            (8750 + x_offset, 4400 + y_offset, 7150 + x_offset, 4500 + y_offset),
+            (8650 + x_offset, 4400 + y_offset, 8950 + x_offset, 4500 + y_offset),
         ],
         ('Clayton','Huntingdale'): [
             (8050 + x_offset, 4400 + y_offset, 8500 + x_offset, 4500 + y_offset),
@@ -947,7 +947,7 @@ line_coordinates = {
 
     ('Middle Footscray', 'Footscray'): [
         (-1150 + x_offset, -200 + y_offset, -600 + x_offset, -100 + y_offset),
-        (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+        (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
         (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
         (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
     ],
@@ -1150,7 +1150,7 @@ line_coordinates = {
             (21450 + x_offset, 4500 + y_offset, 21850 + x_offset, 4600 + y_offset),
         ],
         ('Morwell','Moe'): [
-            (21100 + x_offset, 4450 + y_offset, 21500 + x_offset, 4600 + y_offset),
+            (21100 + x_offset, 4500 + y_offset, 21500 + x_offset, 4600 + y_offset),
         ],
         ('Moe','Trafalgar'): [
             (20750 + x_offset, 4500 + y_offset, 21150 + x_offset, 4600 + y_offset),
@@ -1172,10 +1172,10 @@ line_coordinates = {
             (18500 + x_offset, 4500 + y_offset, 19000 + x_offset, 4600 + y_offset),
         ],
         ('Bunyip','Garfield'): [
-            (18100 + x_offset, 4450 + y_offset, 18550 + x_offset, 4600 + y_offset),
+            (18100 + x_offset, 4500 + y_offset, 18550 + x_offset, 4600 + y_offset),
         ],
         ('Garfield','Tynong'): [
-            (17700 + x_offset, 4450 + y_offset, 18150 + x_offset, 4600 + y_offset),
+            (17700 + x_offset, 4500 + y_offset, 18150 + x_offset, 4600 + y_offset),
         ],
         ('Tynong','Nar Nar Goon'): [
             (17200 + x_offset, 4500 + y_offset, 17750 + x_offset, 4600 + y_offset),
@@ -1203,7 +1203,7 @@ line_coordinates = {
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
-            (5150 + x_offset, 4450 + y_offset, 8500 + x_offset, 4600 + y_offset),
+            (5150 + x_offset, 4500 + y_offset, 8500 + x_offset, 4600 + y_offset),
             (5150 + x_offset, 4250 + y_offset, 5200 + x_offset, 4600 + y_offset),
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
             (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
@@ -1283,12 +1283,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, -50 + y_offset, 1600 + x_offset, 0 + y_offset),
@@ -1403,7 +1403,7 @@ line_coordinates = {
             (-3200 + x_offset, -1300 + y_offset, -3150 + x_offset, 0 + y_offset),
             (-3200 + x_offset, -50 + y_offset, -2950 + x_offset, 0 + y_offset),
             (-2900 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
@@ -1459,12 +1459,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, -50 + y_offset, 1600 + x_offset, 0 + y_offset),
@@ -1650,12 +1650,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 50 + y_offset, 1500 + x_offset, 100 + y_offset),
@@ -1786,7 +1786,7 @@ line_coordinates = {
             (-3300 + x_offset, 50 + y_offset, -2950 + x_offset, 100 + y_offset),
             (-2900 + x_offset, 50 + y_offset, -2650 + x_offset, 100 + y_offset),
             (-2600 + x_offset, 50 + y_offset, -600 + x_offset, 100 + y_offset),
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
@@ -1908,12 +1908,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 50 + y_offset, 1500 + x_offset, 100 + y_offset),
