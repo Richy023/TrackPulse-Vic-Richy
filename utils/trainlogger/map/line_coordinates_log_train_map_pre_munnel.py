@@ -1479,77 +1479,77 @@ line_coordinates = {
     'vline_long_distance':{
         #bairsndale line
         ('Bairnsdale','Stratford'): [
-            (23050 + x_offset, 4500 + y_offset, 23400 + x_offset, 4650 + y_offset),
+            (23050 + x_offset, 4600 + y_offset, 23400 + x_offset, 4750 + y_offset),
         ],
 
         ('Stratford','Sale'): [
-            (22650 + x_offset, 4500 + y_offset, 23100 + x_offset, 4650 + y_offset),
+            (22650 + x_offset, 4600 + y_offset, 23100 + x_offset, 4750 + y_offset),
         ],
 
         ('Sale','Rosedale'): [
-            (22300 + x_offset, 4500 + y_offset, 22700 + x_offset, 4600 + y_offset),
+            (22300 + x_offset, 4600 + y_offset, 22700 + x_offset, 4700 + y_offset),
         ],
 
         ('Rosedale','Traralgon'): [
-            (21900 + x_offset, 4500 + y_offset, 22350 + x_offset, 4600 + y_offset),
+            (21900 + x_offset, 4600 + y_offset, 22350 + x_offset, 4700 + y_offset),
             (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
         ],
 
         ('Traralgon','Morwell'): [
             (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
-            (21350 + x_offset, 4500 + y_offset, 21750 + x_offset, 4600 + y_offset),
+            (21350 + x_offset, 4600 + y_offset, 21750 + x_offset, 4700 + y_offset),
         ],
         ('Morwell','Moe'): [
-            (21000 + x_offset, 4550 + y_offset, 21400 + x_offset, 4600 + y_offset),
+            (21000 + x_offset, 4550 + y_offset, 21400 + x_offset, 4700 + y_offset),
         ],
         ('Moe','Trafalgar'): [
-            (20650 + x_offset, 4500 + y_offset, 21050 + x_offset, 4600 + y_offset),
+            (20650 + x_offset, 4600 + y_offset, 21050 + x_offset, 4700 + y_offset),
         ],
         ('Trafalgar','Yarragon'): [
-            (20200 + x_offset, 4500 + y_offset, 20700 + x_offset, 4600 + y_offset),
+            (20200 + x_offset, 4600 + y_offset, 20700 + x_offset, 4700 + y_offset),
         ],  
         ('Yarragon','Warragul'): [
-            (19700 + x_offset, 4500 + y_offset, 20250 + x_offset, 4600 + y_offset),
+            (19700 + x_offset, 4600 + y_offset, 20250 + x_offset, 4700 + y_offset),
         ],
         ('Drouin','Warragul'): [
-            (19300 + x_offset, 4500 + y_offset, 19750 + x_offset, 4600 + y_offset),
+            (19300 + x_offset, 4600 + y_offset, 19750 + x_offset, 4700 + y_offset),
         ],
 
         ('Drouin','Longwarry'): [
-            (18850 + x_offset, 4500 + y_offset, 19350 + x_offset, 4600 + y_offset),
+            (18850 + x_offset, 4600 + y_offset, 19350 + x_offset, 4700 + y_offset),
         ],
         ('Longwarry','Bunyip'): [
-            (18400 + x_offset, 4500 + y_offset, 18900 + x_offset, 4600 + y_offset),
+            (18400 + x_offset, 4600 + y_offset, 18900 + x_offset, 4700 + y_offset),
         ],
         ('Bunyip','Garfield'): [
-            (18000 + x_offset, 4550 + y_offset, 18450 + x_offset, 4600 + y_offset),
+            (18000 + x_offset, 4550 + y_offset, 18450 + x_offset, 4700 + y_offset),
         ],
         ('Garfield','Tynong'): [
-            (17600 + x_offset, 4550 + y_offset, 18050 + x_offset, 4600 + y_offset),
+            (17600 + x_offset, 4550 + y_offset, 18050 + x_offset, 4700 + y_offset),
         ],
         ('Tynong','Nar Nar Goon'): [
-            (17100 + x_offset, 4500 + y_offset, 17650 + x_offset, 4600 + y_offset),
+            (17100 + x_offset, 4600 + y_offset, 17650 + x_offset, 4700 + y_offset),
         ],
         ('Nar Nar Goon','Pakenham'): [
-            (15700 + x_offset, 4550 + y_offset, 17150 + x_offset, 4600 + y_offset),
-            (17100 + x_offset, 4500 + y_offset, 17150 + x_offset, 4600 + y_offset),
+            (15700 + x_offset, 4650 + y_offset, 17150 + x_offset, 4700 + y_offset),
+            (17100 + x_offset, 4600 + y_offset, 17150 + x_offset, 4700 + y_offset),
             (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
 
         ('Pakenham','Dandenong'): [
-            (11850 + x_offset, 4500 + y_offset, 12000 + x_offset, 4600 + y_offset),
-            (12050 + x_offset, 4500 + y_offset, 15600 + x_offset, 4600 + y_offset),
+            (11850 + x_offset, 4600 + y_offset, 12000 + x_offset, 4700 + y_offset),
+            (12050 + x_offset, 4600 + y_offset, 15600 + x_offset, 4700 + y_offset),
             (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
             (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Dandenong','Clayton'): [
-            (8550 + x_offset, 4500 + y_offset, 11750 + x_offset, 4600 + y_offset),
+            (8550 + x_offset, 4600 + y_offset, 11750 + x_offset, 4700 + y_offset),
             (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
-            (5050 + x_offset, 4550 + y_offset, 8400 + x_offset, 4600 + y_offset),
-            (5050 + x_offset, 4250 + y_offset, 5100 + x_offset, 4600 + y_offset),
+            (5050 + x_offset, 4550 + y_offset, 8500 + x_offset, 4700 + y_offset),
+            (5050 + x_offset, 4250 + y_offset, 5100 + x_offset, 4700 + y_offset),
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
             (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
         ],
