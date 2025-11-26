@@ -3,10 +3,15 @@ y_offset = 6300
 
 station_coordinates = {
     "Parliament": (3618 + x_offset, 1264 + y_offset,  4134 + x_offset,  1393 + y_offset),
-    "Flinders Street": (2616 + x_offset, 2732 + y_offset,  3325 + x_offset,  2832 + y_offset),
+    "Flinders Street": (2850 + x_offset, 2700 + y_offset, 3650 + x_offset, 2950 + y_offset),
+    "Town Hall": (2850 + x_offset, 2700 + y_offset, 3650 + x_offset, 2950 + y_offset),
     "Southern Cross": (431 + x_offset, 1264 + y_offset, 1162 + x_offset, 1378 + y_offset),
-    "Melbourne Central": (2716 + x_offset, 376 + y_offset, 3217 + x_offset, 619 + y_offset),
+    "Melbourne Central": (2850 + x_offset, -100 + y_offset, 3550 + x_offset, 350 + y_offset),
+    "State Library": (2850 + x_offset, -100 + y_offset, 3550 + x_offset, 350 + y_offset),
     "Flagstaff": (2351 + x_offset, 168 + y_offset, 2494 + x_offset, 619 + y_offset),
+    "Anzac": (3750 + x_offset, 2750 + y_offset, 4100 + x_offset, 2900 + y_offset),
+    "Parkville": (2400 + x_offset, -500 + y_offset, 2850 + x_offset, -350 + y_offset),
+    "Arden": (2050 + x_offset, -500 + y_offset, 2400 + x_offset, -350 + y_offset),
     "Richmond": (4327 + x_offset, 2632 + y_offset, 4807 + x_offset, 2732 + y_offset),
     "East Richmond": (5250 + x_offset, 1750 + y_offset, 6020 + x_offset, 1920 + y_offset),
     "Burnley": (6050 + x_offset, 1700 + y_offset, 6450 + x_offset, 1940 + y_offset),
