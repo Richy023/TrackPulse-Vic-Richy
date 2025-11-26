@@ -257,7 +257,7 @@ def postcompat(data:list, lines_dictionary:dict):
             metro_month = int(metro_date.split('-')[1])
             if trip_year < metro_year or (trip_year == metro_year and trip_month < metro_month):
                 if group == 'Summer Start Metro Tunnel Service':
-                    group = 'Pakenham'
+                    group = 'Sunbury'
                 if group == 'Frankston':
                     if station1 in lines_dictionary['Werribee'][0] and station1 not in lines_dictionary['Frankston'][0] and station2 in lines_dictionary['Werribee'][0] and station2 not in lines_dictionary['Frankston'][0]:
                         group = 'Werribee'
