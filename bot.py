@@ -58,7 +58,9 @@ from utils.alias import setWebAlias
 from utils.aviationAPIs.airportdata import get_airport_data
 from utils.aviationAPIs.aircraftphoto import getplaneimage
 from utils.game.imageadder import acceptGuesserPhoto
-from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines
+from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines_pre_munnel
+from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import getTotalLines_post_munnel
+from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import getTotalLines_sydney_tram
 from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
 sys.stdout = sys.__stdout__ 
 
@@ -5928,7 +5930,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             
             # get the percentage of area covered
-            percentageCovered = (percent_amount/getTotalLines()*100)
+            percentageCovered = (percent_amount/getTotalLines_pre_munnel()*100)
             
             # Send the map once generated
             try:
@@ -5977,7 +5979,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Post Metro Tunnel Map of logs with </log train:1289843416628330506> for @{username}{year_str}{line_str}", 
+                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for @{username}{year_str}{line_str}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
