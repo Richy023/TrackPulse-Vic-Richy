@@ -53,6 +53,7 @@ lines_dictionary_log_train_map_pre_munnel = {
     'Mornington Tourist Railway': [['Moorooduc', 'Tanti Park', 'Narambi Road', 'Stopping Place 16', 'Mornington'], ptv_grey],
     'Victorian Goldfields Railway': [['Castlemaine', 'Muckleford', 'Maldon'], ptv_grey],
     'Walhalla Goldfields Railway': [['Thomson', 'Winter Platform', 'Cascade Bridge Halt', 'Happy Creek', 'Walhalla'], ptv_grey],
+    'Bellarine Railway': [['Drysdale', 'Suma Park', "Laker's Siding", 'Swan Bay', 'Queenscliff'], ptv_grey],
     'Unknown/Other': [[None], ptv_grey],
 }
 lines_dictionary_log_train_map_post_munnel = {
@@ -106,6 +107,7 @@ lines_dictionary_log_train_map_post_munnel = {
     'Mornington Tourist Railway': [['Moorooduc', 'Tanti Park', 'Narambi Road', 'Stopping Place 16', 'Mornington'], ptv_grey],
     'Victorian Goldfields Railway': [['Castlemaine', 'Muckleford', 'Maldon'], ptv_grey],
     'Walhalla Goldfields Railway': [['Thomson', 'Winter Platform', 'Cascade Bridge Halt', 'Happy Creek', 'Walhalla'], ptv_grey],
+    'Bellarine Railway': [['Drysdale', 'Suma Park', "Laker's Siding", 'Swan Bay', 'Queenscliff'], ptv_grey],
     'Unknown/Other': [[None], ptv_grey],
 }
 

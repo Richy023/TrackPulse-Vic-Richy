@@ -2087,6 +2087,18 @@ line_coordinates = {
         ('Happy Creek', 'Walhalla'):[
             (21050 + x_offset, 3150 + y_offset, 21200 + x_offset, 3400 + y_offset),
         ],
+        ('Drysdale', 'Suma Park'):[
+            (-4450 + x_offset, 2050 + y_offset, -4200 + x_offset, 2200 + y_offset),
+        ],
+        ('Suma Park', "Laker's Siding"):[
+            (-4250 + x_offset, 2050 + y_offset, -3600 + x_offset, 2150 + y_offset),
+        ],
+        ("Laker's Siding", 'Swan Bay'):[
+            (-3650 + x_offset, 2050 + y_offset, -3000 + x_offset, 2150 + y_offset),
+        ],
+        ('Swan Bay', 'Queenscliff'):[
+            (-3050 + x_offset, 2050 + y_offset, -2750 + x_offset, 2200 + y_offset),
+        ],
     },
 }
 
