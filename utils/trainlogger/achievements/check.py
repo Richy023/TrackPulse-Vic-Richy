@@ -110,12 +110,12 @@ def checkAchievements(user):
                 
         for group_name, group_data in specific_station_groups.items():
             print(f'Checking {group_name} group...')
-            if visited_stations.issuperset(group_data['stations']):
+            if any(station in visited_stations for station in group_data['stations']):
                 new_achievements.append(group_data['achievement'])
                 print(f'{group_name} group achievement added')
             else:
                 print(f'{group_name} group achievement not added')
-                print(f"Stations missing: {group_data['stations'] - visited_stations}")
+                print(f"No stations from {group_name} visited yet")
             
     # 10 trips in a day checker
     print('Checking for 10 trips in a day...')
