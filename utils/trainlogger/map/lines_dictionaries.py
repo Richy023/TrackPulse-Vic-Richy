@@ -24,6 +24,7 @@ lines_dictionary_log_train_map_pre_munnel = {
     'Pakenham Loop': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'South Yarra', 'Hawksburn', 'Toorak', 'Armadale', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham','East Pakenham'],0x00a8e4],
     'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
     'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
+    'Summer Start Metro Tunnel Service': [['West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall'],0x00a8e4],
     'Sunbury': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
     'Sunbury Loop': [['Flagstaff', 'Melbourne Central', 'Parliament', 'Flinders Street', 'Southern Cross', 'North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
     'Upfield': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
@@ -52,6 +53,7 @@ lines_dictionary_log_train_map_pre_munnel = {
     'Mornington Tourist Railway': [['Moorooduc', 'Tanti Park', 'Narambi Road', 'Stopping Place 16', 'Mornington'], ptv_grey],
     'Victorian Goldfields Railway': [['Castlemaine', 'Muckleford', 'Maldon'], ptv_grey],
     'Walhalla Goldfields Railway': [['Thomson', 'Winter Platform', 'Cascade Bridge Halt', 'Happy Creek', 'Walhalla'], ptv_grey],
+    'Bellarine Railway': [['Drysdale', 'Suma Park', "Laker's Siding", 'Swan Bay', 'Queenscliff'], ptv_grey],
     'Unknown/Other': [[None], ptv_grey],
 }
 lines_dictionary_log_train_map_post_munnel = {
@@ -105,6 +107,7 @@ lines_dictionary_log_train_map_post_munnel = {
     'Mornington Tourist Railway': [['Moorooduc', 'Tanti Park', 'Narambi Road', 'Stopping Place 16', 'Mornington'], ptv_grey],
     'Victorian Goldfields Railway': [['Castlemaine', 'Muckleford', 'Maldon'], ptv_grey],
     'Walhalla Goldfields Railway': [['Thomson', 'Winter Platform', 'Cascade Bridge Halt', 'Happy Creek', 'Walhalla'], ptv_grey],
+    'Bellarine Railway': [['Drysdale', 'Suma Park', "Laker's Siding", 'Swan Bay', 'Queenscliff'], ptv_grey],
     'Unknown/Other': [[None], ptv_grey],
 }
 

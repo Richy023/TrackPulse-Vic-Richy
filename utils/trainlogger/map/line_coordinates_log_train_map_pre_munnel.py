@@ -1,7 +1,92 @@
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset, y_offset
 
 line_coordinates = {
-    'standard_guage': {
+    'Summer Start Metro Tunnel Service': {
+        ('Westall', 'Clayton'): [
+            (8650 + x_offset, 4300 + y_offset, 8950 + x_offset, 4400 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+            (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
+        ],
+        ('Clayton','Huntingdale'): [
+            (8050 + x_offset, 4300 + y_offset, 8500 + x_offset, 4400 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+        ],
+        ('Huntingdale','Oakleigh'): [
+            (7500 + x_offset, 4300 + y_offset, 8100 + x_offset, 4400 + y_offset),
+        ],
+        ('Oakleigh','Hughesdale'): [
+            (6950 + x_offset, 4300 + y_offset, 7550 + x_offset, 4400 + y_offset),
+        ],
+        ('Hughesdale','Murrumbeena'): [
+            (6300 + x_offset, 4300 + y_offset, 7000 + x_offset, 4400 + y_offset),
+        ],
+        ('Murrumbeena','Carnegie'): [
+            (5700 + x_offset, 4300 + y_offset, 6350 + x_offset, 4400 + y_offset),
+        ],
+        ('Carnegie','Caulfield'): [
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (5330 + x_offset, 4300 + y_offset, 5450 + x_offset, 4400 + y_offset),
+            (5400 + x_offset, 4300 + y_offset, 5750 + x_offset, 4400 + y_offset),
+        ],
+        ('Caulfield','Malvern'): [
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
+            (5350 + x_offset, 4000 + y_offset, 5450 + x_offset, 4150 + y_offset),
+        ],
+        ('Malvern','Anzac'): [
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
+            (5300 + x_offset, 2950 + y_offset, 5450 + x_offset, 4050 + y_offset),
+            (3900 + x_offset, 2950 + y_offset, 4850 + x_offset, 3050 + y_offset),
+        ],
+        ('Anzac','Town Hall'): [
+            (2750 + x_offset, 3000 + y_offset, 3950 + x_offset, 3050 + y_offset),
+            (3900 + x_offset, 2950 + y_offset, 3950 + x_offset, 3050 + y_offset),
+            (2750 + x_offset, 2650 + y_offset, 2850 + x_offset, 3050 + y_offset),
+            (2800 + x_offset, 2450 + y_offset, 2850 + x_offset, 2600 + y_offset),
+            (2750 + x_offset, 1600 + y_offset, 2850 + x_offset, 1800 + y_offset),
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        ],
+        ('Town Hall','State Library'): [
+            (2750 + x_offset, 1100 + y_offset, 2850 + x_offset, 1500 + y_offset),
+            (2750 + x_offset, 950 + y_offset, 2850 + x_offset, 1050 + y_offset),
+            (2800 + x_offset, 550 + y_offset, 2850 + x_offset, 700 + y_offset),
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        ],
+        ('State Library', 'Parkville'): [
+            (2600 + x_offset, -300 + y_offset, 2850 + x_offset, 400 + y_offset),
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        ],
+        ('Parkville', 'Arden'): [
+            (2150 + x_offset, -300 + y_offset, 2650 + x_offset, -200 + y_offset),
+        ],
+        ('Arden', 'Footscray'): [
+            (2000 + x_offset, -300 + y_offset, 2250 + x_offset, -200 + y_offset),
+            (-450 + x_offset, -300 + y_offset, 1650 + x_offset, -200 + y_offset),
+            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
+            (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
+        ],
+        ('Middle Footscray', 'Footscray'): [
+            (-1150 + x_offset, -300 + y_offset, -600 + x_offset, -200 + y_offset),
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
+            (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
+        ],
+        ('West Footscray', 'Middle Footscray'): [
+            (-1750 + x_offset, -300 + y_offset, -1100 + x_offset, -200 + y_offset),
+            (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
+        ],
+    },
+    'standard_gauge': {
         ('Albury', 'Wodonga'): [
             (6000 + x_offset, -5400 + y_offset, 6300 + x_offset, -5200 + y_offset),
         ],
@@ -126,13 +211,15 @@ line_coordinates = {
         ('Jolimont','Flinders Street'):[
               (3600 + x_offset, 1750 + y_offset, 4250 + x_offset, 1950 + y_offset),
               (3050 + x_offset, 1900 + y_offset, 3350 + x_offset, 1950 + y_offset),
-                (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+                (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
                 (3550 + x_offset, 1800 + y_offset, 3650 + x_offset, 2000 + y_offset),
         ],
         ('Flinders Street','Southern Cross'): [
             (2150 + x_offset, 1850 + y_offset, 2900 + x_offset, 1950 + y_offset),
             (2150 + x_offset, 1400 + y_offset, 2200 + x_offset, 1950 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
         ],
         ('Southern Cross','Flagstaff'): [
@@ -144,10 +231,12 @@ line_coordinates = {
         ('Flagstaff','Melbourne Central'):[
             (2500 + x_offset, 900 + y_offset, 2900 + x_offset, 950 + y_offset),
             (2350 + x_offset, 650 + y_offset, 2500 + x_offset, 1150 + y_offset), # Flagstaff Coords
-            (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
         ],
         ('Melbourne Central', 'Parliament'):[
-            (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
             (3050 + x_offset, 850 + y_offset, 3250 + x_offset, 950 + y_offset),
             (3200 + x_offset, 850 + y_offset, 3250 + x_offset, 1250 + y_offset),
             (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coords
@@ -164,7 +253,8 @@ line_coordinates = {
             (3200 + x_offset, 1400 + y_offset, 3250 + x_offset, 1950 + y_offset),
             (3000 + x_offset, 1900 + y_offset, 3250 + x_offset, 1950 + y_offset),
             (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coords
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         ],
         
         # begin the mernda line but it dosn't go to its initial locations
@@ -273,13 +363,13 @@ line_coordinates = {
             (-750 + x_offset, 350 + y_offset, -651 + x_offset, 599 + y_offset),
         ],
         ('Seddon', 'Footscray'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-750 + x_offset, 250 + y_offset, -601 + x_offset, 399 + y_offset),
         ],
         ('Footscray','South Kensington'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 250 + y_offset, 99 + x_offset, 349 + y_offset),
@@ -300,7 +390,8 @@ line_coordinates = {
         ('Southern Cross', 'Flinders Street'):[
             (1250 + x_offset, 1400 + y_offset, 1299 + x_offset, 2449 + y_offset),
             (1250 + x_offset, 2400 + y_offset, 2899 + x_offset, 2449 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
         ],
         # Williamstown Branch
@@ -375,17 +466,23 @@ line_coordinates = {
         ],
         ('Glen Huntly', 'Caulfield'):[
             (4900 + x_offset, 4300 + y_offset, 5000 + x_offset, 4800 + y_offset),
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
         ],
         ('Caulfield', 'Malvern'):[
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
             (4900 + x_offset, 4000 + y_offset, 5000 + x_offset, 4150 + y_offset),
         ],
         ('Malvern', 'Armadale'):[
             (4850 + x_offset, 3800 + y_offset, 5000 + x_offset, 4050 + y_offset),
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
         ],
         ('Armadale', 'Toorak'):[
-            (4900 + x_offset, 3550 + y_offset, 5000 + x_offset, 3850 + y_offset),
+            (4900 + x_offset, 3600 + y_offset, 5000 + x_offset, 3850 + y_offset),
         ],
         ('Toorak', 'Hawksburn'):[
             (4900 + x_offset, 3400 + y_offset, 5000 + x_offset, 3650 + y_offset)
@@ -407,7 +504,8 @@ line_coordinates = {
         ('Richmond', 'Flinders Street'):[
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # richmond coords
             (3050 + x_offset, 2350 + y_offset, 4500 + x_offset, 2450 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         ],
         
     },
@@ -485,12 +583,14 @@ line_coordinates = {
         (3550 + x_offset, 2000 + y_offset, 4499 + x_offset, 2049 + y_offset),
         (3050 + x_offset, 2000 + y_offset, 3499 + x_offset, 2059 + y_offset),
         (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # richmond coords
-        (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+        (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
     ],
     ('Flinders Street', 'Southern Cross'):[
         (2050 + x_offset, 1400 + y_offset, 2100 + x_offset, 2050 + y_offset),
         (2050 + x_offset, 1950 + y_offset, 2900 + x_offset, 2050 + y_offset),
-        (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+        (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
     ],
     ('Southern Cross', 'Flagstaff'):[
@@ -503,12 +603,14 @@ line_coordinates = {
     ("Flagstaff", "Melbourne Central"):[
         (2500 + x_offset, 800 + y_offset, 2901 + x_offset, 852 + y_offset),
         (2350 + x_offset, 650 + y_offset, 2500 + x_offset, 1150 + y_offset), # Flagstaff Coords
-        (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+        (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
     ],
     ('Melbourne Central', 'Parliament'):[
         (3050 + x_offset, 800 + y_offset, 3400 + x_offset, 850 + y_offset),
         (3300 + x_offset, 800 + y_offset, 3400 + x_offset, 1250 + y_offset),
-        (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+        (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
         (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coords
     ],
     ('Parliament', 'Richmond'):[
@@ -521,7 +623,8 @@ line_coordinates = {
     ('Flinders Street', 'Richmond'):[
         (3050 + x_offset, 2000 + y_offset, 3500 + x_offset, 2050 + y_offset),
         (3550 + x_offset, 2000 + y_offset, 4500 + x_offset, 2050 + y_offset),
-        (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+        (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
         
     ],
@@ -615,79 +718,88 @@ line_coordinates = {
     },
     'dandenong':{
         ('East Pakenham','Pakenham'): [
-            (15700 + x_offset, 4300 + y_offset, 16000 + x_offset, 4450 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
+            (15700 + x_offset, 4400 + y_offset, 16100 + x_offset, 4550 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
         ('Pakenham','Cardinia Road'): [
-            (15100 + x_offset, 4300 + y_offset, 15600 + x_offset, 4400 + y_offset),
-            (15050 + x_offset, 4300 + y_offset, 15150 + x_offset, 4400 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
+            (15200 + x_offset, 4400 + y_offset, 15700 + x_offset, 4500 + y_offset),
+            (15150 + x_offset, 4400 + y_offset, 15250 + x_offset, 4500 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
         ('Cardinia Road','Officer'): [
-            (14500 + x_offset, 4300 + y_offset, 15100 + x_offset, 4400 + y_offset),
+            (14600 + x_offset, 4400 + y_offset, 15200 + x_offset, 4500 + y_offset),
         ],
         ('Officer','Beaconsfield'): [
-            (13950 + x_offset, 4300 + y_offset, 14550 + x_offset, 4400 + y_offset),
+            (14050 + x_offset, 4400 + y_offset, 14650 + x_offset, 4500 + y_offset),
         ],
         ('Beaconsfield','Berwick'): [
-            (13400 + x_offset, 4300 + y_offset, 14000 + x_offset, 4400 + y_offset),
+            (13500 + x_offset, 4400 + y_offset, 14100 + x_offset, 4500 + y_offset),
         ],
         ('Berwick','Narre Warren'): [
-            (12850 + x_offset, 4300 + y_offset, 13450 + x_offset, 4400 + y_offset),
+            (12950 + x_offset, 4400 + y_offset, 13550 + x_offset, 4500 + y_offset),
         ],
         ('Narre Warren','Hallam'): [
-            (12300 + x_offset, 4300 + y_offset, 12900 + x_offset, 4400 + y_offset),
+            (12400 + x_offset, 4400 + y_offset, 13000 + x_offset, 4500 + y_offset),
         ],
         ('Hallam','Dandenong'): [
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
-            (11900 + x_offset, 4300 + y_offset, 12350 + x_offset, 4400 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (12000 + x_offset, 4400 + y_offset, 12450 + x_offset, 4500 + y_offset),
         ],
         ('Dandenong','Yarraman'): [
-            (11250 + x_offset, 4300 + y_offset, 11750 + x_offset, 4400 + y_offset),
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
+            (11350 + x_offset, 4400 + y_offset, 11850 + x_offset, 4500 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Yarraman','Noble Park'): [
-            (10700 + x_offset, 4300 + y_offset, 11300 + x_offset, 4400 + y_offset),
+            (10800 + x_offset, 4400 + y_offset, 11400 + x_offset, 4500 + y_offset),
         ],
         ('Noble Park','Sandown Park'): [
-            (10050 + x_offset, 4300 + y_offset, 10750 + x_offset, 4400 + y_offset),
+            (10150 + x_offset, 4400 + y_offset, 10850 + x_offset, 4500 + y_offset),
         ],
         ('Sandown Park','Springvale'): [
-            (9400 + x_offset, 4300 + y_offset, 10100 + x_offset, 4400 + y_offset),
+            (9500 + x_offset, 4400 + y_offset, 10200 + x_offset, 4500 + y_offset),
         ],
         ('Springvale','Westall'): [
-            (8900 + x_offset, 4300 + y_offset, 9450 + x_offset, 4400 + y_offset),
+            (9000 + x_offset, 4400 + y_offset, 9550 + x_offset, 4500 + y_offset),
+            (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
         ],
         ('Westall','Clayton'): [
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
-            (8550 + x_offset, 4300 + y_offset, 8950 + x_offset, 4400 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+            (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
+            (8650 + x_offset, 4400 + y_offset, 8950 + x_offset, 4500 + y_offset),
         ],
         ('Clayton','Huntingdale'): [
-            (7950 + x_offset, 4300 + y_offset, 8400 + x_offset, 4400 + y_offset),
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
+            (8050 + x_offset, 4400 + y_offset, 8500 + x_offset, 4500 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Huntingdale','Oakleigh'): [
-            (7400 + x_offset, 4300 + y_offset, 8000 + x_offset, 4400 + y_offset),
+            (7500 + x_offset, 4400 + y_offset, 8100 + x_offset, 4500 + y_offset),
         ],
         ('Oakleigh','Hughesdale'): [
-            (6850 + x_offset, 4300 + y_offset, 7450 + x_offset, 4400 + y_offset),
+            (6950 + x_offset, 4400 + y_offset, 7550 + x_offset, 4500 + y_offset),
         ],
         ('Hughesdale','Murrumbeena'): [
-            (6200 + x_offset, 4300 + y_offset, 6900 + x_offset, 4400 + y_offset),
+            (6300 + x_offset, 4400 + y_offset, 7000 + x_offset, 4500 + y_offset),
         ],
         ('Murrumbeena','Carnegie'): [
-            (5600 + x_offset, 4300 + y_offset, 6250 + x_offset, 4400 + y_offset),
+            (5700 + x_offset, 4400 + y_offset, 6350 + x_offset, 4500 + y_offset),
         ],
         ('Carnegie','Caulfield'): [
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
-            (5250 + x_offset, 4300 + y_offset, 5650 + x_offset, 4400 + y_offset),
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (5230 + x_offset, 4300 + y_offset, 5300 + x_offset, 4500 + y_offset),
+            (5250 + x_offset, 4400 + y_offset, 5750 + x_offset, 4500 + y_offset),
         ],
         ('Caulfield','Malvern'): [
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
             (5200 + x_offset, 4000 + y_offset, 5300 + x_offset, 4150 + y_offset),
         ],
         ('Malvern','Armadale'): [
             (5200 + x_offset, 3800 + y_offset, 5300 + x_offset, 4050 + y_offset),
+            (4900 + x_offset, 3950 + y_offset, 5030 + x_offset, 4100 + y_offset), # malvern coords
+            (5030 + x_offset, 4000 + y_offset, 5220 + x_offset, 4050 + y_offset), # malvern coords
+            (5220 + x_offset, 3950 + y_offset, 5500 + x_offset, 4100 + y_offset), # malvern coords
         ],
         ('Armadale','Toorak'): [
             (5200 + x_offset, 3600 + y_offset, 5300 + x_offset, 3850 + y_offset),
@@ -696,7 +808,7 @@ line_coordinates = {
             (5200 + x_offset, 3400 + y_offset, 5300 + x_offset, 3650 + y_offset),
         ],
         ('Hawksburn','South Yarra'): [
-            (5200 + x_offset, 2950 + y_offset, 5300 + x_offset, 3650 + y_offset),
+            (5200 + x_offset, 2950 + y_offset, 5300 + x_offset, 3700 + y_offset),
             (4800 + x_offset, 2800 + y_offset, 5000 + x_offset, 2950 + y_offset), # south yarra coords
             (5000 + x_offset, 2850 + y_offset, 5250 + x_offset, 2900 + y_offset), # south yarra coords
             (5200 + x_offset, 2800 + y_offset, 5350 + x_offset, 2950 + y_offset), # south yarra coords
@@ -712,12 +824,14 @@ line_coordinates = {
         ('Richmond','Flinders Street'): [
             (3050 + x_offset, 2100 + y_offset, 4550 + x_offset, 2150 + y_offset),
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # richmond coords
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         ],
         ('Flinders Street','Southern Cross'): [
             (1950 + x_offset, 2100 + y_offset, 2900 + x_offset, 2150 + y_offset),
             (1950 + x_offset, 1400 + y_offset, 2000 + x_offset, 2150 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
         ],
         ('Southern Cross','Flagstaff'): [
@@ -729,10 +843,12 @@ line_coordinates = {
         ('Flagstaff','Melbourne Central'): [
             (2350 + x_offset, 650 + y_offset, 2500 + x_offset, 1150 + y_offset), # Flagstaff Coords
             (2500 + x_offset, 650 + y_offset, 2900 + x_offset, 750 + y_offset),
-            (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
         ],
         ('Melbourne Central','Parliament'): [
-            (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+            (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+            (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
             (3050 + x_offset, 700 + y_offset, 3550 + x_offset, 750 + y_offset),
             (3450 + x_offset, 700 + y_offset, 3600 + x_offset, 1250 + y_offset),
             (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coord
@@ -745,17 +861,17 @@ line_coordinates = {
         ],
         # cranbourne branch
         ('Cranbourne','Merinda Park'): [
-            (11950 + x_offset, 4950 + y_offset, 12100 + x_offset, 5200 + y_offset),
+            (12050 + x_offset, 5050 + y_offset, 12200 + x_offset, 5300 + y_offset),
         ],
         ('Merinda Park','Lynbrook'): [
-            (11950 + x_offset, 4700 + y_offset, 12100 + x_offset, 5000 + y_offset),
+            (12050 + x_offset, 4800 + y_offset, 12200 + x_offset, 5100 + y_offset),
         ],
         ('Lynbrook','Dandenong'): [
-            (12000 + x_offset, 4350 + y_offset, 12050 + x_offset, 4800 + y_offset),
-            (12000 + x_offset, 4700 + y_offset, 12100 + x_offset, 4800 + y_offset),
-            (11900 + x_offset, 4350 + y_offset, 12050 + x_offset, 4400 + y_offset),
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
-        ],
+            (12100 + x_offset, 4450 + y_offset, 12150 + x_offset, 4900 + y_offset),
+            (12100 + x_offset, 4800 + y_offset, 12200 + x_offset, 4900 + y_offset),
+            (12000 + x_offset, 4450 + y_offset, 12150 + x_offset, 4500 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+        ]
     },
     
     'sandringham': {
@@ -806,7 +922,8 @@ line_coordinates = {
         ],
         ('Richmond', 'Flinders Street'): [
             (3050 + x_offset, 2500 + y_offset, 4500 + x_offset, 2550 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
         ],
 
@@ -826,24 +943,28 @@ line_coordinates = {
     ("Flagstaff", "Melbourne Central"):[
         (2500 + x_offset, 1050 + y_offset, 2900 + x_offset, 1100 + y_offset),
         (2350 + x_offset, 650 + y_offset, 2500 + x_offset, 1150 + y_offset), # Flagstaff Coords
-        (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+        (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
     ],
     ('Melbourne Central', 'Parliament'):[
         (3050 + x_offset, 1000 + y_offset, 3150 + x_offset, 1250 + y_offset),
-        (2900 + x_offset, 650 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
+        (2750 + x_offset, 400 + y_offset, 3050 + x_offset, 550 + y_offset), # State Library part
+        (2900 + x_offset, 550 + y_offset, 3050 + x_offset, 1150 + y_offset), # Melbourne Central Coords
         (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coords
     ],
 
     ('Parliament', 'Flinders Street'):[
         (3050 + x_offset, 1400 + y_offset, 3150 + x_offset, 1850 + y_offset),
-        (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+        (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         (3050 + x_offset, 1250 + y_offset, 3600 + x_offset, 1400 + y_offset), # Parliament Coords
     ],
 
     ('Flinders Street', 'Southern Cross'):[
         (2250 + x_offset, 1400 + y_offset, 2300 + x_offset, 1850 + y_offset),
-        (2300 + x_offset, 1750 + y_offset, 2900 + x_offset, 1850 + y_offset),
-        (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+        (2300 + x_offset, 1800 + y_offset, 2900 + x_offset, 1850 + y_offset),
+        (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
     ],
 
@@ -901,15 +1022,17 @@ line_coordinates = {
 
     ('Tottenham', 'West Footscray'): [
         (-2350 + x_offset, -200 + y_offset, -1700 + x_offset, -100 + y_offset),
+        (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
     ],
 
     ('West Footscray', 'Middle Footscray'): [
         (-1750 + x_offset, -200 + y_offset, -1100 + x_offset, -100 + y_offset),
+        (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
     ],
 
     ('Middle Footscray', 'Footscray'): [
         (-1150 + x_offset, -200 + y_offset, -600 + x_offset, -100 + y_offset),
-        (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+        (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
         (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
         (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
     ],
@@ -920,7 +1043,7 @@ line_coordinates = {
         (1200 + x_offset, 350 + y_offset, 1339 + x_offset, 499 + y_offset), # North Melbourne icon
         (1300 + x_offset, 400 + y_offset, 1649 + x_offset, 449 + y_offset), # North Melbourne icon
         (1602 + x_offset, 350 + y_offset, 2049 + x_offset, 499 + y_offset), # North Melbourne icon
-        (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+        (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
         (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
         (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
     ],
@@ -1033,7 +1156,7 @@ line_coordinates = {
     ],
     ('Macaulay', 'North Melbourne'):[
         (2950 + x_offset, -600 + y_offset, 3050 + x_offset, -500 + y_offset),
-        (1950 + x_offset, -500 + y_offset, 3000 + x_offset, -400 + y_offset),
+        (1950 + x_offset, -500 + y_offset, 3000 + x_offset, -450 + y_offset),
         (1950 + x_offset, -500 + y_offset, 2000 + x_offset, 350 + y_offset),
         (1200 + x_offset, 350 + y_offset, 1339 + x_offset, 499 + y_offset), # North Melbourne icon
         (1300 + x_offset, 400 + y_offset, 1649 + x_offset, 449 + y_offset), # North Melbourne icon
@@ -1045,9 +1168,10 @@ line_coordinates = {
         
     'flemington': {
         ('Flinders Street','Southern Cross'): [
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1251 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern Cross icon
-            (1650 + x_offset, 2550 + y_offset, 2899 + x_offset, 2699 + y_offset),
+            (1650 + x_offset, 2600 + y_offset, 2899 + x_offset, 2650 + y_offset),
             (1612 + x_offset, 2451 + y_offset, 1708 + x_offset, 2688 + y_offset),
             (1621 + x_offset, 1398 + y_offset, 1708 + x_offset, 2388 + y_offset),
             ],
@@ -1107,84 +1231,86 @@ line_coordinates = {
     'vline_intercity':{
         # traralgon line
         ('Traralgon','Morwell'): [
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
-            (21350 + x_offset, 4400 + y_offset, 21750 + x_offset, 4500 + y_offset),
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
+            (21450 + x_offset, 4500 + y_offset, 21850 + x_offset, 4600 + y_offset),
         ],
         ('Morwell','Moe'): [
-            (21000 + x_offset, 4350 + y_offset, 21400 + x_offset, 4500 + y_offset),
+            (21100 + x_offset, 4500 + y_offset, 21500 + x_offset, 4600 + y_offset),
         ],
         ('Moe','Trafalgar'): [
-            (20650 + x_offset, 4400 + y_offset, 21050 + x_offset, 4500 + y_offset),
+            (20750 + x_offset, 4500 + y_offset, 21150 + x_offset, 4600 + y_offset),
         ],
         ('Trafalgar','Yarragon'): [
-            (20200 + x_offset, 4400 + y_offset, 20700 + x_offset, 4500 + y_offset),
+            (20300 + x_offset, 4500 + y_offset, 20800 + x_offset, 4600 + y_offset),
         ],  
         ('Yarragon','Warragul'): [
-            (19700 + x_offset, 4400 + y_offset, 20250 + x_offset, 4500 + y_offset),
+            (19800 + x_offset, 4500 + y_offset, 20350 + x_offset, 4600 + y_offset),
         ],
         ('Drouin','Warragul'): [
-            (19300 + x_offset, 4400 + y_offset, 19750 + x_offset, 4500 + y_offset),
+            (19400 + x_offset, 4500 + y_offset, 19850 + x_offset, 4600 + y_offset),
         ],
 
         ('Drouin','Longwarry'): [
-            (18850 + x_offset, 4400 + y_offset, 19350 + x_offset, 4500 + y_offset),
+            (18950 + x_offset, 4500 + y_offset, 19450 + x_offset, 4600 + y_offset),
         ],
         ('Longwarry','Bunyip'): [
-            (18400 + x_offset, 4400 + y_offset, 18900 + x_offset, 4500 + y_offset),
+            (18500 + x_offset, 4500 + y_offset, 19000 + x_offset, 4600 + y_offset),
         ],
         ('Bunyip','Garfield'): [
-            (18000 + x_offset, 4350 + y_offset, 18450 + x_offset, 4500 + y_offset),
+            (18100 + x_offset, 4500 + y_offset, 18550 + x_offset, 4600 + y_offset),
         ],
         ('Garfield','Tynong'): [
-            (17600 + x_offset, 4350 + y_offset, 18050 + x_offset, 4500 + y_offset),
+            (17700 + x_offset, 4500 + y_offset, 18150 + x_offset, 4600 + y_offset),
         ],
         ('Tynong','Nar Nar Goon'): [
-            (17100 + x_offset, 4400 + y_offset, 17650 + x_offset, 4500 + y_offset),
+            (17200 + x_offset, 4500 + y_offset, 17750 + x_offset, 4600 + y_offset),
         ],
         ('Nar Nar Goon','Pakenham'): [
-            (15700 + x_offset, 4450 + y_offset, 17150 + x_offset, 4500 + y_offset),
-            (17100 + x_offset, 4400 + y_offset, 17150 + x_offset, 4500 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
+            (15800 + x_offset, 4550 + y_offset, 17250 + x_offset, 4600 + y_offset),
+            (17200 + x_offset, 4500 + y_offset, 17250 + x_offset, 4600 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
 
         ('Pakenham','Berwick'): [
-            (13400 + x_offset, 4400 + y_offset, 13450 + x_offset, 4500 + y_offset),
-            (13450 + x_offset, 4450 + y_offset, 15600 + x_offset, 4500 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
+            (13500 + x_offset, 4500 + y_offset, 13550 + x_offset, 4600 + y_offset),
+            (13550 + x_offset, 4550 + y_offset, 15700 + x_offset, 4600 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
         ('Berwick','Dandenong'): [
-            (12050 + x_offset, 4450 + y_offset, 13400 + x_offset, 4500 + y_offset),
-            (13400 + x_offset, 4400 + y_offset, 13450 + x_offset, 4500 + y_offset),
-            (11900 + x_offset, 4400 + y_offset, 12000 + x_offset, 4500 + y_offset),
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
+            (12150 + x_offset, 4550 + y_offset, 13500 + x_offset, 4600 + y_offset),
+            (13500 + x_offset, 4500 + y_offset, 13550 + x_offset, 4600 + y_offset),
+            (12000 + x_offset, 4500 + y_offset, 12100 + x_offset, 4600 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Dandenong','Clayton'): [
-            (8550 + x_offset, 4400 + y_offset, 11750 + x_offset, 4500 + y_offset),
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
+            (8650 + x_offset, 4500 + y_offset, 11850 + x_offset, 4600 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
-            (5150 + x_offset, 4450 + y_offset, 8400 + x_offset, 4500 + y_offset),
-            (5150 + x_offset, 4250 + y_offset, 5200 + x_offset, 4500 + y_offset),
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (5150 + x_offset, 4500 + y_offset, 8500 + x_offset, 4600 + y_offset),
+            (5150 + x_offset, 4250 + y_offset, 5200 + x_offset, 4600 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
         ],
         ('Caulfield','Richmond'): [
             (5150 + x_offset, 2900 + y_offset, 5200 + x_offset, 4150 + y_offset),
             (5100 + x_offset, 2200 + y_offset, 5200 + x_offset, 2850 + y_offset),
             (4650 + x_offset, 2150 + y_offset, 5200 + x_offset, 2250 + y_offset),
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
         ],
         ('Richmond','Flinders Street'): [
             (3050 + x_offset, 2200 + y_offset, 4550 + x_offset, 2250 + y_offset),
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         ],
         ('Flinders Street','Southern Cross'): [
             (1850 + x_offset, 1350 + y_offset, 1900 + x_offset, 2250 + y_offset),
             (1800 + x_offset, 2150 + y_offset, 2900 + x_offset, 2250 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1250 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern 
         ], 
         
@@ -1242,12 +1368,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, -50 + y_offset, 1600 + x_offset, 0 + y_offset),
@@ -1362,7 +1488,7 @@ line_coordinates = {
             (-3200 + x_offset, -1300 + y_offset, -3150 + x_offset, 0 + y_offset),
             (-3200 + x_offset, -50 + y_offset, -2950 + x_offset, 0 + y_offset),
             (-2900 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
@@ -1418,12 +1544,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, -50 + y_offset, 1600 + x_offset, 0 + y_offset),
@@ -1438,96 +1564,98 @@ line_coordinates = {
     'vline_long_distance':{
         #bairsndale line
         ('Bairnsdale','Stratford'): [
-            (23050 + x_offset, 4500 + y_offset, 23400 + x_offset, 4650 + y_offset),
+            (23150 + x_offset, 4600 + y_offset, 23500 + x_offset, 4750 + y_offset),
         ],
 
         ('Stratford','Sale'): [
-            (22650 + x_offset, 4500 + y_offset, 23100 + x_offset, 4650 + y_offset),
+            (22750 + x_offset, 4600 + y_offset, 23200 + x_offset, 4750 + y_offset),
         ],
 
         ('Sale','Rosedale'): [
-            (22300 + x_offset, 4500 + y_offset, 22700 + x_offset, 4600 + y_offset),
+            (22400 + x_offset, 4600 + y_offset, 22800 + x_offset, 4700 + y_offset),
         ],
 
         ('Rosedale','Traralgon'): [
-            (21900 + x_offset, 4500 + y_offset, 22350 + x_offset, 4600 + y_offset),
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
+            (22000 + x_offset, 4600 + y_offset, 22450 + x_offset, 4700 + y_offset),
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
         ],
 
         ('Traralgon','Morwell'): [
-            (21750 + x_offset, 4400 + y_offset, 21900 + x_offset, 4650 + y_offset), # traralgon coords
-            (21350 + x_offset, 4500 + y_offset, 21750 + x_offset, 4600 + y_offset),
+            (21850 + x_offset, 4500 + y_offset, 22000 + x_offset, 4750 + y_offset), # traralgon coords
+            (21450 + x_offset, 4600 + y_offset, 21850 + x_offset, 4700 + y_offset),
         ],
         ('Morwell','Moe'): [
-            (21000 + x_offset, 4550 + y_offset, 21400 + x_offset, 4600 + y_offset),
+            (21100 + x_offset, 4550 + y_offset, 21500 + x_offset, 4700 + y_offset),
         ],
         ('Moe','Trafalgar'): [
-            (20650 + x_offset, 4500 + y_offset, 21050 + x_offset, 4600 + y_offset),
+            (20750 + x_offset, 4600 + y_offset, 21150 + x_offset, 4700 + y_offset),
         ],
         ('Trafalgar','Yarragon'): [
-            (20200 + x_offset, 4500 + y_offset, 20700 + x_offset, 4600 + y_offset),
+            (20300 + x_offset, 4600 + y_offset, 20800 + x_offset, 4700 + y_offset),
         ],  
         ('Yarragon','Warragul'): [
-            (19700 + x_offset, 4500 + y_offset, 20250 + x_offset, 4600 + y_offset),
+            (19800 + x_offset, 4600 + y_offset, 20350 + x_offset, 4700 + y_offset),
         ],
         ('Drouin','Warragul'): [
-            (19300 + x_offset, 4500 + y_offset, 19750 + x_offset, 4600 + y_offset),
+            (19400 + x_offset, 4600 + y_offset, 19850 + x_offset, 4700 + y_offset),
         ],
 
         ('Drouin','Longwarry'): [
-            (18850 + x_offset, 4500 + y_offset, 19350 + x_offset, 4600 + y_offset),
+            (18950 + x_offset, 4600 + y_offset, 19450 + x_offset, 4700 + y_offset),
         ],
         ('Longwarry','Bunyip'): [
-            (18400 + x_offset, 4500 + y_offset, 18900 + x_offset, 4600 + y_offset),
+            (18500 + x_offset, 4600 + y_offset, 19000 + x_offset, 4700 + y_offset),
         ],
         ('Bunyip','Garfield'): [
-            (18000 + x_offset, 4550 + y_offset, 18450 + x_offset, 4600 + y_offset),
+            (18100 + x_offset, 4550 + y_offset, 18550 + x_offset, 4700 + y_offset),
         ],
         ('Garfield','Tynong'): [
-            (17600 + x_offset, 4550 + y_offset, 18050 + x_offset, 4600 + y_offset),
+            (17700 + x_offset, 4550 + y_offset, 18150 + x_offset, 4700 + y_offset),
         ],
         ('Tynong','Nar Nar Goon'): [
-            (17100 + x_offset, 4500 + y_offset, 17650 + x_offset, 4600 + y_offset),
+            (17200 + x_offset, 4600 + y_offset, 17750 + x_offset, 4700 + y_offset),
         ],
         ('Nar Nar Goon','Pakenham'): [
-            (15700 + x_offset, 4550 + y_offset, 17150 + x_offset, 4600 + y_offset),
-            (17100 + x_offset, 4500 + y_offset, 17150 + x_offset, 4600 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
+            (15800 + x_offset, 4650 + y_offset, 17250 + x_offset, 4700 + y_offset),
+            (17200 + x_offset, 4600 + y_offset, 17250 + x_offset, 4700 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
 
         ('Pakenham','Dandenong'): [
-            (11850 + x_offset, 4500 + y_offset, 12000 + x_offset, 4600 + y_offset),
-            (12050 + x_offset, 4500 + y_offset, 15600 + x_offset, 4600 + y_offset),
-            (15600 + x_offset, 4300 + y_offset, 15750 + x_offset, 4650 + y_offset), # pakenham coords
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
+            (11950 + x_offset, 4600 + y_offset, 12100 + x_offset, 4700 + y_offset),
+            (12150 + x_offset, 4600 + y_offset, 15700 + x_offset, 4700 + y_offset),
+            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Dandenong','Clayton'): [
-            (8550 + x_offset, 4500 + y_offset, 11750 + x_offset, 4600 + y_offset),
-            (11750 + x_offset, 4300 + y_offset, 11900 + x_offset, 4650 + y_offset), # dandenong coords
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
+            (8650 + x_offset, 4600 + y_offset, 11850 + x_offset, 4700 + y_offset),
+            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
-            (5050 + x_offset, 4550 + y_offset, 8400 + x_offset, 4600 + y_offset),
-            (5050 + x_offset, 4250 + y_offset, 5100 + x_offset, 4600 + y_offset),
-            (8400 + x_offset, 4300 + y_offset, 8550 + x_offset, 4650 + y_offset), # clayton coords
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (5050 + x_offset, 4550 + y_offset, 8500 + x_offset, 4700 + y_offset),
+            (5050 + x_offset, 4250 + y_offset, 5100 + x_offset, 4700 + y_offset),
+            (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
         ],
         ('Caulfield','Richmond'): [
             (5050 + x_offset, 2900 + y_offset, 5100 + x_offset, 4150 + y_offset),
             (5050 + x_offset, 2300 + y_offset, 5100 + x_offset, 2850 + y_offset),
             (4650 + x_offset, 2250 + y_offset, 5100 + x_offset, 2350 + y_offset),
-            (4900 + x_offset, 4150 + y_offset, 5350 + x_offset, 4300 + y_offset), # caulfield coords
+            (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
         ],
         ('Richmond','Flinders Street'): [
             (3050 + x_offset, 2300 + y_offset, 4550 + x_offset, 2350 + y_offset),
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2600 + y_offset), # Richmond Coords
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
         ],
         ('Flinders Street','Southern Cross'): [
             (1750 + x_offset, 1350 + y_offset, 1800 + x_offset, 2350 + y_offset),
             (1700 + x_offset, 2250 + y_offset, 2900 + x_offset, 2350 + y_offset),
-            (2900 + x_offset, 1750 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
+            (2750 + x_offset, 1500 + y_offset, 3050 + x_offset, 1650 + y_offset), # Town hall part
+            (2900 + x_offset, 1650 + y_offset, 3049 + x_offset, 2699 + y_offset), # Flinders Street icon
             (1200 + x_offset, 1250 + y_offset, 2349 + x_offset, 1399 + y_offset), # Southern 
         ], 
 
@@ -1607,12 +1735,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 50 + y_offset, 1500 + x_offset, 100 + y_offset),
@@ -1743,7 +1871,7 @@ line_coordinates = {
             (-3300 + x_offset, 50 + y_offset, -2950 + x_offset, 100 + y_offset),
             (-2900 + x_offset, 50 + y_offset, -2650 + x_offset, 100 + y_offset),
             (-2600 + x_offset, 50 + y_offset, -600 + x_offset, 100 + y_offset),
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
@@ -1865,12 +1993,12 @@ line_coordinates = {
             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
             (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
             (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
         ],
         ('Footscray', 'Southern Cross'):[
-            (-600 + x_offset, -200 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
+            (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
             (-450 + x_offset, 50 + y_offset, 1500 + x_offset, 100 + y_offset),
@@ -1948,23 +2076,37 @@ line_coordinates = {
             (-4000 + x_offset, -3300 + y_offset, -3600 + x_offset, -3150 + y_offset),
         ],
         ('Thomson', 'Winter Platform'):[
-            (20950 + x_offset, 3650 + y_offset, 21100 + x_offset, 3900 + y_offset),
+            (21050 + x_offset, 3750 + y_offset, 21200 + x_offset, 4000 + y_offset),
         ],
         ('Winter Platform', 'Cascade Bridge Halt'):[
-            (20950 + x_offset, 3450 + y_offset, 21050 + x_offset, 3700 + y_offset),
+            (21050 + x_offset, 3550 + y_offset, 21150 + x_offset, 3800 + y_offset),
         ],
         ('Cascade Bridge Halt', 'Happy Creek'):[
-            (20950 + x_offset, 3250 + y_offset, 21050 + x_offset, 3500 + y_offset),
+            (21050 + x_offset, 3350 + y_offset, 21150 + x_offset, 3600 + y_offset),
         ],
         ('Happy Creek', 'Walhalla'):[
-            (20950 + x_offset, 3050 + y_offset, 21100 + x_offset, 3300 + y_offset),
+            (21050 + x_offset, 3150 + y_offset, 21200 + x_offset, 3400 + y_offset),
+        ],
+        ('Drysdale', 'Suma Park'):[
+            (-4450 + x_offset, 2050 + y_offset, -4200 + x_offset, 2200 + y_offset),
+        ],
+        ('Suma Park', "Laker's Siding"):[
+            (-4250 + x_offset, 2050 + y_offset, -3600 + x_offset, 2150 + y_offset),
+        ],
+        ("Laker's Siding", 'Swan Bay'):[
+            (-3650 + x_offset, 2050 + y_offset, -3000 + x_offset, 2150 + y_offset),
+        ],
+        ('Swan Bay', 'Queenscliff'):[
+            (-3050 + x_offset, 2050 + y_offset, -2750 + x_offset, 2200 + y_offset),
         ],
     },
 }
 
-def getTotalLines():
+def getTotalLines_pre_munnel():
     total_lines = 0
     for line_type in line_coordinates.values():
         for station_pair in line_type.values():
             total_lines += len(station_pair)
     return total_lines
+
+print(getTotalLines_pre_munnel())

@@ -7,7 +7,7 @@ from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import lin
 from utils.trainlogger.map.station_coordinates_log_sydney_tram_map import x_offset as x_offset_log_sydney_tram, y_offset as y_offset_log_sydney_tram, station_coordinates as station_coordinates_log_sydney_tram
 from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import line_coordinates as lines_coordinates_log_sydney_tram
 
-metro_date = '2025-12-31' # this is just a placeholder date, replace when the metro tunnel date is confirmed
+metro_date = '2026-02-01' # this refers to the big switch date, which was assumed to be the opening date when this was coded in march. any "pre munnel" "post munnel" stuff refers to the big switch and not the acutal munnel
 
 def precompat(data:list, lines_dictionary:dict):
     newdata = []
@@ -20,11 +20,9 @@ def precompat(data:list, lines_dictionary:dict):
             station2=cols[6]
             trip_year = int(trip_date.split('-')[0])
             trip_month = int(trip_date.split('-')[1])
-            trip_day = int(trip_date.split('-')[2])
             metro_year = int(metro_date.split('-')[0])
             metro_month = int(metro_date.split('-')[1])
-            metro_day = int(metro_date.split('-')[2])
-            if trip_year >= metro_year + 1 or (trip_year == metro_year and trip_month >= metro_month + 1) or (trip_year == metro_year and trip_month == metro_month and trip_day >= metro_day):
+            if trip_year > metro_year or (trip_year == metro_year and trip_month > metro_month):
                 if group == 'Frankston':
                     if station1 in ['Flagstaff','Parliament','Melbourne Central'] and station2 in ['Flagstaff','Parliament','Melbourne Central']:
                         group = 'Unknown'
@@ -255,11 +253,11 @@ def postcompat(data:list, lines_dictionary:dict):
             station2=cols[6]
             trip_year = int(trip_date.split('-')[0])
             trip_month = int(trip_date.split('-')[1])
-            trip_day = int(trip_date.split('-')[2])
             metro_year = int(metro_date.split('-')[0])
             metro_month = int(metro_date.split('-')[1])
-            metro_day = int(metro_date.split('-')[2])
-            if trip_year <= metro_year - 1 or (trip_year == metro_year and trip_month <= metro_month - 1) or (trip_year == metro_year and trip_month == metro_month and trip_day <= metro_day - 1):
+            if trip_year < metro_year or (trip_year == metro_year and trip_month < metro_month):
+                if group == 'Summer Start Metro Tunnel Service':
+                    group = 'Sunbury'
                 if group == 'Frankston':
                     if station1 in lines_dictionary['Werribee'][0] and station1 not in lines_dictionary['Frankston'][0] and station2 in lines_dictionary['Werribee'][0] and station2 not in lines_dictionary['Frankston'][0]:
                         group = 'Werribee'
@@ -487,7 +485,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:
@@ -496,7 +494,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'ballarat_seperate'
                 elif cols[4] in ['Ararat', 'Maryborough']:
                     group = 'ararat/maryborough_seperate'
-                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway']:
+                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway', 'Bellarine Railway']:
                     group = 'heritage'
                 else:
                     group = cols[4]
@@ -628,7 +626,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:
@@ -637,7 +635,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'ballarat_seperate'
                 elif cols[4] in ['Ararat', 'Maryborough']:
                     group = 'ararat/maryborough_seperate'
-                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway']:
+                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway', 'Bellarine Railway']:
                     group = 'heritage'
                 else:
                     group = cols[4]

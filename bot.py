@@ -58,7 +58,9 @@ from utils.alias import setWebAlias
 from utils.aviationAPIs.airportdata import get_airport_data
 from utils.aviationAPIs.aircraftphoto import getplaneimage
 from utils.game.imageadder import acceptGuesserPhoto
-from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines
+from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines_pre_munnel
+from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import getTotalLines_post_munnel
+from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import getTotalLines_sydney_tram
 from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
 sys.stdout = sys.__stdout__ 
 
@@ -167,6 +169,7 @@ for line in file:
     line = line.strip()
     lines_list.append(line)
 file.close()
+lines_list.append("Summer Start Metro Tunnel Service")
 
 file = open('utils\\datalists\\types.txt','r')
 types_list = []
@@ -401,6 +404,7 @@ lines_dictionary_main = {
     'Pakenham': [['Richmond', 'South Yarra', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham'],0x00a8e4],
     'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
     'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
+    'Summer Start Metro Tunnel Service': [['West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall'],0x00a8e4],
     'Sunbury': [['North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
     'Upfield': [['North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
     'Werribee': [['Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
@@ -2906,6 +2910,13 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                     return
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
+                return
+        
+        if line == "Summer Start Metro Tunnel Service":
+            log_year = int(savedate.split('-')[0])
+            log_month = int(savedate.split('-')[1])
+            if log_year > 2026 or log_year == 2026 and log_month >= 2:
+                await ctx.edit_original_response(content='''Invalid line: The `Summer Start Metro Tunnel Service` refers to the service between Westall and West Footscray that ran between the 30th of November 2025 and the 31st of January 2026. The date you have selected, `''' + savedate + '''`, is outside that range and the line no longer in operation. Please try again and choose an operational line, the Sunbury, Pakenham and Cranbourne Lines all run via the Metro Tunnel.''')
                 return
 
         if 'overland' in line.lower():
@@ -5815,7 +5826,7 @@ async def profile(ctx, user: discord.User = None):
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5876,7 +5887,7 @@ async def viewMaps(ctx, mode: str):
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
         app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel opens", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
@@ -5919,7 +5930,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             
             # get the percentage of area covered
-            percentageCovered = (percent_amount/getTotalLines()*100)
+            percentageCovered = (percent_amount/getTotalLines_pre_munnel()*100)
             
             # Send the map once generated
             try:
@@ -5955,20 +5966,37 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
         if mode == "time_based_variants/log_train_map_post_munnel.png":
             modeName = 'vic-metrotunnel'
             try:
-                await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel')
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
             except Exception as e:
-                await ctx.followup.send(f'Error:\n```{e}```')
+                await ctx.followup.send(f'An error occurred while generating the map:\n```{e}```')
+                print(f'Error generating map for {username}:\n```{str(e)}\n\n{traceback.format_exc()}```\n<@{USER_ID}>')
                 return
+
+            # get the percentage of area covered
+            percentageCovered = (percent_amount/getTotalLines_post_munnel()*100)
+
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                # make nameextras string
+                nameextras = ''
+                if train != 'all' and year != 0:
+                    nameextras = f' for {train} trains in {year}'
+                elif train != 'all':
+                    nameextras = f' for ' + train.strip("\'")
+                elif year != 0:
+                    nameextras = f' in {year}'
+                if line != 'All':
+                    nameextras += f' on the {line} line'
+                nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
+
+                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Post Metro Tunnel Map of logs with </log train:1289843416628330506> for @{username}{year_str}{line_str}", 
+                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")

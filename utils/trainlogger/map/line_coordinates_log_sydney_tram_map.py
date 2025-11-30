@@ -129,3 +129,12 @@ line_coordinates = {
         ],
     },
 }
+
+def getTotalLines_sydney_tram():
+    total_lines = 0
+    for line_type in line_coordinates.values():
+        for station_pair in line_type.values():
+            total_lines += len(station_pair)
+    return total_lines
+
+print(getTotalLines_sydney_tram())

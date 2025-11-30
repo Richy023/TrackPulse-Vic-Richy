@@ -1,7 +1,7 @@
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset, y_offset
 
 line_coordinates = {
-    'standard_guage': {
+    'standard_gauge': {
         ('Albury', 'Wodonga'): [
             (6000 + x_offset, -5400 + y_offset, 6300 + x_offset, -5200 + y_offset),
         ],
@@ -1988,5 +1988,26 @@ line_coordinates = {
         ('Happy Creek', 'Walhalla'):[
             (20950 + x_offset, 3050 + y_offset, 21100 + x_offset, 3300 + y_offset),
         ],
+        ('Drysdale', 'Suma Park'):[
+            (-4450 + x_offset, 2050 + y_offset, -4200 + x_offset, 2200 + y_offset),
+        ],
+        ('Suma Park', "Laker's Siding"):[
+            (-4250 + x_offset, 2050 + y_offset, -3600 + x_offset, 2150 + y_offset),
+        ],
+        ("Laker's Siding", 'Swan Bay'):[
+            (-3650 + x_offset, 2050 + y_offset, -3000 + x_offset, 2150 + y_offset),
+        ],
+        ('Swan Bay', 'Queenscliff'):[
+            (-3050 + x_offset, 2050 + y_offset, -2750 + x_offset, 2200 + y_offset),
+        ],
     },
 }
+
+def getTotalLines_post_munnel():
+    total_lines = 0
+    for line_type in line_coordinates.values():
+        for station_pair in line_type.values():
+            total_lines += len(station_pair)
+    return total_lines
+
+print(getTotalLines_post_munnel())
