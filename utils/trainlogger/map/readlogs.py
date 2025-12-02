@@ -424,7 +424,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     end = end.replace('*','')
 
                     # Find the line that contains these stations
-                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Cranbourne', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Pakenham', 'Sunbury', 'Upfield'] and cols[5] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
+                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Cranbourne', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Pakenham', 'Sunbury', 'Upfield'] and cols[6] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
                     elif group == 'City Circle' and start in ['Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
@@ -557,7 +557,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     end = end.replace('*','')
 
                     # Find the line that contains these stations
-                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Frankston', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Sunbury', 'Upfield'] and cols[5] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
+                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Frankston', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Sunbury', 'Upfield'] and cols[6] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
                     elif group == 'City Circle' and start in ['Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
