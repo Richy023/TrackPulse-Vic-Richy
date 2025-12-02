@@ -617,7 +617,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'northern'
                 elif cols[4] in ['Pakenham','Cranbourne','Sunbury']:
                     group = 'dandenong'
-                elif cols[4] in ['Frankston']:
+                elif cols[4] in ['Frankston', 'Frankston Loop']:
                     group = 'frankston'
                 elif cols[4] in ['Stony Point']:
                     group = 'stony_point'
