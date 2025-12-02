@@ -91,6 +91,32 @@ def checkAchievements(user):
             print('All lines achievement not added')
             print(f"Items missing: {set(mtrains) - items_found}")
             
+    # Check for specific stations visited
+    print('Checking for specific stations visited...')
+    specific_station_groups = {
+        'Metro Tunnel': {
+            'stations': {'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac'},
+            'achievement': '43'
+        },
+    }
+
+    visited_stations = set()
+    with open(filepath, mode='r', newline='', encoding='utf-8') as csvfile:
+        csv_reader = csv.reader(csvfile)
+        for row in csv_reader:
+            if len(row) > 6:
+                visited_stations.add(row[5])  # From station
+                visited_stations.add(row[6])  # To station
+                
+        for group_name, group_data in specific_station_groups.items():
+            print(f'Checking {group_name} group...')
+            if any(station in visited_stations for station in group_data['stations']):
+                new_achievements.append(group_data['achievement'])
+                print(f'{group_name} group achievement added')
+            else:
+                print(f'{group_name} group achievement not added')
+                print(f"No stations from {group_name} visited yet")
+            
     # 10 trips in a day checker
     print('Checking for 10 trips in a day...')
     dates = {}
@@ -151,6 +177,10 @@ def checkAchievements(user):
             'stations': {'Altona','Seaholme', 'Westona'},
             'achievement': '39'
         },
+        'Metro Tunnel': {
+            'stations': {'Parkville', 'State Library', 'Town Hall', 'Anzac'},
+            'achievement': '41'
+        }
     }
 
     visited_stations = set()
@@ -263,19 +293,19 @@ def checkAchievements(user):
         else:
             print('SG set achievement not added')
     
-    # Check for 7005
-    print('Checking for 7005')
-    vline_train_7005 = '7005'
+    # # Check for 7005 (removed cause its no longer in that livery)
+    # print('Checking for 7005')
+    # vline_train_7005 = '7005'
 
-    with open(filepath, mode='r', newline='', encoding='utf-8') as csvfile:
-        csv_reader = csv.reader(csvfile)
-        for row in csv_reader:
-            if len(row) > 1 and row[1] == vline_train_7005:
-                new_achievements.append('18')
-                print('7005 train achievement added')
-                break
-        else:
-            print('7005 train achievement not added')
+    # with open(filepath, mode='r', newline='', encoding='utf-8') as csvfile:
+    #     csv_reader = csv.reader(csvfile)
+    #     for row in csv_reader:
+    #         if len(row) > 1 and row[1] == vline_train_7005:
+    #             new_achievements.append('18')
+    #             print('7005 train achievement added')
+    #             break
+    #     else:
+    #         print('7005 train achievement not added')
             
     # Check for heratige train types
     print('Checking for heratige train types...')
@@ -487,6 +517,7 @@ def checkAchievements(user):
         ('Southern Cross', 'Swan Hill'): '28',
         ('Riversdale', 'Willison'): '34',
         ('Werribee', 'Frankston'): '36',
+        ('Sunbury', 'East Pakenham'): '42'
 
     }
 

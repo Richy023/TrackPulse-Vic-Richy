@@ -256,8 +256,6 @@ def postcompat(data:list, lines_dictionary:dict):
             metro_year = int(metro_date.split('-')[0])
             metro_month = int(metro_date.split('-')[1])
             if trip_year < metro_year or (trip_year == metro_year and trip_month < metro_month):
-                if group == 'Summer Start Metro Tunnel Service':
-                    group = 'Pakenham'
                 if group == 'Frankston':
                     if station1 in lines_dictionary['Werribee'][0] and station1 not in lines_dictionary['Frankston'][0] and station2 in lines_dictionary['Werribee'][0] and station2 not in lines_dictionary['Frankston'][0]:
                         group = 'Werribee'
@@ -368,6 +366,8 @@ def postcompat(data:list, lines_dictionary:dict):
                     elif station2 in ['North Melbourne','Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         newdata.append(f'{cols[0]},{cols[1]},{cols[2]},{trip_date},Unknown,{station1},{station2},')
                         station2 = '*Footscray'
+                elif group == 'Summer Start Metro Tunnel Service':
+                    group = 'Pakenham'
             line = f"{cols[0]},{cols[1]},{cols[2]},{trip_date},{group},{station1},{station2},"
         newdata.append(line)
     return newdata
@@ -424,7 +424,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     end = end.replace('*','')
 
                     # Find the line that contains these stations
-                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Cranbourne', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Pakenham', 'Sunbury', 'Upfield'] and cols[5] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
+                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Cranbourne', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Pakenham', 'Sunbury', 'Upfield'] and cols[6] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
                     elif group == 'City Circle' and start in ['Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
@@ -485,7 +485,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:
@@ -494,7 +494,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'ballarat_seperate'
                 elif cols[4] in ['Ararat', 'Maryborough']:
                     group = 'ararat/maryborough_seperate'
-                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway']:
+                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway', 'Bellarine Railway']:
                     group = 'heritage'
                 else:
                     group = cols[4]
@@ -557,7 +557,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     end = end.replace('*','')
 
                     # Find the line that contains these stations
-                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Frankston', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Sunbury', 'Upfield'] and cols[5] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
+                    if group in ['Alamein', 'Belgrave', 'Craigieburn', 'Frankston', 'Glen Waverley', 'Hurstbridge', 'Lilydale', 'Sunbury', 'Upfield'] and cols[6] in ['Flinders Street','Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
                     elif group == 'City Circle' and start in ['Southern Cross','Flagstaff','Parliament','Melbourne Central']:
                         group = group + " Loop"
@@ -617,7 +617,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'northern'
                 elif cols[4] in ['Pakenham','Cranbourne','Sunbury']:
                     group = 'dandenong'
-                elif cols[4] in ['Frankston']:
+                elif cols[4] in ['Frankston', 'Frankston Loop']:
                     group = 'frankston'
                 elif cols[4] in ['Stony Point']:
                     group = 'stony_point'
@@ -626,7 +626,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 elif cols[4] in ['Flemington Racecourse']:
                     group = 'flemington'
                 elif cols[4] in ['Albury']:
-                    group = 'standard_guage'
+                    group = 'standard_gauge'
                 elif cols[4] in ['Traralgon', 'Geelong','Bendigo','Seymour',]:
                     group = 'vline_intercity'
                 elif cols[4] in ['Shepparton', 'Swan Hill', 'Echuca', 'Warrnambool', 'Bairnsdale']:
@@ -635,7 +635,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                     group = 'ballarat_seperate'
                 elif cols[4] in ['Ararat', 'Maryborough']:
                     group = 'ararat/maryborough_seperate'
-                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway']:
+                elif cols[4] in ['Puffing Billy Railway', 'Yarra Valley Railway', 'Daylesford Spa Country Railway', 'Mornington Tourist Railway', 'Victorian Goldfields Railway', 'Walhalla Goldfields Railway', 'Bellarine Railway']:
                     group = 'heritage'
                 else:
                     group = cols[4]
