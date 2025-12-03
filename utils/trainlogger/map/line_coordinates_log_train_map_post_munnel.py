@@ -1222,13 +1222,11 @@ line_coordinates = {
             (-5200 + x_offset, 2400 + y_offset, -5100 + x_offset, 2550 + y_offset),
         ],
         ('Marshall','South Geelong'):[
-            (-5200 + x_offset, 2150 + y_offset, -4950 + x_offset, 2300 + y_offset), # south geelong coords
-            (-5200 + x_offset, 2300 + y_offset, -5100 + x_offset, 2450 + y_offset),
+            (-5200 + x_offset, 2200 + y_offset, -5100 + x_offset, 2450 + y_offset),
         ],
         ('South Geelong', 'Geelong'):[
             (-5200 + x_offset, 1950 + y_offset, -4950 + x_offset, 2100 + y_offset), # Geelong coords
-            (-5200 + x_offset, 2150 + y_offset, -4950 + x_offset, 2300 + y_offset), # south geelong coords
-            (-5200 + x_offset, 2050 + y_offset, -5100 + x_offset, 2200 + y_offset),
+            (-5200 + x_offset, 2050 + y_offset, -5100 + x_offset, 2250 + y_offset),
         ],
         ('Geelong','North Geelong'):[
             (-5200 + x_offset, 1800 + y_offset, -5100 + x_offset, 1950 + y_offset),
@@ -1589,13 +1587,11 @@ line_coordinates = {
             (-5100 + x_offset, 2400 + y_offset, -5000 + x_offset, 2550 + y_offset),
         ],
         ('Marshall','South Geelong'):[
-            (-5200 + x_offset, 2150 + y_offset, -4950 + x_offset, 2300 + y_offset), # south geelong coords
-            (-5100 + x_offset, 2300 + y_offset, -5000 + x_offset, 2450 + y_offset),
+            (-5100 + x_offset, 2200 + y_offset, -5000 + x_offset, 2450 + y_offset),
         ],
         ('South Geelong', 'Geelong'):[
             (-5200 + x_offset, 1950 + y_offset, -4950 + x_offset, 2100 + y_offset), # Geelong coords
-            (-5200 + x_offset, 2150 + y_offset, -4950 + x_offset, 2300 + y_offset), # south geelong coords
-            (-5100 + x_offset, 2050 + y_offset, -5000 + x_offset, 2200 + y_offset),
+            (-5100 + x_offset, 2050 + y_offset, -5000 + x_offset, 2250 + y_offset),
         ],
         ('Geelong','North Geelong'):[
             (-5100 + x_offset, 1800 + y_offset, -5000 + x_offset, 1950 + y_offset),
