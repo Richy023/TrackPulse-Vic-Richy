@@ -2,6 +2,52 @@ from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x
 
 line_coordinates = {
     'Summer Start Metro Tunnel Service': {
+        ('East Pakenham','Pakenham'): [
+            (15700 + x_offset, 4300 + y_offset, 16400 + x_offset, 4400 + y_offset),
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (16400 + x_offset, 4300 + y_offset, 16550 + x_offset, 4550 + y_offset), # east pakenham coords
+        ],
+        ('Pakenham','Cardinia Road'): [
+            (15200 + x_offset, 4300 + y_offset, 15700 + x_offset, 4400 + y_offset),
+            (15150 + x_offset, 4300 + y_offset, 15250 + x_offset, 4400 + y_offset),
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+        ],
+        ('Cardinia Road','Officer'): [
+            (14600 + x_offset, 4300 + y_offset, 15200 + x_offset, 4400 + y_offset),
+        ],
+        ('Officer','Beaconsfield'): [
+            (14050 + x_offset, 4300 + y_offset, 14650 + x_offset, 4400 + y_offset),
+        ],
+        ('Beaconsfield','Berwick'): [
+            (13500 + x_offset, 4300 + y_offset, 14100 + x_offset, 4400 + y_offset),
+        ],
+        ('Berwick','Narre Warren'): [
+            (12950 + x_offset, 4300 + y_offset, 13550 + x_offset, 4400 + y_offset),
+        ],
+        ('Narre Warren','Hallam'): [
+            (12400 + x_offset, 4300 + y_offset, 13000 + x_offset, 4400 + y_offset),
+        ],
+        ('Hallam','Dandenong'): [
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (12000 + x_offset, 4300 + y_offset, 12450 + x_offset, 4400 + y_offset),
+        ],
+        ('Dandenong','Yarraman'): [
+            (11350 + x_offset, 4300 + y_offset, 11850 + x_offset, 4400 + y_offset),
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+        ],
+        ('Yarraman','Noble Park'): [
+            (10800 + x_offset, 4300 + y_offset, 11400 + x_offset, 4400 + y_offset),
+        ],
+        ('Noble Park','Sandown Park'): [
+            (10150 + x_offset, 4300 + y_offset, 10850 + x_offset, 4400 + y_offset),
+        ],
+        ('Sandown Park','Springvale'): [
+            (9500 + x_offset, 4300 + y_offset, 10200 + x_offset, 4400 + y_offset),
+        ],
+        ('Springvale','Westall'): [
+            (9000 + x_offset, 4300 + y_offset, 9550 + x_offset, 4400 + y_offset),
+            (8950 + x_offset, 4300 + y_offset, 9100 + x_offset, 4550 + y_offset), # westall coords
+        ],
         ('Westall', 'Clayton'): [
             (8650 + x_offset, 4300 + y_offset, 8950 + x_offset, 4400 + y_offset),
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
@@ -85,6 +131,45 @@ line_coordinates = {
             (-1750 + x_offset, -300 + y_offset, -1100 + x_offset, -200 + y_offset),
             (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
         ],
+        ('Tottenham', 'West Footscray'): [
+            (-2350 + x_offset, -300 + y_offset, -1700 + x_offset, -200 + y_offset),
+            (-1800 + x_offset, -300 + y_offset, -1650 + x_offset, -50 + y_offset), # west fooscray station icon
+        ],
+        ('Sunshine', 'Tottenham'): [
+            (-2750 + x_offset, -300 + y_offset, -2300 + x_offset, -200 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
+        ],
+        ('Albion', 'Sunshine'): [
+            (-3000 + x_offset, -500 + y_offset, -2900 + x_offset, -200 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
+        ],
+        ('Ginifer', 'Albion'): [
+            (-3000 + x_offset, -800 + y_offset, -2900 + x_offset, -700 + y_offset),
+            (-3000 + x_offset, -700 + y_offset, -3050 + x_offset, -450 + y_offset),
+            (-3000 + x_offset, -500 + y_offset, -2900 + x_offset, -450 + y_offset),
+        ],
+        ('St Albans', 'Ginifer'): [
+            (-3000 + x_offset, -1000 + y_offset, -2900 + x_offset, -750 + y_offset),
+        ],
+        ('Keilor Plains', 'St Albans'): [
+            (-3000 + x_offset, -1250 + y_offset, -2900 + x_offset, -950 + y_offset),
+        ],
+        ('Watergardens', 'Keilor Plains'): [
+            (-3000 + x_offset, -1300 + y_offset, -2900 + x_offset, -1150 + y_offset),
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
+        ],
+        ('Diggers Rest', 'Watergardens'): [
+            (-3000 + x_offset, -1600 + y_offset, -2900 + x_offset, -1450 + y_offset),
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
+        ],
+        ('Sunbury', 'Diggers Rest'): [
+            (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
+            (-3000 + x_offset, -1700 + y_offset, -2900 + x_offset, -1550 + y_offset),
+        ],
     },
     'standard_gauge': {
         ('Albury', 'Wodonga'): [
@@ -125,11 +210,11 @@ line_coordinates = {
 
         ('Southern Cross', 'Broadmeadows'): [
             (200 + x_offset, -2800 + y_offset, 1650 + x_offset, -1250 + y_offset),
-            (-2300 + x_offset, -1400 + y_offset, 250 + x_offset, -600 + y_offset),
-            (-3050 + x_offset, -700 + y_offset, 200 + x_offset, -600 + y_offset),
+            (200 + x_offset, -1400 + y_offset, 250 + x_offset, -600 + y_offset),
+            (-2950 + x_offset, -700 + y_offset, 200 + x_offset, -600 + y_offset),
             (-3500 + x_offset, -650 + y_offset, -3310 + x_offset, 200 + y_offset),
-            (-3500 + x_offset, 150 + y_offset, -2950 + x_offset, 200 + y_offset),
-            (-2900 + x_offset, 150 + y_offset, -2650 + x_offset, 200 + y_offset),
+            (-3500 + x_offset, 150 + y_offset, -2850 + x_offset, 200 + y_offset),
+            (-2800 + x_offset, 150 + y_offset, -2650 + x_offset, 200 + y_offset),
             (-2600 + x_offset, 100 + y_offset, -2500 + x_offset, 200 + y_offset),
             (-2450 + x_offset, 150 + y_offset, -550 + x_offset, 200 + y_offset),
             (-500 + x_offset, 150 + y_offset, 1400 + x_offset, 200 + y_offset),
@@ -718,13 +803,14 @@ line_coordinates = {
     },
     'dandenong':{
         ('East Pakenham','Pakenham'): [
-            (15700 + x_offset, 4400 + y_offset, 16100 + x_offset, 4550 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (15700 + x_offset, 4400 + y_offset, 16400 + x_offset, 4500 + y_offset),
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (16400 + x_offset, 4300 + y_offset, 16550 + x_offset, 4550 + y_offset), # east pakenham coords
         ],
         ('Pakenham','Cardinia Road'): [
             (15200 + x_offset, 4400 + y_offset, 15700 + x_offset, 4500 + y_offset),
             (15150 + x_offset, 4400 + y_offset, 15250 + x_offset, 4500 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
         ('Cardinia Road','Officer'): [
             (14600 + x_offset, 4400 + y_offset, 15200 + x_offset, 4500 + y_offset),
@@ -742,12 +828,12 @@ line_coordinates = {
             (12400 + x_offset, 4400 + y_offset, 13000 + x_offset, 4500 + y_offset),
         ],
         ('Hallam','Dandenong'): [
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
             (12000 + x_offset, 4400 + y_offset, 12450 + x_offset, 4500 + y_offset),
         ],
         ('Dandenong','Yarraman'): [
             (11350 + x_offset, 4400 + y_offset, 11850 + x_offset, 4500 + y_offset),
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Yarraman','Noble Park'): [
             (10800 + x_offset, 4400 + y_offset, 11400 + x_offset, 4500 + y_offset),
@@ -870,7 +956,7 @@ line_coordinates = {
             (12100 + x_offset, 4450 + y_offset, 12150 + x_offset, 4900 + y_offset),
             (12100 + x_offset, 4800 + y_offset, 12200 + x_offset, 4900 + y_offset),
             (12000 + x_offset, 4450 + y_offset, 12150 + x_offset, 4500 + y_offset),
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ]
     },
     
@@ -979,17 +1065,17 @@ line_coordinates = {
 
     # Sunbury Line
     ('Sunbury', 'Diggers Rest'): [
-        (-3350 + x_offset, -1850 + y_offset, -3000 + x_offset, -1700 + y_offset), # Sunbury Coords
+        (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
         (-3100 + x_offset, -1700 + y_offset, -3000 + x_offset, -1550 + y_offset),
     ],
     ('Diggers Rest', 'Watergardens'): [
         (-3100 + x_offset, -1600 + y_offset, -3000 + x_offset, -1450 + y_offset),
-        (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+        (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
     ],
 
     ('Watergardens', 'Keilor Plains'): [
         (-3100 + x_offset, -1300 + y_offset, -3000 + x_offset, -1150 + y_offset),
-        (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+        (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
     ],
 
     ('Keilor Plains', 'St Albans'): [
@@ -1007,17 +1093,18 @@ line_coordinates = {
     ],
 
     ('Albion', 'Sunshine'): [
-        (-3100 + x_offset, -500 + y_offset, -3000 + x_offset, -100 + y_offset),
-        (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-        (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-        (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords
+        (-3100 + x_offset, -500 + y_offset, -3050 + x_offset, -100 + y_offset),
+        (-3100 + x_offset, -150 + y_offset, -2900 + x_offset, -100 + y_offset),
+        (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+        (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+        (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
     ],
 
     ('Sunshine', 'Tottenham'): [
-        (-2850 + x_offset, -200 + y_offset, -2300 + x_offset, -100 + y_offset),
-        (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-        (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-        (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords
+        (-2750 + x_offset, -200 + y_offset, -2300 + x_offset, -100 + y_offset),
+        (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+        (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+        (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
     ],
 
     ('Tottenham', 'West Footscray'): [
@@ -1268,23 +1355,23 @@ line_coordinates = {
         ('Nar Nar Goon','Pakenham'): [
             (15800 + x_offset, 4550 + y_offset, 17250 + x_offset, 4600 + y_offset),
             (17200 + x_offset, 4500 + y_offset, 17250 + x_offset, 4600 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
 
         ('Pakenham','Berwick'): [
             (13500 + x_offset, 4500 + y_offset, 13550 + x_offset, 4600 + y_offset),
             (13550 + x_offset, 4550 + y_offset, 15700 + x_offset, 4600 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
         ('Berwick','Dandenong'): [
             (12150 + x_offset, 4550 + y_offset, 13500 + x_offset, 4600 + y_offset),
             (13500 + x_offset, 4500 + y_offset, 13550 + x_offset, 4600 + y_offset),
             (12000 + x_offset, 4500 + y_offset, 12100 + x_offset, 4600 + y_offset),
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Dandenong','Clayton'): [
             (8650 + x_offset, 4500 + y_offset, 11850 + x_offset, 4600 + y_offset),
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
@@ -1356,18 +1443,18 @@ line_coordinates = {
             (-4950 + x_offset, 200 + y_offset, -4800 + x_offset, 650 + y_offset), # deer park coords
         ],
         ('Deer Park','Sunshine'):[
-            (-4800 + x_offset, 450 + y_offset, -3000 + x_offset, 500 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-4800 + x_offset, 450 + y_offset, -2900 + x_offset, 500 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
         ],
         ('Sunshine','Footscray'):[
-            (-2850 + x_offset, 450 + y_offset, -2600 + x_offset, 500 + y_offset),
+            (-2750 + x_offset, 450 + y_offset, -2600 + x_offset, 500 + y_offset),
             (-2650 + x_offset, -100 + y_offset, -2600 + x_offset, 500 + y_offset),
             (-2650 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
@@ -1477,21 +1564,21 @@ line_coordinates = {
         ],
         ('Clarkefield','Sunbury'):[
             (-3200 + x_offset, -2000 + y_offset, -3100 + x_offset, -1850 + y_offset),
-            (-3350 + x_offset, -1850 + y_offset, -3000 + x_offset, -1700 + y_offset), # Sunbury Coords
+            (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
         ],
         ('Sunbury','Watergardens'):[
             (-3200 + x_offset, -1700 + y_offset, -3150 + x_offset, -1450 + y_offset),
-            (-3350 + x_offset, -1850 + y_offset, -3000 + x_offset, -1700 + y_offset), # Sunbury Coords
-            (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+            (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
         ],
         ('Watergardens','Footscray'):[
             (-3200 + x_offset, -1300 + y_offset, -3150 + x_offset, 0 + y_offset),
-            (-3200 + x_offset, -50 + y_offset, -2950 + x_offset, 0 + y_offset),
-            (-2900 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
+            (-3200 + x_offset, -50 + y_offset, -2850 + x_offset, 0 + y_offset),
+            (-2800 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
-            (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
         ],
     },
     
@@ -1532,18 +1619,18 @@ line_coordinates = {
         ],
         ('Ardeer', 'Sunshine'):[
             (-3950 + x_offset, 200 + y_offset, -3550 + x_offset, 300 + y_offset),
-            (-3550 + x_offset, 200 + y_offset, -3000 + x_offset, 300 + y_offset),
-             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords
+            (-3550 + x_offset, 200 + y_offset, -2900 + x_offset, 300 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
         ],
         ('Sunshine','Footscray'):[
-            (-2850 + x_offset, 200 + y_offset, -2600 + x_offset, 300 + y_offset),
+            (-2750 + x_offset, 200 + y_offset, -2600 + x_offset, 300 + y_offset),
             (-2650 + x_offset, -50 + y_offset, -600 + x_offset, 0 + y_offset),
             (-2650 + x_offset, -50 + y_offset, -2600 + x_offset, 300 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
@@ -1618,18 +1705,18 @@ line_coordinates = {
         ('Nar Nar Goon','Pakenham'): [
             (15800 + x_offset, 4650 + y_offset, 17250 + x_offset, 4700 + y_offset),
             (17200 + x_offset, 4600 + y_offset, 17250 + x_offset, 4700 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
         ],
 
         ('Pakenham','Dandenong'): [
             (11950 + x_offset, 4600 + y_offset, 12100 + x_offset, 4700 + y_offset),
             (12150 + x_offset, 4600 + y_offset, 15700 + x_offset, 4700 + y_offset),
-            (15700 + x_offset, 4400 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (15700 + x_offset, 4300 + y_offset, 15850 + x_offset, 4750 + y_offset), # pakenham coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
         ],
         ('Dandenong','Clayton'): [
             (8650 + x_offset, 4600 + y_offset, 11850 + x_offset, 4700 + y_offset),
-            (11850 + x_offset, 4400 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
+            (11850 + x_offset, 4300 + y_offset, 12000 + x_offset, 4750 + y_offset), # dandenong coords
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
@@ -1723,18 +1810,18 @@ line_coordinates = {
             (-4950 + x_offset, 200 + y_offset, -4800 + x_offset, 650 + y_offset), # deer park coords
         ],
         ('Deer Park','Sunshine'):[
-            (-4800 + x_offset, 550 + y_offset, -3000 + x_offset, 600 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-4800 + x_offset, 550 + y_offset, -2900 + x_offset, 600 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords 
         ],
         ('Sunshine','Footscray'):[
-            (-2850 + x_offset, 550 + y_offset, -2450 + x_offset, 600 + y_offset),
+            (-2750 + x_offset, 550 + y_offset, -2450 + x_offset, 600 + y_offset),
             (-2500 + x_offset, 50 + y_offset, -2450 + x_offset, 600 + y_offset),
             (-2500 + x_offset, 50 + y_offset, -600 + x_offset, 100 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords 
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
@@ -1862,19 +1949,19 @@ line_coordinates = {
         ],
         ('Gisborne','Watergardens'):[
             (-3300 + x_offset, -2400 + y_offset, -3200 + x_offset, -2350 + y_offset),
-            (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
             (-3300 + x_offset, -2400 + y_offset, -3250 + x_offset, -1850 + y_offset),
             (-3300 + x_offset, -1700 + y_offset, -3250 + x_offset, -1450 + y_offset),
         ],
         ('Watergardens','Footscray'):[
             (-3300 + x_offset, -1300 + y_offset, -3250 + x_offset, 100 + y_offset),
-            (-3300 + x_offset, 50 + y_offset, -2950 + x_offset, 100 + y_offset),
-            (-2900 + x_offset, 50 + y_offset, -2650 + x_offset, 100 + y_offset),
+            (-3300 + x_offset, 50 + y_offset, -2850 + x_offset, 100 + y_offset),
+            (-2800 + x_offset, 50 + y_offset, -2650 + x_offset, 100 + y_offset),
             (-2600 + x_offset, 50 + y_offset, -600 + x_offset, 100 + y_offset),
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
-            (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
         ],
         # echuca line
         ('Echuca','Rochester'):[
@@ -1914,12 +2001,12 @@ line_coordinates = {
         ],
         ('Clarkefield','Sunbury'):[
             (-3300 + x_offset, -2000 + y_offset, -3200 + x_offset, -1850 + y_offset),
-            (-3350 + x_offset, -1850 + y_offset, -3000 + x_offset, -1700 + y_offset), # Sunbury Coords
+            (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
         ],
         ('Sunbury','Watergardens'):[
             (-3300 + x_offset, -1700 + y_offset, -3250 + x_offset, -1450 + y_offset),
-            (-3350 + x_offset, -1850 + y_offset, -3000 + x_offset, -1700 + y_offset), # Sunbury Coords
-            (-3350 + x_offset, -1450 + y_offset, -3000 + x_offset, -1300 + y_offset), # Watergardens Coords
+            (-3350 + x_offset, -1850 + y_offset, -2900 + x_offset, -1700 + y_offset), # Sunbury Coords
+            (-3350 + x_offset, -1450 + y_offset, -2900 + x_offset, -1300 + y_offset), # Watergardens Coords
         ],
     },
     'ararat/maryborough_seperate':{
@@ -1980,19 +2067,19 @@ line_coordinates = {
         ],
         ('Ardeer', 'Sunshine'):[
             (-3950 + x_offset, 300 + y_offset, -3550 + x_offset, 400 + y_offset),
-            (-3550 + x_offset, 300 + y_offset, -3000 + x_offset, 400 + y_offset),
-             (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords
+            (-3550 + x_offset, 300 + y_offset, -2900 + x_offset, 400 + y_offset),
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
         ],
         ('Sunshine','Footscray'):[
-            (-2850 + x_offset, 350 + y_offset, -2650 + x_offset, 400 + y_offset),
+            (-2750 + x_offset, 350 + y_offset, -2650 + x_offset, 400 + y_offset),
             (-2600 + x_offset, 350 + y_offset, -2450 + x_offset, 400 + y_offset),
             (-2500 + x_offset, 50 + y_offset, -2450 + x_offset, 400 + y_offset),
             (-2500 + x_offset, 50 + y_offset, -600 + x_offset, 100 + y_offset),
-            (-3000 + x_offset, -200 + y_offset, -2850 + x_offset, -50 + y_offset), # Sunshine Coords
-            (-2950 + x_offset, -80 + y_offset, -2900 + x_offset, 220 + y_offset), # Sunshine Coords
-            (-3000 + x_offset, 220 + y_offset, -2850 + x_offset, 650 + y_offset), # Sunshine Coords 
+            (-2900 + x_offset, -300 + y_offset, -2750 + x_offset, -50 + y_offset), # Sunshine Coords
+            (-2850 + x_offset, -80 + y_offset, -2800 + x_offset, 220 + y_offset), # Sunshine Coords
+            (-2900 + x_offset, 220 + y_offset, -2750 + x_offset, 650 + y_offset), # Sunshine Coords
             (-600 + x_offset, -300 + y_offset, -451 + x_offset, 149 + y_offset), # footscray station icon
             (-550 + x_offset, 100 + y_offset, -501 + x_offset, 249 + y_offset), # footscray station icon
             (-600 + x_offset, 200 + y_offset, -451 + x_offset, 349 + y_offset), # footscray station icon
