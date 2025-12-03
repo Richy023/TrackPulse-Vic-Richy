@@ -149,7 +149,7 @@ line_coordinates = {
         ],
         ('Ginifer', 'Albion'): [
             (-3000 + x_offset, -800 + y_offset, -2900 + x_offset, -700 + y_offset),
-            (-3000 + x_offset, -700 + y_offset, -3050 + x_offset, -450 + y_offset),
+            (-3000 + x_offset, -700 + y_offset, -2950 + x_offset, -450 + y_offset),
             (-3000 + x_offset, -500 + y_offset, -2900 + x_offset, -450 + y_offset),
         ],
         ('St Albans', 'Ginifer'): [
