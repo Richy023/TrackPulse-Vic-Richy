@@ -856,7 +856,7 @@ line_coordinates = {
         ],
         ('South Yarra', 'Richmond'):[
             (4600 + x_offset, 2100 + y_offset, 5000 + x_offset, 2150 + y_offset),
-            (4950 + x_offset, 2150 + y_offset, 5100 + x_offset, 2700 + y_offset),
+            (4950 + x_offset, 2150 + y_offset, 5000 + x_offset, 2700 + y_offset),
             (4800 + x_offset, 2700 + y_offset, 5050 + x_offset, 2850 + y_offset), # south yarra coords
             (4500 + x_offset, 1950 + y_offset, 4650 + x_offset, 2500 + y_offset), # richmond coords
         ],
@@ -1037,7 +1037,7 @@ line_coordinates = {
         (2950 + x_offset, -2000 + y_offset, 3050 + x_offset, -1750 + y_offset),
     ],
     ('Moreland','Anstey'):[
-        (2900 + x_offset, -1850 + y_offset, 3050 + x_offset, -1550 + y_offset),
+        (2900 + x_offset, -1800 + y_offset, 3050 + x_offset, -1550 + y_offset),
     ],
     ('Anstey','Brunswick'):[
         (2900 + x_offset, -1600 + y_offset, 3050 + x_offset, -1400 + y_offset),

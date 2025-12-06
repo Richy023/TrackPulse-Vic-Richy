@@ -1223,7 +1223,7 @@ line_coordinates = {
         (2950 + x_offset, -2000 + y_offset, 3050 + x_offset, -1750 + y_offset),
     ],
     ('Moreland','Anstey'):[
-        (2900 + x_offset, -1850 + y_offset, 3050 + x_offset, -1550 + y_offset),
+        (2900 + x_offset, -1800 + y_offset, 3050 + x_offset, -1550 + y_offset),
     ],
     ('Anstey','Brunswick'):[
         (2900 + x_offset, -1600 + y_offset, 3050 + x_offset, -1400 + y_offset),
