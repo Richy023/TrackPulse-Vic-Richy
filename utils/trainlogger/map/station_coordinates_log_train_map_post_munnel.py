@@ -350,4 +350,9 @@ station_coordinates = {
     "Cascade Bridge Halt": (19950 + x_offset, 3350 + y_offset, 20900 + x_offset, 3550 + y_offset),
     "Happy Creek": (20250 + x_offset, 3150 + y_offset, 20900 + x_offset, 3350 + y_offset),
     "Walhalla": (20800 + x_offset, 2850 + y_offset, 21300 + x_offset, 3040 + y_offset),
+    "Drysdale": (-4900 + x_offset, 2050 + y_offset, -4500 + x_offset, 2200 + y_offset),
+    "Suma Park": (-4500 + x_offset, 1830 + y_offset, -3970 + x_offset, 2020 + y_offset),
+    "Laker's Siding": (-3970 + x_offset, 1830 + y_offset, -3300 + x_offset, 2020 + y_offset),
+    "Swan Bay": (-3300 + x_offset, 1830 + y_offset, -2800 + x_offset, 2020 + y_offset),
+    "Queenscliff": (-2720 + x_offset, 2050 + y_offset, -2150 + x_offset, 2200 + y_offset),
 }
