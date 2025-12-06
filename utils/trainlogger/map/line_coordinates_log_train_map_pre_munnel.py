@@ -1670,7 +1670,7 @@ line_coordinates = {
             (21450 + x_offset, 4600 + y_offset, 21850 + x_offset, 4700 + y_offset),
         ],
         ('Morwell','Moe'): [
-            (21100 + x_offset, 4550 + y_offset, 21500 + x_offset, 4700 + y_offset),
+            (21100 + x_offset, 4600 + y_offset, 21500 + x_offset, 4700 + y_offset),
         ],
         ('Moe','Trafalgar'): [
             (20750 + x_offset, 4600 + y_offset, 21150 + x_offset, 4700 + y_offset),
@@ -1692,10 +1692,10 @@ line_coordinates = {
             (18500 + x_offset, 4600 + y_offset, 19000 + x_offset, 4700 + y_offset),
         ],
         ('Bunyip','Garfield'): [
-            (18100 + x_offset, 4550 + y_offset, 18550 + x_offset, 4700 + y_offset),
+            (18100 + x_offset, 4600 + y_offset, 18550 + x_offset, 4700 + y_offset),
         ],
         ('Garfield','Tynong'): [
-            (17700 + x_offset, 4550 + y_offset, 18150 + x_offset, 4700 + y_offset),
+            (17700 + x_offset, 4600 + y_offset, 18150 + x_offset, 4700 + y_offset),
         ],
         ('Tynong','Nar Nar Goon'): [
             (17200 + x_offset, 4600 + y_offset, 17750 + x_offset, 4700 + y_offset),
