@@ -1718,7 +1718,7 @@ line_coordinates = {
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
         ],
         ('Clayton','Caulfield'): [
-            (5050 + x_offset, 4550 + y_offset, 8500 + x_offset, 4700 + y_offset),
+            (5050 + x_offset, 4600 + y_offset, 8500 + x_offset, 4700 + y_offset),
             (5050 + x_offset, 4250 + y_offset, 5100 + x_offset, 4700 + y_offset),
             (8500 + x_offset, 4300 + y_offset, 8650 + x_offset, 4750 + y_offset), # clayton coords
             (4900 + x_offset, 4150 + y_offset, 5500 + x_offset, 4300 + y_offset), # caulfield coords
