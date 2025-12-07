@@ -3032,7 +3032,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         except Exception as e:
             await printlog(f"Error getting image: {e}")
 
-        footer = f"Log ID #"
+        footer = f"Log ID {APIresponse['log_id']}"
         footer += f' | Photo by {credits}' if credits is not None else ''
         embed.set_footer(text=footer)
         
@@ -3280,11 +3280,12 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
             # Remove newlines
             notes = notes.replace('\n', ' ')
-            #add quotes so the csv dosn't break when u use a comma
-            notes = f'"{notes}"'
 
         # Add train to the list
-        id = addTram(ctx.user.name, number, type, savedate, route, start.title(), end.title(), notes)
+        APIresponse = logTrip(mode='victram', userid=ctx.user.id, start=start.title(), end=end.title(), line=route, number=number, vType=type, date=savedate, note=notes)
+        if APIresponse == 'error':
+            await ctx.edit_original_response(content='There was an error logging your trip. Please try again later.')
+            return
 
         embed = discord.Embed(title="Tram Logged",colour=tram_colour)
         
@@ -3301,7 +3302,7 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
         if imageURL != None:
             embed.set_thumbnail(url=imageURL)
         credits = f' | Photo by {credits}' if credits != None else ''
-        embed.set_footer(text=f"Log ID #{id}{credits}")
+        embed.set_footer(text=f"Log ID {APIresponse['log_id']}{credits}")
         await ctx.edit_original_response(embed=embed)
         
                 
