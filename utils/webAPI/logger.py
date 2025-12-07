@@ -1,4 +1,3 @@
-from flask import jsonify
 import requests
 import os
 from dotenv import load_dotenv
@@ -18,7 +17,7 @@ def logTrip(mode, userid:int, start=None, end=None, line=None, number=None, vTyp
     """
     if not WEB_BASE_URL:
         print("WEB_BASE_URL is not set in the environment variables.")
-        return
+        return 'error'
     
     # format user id
     userid = f'oauth2|discord|{userid}'

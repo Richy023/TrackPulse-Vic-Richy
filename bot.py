@@ -3032,7 +3032,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         except Exception as e:
             await printlog(f"Error getting image: {e}")
 
-        footer = f"Log ID #"
+        footer = f"Log ID {APIresponse['log_id']}"
         footer += f' | Photo by {credits}' if credits is not None else ''
         embed.set_footer(text=footer)
         
