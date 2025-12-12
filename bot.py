@@ -1231,7 +1231,7 @@ async def line_info(ctx, search: str):
 async def victorianrailphotos(ctx, number: str = '', traintype: str = '', location: str = '', photographer: str = '', featured:bool=False):
     if featured:
         featured = 'featured'
-    await ctx.response.send_message(f'[View results](https://victorianrailphotos.com/search?number={number}&type={traintype}&location={location}&photographer={photographer})')
+    await ctx.response.send_message('[View results]'+f'(https://victorianrailphotos.com/search?number={number}&type={traintype}&location={location}&photographer={photographer})'.replace(' ', '%20'))
 
 
 
