@@ -276,9 +276,7 @@ for line in file:
     heritage_stations.append(line)
 file.close()
 
-
 # Create lists of stops
-
 metro_stations = metro_stops
 metro_stations = [station.replace(' Station','') for station in metro_stations]
 
