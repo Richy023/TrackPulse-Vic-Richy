@@ -4,7 +4,6 @@ import dotenv
 dotenv.load_dotenv()
 
 VRP_BASE_URL = os.getenv('VRP_BASE_URL', 'http://victorianrailphotos.com')
-print('VRP BASE URL IS: ', VRP_BASE_URL)
 # THIS IS DIFFRNT TO THE ONE USED IN THE TRAIN PHOTO COMMAND!
 # THIS ONE ONLY RETURNS THE FIRST IMAGE AND ALSO REQUIRS CORRECT FORMATTING!!
 def getImage(number, thumbnail=False):
