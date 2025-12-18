@@ -1,9 +1,13 @@
 import requests
+import os
+import dotenv
+dotenv.load_dotenv()
 
+VRP_BASE_URL = os.getenv('VRP_BASE_URL', 'http://victorianrailphotos.com')
 # THIS IS DIFFRNT TO THE ONE USED IN THE TRAIN PHOTO COMMAND!
 # THIS ONE ONLY RETURNS THE FIRST IMAGE AND ALSO REQUIRS CORRECT FORMATTING!!
 def getImage(number, thumbnail=False):
-    apiURL = f"https://victorianrailphotos.com/api/photos/{number}"
+    apiURL = f"{VRP_BASE_URL}/api/photos/{number}"
     
     if thumbnail:
         thummy = 'thumbnail'
@@ -26,7 +30,7 @@ def getImage(number, thumbnail=False):
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
                 try:
-                    response = requests.get(f'https://victorianrailphotos.com/api/view/{photo["id"]}/train')
+                    response = requests.get(f'{VRP_BASE_URL}/api/view/{photo["id"]}/train')
                     print('added view count api')
                     print('response: ', response.text)
                 except Exception as e:
@@ -42,7 +46,7 @@ def getImage(number, thumbnail=False):
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
                 try:
-                    requests.get(f'https://victorianrailphotos.com/api/view/{photo["id"]}/train')
+                    requests.get(f'{VRP_BASE_URL}/api/view/{photo["id"]}/train')
                     print('added view count api')
                     print('response: ', response.text)
                 except Exception as e:
@@ -58,7 +62,7 @@ def getImage(number, thumbnail=False):
     
     
 def getNSWImage(number):
-    photo_url = f"https://victorianrailphotos.com/photos/nsw/{number}.webp"
+    photo_url = f"{VRP_BASE_URL}/photos/nsw/{number}.webp"
 
     # Make a HEAD request to check if the photo exists
     URLresponse = requests.head(photo_url)
@@ -69,7 +73,7 @@ def getNSWImage(number):
     
     
 def getTramImage(number, thumbnail=False):
-    apiURL = f"https://victorianrailphotos.com/api/photos/tram/{number}"
+    apiURL = f"{VRP_BASE_URL}/api/photos/tram/{number}"
     
     if thumbnail:
         thummy = 'thumbnail'
@@ -117,7 +121,7 @@ def getIcon(type):
 def getStationImage(station):
     type = station.title()
     cleaned_type = type.replace(' ', '%20')
-    url = f"https://victorianrailphotos.com/stations/photos/{cleaned_type}.jpg"
+    url = f"{VRP_BASE_URL}/stations/photos/{cleaned_type}.jpg"
     URLresponse = requests.head(url)
     if URLresponse.status_code == 200:
         return(url)
