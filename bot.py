@@ -4025,10 +4025,10 @@ vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Ben
         app_commands.Choice(name="Flights", value="flights"),
 
 ])
-@app_commands.choices(send=[
-        app_commands.Choice(name="Web (Victorian Train only)", value="web"),
-        app_commands.Choice(name="Thread", value="thread"),
-])
+# @app_commands.choices(send=[
+#         app_commands.Choice(name="Web (Victorian Train only)", value="web"),
+#         app_commands.Choice(name="Thread", value="thread"),
+# ])
 
 async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
     async def sendLogs():
