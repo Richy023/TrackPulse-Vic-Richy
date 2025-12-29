@@ -389,24 +389,23 @@ traintoedit = None # var that will store the selected train in the db to edit.
 
 # line stations and colours
 lines_dictionary_main = {
-    'Alamein': [['Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'Riversdale', 'Willison', 'Hartwell', 'Burwood', 'Ashburton', 'Alamein'],0x01518a],
-    'Belgrave': [['Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Heathmont', 'Bayswater', 'Boronia', 'Ferntree Gully', 'Upper Ferntree Gully', 'Upwey', 'Tecoma', 'Belgrave'],0x01518a],
-    'Craigieburn': [['North Melbourne', 'Kensington', 'Newmarket', 'Ascot Vale', 'Moonee Ponds', 'Essendon', 'Glenbervie', 'Strathmore', 'Pascoe Vale', 'Oak Park', 'Glenroy', 'Jacana', 'Broadmeadows', 'Coolaroo', 'Roxburgh Park', 'Craigieburn'],0xfcb818],
-    'Cranbourne': [['Richmond', 'South Yarra', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Lynbrook', 'Merinda Park', 'Cranbourne'],0x00a8e4],
+    'Alamein': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'Riversdale', 'Willison', 'Hartwell', 'Burwood', 'Ashburton', 'Alamein'],0x01518a],
+    'Belgrave': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Heathmont', 'Bayswater', 'Boronia', 'Ferntree Gully', 'Upper Ferntree Gully', 'Upwey', 'Tecoma', 'Belgrave'],0x01518a],
+    'Craigieburn': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Kensington', 'Newmarket', 'Ascot Vale', 'Moonee Ponds', 'Essendon', 'Glenbervie', 'Strathmore', 'Pascoe Vale', 'Oak Park', 'Glenroy', 'Jacana', 'Broadmeadows', 'Coolaroo', 'Roxburgh Park', 'Craigieburn'],0xfcb818],
+    'Cranbourne': [['Sunbury', 'Diggers Rest', 'Watergardens', 'Keilor Plains', 'St Albans', 'Ginifer', 'Albion', 'Sunshine', 'Tottenham', 'West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Lynbrook', 'Merinda Park', 'Cranbourne'],0x00a8e4],
     'Flemington Racecourse': [['Flemington Racecourse', 'Showgrounds', 'North Melbourne', 'Southern Cross', 'Flinders Street'],0x8a8c8f],
-    'Frankston': [['Flinders Street', 'Richmond', 'South Yarra', 'Hawksburn', 'Toorak', 'Armadale', 'Malvern', 'Caulfield', 'Glen Huntly', 'Ormond', 'McKinnon', 'Bentleigh', 'Patterson', 'Moorabbin', 'Highett', 'Southland', 'Cheltenham', 'Mentone', 'Parkdale', 'Mordialloc', 'Aspendale', 'Edithvale', 'Chelsea', 'Bonbeach', 'Carrum', 'Seaford', 'Kananook', 'Frankston'],0x009645],
-    'Glen Waverley': [['Richmond', 'East Richmond', 'Burnley', 'Heyington', 'Kooyong', 'Tooronga', 'Gardiner', 'Glen Iris', 'Darling', 'East Malvern', 'Holmesglen', 'Jordanville', 'Mount Waverley', 'Syndal', 'Glen Waverley'],0x01518a],
-    'Hurstbridge': [['Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Westgarth', 'Dennis', 'Fairfield', 'Alphington', 'Darebin', 'Ivanhoe', 'Eaglemont', 'Heidelberg', 'Rosanna', 'Macleod', 'Watsonia', 'Greensborough', 'Montmorency', 'Eltham', 'Diamond Creek', 'Wattle Glen', 'Hurstbridge'],0xd0202e],
-    'Lilydale': [['Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Ringwood East', 'Croydon', 'Mooroolbark', 'Lilydale'],0x01518a],
-    'Mernda': [['Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Rushall', 'Merri', 'Northcote', 'Croxton', 'Thornbury', 'Bell', 'Preston', 'Regent', 'Reservoir', 'Ruthven', 'Keon Park', 'Thomastown', 'Lalor', 'Epping', 'South Morang', 'Middle Gorge', 'Hawkstowe', 'Mernda'],0xd0202e],
-    'Pakenham': [['Richmond', 'South Yarra', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham'],0x00a8e4],
+    'Frankston': [['Flinders Street', 'Southern Cross', 'Flagstaff', 'Melbourne Central', 'Parliament', 'Richmond', 'South Yarra', 'Hawksburn', 'Toorak', 'Armadale', 'Malvern', 'Caulfield', 'Glen Huntly', 'Ormond', 'McKinnon', 'Bentleigh', 'Patterson', 'Moorabbin', 'Highett', 'Southland', 'Cheltenham', 'Mentone', 'Parkdale', 'Mordialloc', 'Aspendale', 'Edithvale', 'Chelsea', 'Bonbeach', 'Carrum', 'Seaford', 'Kananook', 'Frankston'],0x009645],
+    'Glen Waverley': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Heyington', 'Kooyong', 'Tooronga', 'Gardiner', 'Glen Iris', 'Darling', 'East Malvern', 'Holmesglen', 'Jordanville', 'Mount Waverley', 'Syndal', 'Glen Waverley'],0x01518a],
+    'Hurstbridge': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Westgarth', 'Dennis', 'Fairfield', 'Alphington', 'Darebin', 'Ivanhoe', 'Eaglemont', 'Heidelberg', 'Rosanna', 'Macleod', 'Watsonia', 'Greensborough', 'Montmorency', 'Eltham', 'Diamond Creek', 'Wattle Glen', 'Hurstbridge'],0xd0202e],
+    'Lilydale': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Ringwood East', 'Croydon', 'Mooroolbark', 'Lilydale'],0x01518a],
+    'Mernda': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Rushall', 'Merri', 'Northcote', 'Croxton', 'Thornbury', 'Bell', 'Preston', 'Regent', 'Reservoir', 'Ruthven', 'Keon Park', 'Thomastown', 'Lalor', 'Epping', 'South Morang', 'Middle Gorge', 'Hawkstowe', 'Mernda'],0xd0202e],
+    'Pakenham': [['Sunbury', 'Diggers Rest', 'Watergardens', 'Keilor Plains', 'St Albans', 'Ginifer', 'Albion', 'Sunshine', 'Tottenham', 'West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham','East Pakenham'],0x00a8e4],
     'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
     'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
-    'Summer Start Metro Tunnel Service': [['Sunbury', 'Diggers Rest', 'Watergardens', 'Keilor Plains', 'St Albans', 'Ginifer', 'Albion', 'Sunshine', 'Tottenham', 'West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham','East Pakenham'],0x00a8e4],
-    'Sunbury': [['North Melbourne', 'Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0xfcb818],
-    'Upfield': [['North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
-    'Werribee': [['Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
-    'Williamstown': [['Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'North Williamstown', 'Williamstown Beach', 'Williamstown'],0x009645],
+    'Sunbury': [['Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0x00a8e4],
+    'Upfield': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
+    'Werribee': [['Sandringham', 'Hampton', 'Brighton Beach', 'Middle Brighton', 'North Brighton', 'Gardenvale', 'Elsternwick', 'Ripponlea', 'Balaclava', 'Windsor', 'Prahran', 'South Yarra', 'Richmond', 'Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
+    'Williamstown': [['Sandringham', 'Hampton', 'Brighton Beach', 'Middle Brighton', 'North Brighton', 'Gardenvale', 'Elsternwick', 'Ripponlea', 'Balaclava', 'Windsor', 'Prahran', 'South Yarra', 'Richmond', 'Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'North Williamstown', 'Williamstown Beach', 'Williamstown'],0x009645],
     'Unknown/Other':[[None], ptv_grey],
 }
 
@@ -5823,8 +5822,8 @@ async def profile(ctx, user: discord.User = None):
 # map view command
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5840,13 +5839,13 @@ async def viewMaps(ctx, mode: str):
         compressed.save('temp/themap.png')
         file=discord.File('temp/themap.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
-            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
+            embed = discord.Embed(title=f"Former map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that was used before the Metro Tunnel Big Switch on February 1st 2026.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
             await printlog(f"Retrieved /log train map for {ctx.user.name} in {ctx.channel.mention}")
         elif mode == "time_based_variants/log_train_map_post_munnel.png":
-            embed = discord.Embed(title=f"Future map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that will be used once the Metro Tunnel opens.")
+            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
@@ -5884,8 +5883,8 @@ async def viewMaps(ctx, mode: str):
 # map trip command maps trips 
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
-        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
+        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
@@ -5902,7 +5901,7 @@ async def viewMaps(ctx, mode: str):
         app_commands.Choice(name="Sprinter", value="Sprinter"),
         app_commands.Choice(name="Other", value="Other"),
 ])
-async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
+async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
     await ctx.response.defer()
     log_command(ctx.user.id, 'maps-trips')
     await printlog(f"Making trip map for {str(ctx.user.id)}")
@@ -5949,7 +5948,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
                 imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
-                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Pre Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -5994,7 +5993,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
