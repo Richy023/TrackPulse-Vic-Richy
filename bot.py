@@ -4030,14 +4030,14 @@ vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Ben
         app_commands.Choice(name="Thread", value="thread"),
 ])
 
-async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None, send:str='web'):
+async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
     async def sendLogs():
         ctx.response.defer()
         log_command(ctx.user.id, 'view-log')
         
-        if mode == 'train' and id == None and send == 'web':
-            await ctx.followup.send('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
-            return
+        # if mode == 'train' and id == None and send == 'web':
+        #     await ctx.followup.send('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
+        #     return
         
         if user == None:
                 userid = ctx.user
