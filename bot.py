@@ -3930,11 +3930,15 @@ async def busOpsautocompletion(
     interaction: discord.Interaction,
     current: str
 ) -> typing.List[app_commands.Choice[str]]:
-    fruits = busOps.copy()
+    # 1. Use set() to remove duplicates from busOps
+    # 2. Use sorted() to keep the list in alphabetical order
+    unique_operators = sorted(set(busOps))
+    
+    # 3. Return the filtered list (limited to 25 to prevent Discord API errors)
     return [
-        app_commands.Choice(name=fruit, value=fruit)
-        for fruit in fruits if current.lower() in fruit.lower()
-    ]
+        app_commands.Choice(name=operator, value=operator)
+        for operator in unique_operators if current.lower() in operator.lower()
+    ][:25]
 
 async def station_autocompletion(
     interaction: discord.Interaction,
