@@ -46,4 +46,16 @@ def logTrip(mode, userid:int, start=None, end=None, line=None, number=None, vTyp
         
     return response.json() if response.status_code == 200 else None
     
+def getUserCSV(username):
+    if not WEB_BASE_URL:
+        print("WEB_BASE_URL is not set in the environment variables.")
+        return 'error'
     
+    try:
+        response = requests.get(f"{WEB_BASE_URL}/getCSV", params={'username': username})
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Error retrieving CSV: {e}")
+        return 'error'
+        
+    return response.text if response.status_code == 200 else None
