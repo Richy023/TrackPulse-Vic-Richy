@@ -4051,8 +4051,9 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
             await ctx.response.send_message('You cannot view other users logs.', ephemeral=True)
             return
             
-
+        # for signle log viewing
         if id != None:
+            await ctx.response.defer()
             
             if mode == 'train':
                 file_path = f'utils/trainlogger/userdata/{userid.name}.csv'
@@ -4142,12 +4143,13 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                             pass
                         try:
                             embed.set_thumbnail(url=image)
+                            embed.set_footer(text=f'Photo by {credits}')
                         except:
                             await printlog('no image')
-                        await ctx.response.send_message(embed=embed)
+                        await ctx.followup.send(embed=embed)
                         return
                 # if there is no row with the id:
-                await ctx.response.send_message(f'Cannot find log `{id}`')
+                await ctx.followup.send(f'Cannot find log `{id}`')
                 
         else:
             # for train
