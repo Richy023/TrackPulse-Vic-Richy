@@ -126,9 +126,6 @@ def vicSigURL(carriageNumber, trainType):
     else:
         if trainType in ['HCMT', "X'Trapolis 2.0"]:
             url = ''
-        
-        
-        
         if trainType == "X'Trapolis 100":
             name = 'X%27Trapolis'
         elif trainType == "EDI Comeng" or trainType == "Alstom Comeng":
