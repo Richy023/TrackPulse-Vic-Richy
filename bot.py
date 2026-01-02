@@ -1446,59 +1446,93 @@ async def tramsearch(ctx, tram: str):
     log_command(ctx.user.id, 'tram-search')
     channel = ctx.channel
     type = tramType(tram)
-    set = tram.upper()
-   
-    await printlog(f'Set: {set}')
+
+    await printlog(f'Set: {tram}')
     await printlog(f"Tram Type: {type}")
     if type is None:
         await ctx.edit_original_response(content="Tram not found")
     else:
-        embed = discord.Embed(title=f"Info for {tram.upper()}:", color=metro_colour)
-        if set.endswith('-'):
-            embed.add_field(name=type, value=set[:-1])
-        else:
-            embed.add_field(name=type, value=set)
+        embed = discord.Embed(title=f"Info for {tram.upper()} ({type}):", color=tram_colour)
+        # embed.set_thumbnail(url=getIcon(type))  # cant be bothered with image rn
         
-        embed.set_thumbnail(url=getIcon(type))
-        
-        if type in ['HCMT', "X'Trapolis 100", 'Alstom Comeng', 'EDI Comeng', 'Siemens Nexas','VLocity', 'Sprinter', 'N Class']:
-            information = trainData(set)
-            await printlog(information)
-            infoData = f'**Livery:** {information[1]}\n**Status:** {information[3]}\n**Entered Service:** {information[2]}\n**Vicsig notes:** {information[4]}'
-            if information[5]:
-                infoData+=f'\n**Name:** {information[5]}'
+        try:
+            information = tramData(tram)
+            # await printlog(information)
+            if information[6] != 'n/a':
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Interior:** {information[6]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
+            else:
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
                 
             # thing if the user has been on
-            async def check_variable_in_csv(variable, file_path):
+            def checkTrainRidden(variable, file_path):
                 if not os.path.exists(file_path):
-                    await printlog(f"The file {file_path} does not exist.")
-                    return False
+                    print(f"The file {file_path} does not exist.")
+                    return False, []
 
+                log_ids = []
                 with open(file_path, mode='r') as file:
                     csv_reader = csv.reader(file)
                     for row in csv_reader:
                         if row[1] == variable:
-                            return True
-                return False 
+                            log_ids.append(row[0])
+                
+                return bool(log_ids), log_ids
         
             fPath = f'utils/trainlogger/userdata/tram/{ctx.user.name}.csv'
-            trainridden = check_variable_in_csv(set, fPath)
-            if trainridden:
-                infoData +='\n\n✅ You have been on this tram before'
+            result, log_ids = checkTrainRidden(tram, fPath)
+            if result:
+                log_ids_str = ', '.join([f'`{id}`' for id in log_ids])
+                infoData += f'\n\nYou have been on this tram before (Log IDs: {log_ids_str})\n'
                 
             embed.add_field(name='Information', value=infoData)
-        else:
-            embed.add_field(name='Information', value='None available')
-            
+        except:
+            if type == 'G-Class':
+                embed.add_field(name='Information', value='**Status:** Testing')
+            else:
+                embed.add_field(name='Information', value='None available')
+        try:
+            import commands.searchtram as tramsearch
+            output = tramsearch.tramtracker(tram)
+            if output:
+                current_time = datetime.now()
+                date = f"{current_time.year}{current_time.month:02}{current_time.day:02}"
+                tripinfo = ""
+                for trip in output:
+                    tripinfo += f"Trip ID: [{trip['trip_id']}](<https://anytrip.com.au/region/vic?selectedTrip=tripInstance%2F{date}%2Fau3:ac:{trip['trip_id']}%2F0>) \n"
+                    route_id = trip['route_id']
+                    route_id = route_id.split('-')[2].split(':')[0]
+                    tripinfo += f"Route: {route_id} \n"
+            embed.add_field(name="Current trip(s)", value=tripinfo,inline=False)
+        except:
+            await printlog(f'notrunning tram')
+        if type !='G-Class':
+            embed.add_field(name="Deloyments", value=f"[transportvic.me](<https://transportvic.me/tram/tracker/fleet?fleet={tram}>)", inline=False)
         imageURL, credits = getTramImage(tram.upper())
         if imageURL is not None:
             embed.set_image(url=imageURL)
-            embed.add_field(name='Photo by:', value=credits, inline=False)
-        
-        embed.add_field(name="Source:", value=f'[MPTG (Icon)](https://melbournesptgallery.weebly.com/melbourne-train-and-tram-fronts.html), [Vicsig (Other info)](https://vicsig.net)', inline=False)
+            embed.set_footer(text=f'Photo by: {credits}\nMPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+        else:
+            embed.set_footer(text='MPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+
         
         # embed.add_field(name='<a:botloading2:1261102206468362381> Loading trip data', value='⠀')
         embed_update = await ctx.edit_original_response(embed=embed)
+
+import utils.bussearch as bussearch
+@search.command(name="bus", description="Search for a specific Bus")
+@app_commands.describe(bus="bus number or plate")
+async def bussearchcommand(ctx, bus: str):
+    await ctx.response.defer()
+    bus = bus.upper()
+    embed= await bussearch.search(bus, ctx)
+    try:
+        if embed == 'n':
+            await ctx.edit_original_response(content="Please use operator prefix before number")
+        else:
+            await ctx.edit_original_response(embed=embed)
+
+    except Exception as e:
+        await ctx.edit_original_response(content=f"can not find that bus in list: {e}")
     
 # add a favourite stop
 async def stop_autocompletion(
