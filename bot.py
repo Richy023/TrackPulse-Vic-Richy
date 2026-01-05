@@ -554,7 +554,7 @@ async def on_ready():
         await printlog(f'Error: {e}\n make sure the bot has premission to send in the startup channel')
         return
     
-    # trainTimleyCheckerLoop.start()  # Start the train timley checker loop
+    trainTimleyCheckerLoop.start()  # Start the train timley checker loop
     
     try:
         task_loop.start()
@@ -1445,59 +1445,93 @@ async def tramsearch(ctx, tram: str):
     log_command(ctx.user.id, 'tram-search')
     channel = ctx.channel
     type = tramType(tram)
-    set = tram.upper()
-   
-    await printlog(f'Set: {set}')
+
+    await printlog(f'Set: {tram}')
     await printlog(f"Tram Type: {type}")
     if type is None:
         await ctx.edit_original_response(content="Tram not found")
     else:
-        embed = discord.Embed(title=f"Info for {tram.upper()}:", color=metro_colour)
-        if set.endswith('-'):
-            embed.add_field(name=type, value=set[:-1])
-        else:
-            embed.add_field(name=type, value=set)
+        embed = discord.Embed(title=f"Info for {tram.upper()} ({type}):", color=tram_colour)
+        # embed.set_thumbnail(url=getIcon(type))  # cant be bothered with image rn
         
-        embed.set_thumbnail(url=getIcon(type))
-        
-        if type in ['HCMT', "X'Trapolis 100", 'Alstom Comeng', 'EDI Comeng', 'Siemens Nexas','VLocity', 'Sprinter', 'N Class']:
-            information = trainData(set)
-            await printlog(information)
-            infoData = f'**Livery:** {information[1]}\n**Status:** {information[3]}\n**Entered Service:** {information[2]}\n**Vicsig notes:** {information[4]}'
-            if information[5]:
-                infoData+=f'\n**Name:** {information[5]}'
+        try:
+            information = tramData(tram)
+            # await printlog(information)
+            if information[6] != 'n/a':
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Interior:** {information[6]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
+            else:
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
                 
             # thing if the user has been on
-            async def check_variable_in_csv(variable, file_path):
+            def checkTrainRidden(variable, file_path):
                 if not os.path.exists(file_path):
-                    await printlog(f"The file {file_path} does not exist.")
-                    return False
+                    print(f"The file {file_path} does not exist.")
+                    return False, []
 
+                log_ids = []
                 with open(file_path, mode='r') as file:
                     csv_reader = csv.reader(file)
                     for row in csv_reader:
                         if row[1] == variable:
-                            return True
-                return False 
+                            log_ids.append(row[0])
+                
+                return bool(log_ids), log_ids
         
             fPath = f'utils/trainlogger/userdata/tram/{ctx.user.name}.csv'
-            trainridden = check_variable_in_csv(set, fPath)
-            if trainridden:
-                infoData +='\n\n✅ You have been on this tram before'
+            result, log_ids = checkTrainRidden(tram, fPath)
+            if result:
+                log_ids_str = ', '.join([f'`{id}`' for id in log_ids])
+                infoData += f'\n\nYou have been on this tram before (Log IDs: {log_ids_str})\n'
                 
             embed.add_field(name='Information', value=infoData)
-        else:
-            embed.add_field(name='Information', value='None available')
-            
+        except:
+            if type == 'G-Class':
+                embed.add_field(name='Information', value='**Status:** Testing')
+            else:
+                embed.add_field(name='Information', value='None available')
+        try:
+            import commands.searchtram as tramsearch
+            output = tramsearch.tramtracker(tram)
+            if output:
+                current_time = datetime.now()
+                date = f"{current_time.year}{current_time.month:02}{current_time.day:02}"
+                tripinfo = ""
+                for trip in output:
+                    tripinfo += f"Trip ID: [{trip['trip_id']}](<https://anytrip.com.au/region/vic?selectedTrip=tripInstance%2F{date}%2Fau3:ac:{trip['trip_id']}%2F0>) \n"
+                    route_id = trip['route_id']
+                    route_id = route_id.split('-')[2].split(':')[0]
+                    tripinfo += f"Route: {route_id} \n"
+            embed.add_field(name="Current trip(s)", value=tripinfo,inline=False)
+        except:
+            await printlog(f'notrunning tram')
+        if type !='G-Class':
+            embed.add_field(name="Deloyments", value=f"[transportvic.me](<https://transportvic.me/tram/tracker/fleet?fleet={tram}>)", inline=False)
         imageURL, credits = getTramImage(tram.upper())
         if imageURL is not None:
             embed.set_image(url=imageURL)
-            embed.add_field(name='Photo by:', value=credits, inline=False)
-        
-        embed.add_field(name="Source:", value=f'[MPTG (Icon)](https://melbournesptgallery.weebly.com/melbourne-train-and-tram-fronts.html), [Vicsig (Other info)](https://vicsig.net)', inline=False)
+            embed.set_footer(text=f'Photo by: {credits}\nMPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+        else:
+            embed.set_footer(text='MPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+
         
         # embed.add_field(name='<a:botloading2:1261102206468362381> Loading trip data', value='⠀')
         embed_update = await ctx.edit_original_response(embed=embed)
+
+import utils.bussearch as bussearch
+@search.command(name="bus", description="Search for a specific Bus")
+@app_commands.describe(bus="bus number or plate")
+async def bussearchcommand(ctx, bus: str):
+    await ctx.response.defer()
+    bus = bus.upper()
+    embed= await bussearch.search(bus, ctx)
+    try:
+        if embed == 'n':
+            await ctx.edit_original_response(content="Please use operator prefix before number")
+        else:
+            await ctx.edit_original_response(embed=embed)
+
+    except Exception as e:
+        await ctx.edit_original_response(content=f"can not find that bus in list: {e}")
     
 # add a favourite stop
 async def stop_autocompletion(
@@ -4035,11 +4069,10 @@ vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Ben
 
 async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
     async def sendLogs():
-        ctx.response.defer()
         log_command(ctx.user.id, 'view-log')
         
         # if mode == 'train' and id == None and send == 'web':
-        #     await ctx.followup.send('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
+        #     await ctx.response.send_message('[Click here to view your logs online](https://trackpulsevic.xm9g.net/logs/viewer)', ephemeral=False)
         #     return
         
         if user == None:
@@ -4048,11 +4081,12 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
             userid = user
             
         if userid != ctx.user and ctx.user.id not in admin_users:
-            await ctx.followup.send('You cannot view other users logs.', ephemeral=True)
+            await ctx.response.send_message('You cannot view other users logs.', ephemeral=True)
             return
             
-
+        # for signle log viewing
         if id != None:
+            await ctx.response.defer()
             
             if mode == 'train':
                 file_path = f'utils/trainlogger/userdata/{userid.name}.csv'
@@ -4142,6 +4176,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                             pass
                         try:
                             embed.set_thumbnail(url=image)
+                            embed.set_footer(text=f'Photo by {credits}')
                         except:
                             await printlog('no image')
                         await ctx.followup.send(embed=embed)
@@ -4161,17 +4196,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trains logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trains logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4182,7 +4217,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                         type=discord.ChannelType.public_thread
                     )
                 except Exception as e:
-                    await ctx.followup.send(f"Cannot create thread! Ensure the bot has permission to create threads and that you aren't running this in another thread or DM.\n Error: `{e}`")
+                    await ctx.response.send_message(f"Cannot create thread! Ensure the bot has permission to create threads and that you aren't running this in another thread or DM.\n Error: `{e}`")
                     
                 # send reponse message
                 pfp = userid.avatar.url
@@ -4269,15 +4304,15 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     if userid == ctx.user:
                         await ctx.follow("You have no trams logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trams logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readTramLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trams logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trams logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4288,7 +4323,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f' # <:tram:1241165701390012476> {userid.name}\'s Tram Logs')
                 formatted_data = ""
@@ -4333,17 +4368,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/sydney-trams/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trams logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trams logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readSydneyLightRailLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trams logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trams logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4354,7 +4389,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# {userid.name}\'s Light Rail Logs')
                 formatted_data = ""
@@ -4390,17 +4425,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/sydney-trains/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trains logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readSydneyTrainLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trains logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4411,7 +4446,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# <:NSWTrains:1255084911103184906>  {userid.name}\'s NSW Train Logs')
                 formatted_data = ""
@@ -4447,17 +4482,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/adelaide-trains/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no Adelaide trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no Adelaide trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no Adelaide trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no Adelaide trains logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readPerthLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no Adelaide trains logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no Adelaide trains logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no Adelaide trains logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no Adelaide trains logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4468,7 +4503,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f' # <:Adelaide_train_:1300008231510347807><:journeybeyond:1300021503093510155> {userid.name}\'s Adelaide Train Logs')
                 formatted_data = ""
@@ -4503,9 +4538,9 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/adelaide-trams/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trams logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trams logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trams logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readAdelaideTramLogs(userid.name)
@@ -4524,7 +4559,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# {userid.name}\'s Tram Logs')
                 formatted_data = ""
@@ -4581,7 +4616,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f'# <:transperthtrain:1335396329798631477><:TransWA:1335397360255373392> {userid.name}\'s Perth Train Logs')
                 formatted_data = ""
@@ -4616,17 +4651,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/bus/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no busses logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no busses logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no busses logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no busses logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readBusLogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no busses logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no busses logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no busses logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no busses logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4637,7 +4672,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f' # <:bus:1241165769241530460> {userid.name}\'s Bus Logs')
                 formatted_data = ""
@@ -4675,17 +4710,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/flights/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no flights logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no flights logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no flights logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no flights logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = readFlightlogs(userid.name)
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no flights logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no flights logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no flights logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no flights logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4696,7 +4731,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f' # {userid.name}\'s Flight Logs')
                 formatted_data = ""
@@ -4747,17 +4782,17 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                     file = discord.File(f'utils/trainlogger/userdata/canberra-trams/{userid.name}.csv')
                 except FileNotFoundError:
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trips logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trips logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trips logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trips logged!",ephemeral=True)
                     return
                 await printlog(userid.name)
                 data = universalReadLogs(userid.name, mode='canberra-trams')
                 if data == 'no data':
                     if userid == ctx.user:
-                        await ctx.followup.send("You have no trips logged!",ephemeral=True)
+                        await ctx.response.send_message("You have no trips logged!",ephemeral=True)
                     else:
-                        await ctx.followup.send("This user has no trips logged!",ephemeral=True)
+                        await ctx.response.send_message("This user has no trips logged!",ephemeral=True)
                     return
             
                 # create thread
@@ -4768,7 +4803,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 )
                 
                 # send reponse message
-                await ctx.followup.send(f"Logs will be sent in <#{logsthread.id}>")
+                await ctx.response.send_message(f"Logs will be sent in <#{logsthread.id}>")
                 await logsthread.send(f'# {userid.name}\'s CSV file', file=file)
                 await logsthread.send(f' # {userid.name}\'s Canberra Light Rail Logs')
                 formatted_data = ""
@@ -6281,33 +6316,33 @@ async def run_in_thread(ctx, operator):
         writer = csv.writer(file)
         writer.writerow(statuses)
         
-# @schedule.command(name="add", description="Add a train to make its run be send in a channel every 10 minutes.")
-# @app_commands.describe(train="A carriage number on the train to send, eg 860M", channel="The channel to send the run to")
-# async def add_schedule(ctx, train: str, channel: discord.TextChannel):
-#     if ctx.user.guild_permissions.administrator:
-#         log_command(ctx.user.id, 'add-schedule')
-#         await ctx.response.defer()
-#         await trainTimleyFetcherAdd(ctx, train, channel, 10)
-#     else:
-#         await ctx.response.send_message("Only administrators can add schedules.", ephemeral=True)
-#         return
+@schedule.command(name="add", description="Add a train to make its run be send in a channel every 10 minutes.")
+@app_commands.describe(train="A carriage number on the train to send, eg 860M", channel="The channel to send the run to")
+async def add_schedule(ctx, train: str, channel: discord.TextChannel):
+    if ctx.user.guild_permissions.administrator:
+        log_command(ctx.user.id, 'add-schedule')
+        await ctx.response.defer()
+        await trainTimleyFetcherAdd(ctx, train, channel, 10)
+    else:
+        await ctx.response.send_message("Only administrators can add schedules.", ephemeral=True)
+        return
     
-# @schedule.command(name="remove", description="Remove a train to make its run not be send in the channel.")
-# @app_commands.describe(train="The carriage number of the train to stop sending, eg 860M", channel="The channel to stop sending the run to.")
-# async def add_schedule(ctx, train: str, channel: discord.TextChannel):
-#     if ctx.user.guild_permissions.administrator:
-#         log_command(ctx.user.id, 'remove-schedule')
-#         await ctx.response.defer()
-#         await trainTimleyFetcherRemove(ctx, train, channel)
-#     else:
-#         await ctx.response.send_message("Only administrators can remove schedules.", ephemeral=True)
-#         return
+@schedule.command(name="remove", description="Remove a train to make its run not be send in the channel.")
+@app_commands.describe(train="The carriage number of the train to stop sending, eg 860M", channel="The channel to stop sending the run to.")
+async def add_schedule(ctx, train: str, channel: discord.TextChannel):
+    if ctx.user.guild_permissions.administrator:
+        log_command(ctx.user.id, 'remove-schedule')
+        await ctx.response.defer()
+        await trainTimleyFetcherRemove(ctx, train, channel)
+    else:
+        await ctx.response.send_message("Only administrators can remove schedules.", ephemeral=True)
+        return
     
-# @schedule.command(name="list", description="List all trains that are being sent in a channel.")
-# async def list_schedule(ctx, channel: discord.TextChannel):
-#     log_command(ctx.user.id, 'view-schedule-list')
-#     await ctx.response.defer()
-#     await trainTimleyFetcherList(ctx, channel)
+@schedule.command(name="list", description="List all trains that are being sent in a channel.")
+async def list_schedule(ctx, channel: discord.TextChannel):
+    log_command(ctx.user.id, 'view-schedule-list')
+    await ctx.response.defer()
+    await trainTimleyFetcherList(ctx, channel)
 
 #about/credits
 @bot.tree.command(name="about", description="View information about the bot.")
@@ -6316,7 +6351,7 @@ async def about(ctx):
     log_command(ctx.user.id, 'about')
     embed = discord.Embed(title="About", description=f"TrackPulse Vic is a Discord bot that allows users to log their train, and tram trips in Victoria, New South Wales, South Australia and Western Australia, along with any bus trips. It also provides the ability to get real-time line status updates for Metro Trains Melbourne, upcoming departures from Melbourne stations and the ability to search for information about a specific train, as well as a range of other features.\nOnline Since <t:{uptime}:R>", color=discord.Color.blue())
     embed.add_field(name="Developed by", value="[Xm9G](https://xm9g.net/)\n[Comeng17](https://github.com/Comeng17)", inline=True)
-    embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\nAperture',inline=True)
+    embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\n[Richy](https://github.com/Richy023)\nsaladmunchr (hosting)\nAperture (NSW train info)\n',inline=True)
     embed.add_field(name='Photos sourced from',value="[Victorian Rail Photos](https://victorianrailphotos.com/)")
     embed.add_field(name="Data Sources", value="[Transport Victoria](https://www.ptv.vic.gov.au/)\n", inline=True)
     embed.add_field(name='Website', value='https://trackpulsevic.xm9g.net')
