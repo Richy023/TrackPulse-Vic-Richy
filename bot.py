@@ -6785,6 +6785,28 @@ async def update(ctx):
             await ctx.send("You are not authorized to use this command.")
     else:
         await ctx.send("Remote updates are not enabled")
+
+@bot.command()
+async def deletecache(ctx):
+    if ctx.author.id in admin_users:
+        log_command(ctx.author.id, 'deletecache')
+        await ctx.send(f"Deleting Cache")
+        await printlog("Deleting Cache")
+        folder_path = "cache"
+        for filename in os.listdir(folder_path): 
+            file_path = os.path.join(folder_path, filename)  
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)  
+                elif os.path.isdir(file_path):  
+                    os.rmdir(file_path)  
+            except Exception as e:  
+                print(f"Error deleting {file_path}: {e}")
+            await ctx.send("The cache has successfully been deleted")
+            await printlog('Deletion Done')
+    else:
+        await printlog(f'{str(ctx.author.id)} tried to delete the cache.')
+        await ctx.send("You are not authorized to use this command.")
         
 # thing to notify of errors:
 # @bot.event
