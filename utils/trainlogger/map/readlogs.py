@@ -381,6 +381,25 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
 
         data = precompat(data, lines_dictionary)
 
+        try:
+            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt",'r')
+            old_stations = []
+            for line in file:
+                line = line.strip()
+                old_stations = line.split(",")
+            file.close()
+
+            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt",'r')
+            old_affected_lines = []
+            for line in file:
+                line = line.strip()
+                line = tuple(line.split(","))
+                old_affected_lines.append(line)
+            file.close()
+        except:
+            old_stations = [None]
+            old_affected_lines = [None]
+
         stations = []
         for line in data:
             cols = line.strip().split(',')
@@ -731,7 +750,23 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
         
     # do the map gen
     map_handler = MapImageHandler(f"utils/trainlogger/map/{mode}", lines_dictionary, x_offset, y_offset, station_coordinates, line_coordinates)
+    stations = list(sorted(set(stations)))
+    affected_lines = list(sorted(set(affected_lines)))
+    print(stations)
     print(affected_lines)
-    map_handler.highlight_map(affected_lines, f"utils/trainlogger/userdata/maps/{user}-{modeName}-{year}-{trainType}-{line_choice}.png", stations)
-    affected_lines = list(set(affected_lines))
+
+    if old_stations == stations and old_affected_lines == affected_lines:
+        print("using cached version")
+    else:
+        map_handler.highlight_map(affected_lines, f"cache/{user}-{modeName}-{year}-{trainType}-{line_choice}.png", stations)
+
+        station_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt","w")
+        station_txt.write(','.join(stations))
+
+        affected_lines_writable = []
+        for affected_line in affected_lines:
+            affected_lines_writable.append(f"{','.join(affected_line)}\n")
+        affected_lines_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt","w")
+        affected_lines_txt.write(''.join(''.join(affected_lines_writable)))
+
     return(len(affected_lines))

@@ -304,7 +304,7 @@ bus_coach_stops = sorted(set(bus_coach_stops))
 
 # Create required folders cause their not on github
 required_folders = ['utils/trainlogger/userdata','temp','cache','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
-                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data','utils/trainlogger/userdata/maps', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
+                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
 for folder in required_folders:
     if os.path.exists(folder) and os.path.isdir(folder):
         print(f"{folder} exists")
@@ -5987,7 +5987,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
                 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
@@ -6033,7 +6033,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
@@ -6061,7 +6061,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
@@ -6802,8 +6802,8 @@ async def deletecache(ctx):
                     os.rmdir(file_path)  
             except Exception as e:  
                 print(f"Error deleting {file_path}: {e}")
-            await ctx.send("The cache has successfully been deleted")
-            await printlog('Deletion Done')
+        await ctx.send("The cache has successfully been deleted")
+        await printlog('Deletion Done')
     else:
         await printlog(f'{str(ctx.author.id)} tried to delete the cache.')
         await ctx.send("You are not authorized to use this command.")
