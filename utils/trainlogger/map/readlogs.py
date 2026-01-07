@@ -374,31 +374,31 @@ def postcompat(data:list, lines_dictionary:dict):
 
 
 def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_train_map_pre_munnel.png', line_choice:str="All", year:int=0, modeName:str='vic', trainType:str='all'):
+    try:
+        file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt",'r')
+        old_stations = []
+        for line in file:
+            line = line.strip()
+            old_stations = line.split(",")
+        file.close()
+
+        file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt",'r')
+        old_affected_lines = []
+        for line in file:
+            line = line.strip()
+            line = tuple(line.split(","))
+            old_affected_lines.append(line)
+        file.close()
+    except:
+        old_stations = [None]
+        old_affected_lines = [None]
+    
     if mode == 'time_based_variants/log_train_map_pre_munnel.png':
         file = open(f'utils/trainlogger/userdata/{user}.csv', 'r')
         data = file.readlines()
         file.close()
 
         data = precompat(data, lines_dictionary)
-
-        try:
-            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt",'r')
-            old_stations = []
-            for line in file:
-                line = line.strip()
-                old_stations = line.split(",")
-            file.close()
-
-            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt",'r')
-            old_affected_lines = []
-            for line in file:
-                line = line.strip()
-                line = tuple(line.split(","))
-                old_affected_lines.append(line)
-            file.close()
-        except:
-            old_stations = [None]
-            old_affected_lines = [None]
 
         stations = []
         for line in data:
