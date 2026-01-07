@@ -5873,11 +5873,14 @@ async def viewMaps(ctx, mode: str):
     await ctx.response.defer()
     log_command(ctx.user.id,'map-view')
     try:
-        uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
-        legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
-        compressed = compress(legended)
-        compressed.save('temp/themap.png')
-        file=discord.File('temp/themap.png', filename='map.png')
+        try:
+            file=discord.File(f'cache/{mode}.png', filename='map.png')
+        except:
+            uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
+            legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
+            compressed = compress(legended)
+            compressed.save(f'cache/{mode}.png')
+            file=discord.File(f'cache/{mode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
             user = await bot.fetch_user(1002449671224041502)
