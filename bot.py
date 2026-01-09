@@ -705,7 +705,7 @@ async def task_loop():
     except Exception as e:
         healthcheck.pinghealthcheck(fail=True)
         
-    await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs} trips logged'))
+    await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs:,} trips logged'))
     try:
         # write totalLogs to a csv with current date time in iso format
             with open('utils/trainlogger/totalLogs.csv', 'a', newline='') as file:
