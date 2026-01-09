@@ -16,3 +16,4 @@ Wand
 folium
 webdriver_manager
 cryptography
+gtfs-realtime-bindings

@@ -303,8 +303,8 @@ bus_coach_stops = bus_stops + vline_coach_stops
 bus_coach_stops = sorted(set(bus_coach_stops))
 
 # Create required folders cause their not on github
-required_folders = ['utils/trainlogger/userdata','temp','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
-                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data','utils/trainlogger/userdata/maps', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
+required_folders = ['utils/trainlogger/userdata','temp','cache','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
+                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
 for folder in required_folders:
     if os.path.exists(folder) and os.path.isdir(folder):
         print(f"{folder} exists")
@@ -1446,59 +1446,93 @@ async def tramsearch(ctx, tram: str):
     log_command(ctx.user.id, 'tram-search')
     channel = ctx.channel
     type = tramType(tram)
-    set = tram.upper()
-   
-    await printlog(f'Set: {set}')
+
+    await printlog(f'Set: {tram}')
     await printlog(f"Tram Type: {type}")
     if type is None:
         await ctx.edit_original_response(content="Tram not found")
     else:
-        embed = discord.Embed(title=f"Info for {tram.upper()}:", color=metro_colour)
-        if set.endswith('-'):
-            embed.add_field(name=type, value=set[:-1])
-        else:
-            embed.add_field(name=type, value=set)
+        embed = discord.Embed(title=f"Info for {tram.upper()} ({type}):", color=tram_colour)
+        # embed.set_thumbnail(url=getIcon(type))  # cant be bothered with image rn
         
-        embed.set_thumbnail(url=getIcon(type))
-        
-        if type in ['HCMT', "X'Trapolis 100", 'Alstom Comeng', 'EDI Comeng', 'Siemens Nexas','VLocity', 'Sprinter', 'N Class']:
-            information = trainData(set)
-            await printlog(information)
-            infoData = f'**Livery:** {information[1]}\n**Status:** {information[3]}\n**Entered Service:** {information[2]}\n**Vicsig notes:** {information[4]}'
-            if information[5]:
-                infoData+=f'\n**Name:** {information[5]}'
+        try:
+            information = tramData(tram)
+            # await printlog(information)
+            if information[6] != 'n/a':
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Interior:** {information[6]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
+            else:
+                infoData = f'**Depot:** {information[3]}\n**Operator:** {information[2]}\n**Livery:** {information[4]}\n**Status:** {information[5]}\n**Entered Service:** {information[7]}\n**Track Gauge:** {information[8]}\n**myki generation:** {information[9]}\n'
                 
             # thing if the user has been on
-            async def check_variable_in_csv(variable, file_path):
+            def checkTrainRidden(variable, file_path):
                 if not os.path.exists(file_path):
-                    await printlog(f"The file {file_path} does not exist.")
-                    return False
+                    print(f"The file {file_path} does not exist.")
+                    return False, []
 
+                log_ids = []
                 with open(file_path, mode='r') as file:
                     csv_reader = csv.reader(file)
                     for row in csv_reader:
                         if row[1] == variable:
-                            return True
-                return False 
+                            log_ids.append(row[0])
+                
+                return bool(log_ids), log_ids
         
             fPath = f'utils/trainlogger/userdata/tram/{ctx.user.name}.csv'
-            trainridden = check_variable_in_csv(set, fPath)
-            if trainridden:
-                infoData +='\n\n✅ You have been on this tram before'
+            result, log_ids = checkTrainRidden(tram, fPath)
+            if result:
+                log_ids_str = ', '.join([f'`{id}`' for id in log_ids])
+                infoData += f'\n\nYou have been on this tram before (Log IDs: {log_ids_str})\n'
                 
             embed.add_field(name='Information', value=infoData)
-        else:
-            embed.add_field(name='Information', value='None available')
-            
+        except:
+            if type == 'G-Class':
+                embed.add_field(name='Information', value='**Status:** Testing')
+            else:
+                embed.add_field(name='Information', value='None available')
+        try:
+            import commands.searchtram as tramsearch
+            output = tramsearch.tramtracker(tram)
+            if output:
+                current_time = datetime.now()
+                date = f"{current_time.year}{current_time.month:02}{current_time.day:02}"
+                tripinfo = ""
+                for trip in output:
+                    tripinfo += f"Trip ID: [{trip['trip_id']}](<https://anytrip.com.au/region/vic?selectedTrip=tripInstance%2F{date}%2Fau3:ac:{trip['trip_id']}%2F0>) \n"
+                    route_id = trip['route_id']
+                    route_id = route_id.split('-')[2].split(':')[0]
+                    tripinfo += f"Route: {route_id} \n"
+            embed.add_field(name="Current trip(s)", value=tripinfo,inline=False)
+        except:
+            await printlog(f'notrunning tram')
+        if type !='G-Class':
+            embed.add_field(name="Deloyments", value=f"[transportvic.me](<https://transportvic.me/tram/tracker/fleet?fleet={tram}>)", inline=False)
         imageURL, credits = getTramImage(tram.upper())
         if imageURL is not None:
             embed.set_image(url=imageURL)
-            embed.add_field(name='Photo by:', value=credits, inline=False)
-        
-        embed.add_field(name="Source:", value=f'[MPTG (Icon)](https://melbournesptgallery.weebly.com/melbourne-train-and-tram-fronts.html), [Vicsig (Other info)](https://vicsig.net)', inline=False)
+            embed.set_footer(text=f'Photo by: {credits}\nMPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+        else:
+            embed.set_footer(text='MPTG (Icon), Vicsig (Other info), Myki info: r/MT discord community')
+
         
         # embed.add_field(name='<a:botloading2:1261102206468362381> Loading trip data', value='⠀')
         embed_update = await ctx.edit_original_response(embed=embed)
+
+import utils.bussearch as bussearch
+@search.command(name="bus", description="Search for a specific Bus")
+@app_commands.describe(bus="bus number or plate")
+async def bussearchcommand(ctx, bus: str):
+    await ctx.response.defer()
+    bus = bus.upper()
+    embed= await bussearch.search(bus, ctx)
+    try:
+        if embed == 'n':
+            await ctx.edit_original_response(content="Please use operator prefix before number")
+        else:
+            await ctx.edit_original_response(embed=embed)
+
+    except Exception as e:
+        await ctx.edit_original_response(content=f"can not find that bus in list: {e}")
     
 # add a favourite stop
 async def stop_autocompletion(
@@ -5839,11 +5873,15 @@ async def viewMaps(ctx, mode: str):
     await ctx.response.defer()
     log_command(ctx.user.id,'map-view')
     try:
-        uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
-        legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
-        compressed = compress(legended)
-        compressed.save('temp/themap.png')
-        file=discord.File('temp/themap.png', filename='map.png')
+        editmode = mode.removeprefix("time_based_variants/")
+        try:
+            file=discord.File(f'cache/{editmode}.png', filename='map.png')
+        except:
+            uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
+            legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
+            compressed = compress(legended)
+            compressed.save(f'cache/{editmode}.png')
+            file=discord.File(f'cache/{editmode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
             user = await bot.fetch_user(1002449671224041502)
@@ -5949,7 +5987,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
                 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
@@ -5995,7 +6033,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
@@ -6023,7 +6061,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
@@ -6747,6 +6785,28 @@ async def update(ctx):
             await ctx.send("You are not authorized to use this command.")
     else:
         await ctx.send("Remote updates are not enabled")
+
+@bot.command()
+async def deletecache(ctx):
+    if ctx.author.id in admin_users:
+        log_command(ctx.author.id, 'deletecache')
+        await ctx.send(f"Deleting Cache")
+        await printlog("Deleting Cache")
+        folder_path = "cache"
+        for filename in os.listdir(folder_path): 
+            file_path = os.path.join(folder_path, filename)  
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)  
+                elif os.path.isdir(file_path):  
+                    os.rmdir(file_path)  
+            except Exception as e:  
+                print(f"Error deleting {file_path}: {e}")
+        await ctx.send("The cache has successfully been deleted")
+        await printlog('Deletion Done')
+    else:
+        await printlog(f'{str(ctx.author.id)} tried to delete the cache.')
+        await ctx.send("You are not authorized to use this command.")
         
 # thing to notify of errors:
 # @bot.event
