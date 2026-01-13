@@ -22,6 +22,7 @@ label_colors = {
     'Sandringham': '#f27fb2',
     'Flemington Racecourse': '#949797',
     'City Circle': '#313338',
+    'Summer Start Metro Tunnel Service': '#00a8e4',
     'N/A': '#949797',
     'Other': '#949797',
     

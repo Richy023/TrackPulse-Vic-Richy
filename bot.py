@@ -4966,12 +4966,6 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         log_command(ctx.user.id, 'log-stats')
         statSearch = stat
         userid = user if user else ctx.user
-        
-        if userid.name == 'comeng_17':
-            name = 'comeng17'
-        else:
-            name = userid
-            # 
         if user != None:
             if user != ctx.user and ctx.user.id not in admin_users:
                 print(f'user {user} is not the same as {ctx.user}')
@@ -5003,7 +4997,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         # top operators thing:
         if stat == 'operators':
             try:
-                pieChart(data, f'Top Operators ― {name}', ctx.user.name)
+                pieChart(data, f'Top Operators ― {userid}', ctx.user.name)
                 await ctx.followup.send(message, file=discord.File(f'temp/Graph{ctx.user.name}.png'))
             except:
                 await ctx.followup.send('User has no logs!')  
@@ -5060,7 +5054,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         
         # distance over time
         if stat == 'distanceovertime':
-            distanceChart(data, name)
+            distanceChart(data, userid)
             await ctx.followup.send(file=discord.File(f'temp/Graph{ctx.user.name}.png'))
                 
         # make temp csv
@@ -5093,7 +5087,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 if global_stats:
                     barChart(csv_filename, stat.title(), f'Top {stat.title()} ― Global', ctx.user.name, True)
                 else:
-                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {name}' if year !=0 else f'Top {stat.title()} ― {name}', ctx.user.name, True)
+                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {userid}' if year !=0 else f'Top {stat.title()} ― {userid}', ctx.user.name, True)
             except Exception as e:
                 await ctx.followup.send(f"Error generating graph: `{e}`")
                 return
@@ -5115,7 +5109,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 if global_stats:
                     barChart(csv_filename, stat.title(), f'Top {stat.title()} ― Global', ctx.user.name, False)
                 else:
-                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {name}' if year !=0 else f'Top {stat.title()} ― {name}', ctx.user.name, False)
+                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {userid}' if year !=0 else f'Top {stat.title()} ― {userid}', ctx.user.name, False)
                 await logsthread.send(message, file=discord.File(f'temp/Graph{ctx.user.name}.png'))
             except FileNotFoundError:
                 await logsthread.send(f'User has no logs! {e}')
@@ -5125,7 +5119,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         elif format == 'pie':
             try:
                 if global_stats:
-                    pieChart(csv_filename, f'Top {stat.title()} ― {name}', ctx.user.name)
+                    pieChart(csv_filename, f'Top {stat.title()} ― {userid}', ctx.user.name)
                 else:
                     pieChart(csv_filename, f'Top {stat.title()} ― Global', ctx.user.name)
 
