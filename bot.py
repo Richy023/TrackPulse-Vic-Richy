@@ -134,7 +134,7 @@ from utils.trainlogger.stats import *
 from utils.trainlogger.ids import *
 from utils.trainlogger.map.readlogs import logMap
 from utils.trainlogger.map.mapimage import compress, legend
-from utils.trainlogger.map.lines_dictionaries import *
+from utils.lines_dictionaries import *
 from utils.trainlogger.achievements import *
 from utils.trainlogger.graph import *
 
@@ -303,8 +303,8 @@ bus_coach_stops = bus_stops + vline_coach_stops
 bus_coach_stops = sorted(set(bus_coach_stops))
 
 # Create required folders cause their not on github
-required_folders = ['utils/trainlogger/userdata','temp','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
-                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data','utils/trainlogger/userdata/maps', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
+required_folders = ['utils/trainlogger/userdata','temp','cache','utils/trainlogger/userdata/adelaide-trains','utils/trainlogger/userdata/adelaide-trams','utils/trainlogger/userdata/sydney-trains','utils/trainlogger/userdata/sydney-trams','utils/trainlogger/userdata/canberra-trams','utils/trainlogger/userdata/perth-trains','utils/trainlogger/userdata/bus','utils/trainlogger/userdata/tram',
+                    'utils/trainlogger/achievements/data','utils/train/images','utils/game/images','utils/game/scores','photosubmissions','logins','utils/favourites/data', 'utils/trainlogger/userdata/flights', 'utils/schedule/history', 'cache']
 for folder in required_folders:
     if os.path.exists(folder) and os.path.isdir(folder):
         print(f"{folder} exists")
@@ -317,36 +317,6 @@ for folder in required_folders:
 vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Bendigo','Echuca', 'Swan Hill','Albury', 'Seymour', 'Shepparton', 'Traralgon', 'Bairnsdale']
 vline_rail_lines = [1706, 1837, 1823, 1728, 1740, 1849, 1745, 4871, 1710, 1908, 1848, 1824, 1853]
 
-
-# Colours
-achievement_colour = 0x43ea46
-rare_trains_colour = 0xf23f42
-ptv_grey = 0x333434
-
-metro_colour = 0x0072ce
-vline_colour = 0x8f1a95
-vline_map_colour = 0x782f9a
-tram_colour = 0x78be20
-bus_colour = 0xff8200
-coach_colour = 0xa57fb2
-myki_colour = 0xc2d840
-
-sydney_train_colour = 0xf47913
-sydney_tram_colour = 0xed2438
-
-transperth_colour = 0x008635
-transwa_colour = 0xcf4520
-
-adelaide_metro_colour = 0xf68a24 #this may or may not need fixing
-adelaide_tram_colour = adelaide_metro_colour
-
-#guesser colours
-very_easy_colour = 0x89ff65
-easy_colour = 0xcaff65
-medium_colour = 0xffe665
-hard_colour = 0xffa665
-very_hard_colour = 0xff6565
-ultrahard_colour = 0xe52727
 
 # ENV READING
 config = dotenv_values(".env")
@@ -387,27 +357,6 @@ channel_game_status = {} # variable to store what channels are running the guess
 global traintoedit 
 traintoedit = None # var that will store the selected train in the db to edit.
 
-# line stations and colours
-lines_dictionary_main = {
-    'Alamein': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'Riversdale', 'Willison', 'Hartwell', 'Burwood', 'Ashburton', 'Alamein'],0x01518a],
-    'Belgrave': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Heathmont', 'Bayswater', 'Boronia', 'Ferntree Gully', 'Upper Ferntree Gully', 'Upwey', 'Tecoma', 'Belgrave'],0x01518a],
-    'Craigieburn': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Kensington', 'Newmarket', 'Ascot Vale', 'Moonee Ponds', 'Essendon', 'Glenbervie', 'Strathmore', 'Pascoe Vale', 'Oak Park', 'Glenroy', 'Jacana', 'Broadmeadows', 'Coolaroo', 'Roxburgh Park', 'Craigieburn'],0xfcb818],
-    'Cranbourne': [['Sunbury', 'Diggers Rest', 'Watergardens', 'Keilor Plains', 'St Albans', 'Ginifer', 'Albion', 'Sunshine', 'Tottenham', 'West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Lynbrook', 'Merinda Park', 'Cranbourne'],0x00a8e4],
-    'Flemington Racecourse': [['Flemington Racecourse', 'Showgrounds', 'North Melbourne', 'Southern Cross', 'Flinders Street'],0x8a8c8f],
-    'Frankston': [['Flinders Street', 'Southern Cross', 'Flagstaff', 'Melbourne Central', 'Parliament', 'Richmond', 'South Yarra', 'Hawksburn', 'Toorak', 'Armadale', 'Malvern', 'Caulfield', 'Glen Huntly', 'Ormond', 'McKinnon', 'Bentleigh', 'Patterson', 'Moorabbin', 'Highett', 'Southland', 'Cheltenham', 'Mentone', 'Parkdale', 'Mordialloc', 'Aspendale', 'Edithvale', 'Chelsea', 'Bonbeach', 'Carrum', 'Seaford', 'Kananook', 'Frankston'],0x009645],
-    'Glen Waverley': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Heyington', 'Kooyong', 'Tooronga', 'Gardiner', 'Glen Iris', 'Darling', 'East Malvern', 'Holmesglen', 'Jordanville', 'Mount Waverley', 'Syndal', 'Glen Waverley'],0x01518a],
-    'Hurstbridge': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Westgarth', 'Dennis', 'Fairfield', 'Alphington', 'Darebin', 'Ivanhoe', 'Eaglemont', 'Heidelberg', 'Rosanna', 'Macleod', 'Watsonia', 'Greensborough', 'Montmorency', 'Eltham', 'Diamond Creek', 'Wattle Glen', 'Hurstbridge'],0xd0202e],
-    'Lilydale': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Richmond', 'East Richmond', 'Burnley', 'Hawthorn', 'Glenferrie', 'Auburn', 'Camberwell', 'East Camberwell', 'Canterbury', 'Chatham', 'Union', 'Box Hill', 'Laburnum', 'Blackburn', 'Nunawading', 'Mitcham', 'Heatherdale', 'Ringwood', 'Ringwood East', 'Croydon', 'Mooroolbark', 'Lilydale'],0x01518a],
-    'Mernda': [['Parliament', 'Melbourne Central', 'Flagstaff', 'Southern Cross', 'Flinders Street', 'Jolimont', 'West Richmond', 'North Richmond', 'Collingwood', 'Victoria Park', 'Clifton Hill', 'Rushall', 'Merri', 'Northcote', 'Croxton', 'Thornbury', 'Bell', 'Preston', 'Regent', 'Reservoir', 'Ruthven', 'Keon Park', 'Thomastown', 'Lalor', 'Epping', 'South Morang', 'Middle Gorge', 'Hawkstowe', 'Mernda'],0xd0202e],
-    'Pakenham': [['Sunbury', 'Diggers Rest', 'Watergardens', 'Keilor Plains', 'St Albans', 'Ginifer', 'Albion', 'Sunshine', 'Tottenham', 'West Footscray', 'Middle Footscray', 'Footscray', 'Arden', 'Parkville', 'State Library', 'Town Hall', 'Anzac', 'Malvern', 'Caulfield', 'Carnegie', 'Murrumbeena', 'Hughesdale', 'Oakleigh', 'Huntingdale', 'Clayton', 'Westall', 'Springvale', 'Sandown Park', 'Noble Park', 'Yarraman', 'Dandenong', 'Hallam', 'Narre Warren', 'Berwick', 'Beaconsfield', 'Officer', 'Cardinia Road', 'Pakenham','East Pakenham'],0x00a8e4],
-    'Sandringham': [['Flinders Street', 'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'Balaclava', 'Ripponlea', 'Elsternwick', 'Gardenvale', 'North Brighton', 'Middle Brighton', 'Brighton Beach', 'Hampton', 'Sandringham'],0xf17fb1],
-    'Stony Point': [['Stony Point', 'Crib Point', 'Morradoo', 'Bittern', 'Hastings', 'Tyabb', 'Somerville', 'Baxter', 'Leawarra', 'Frankston'],0x009645],
-    'Sunbury': [['Footscray', 'Middle Footscray', 'West Footscray', 'Tottenham', 'Sunshine', 'Albion', 'Ginifer', 'St Albans', 'Keilor Plains', 'Watergardens', 'Diggers Rest', 'Sunbury'],0x00a8e4],
-    'Upfield': [['Southern Cross', 'Flinders Street', 'Parliament', 'Melbourne Central', 'Flagstaff', 'North Melbourne', 'Macaulay', 'Flemington Bridge', 'Royal Park', 'Jewell', 'Brunswick', 'Anstey', 'Moreland', 'Coburg', 'Batman', 'Merlynston', 'Fawkner', 'Gowrie', 'Upfield'],0xfcb818],
-    'Werribee': [['Sandringham', 'Hampton', 'Brighton Beach', 'Middle Brighton', 'North Brighton', 'Gardenvale', 'Elsternwick', 'Ripponlea', 'Balaclava', 'Windsor', 'Prahran', 'South Yarra', 'Richmond', 'Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'Seaholme', 'Altona', 'Westona', 'Laverton', 'Aircraft', 'Williams Landing', 'Hoppers Crossing', 'Werribee'],0x009645],
-    'Williamstown': [['Sandringham', 'Hampton', 'Brighton Beach', 'Middle Brighton', 'North Brighton', 'Gardenvale', 'Elsternwick', 'Ripponlea', 'Balaclava', 'Windsor', 'Prahran', 'South Yarra', 'Richmond', 'Flinders Street', 'Southern Cross', 'North Melbourne', 'South Kensington', 'Footscray', 'Seddon', 'Yarraville', 'Spotswood', 'Newport', 'North Williamstown', 'Williamstown Beach', 'Williamstown'],0x009645],
-    'Unknown/Other':[[None], ptv_grey],
-}
 
 # Command Groups
 class CommandGroups(app_commands.Group):
@@ -704,7 +653,7 @@ async def task_loop():
     except Exception as e:
         healthcheck.pinghealthcheck(fail=True)
         
-    await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs} trips logged'))
+    await bot.change_presence(activity=discord.CustomActivity(name=f'{totalLogs:,} trips logged'))
     try:
         # write totalLogs to a csv with current date time in iso format
             with open('utils/trainlogger/totalLogs.csv', 'a', newline='') as file:
@@ -777,7 +726,7 @@ async def trainTimleyCheckerLoop():
                                 title=f'{train[4]}\'s Location',
                                 description=f'{train[1]} line to {train[5]}',
                                 url=train[2],
-                                color=lines_dictionary_main[train[1]][1],
+                                color=lines_dictionary_log_train_map_pre_munnel[train[1]][1],
                                 timestamp=datetime.now()
                             )
                             embed.set_footer(text='Maps © Thunderforest, Data © OpenStreetMap contributors')
@@ -1251,7 +1200,7 @@ async def train_search(ctx, train: str, state:str='auto', hide_run_info:bool=Fal
     
     if state == 'Victoria':
         # try:
-        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_main)
+        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_log_train_map_pre_munnel)
         # except Exception as e:
         #     await ctx.edit_original_response(content=f'An error has occored. Please try again.\n`{e}`')
         #     await printlog(f'Search Train error: {e}')
@@ -2202,7 +2151,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
         # Filter data by line if a specific line is selected
         if line != 'all':
             try:
-                line_stations = lines_dictionary_main[line][0]
+                line_stations = lines_dictionary_log_train_map_pre_munnel[line][0]
                 filtered_data = []
                 for row in data:
                     if row[1] in line_stations:  # Check if station is in the line's station list
@@ -2539,14 +2488,14 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                     numdirection = random.choice([-4,-3,-2,2,3,4])
             station = None
             while station == None:
-                station = lines_dictionary_main[line][0][random.randint(0,len(lines_dictionary_main[line][0])-1)]
-                if not 0 <= lines_dictionary_main[line][0].index(station)+numdirection <= len(lines_dictionary_main[line][0]):
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
+                if not 0 <= lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection <= len(lines_dictionary_log_train_map_pre_munnel[line][0]):
                     station = None
 
             embed = discord.Embed(
                 title=f"Which __**{numdirection if numdirection > 0 else numdirection*-1}**__ stations are __**{direction1}**__ from __**{station}**__ station on the __**{line} line**__?",
                 description=f"**Answers must be in the correct order!** Answer using this format:\n<@{bot.user.id}> `station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
-                colour=lines_dictionary_main[line][1])
+                colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
                 await ctx.response.send_message(embed=embed)
@@ -2561,9 +2510,9 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             # get list of correct stations
             if numdirection > 0:
-                correct_list = lines_dictionary_main[line][0][lines_dictionary_main[line][0].index(station)+1:lines_dictionary_main[line][0].index(station)+numdirection+1]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+1:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection+1]
             else:
-                correct_list = lines_dictionary_main[line][0][lines_dictionary_main[line][0].index(station)+numdirection:lines_dictionary_main[line][0].index(station)]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)]
                 correct_list.reverse()
             correct_list1 = [x.lower() for x in correct_list]
 
@@ -2725,7 +2674,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
             # choose random station
             station = ""
             while station == "":
-                station = lines_dictionary_main[line][0][random.randint(0,len(lines_dictionary_main[line][0])-1)]
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
 
             guessed_list = ""
             guessed = ""
@@ -3005,7 +2954,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 embed = discord.Embed(title="Train Logged")
         else:
             try:
-                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_main[line][1])
+                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             except:
                 embed = discord.Embed(title="Train Logged")
         
@@ -4158,7 +4107,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log {row[0]}")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_main[row[4]][1])
+                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[row[4]][1])
                             except:
                                 embed = discord.Embed(title=f'Log `{id}`')
                         embed.add_field(name=f'Set', value="{} ({})".format(row[1], row[2]))
@@ -4269,7 +4218,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log `{sublist[0]}`")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_main[sublist[4]][1])
+                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[sublist[4]][1])
                             except:
                                 embed = discord.Embed(title=f"Log {sublist[0]}")
                         embed.add_field(name=f'Set', value="{} ({})".format(sublist[1], sublist[2]))
@@ -4965,12 +4914,6 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         log_command(ctx.user.id, 'log-stats')
         statSearch = stat
         userid = user if user else ctx.user
-        
-        if userid.name == 'comeng_17':
-            name = 'comeng17'
-        else:
-            name = userid
-            # 
         if user != None:
             if user != ctx.user and ctx.user.id not in admin_users:
                 print(f'user {user} is not the same as {ctx.user}')
@@ -5002,7 +4945,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         # top operators thing:
         if stat == 'operators':
             try:
-                pieChart(data, f'Top Operators ― {name}', ctx.user.name)
+                pieChart(data, f'Top Operators ― {userid}', ctx.user.name)
                 await ctx.followup.send(message, file=discord.File(f'temp/Graph{ctx.user.name}.png'))
             except:
                 await ctx.followup.send('User has no logs!')  
@@ -5059,7 +5002,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         
         # distance over time
         if stat == 'distanceovertime':
-            distanceChart(data, name)
+            distanceChart(data, userid)
             await ctx.followup.send(file=discord.File(f'temp/Graph{ctx.user.name}.png'))
                 
         # make temp csv
@@ -5092,7 +5035,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 if global_stats:
                     barChart(csv_filename, stat.title(), f'Top {stat.title()} ― Global', ctx.user.name, True)
                 else:
-                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {name}' if year !=0 else f'Top {stat.title()} ― {name}', ctx.user.name, True)
+                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {userid}' if year !=0 else f'Top {stat.title()} ― {userid}', ctx.user.name, True)
             except Exception as e:
                 await ctx.followup.send(f"Error generating graph: `{e}`")
                 return
@@ -5114,7 +5057,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
                 if global_stats:
                     barChart(csv_filename, stat.title(), f'Top {stat.title()} ― Global', ctx.user.name, False)
                 else:
-                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {name}' if year !=0 else f'Top {stat.title()} ― {name}', ctx.user.name, False)
+                    barChart(csv_filename, stat.title(), f'Top {stat.title()} in {year} ― {userid}' if year !=0 else f'Top {stat.title()} ― {userid}', ctx.user.name, False)
                 await logsthread.send(message, file=discord.File(f'temp/Graph{ctx.user.name}.png'))
             except FileNotFoundError:
                 await logsthread.send(f'User has no logs! {e}')
@@ -5124,7 +5067,7 @@ async def statTop(ctx: discord.Interaction, stat: str, mode:str, format: str='l&
         elif format == 'pie':
             try:
                 if global_stats:
-                    pieChart(csv_filename, f'Top {stat.title()} ― {name}', ctx.user.name)
+                    pieChart(csv_filename, f'Top {stat.title()} ― {userid}', ctx.user.name)
                 else:
                     pieChart(csv_filename, f'Top {stat.title()} ― Global', ctx.user.name)
 
@@ -5872,11 +5815,15 @@ async def viewMaps(ctx, mode: str):
     await ctx.response.defer()
     log_command(ctx.user.id,'map-view')
     try:
-        uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
-        legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
-        compressed = compress(legended)
-        compressed.save('temp/themap.png')
-        file=discord.File('temp/themap.png', filename='map.png')
+        editmode = mode.removeprefix("time_based_variants/")
+        try:
+            file=discord.File(f'cache/{editmode}.png', filename='map.png')
+        except:
+            uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
+            legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
+            compressed = compress(legended)
+            compressed.save(f'cache/{editmode}.png')
+            file=discord.File(f'cache/{editmode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             embed = discord.Embed(title=f"Former map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that was used before the Metro Tunnel Big Switch on February 1st 2026.")
             user = await bot.fetch_user(1002449671224041502)
@@ -5982,7 +5929,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
                 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
@@ -6028,7 +5975,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
 
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
@@ -6056,7 +6003,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'utils/trainlogger/userdata/maps/{username}-{modeName}.png', filename='map.png')
+                file = discord.File(f'cache/{username}-{modeName}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
@@ -6780,6 +6727,28 @@ async def update(ctx):
             await ctx.send("You are not authorized to use this command.")
     else:
         await ctx.send("Remote updates are not enabled")
+
+@bot.command()
+async def deletecache(ctx):
+    if ctx.author.id in admin_users:
+        log_command(ctx.author.id, 'deletecache')
+        await ctx.send(f"Deleting Cache")
+        await printlog("Deleting Cache")
+        folder_path = "cache"
+        for filename in os.listdir(folder_path): 
+            file_path = os.path.join(folder_path, filename)  
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)  
+                elif os.path.isdir(file_path):  
+                    os.rmdir(file_path)  
+            except Exception as e:  
+                print(f"Error deleting {file_path}: {e}")
+        await ctx.send("The cache has successfully been deleted")
+        await printlog('Deletion Done')
+    else:
+        await printlog(f'{str(ctx.author.id)} tried to delete the cache.')
+        await ctx.send("You are not authorized to use this command.")
         
 # thing to notify of errors:
 # @bot.event
