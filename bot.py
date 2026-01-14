@@ -5804,8 +5804,8 @@ async def profile(ctx, user: discord.User = None):
 # map view command
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
-        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5825,13 +5825,13 @@ async def viewMaps(ctx, mode: str):
             compressed.save(f'cache/{editmode}.png')
             file=discord.File(f'cache/{editmode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
-            embed = discord.Embed(title=f"Former map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that was used before the Metro Tunnel Big Switch on February 1st 2026.")
+            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
             await printlog(f"Retrieved /log train map for {ctx.user.name} in {ctx.channel.mention}")
         elif mode == "time_based_variants/log_train_map_post_munnel.png":
-            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
+            embed = discord.Embed(title=f"Future map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that will be used once the Metro Tunnel opens.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
@@ -5869,8 +5869,8 @@ async def viewMaps(ctx, mode: str):
 # map trip command maps trips 
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
-        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
@@ -5887,7 +5887,7 @@ async def viewMaps(ctx, mode: str):
         app_commands.Choice(name="Sprinter", value="Sprinter"),
         app_commands.Choice(name="Other", value="Other"),
 ])
-async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
+async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
     await ctx.response.defer()
     log_command(ctx.user.id, 'maps-trips')
     await printlog(f"Making trip map for {str(ctx.user.id)}")
@@ -5934,7 +5934,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
                 imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
-                embed = discord.Embed(title=f"Pre Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -5979,7 +5979,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
