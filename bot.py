@@ -5887,7 +5887,7 @@ async def viewMaps(ctx, mode: str):
         app_commands.Choice(name="Sprinter", value="Sprinter"),
         app_commands.Choice(name="Other", value="Other"),
 ])
-async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
+async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,global_stats:bool=False):
     await ctx.response.defer()
     log_command(ctx.user.id, 'maps-trips')
     await printlog(f"Making trip map for {str(ctx.user.id)}")
@@ -5903,7 +5903,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             modeName = 'vic'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train, global_stats)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
@@ -5919,22 +5919,29 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
             try:
                 # make nameextras string
                 nameextras = ''
+                if global_stats == False:
+                    nameextras = f'@{username}'
+                else:
+                    nameextras = f'All'
                 if train != 'all' and year != 0:
-                    nameextras = f' for {train} trains in {year}'
+                    nameextras += f' for {train} trains in {year}'
                 elif train != 'all':
-                    nameextras = f' for ' + train.strip("\'")
+                    nameextras += f' for ' + train.strip("\'")
                 elif year != 0:
-                    nameextras = f' in {year}'
+                    nameextras += f' in {year}'
                 if line != 'All':
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
                 
-                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
                 imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
-                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for {nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -5949,7 +5956,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
         if mode == "time_based_variants/log_train_map_post_munnel.png":
             modeName = 'vic-metrotunnel'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train, global_stats)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
@@ -5965,21 +5972,28 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
             try:
                 # make nameextras string
                 nameextras = ''
+                if global_stats == False:
+                    nameextras = f'@{username}'
+                else:
+                    nameextras = f'All'
                 if train != 'all' and year != 0:
-                    nameextras = f' for {train} trains in {year}'
+                    nameextras += f' for {train} trains in {year}'
                 elif train != 'all':
-                    nameextras = f' for ' + train.strip("\'")
+                    nameextras += f' for ' + train.strip("\'")
                 elif year != 0:
-                    nameextras = f' in {year}'
+                    nameextras += f' in {year}'
                 if line != 'All':
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
 
-                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for {nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -6003,7 +6017,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'cache/{username}-{modeName}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
