@@ -62,6 +62,7 @@ from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getT
 from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import getTotalLines_post_munnel
 from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import getTotalLines_sydney_tram
 from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
+from utils.webAPI.logger import logTrip
 sys.stdout = sys.__stdout__ 
 
 original_open = builtins.open
@@ -1176,7 +1177,7 @@ async def line_info(ctx, search: str):
 async def victorianrailphotos(ctx, number: str = '', traintype: str = '', location: str = '', photographer: str = '', featured:bool=False):
     if featured:
         featured = 'featured'
-    await ctx.response.send_message(f'[View results](https://victorianrailphotos.com/search?number={number}&type={traintype}&location={location}&photographer={photographer})')
+    await ctx.response.send_message('[View results]'+f'(https://victorianrailphotos.com/search?number={number}&type={traintype}&location={location}&photographer={photographer})'.replace(' ', '%20'))
 
 
 
@@ -2932,7 +2933,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
             if number != 'Unknown':
                 set = setNumber(number.upper())
             if set == None:
-                await ctx.edit_original_response(content=f'Invalid train number: `{number.upper()}`')
+                await ctx.edit_original_response(content=f'Couldn\'t find the type of train for `{number.upper()}`, please try again and specify the type of train.')
                 return
             type_final = trainType(number.upper())
             
@@ -2941,12 +2942,16 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
             notes = notes.replace('\n', ' ')
             #add quotes so the csv dosn't break when u use a comma
-            notes = f'"{notes}"'
+            # notes = f'"{notes}"'
                 
             
         # Add train to the list
         print(f'adding {set} {type_final} {savedate} {line} {start.title()} {end.title()} {notes}')
-        id = addTrain(ctx.user.name, set, type_final, savedate, line, start.title(), end.title(), notes)
+        APIresponse = logTrip(mode='victrain', userid=ctx.user.id, start=start.title(), end=end.title(), line=line, number=set, vType=type_final, date=savedate, note=notes)
+        # id = addTrain(ctx.user.name, set, type_final, savedate, line, start.title(), end.title(), notes)
+        if APIresponse == 'error':
+            await ctx.edit_original_response(content='There was an error logging your trip. Please try again later.')
+            return
         
         if line in vLineLines:
             embed = discord.Embed(title="Train Logged",colour=vline_map_colour)
@@ -3007,7 +3012,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         except Exception as e:
             await printlog(f"Error getting image: {e}")
 
-        footer = f"Log ID #{id}"
+        footer = f"Log ID {APIresponse['log_id']}"
         footer += f' | Photo by {credits}' if credits is not None else ''
         embed.set_footer(text=footer)
         
@@ -3255,11 +3260,12 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
             # Remove newlines
             notes = notes.replace('\n', ' ')
-            #add quotes so the csv dosn't break when u use a comma
-            notes = f'"{notes}"'
 
         # Add train to the list
-        id = addTram(ctx.user.name, number, type, savedate, route, start.title(), end.title(), notes)
+        APIresponse = logTrip(mode='victram', userid=ctx.user.id, start=start.title(), end=end.title(), line=route, number=number, vType=type, date=savedate, note=notes)
+        if APIresponse == 'error':
+            await ctx.edit_original_response(content='There was an error logging your trip. Please try again later.')
+            return
 
         embed = discord.Embed(title="Tram Logged",colour=tram_colour)
         
@@ -3276,7 +3282,7 @@ async def logtram(ctx, route:str, number: str, start:str, end:str, date:str='tod
         if imageURL != None:
             embed.set_thumbnail(url=imageURL)
         credits = f' | Photo by {credits}' if credits != None else ''
-        embed.set_footer(text=f"Log ID #{id}{credits}")
+        embed.set_footer(text=f"Log ID {APIresponse['log_id']}{credits}")
         await ctx.edit_original_response(embed=embed)
         
                 
