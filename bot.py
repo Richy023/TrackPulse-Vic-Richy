@@ -62,7 +62,7 @@ from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getT
 from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import getTotalLines_post_munnel
 from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import getTotalLines_sydney_tram
 from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
-from utils.webAPI.logger import logTrip
+from utils.webAPI.logger import getUserCSV, logTrip
 sys.stdout = sys.__stdout__ 
 
 original_open = builtins.open
@@ -2952,6 +2952,8 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         if APIresponse == 'error':
             await ctx.edit_original_response(content='There was an error logging your trip. Please try again later.')
             return
+        else:
+            await printlog(f'Logged train with log ID {APIresponse["log_id"]}')
         
         if line in vLineLines:
             embed = discord.Embed(title="Train Logged",colour=vline_map_colour)
@@ -4043,6 +4045,8 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
         if id != None:
             await ctx.response.defer()
             
+            getUserCSV(f'oauth2|discord|{userid.id}', userid.name, mode=mode)
+            
             if mode == 'train':
                 file_path = f'utils/trainlogger/userdata/{userid.name}.csv'
                 
@@ -4068,13 +4072,8 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 file_path = f'utils/trainlogger/userdata/canberra-trams/{userid.name}.csv'
                 
             
-            
             with open(file_path, mode='r', newline='') as file:
-                
-                if not id.startswith('#'):
-                    cleaned_id = '#' + id
-                else:
-                    cleaned_id = id
+                cleaned_id = id
                 csv_reader = csv.reader(file)
                 for row in csv_reader:
                     if row[0] == cleaned_id.upper():
@@ -4140,6 +4139,8 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 await ctx.followup.send(f'Cannot find log `{id}`')
                 
         else:
+            getUserCSV(f'oauth2|discord|{userid.id}', userid.name, mode=mode)
+
             # for train
             if mode == 'train':
                 if user == None:
