@@ -29,13 +29,6 @@ def getImage(number, thumbnail=False):
             photographer = photo.get('photographer', 'Unknown')
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
-                try:
-                    response = requests.get(f'{VRP_BASE_URL}/api/view/{photo["id"]}/train')
-                    print('added view count api')
-                    print('response: ', response.text)
-                except Exception as e:
-                    print('couldnt add view count api')
-                    print('error: ', e)
                 return photo_url, photographer
             return None, None
         
@@ -45,13 +38,6 @@ def getImage(number, thumbnail=False):
             photographer = photo.get('photographer', 'Unknown')
             url_response = requests.head(photo_url)
             if url_response.status_code == 200:
-                try:
-                    requests.get(f'{VRP_BASE_URL}/api/view/{photo["id"]}/train')
-                    print('added view count api')
-                    print('response: ', response.text)
-                except Exception as e:
-                    print('couldnt add view count api')
-                    print('error: ', e)
                 return photo_url, photographer
             return None, None
         
@@ -140,9 +126,6 @@ def vicSigURL(carriageNumber, trainType):
     else:
         if trainType in ['HCMT', "X'Trapolis 2.0"]:
             url = ''
-        
-        
-        
         if trainType == "X'Trapolis 100":
             name = 'X%27Trapolis'
         elif trainType == "EDI Comeng" or trainType == "Alstom Comeng":
