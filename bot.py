@@ -4037,8 +4037,6 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
         if id != None:
             await ctx.response.defer()
             
-            getUserCSV(f'oauth2|discord|{userid.id}', userid.name, mode=mode)
-            
             if mode == 'train':
                 file_path = f'utils/trainlogger/userdata/{userid.name}.csv'
                 
@@ -4064,8 +4062,13 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 file_path = f'utils/trainlogger/userdata/canberra-trams/{userid.name}.csv'
                 
             
+            
             with open(file_path, mode='r', newline='') as file:
-                cleaned_id = id
+                
+                if not id.startswith('#'):
+                    cleaned_id = '#' + id
+                else:
+                    cleaned_id = id
                 csv_reader = csv.reader(file)
                 for row in csv_reader:
                     if row[0] == cleaned_id.upper():
@@ -4131,8 +4134,6 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                 await ctx.followup.send(f'Cannot find log `{id}`')
                 
         else:
-            getUserCSV(f'oauth2|discord|{userid.id}', userid.name, mode=mode)
-
             # for train
             if mode == 'train':
                 if user == None:
