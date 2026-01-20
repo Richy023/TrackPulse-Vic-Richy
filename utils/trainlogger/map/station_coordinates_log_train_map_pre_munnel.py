@@ -80,7 +80,7 @@ station_coordinates = {
     "Glen Huntly": (4250 + x_offset, 4650 + y_offset, 4860 + x_offset, 4850 + y_offset),
     "Ormond": (4450 + x_offset, 4850 + y_offset, 4860 + x_offset, 5050 + y_offset),
     "McKinnon": (4300 + x_offset, 5030 + y_offset, 4860 + x_offset, 5250 + y_offset),
-    "Bentleigh": (4400 + x_offset, 5250 + y_offset, 4860 + x_offset, 5450 + y_offset),
+    "Benteigh": (4400 + x_offset, 5250 + y_offset, 4860 + x_offset, 5450 + y_offset),
     "Patterson": (4300 + x_offset, 5430 + y_offset, 4860 + x_offset, 5700 + y_offset),
     "Moorabbin": (4350 + x_offset, 5650 + y_offset, 4860 + x_offset, 5850 + y_offset),
     "Highett": (4450 + x_offset, 5850 + y_offset, 4860 + x_offset, 6030 + y_offset),

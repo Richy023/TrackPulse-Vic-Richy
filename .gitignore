@@ -10,7 +10,6 @@ utils/game/scores/
 utils/trainlogger/userdatabackup
 photosubmissions/photos/
 photosubmissions/db.db
-cache/
 temp/
 utils/line-status-data.csv
 logins/
@@ -193,5 +192,3 @@ restart.txt
 utils/game/images/guesser.csv
 utils/game/images/guesser.csv
 utils/trainlogger/totalLogs.csv
-utils/bussets.csv
-utils/tramsets.csv

@@ -271,13 +271,3 @@ def trainData(search_value):
             if row[0] == search_value:
                 return row
     return None
-
-def tramData(search_value):
-    csv_filename = 'utils/tramsets.csv'
-    with open(csv_filename, mode='r') as file:
-        reader = csv.reader(file)
-        header = next(reader)  # Skip the header row
-        for row in reader:
-            if row[0] == search_value:
-                return row
-    return None

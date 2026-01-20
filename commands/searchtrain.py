@@ -156,7 +156,7 @@ async def searchTrainCommand(ctx, train: str, hide_run_info:bool=False, metro_co
     else:
         colour = None
     
-    if type is None or set is None:
+    if type is None:
        await ctx.edit_original_response(content="Train not found")
     else:
         # try:
