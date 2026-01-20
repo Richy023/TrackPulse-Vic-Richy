@@ -4700,14 +4700,14 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                             imgURL = None
                             photographer = 'no one'
                             url = 'https://planespotters.net'
-
+                                                
                         #send in thread to reduce spam!
                         thread = await ctx.channel.create_thread(name=f"{userid.name}'s flight logs")
                             # Make the embed
                         if sublist[4] == 'Unknown':
                             embed = discord.Embed(title=f"Log {sublist[0]}")
                         else:
-                            embed = discord.Embed(title=f"Log {sublist[0]}",colour=0x1F4E1)
+                            embed = discord.Embed(title=f"Log {sublist[0]}",colour=bus_colour)
                         embed.add_field(name=f'Flight', value=f"{sublist[7]} {sublist[4]}")
                         embed.add_field(name=f'Date', value="{}".format(sublist[3]))
                         embed.add_field(name=f'Trip Start', value="{}".format(sublist[5]))
