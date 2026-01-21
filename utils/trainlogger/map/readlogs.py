@@ -1,3 +1,4 @@
+import os
 from matplotlib.pylab import f
 from utils.trainlogger.map.mapimage import MapImageHandler
 from utils.trainlogger.map.station_coordinates_log_train_map_pre_munnel import x_offset as x_offset_log_train_map_pre_munnel, y_offset as y_offset_log_train_map_pre_munnel, station_coordinates as station_coordinates_log_train_map_pre_munnel
@@ -373,11 +374,65 @@ def postcompat(data:list, lines_dictionary:dict):
     return newdata
 
 
-def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_train_map_pre_munnel.png', line_choice:str="All", year:int=0, modeName:str='vic', trainType:str='all'):
+def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_train_map_pre_munnel.png', line_choice:str="All", year:int=0, modeName:str='vic', trainType:str='all', global_stats:bool=False):
+    if global_stats == True:
+        try:
+            file = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_stations.txt",'r')
+            old_stations = []
+            for line in file:
+                line = line.strip()
+                old_stations = line.split(",")
+            file.close()
+
+            file = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt",'r')
+            old_affected_lines = []
+            for line in file:
+                line = line.strip()
+                line = tuple(line.split(","))
+                old_affected_lines.append(line)
+            file.close()
+        except:
+            old_stations = [None]
+            old_affected_lines = [None]
+    else:
+        try:
+            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt",'r')
+            old_stations = []
+            for line in file:
+                line = line.strip()
+                old_stations = line.split(",")
+            file.close()
+
+            file = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt",'r')
+            old_affected_lines = []
+            for line in file:
+                line = line.strip()
+                line = tuple(line.split(","))
+                old_affected_lines.append(line)
+            file.close()
+        except:
+            old_stations = [None]
+            old_affected_lines = [None]
+    
     if mode == 'time_based_variants/log_train_map_pre_munnel.png':
-        file = open(f'utils/trainlogger/userdata/{user}.csv', 'r')
-        data = file.readlines()
-        file.close()
+        if global_stats == True:
+            data = []
+            folder_path = "utils/trainlogger/userdata"
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)  
+                try:
+                    if os.path.isfile(file_path):
+                        file = open(file_path, 'r')
+                        pre_data = file.readlines()
+                        for datum in pre_data:
+                            data.append(datum)
+                        file.close()
+                except Exception as e:  
+                    print(f"Error accesssing {file_path}: {e}")
+        else:
+            file = open(f'utils/trainlogger/userdata/{user}.csv', 'r')
+            data = file.readlines()
+            file.close()
 
         data = precompat(data, lines_dictionary)
 
@@ -510,9 +565,24 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
         line_coordinates = lines_coordinates_log_train_map_pre_munnel
 
     if mode == 'time_based_variants/log_train_map_post_munnel.png':
-        file = open(f'utils/trainlogger/userdata/{user}.csv', 'r')
-        data = file.readlines()
-        file.close()
+        if global_stats == True:
+            data = []
+            folder_path = "utils/trainlogger/userdata"
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)  
+                try:
+                    if os.path.isfile(file_path):
+                        file = open(file_path, 'r')
+                        pre_data = file.readlines()
+                        for datum in pre_data:
+                            data.append(datum)
+                        file.close()
+                except Exception as e:  
+                    print(f"Error accesssing {file_path}: {e}")
+        else:
+            file = open(f'utils/trainlogger/userdata/{user}.csv', 'r')
+            data = file.readlines()
+            file.close()
 
         data = postcompat(data, lines_dictionary)
 
@@ -651,9 +721,24 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
         line_coordinates = lines_coordinates_log_train_map_post_munnel
 
     if mode == 'log_sydney-tram_map.png':
-        file = open(f'utils/trainlogger/userdata/sydney-trams/{user}.csv', 'r')
-        data = file.readlines()
-        file.close()
+        if global_stats == True:
+            data = []
+            folder_path = "utils/trainlogger/userdata/sydney-trams"
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)  
+                try:
+                    if os.path.isfile(file_path):
+                        file = open(file_path, 'r')
+                        pre_data = file.readlines()
+                        for datum in pre_data:
+                            data.append(datum)
+                        file.close()
+                except Exception as e:  
+                    print(f"Error accesssing {file_path}: {e}")
+        else:
+            file = open(f'utils/trainlogger/userdata/sydney-trams/{user}.csv', 'r')
+            data = file.readlines()
+            file.close()
 
         stations = []
         for line in data:
@@ -731,7 +816,35 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
         
     # do the map gen
     map_handler = MapImageHandler(f"utils/trainlogger/map/{mode}", lines_dictionary, x_offset, y_offset, station_coordinates, line_coordinates)
+    stations = list(sorted(set(stations)))
+    affected_lines = list(sorted(set(affected_lines)))
+    print(stations)
     print(affected_lines)
-    map_handler.highlight_map(affected_lines, f"utils/trainlogger/userdata/maps/{user}-{modeName}-{year}-{trainType}-{line_choice}.png", stations)
-    affected_lines = list(set(affected_lines))
+
+    if old_stations == stations and old_affected_lines == affected_lines:
+        print("using cached version")
+    else:
+        if global_stats == True:
+            map_handler.highlight_map(affected_lines, f"cache/{modeName}-{year}-{trainType}-{line_choice}.png", stations)
+
+            station_txt = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_stations.txt","w")
+            station_txt.write(','.join(stations))
+
+            affected_lines_writable = []
+            for affected_line in affected_lines:
+                affected_lines_writable.append(f"{','.join(affected_line)}\n")
+            affected_lines_txt = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt","w")
+            affected_lines_txt.write(''.join(''.join(affected_lines_writable)))
+        else:
+            map_handler.highlight_map(affected_lines, f"cache/{user}-{modeName}-{year}-{trainType}-{line_choice}.png", stations)
+
+            station_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt","w")
+            station_txt.write(','.join(stations))
+
+            affected_lines_writable = []
+            for affected_line in affected_lines:
+                affected_lines_writable.append(f"{','.join(affected_line)}\n")
+            affected_lines_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt","w")
+            affected_lines_txt.write(''.join(''.join(affected_lines_writable)))
+
     return(len(affected_lines))

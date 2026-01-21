@@ -547,7 +547,7 @@ line_coordinates = {
             (4900 + x_offset, 4950 + y_offset, 5000 + x_offset, 5200 + y_offset),
         ],
         ('Ormond', 'Glen Huntly'):[
-            (4900 + x_offset, 4700 + y_offset, 5000 + x_offset, 5000 + y_offset),
+            (4900 + x_offset, 4750 + y_offset, 5000 + x_offset, 5000 + y_offset),
         ],
         ('Glen Huntly', 'Caulfield'):[
             (4900 + x_offset, 4300 + y_offset, 5000 + x_offset, 4800 + y_offset),

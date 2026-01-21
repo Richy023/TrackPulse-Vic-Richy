@@ -1,5 +1,35 @@
 import discord
 
+# Colours
+achievement_colour = 0x43ea46
+rare_trains_colour = 0xf23f42
+ptv_grey = 0x333434
+
+metro_colour = 0x0072ce
+vline_colour = 0x8f1a95
+vline_map_colour = 0x782f9a
+tram_colour = 0x78be20
+bus_colour = 0xff8200
+coach_colour = 0xa57fb2
+myki_colour = 0xc2d840
+
+sydney_train_colour = 0xf47913
+sydney_tram_colour = 0xed2438
+
+transperth_colour = 0x008635
+transwa_colour = 0xcf4520
+
+adelaide_metro_colour = 0xf68a24 #this may or may not need fixing
+adelaide_tram_colour = adelaide_metro_colour
+
+#guesser colours
+very_easy_colour = 0x89ff65
+easy_colour = 0xcaff65
+medium_colour = 0xffe665
+hard_colour = 0xffa665
+very_hard_colour = 0xff6565
+ultrahard_colour = 0xe52727
+
 def genColor(status):
     print(f"Line Status: {status}")
     if status == "Major Delays":
