@@ -1480,7 +1480,7 @@ async def bussearchcommand(ctx, bus: str):
             await ctx.edit_original_response(embed=embed)
 
     except Exception as e:
-        await ctx.edit_original_response(content=f"can not find that bus in list: {e}")
+        await ctx.edit_original_response(content=f"can not find that bus in list")
     
 # add a favourite stop
 async def stop_autocompletion(
