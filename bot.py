@@ -726,7 +726,7 @@ async def trainTimleyCheckerLoop():
                                 title=f'{train[4]}\'s Location',
                                 description=f'{train[1]} line to {train[5]}',
                                 url=train[2],
-                                color=lines_dictionary_log_train_map_post_munnel[train[1]][1],
+                                color=lines_dictionary_log_train_map_pre_munnel[train[1]][1],
                                 timestamp=datetime.now()
                             )
                             embed.set_footer(text='Maps © Thunderforest, Data © OpenStreetMap contributors')
@@ -1200,7 +1200,7 @@ async def train_search(ctx, train: str, state:str='auto', hide_run_info:bool=Fal
     
     if state == 'Victoria':
         # try:
-        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_log_train_map_post_munnel)
+        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_log_train_map_pre_munnel)
         # except Exception as e:
         #     await ctx.edit_original_response(content=f'An error has occored. Please try again.\n`{e}`')
         #     await printlog(f'Search Train error: {e}')
@@ -1480,7 +1480,7 @@ async def bussearchcommand(ctx, bus: str):
             await ctx.edit_original_response(embed=embed)
 
     except Exception as e:
-        await ctx.edit_original_response(content=f"can not find that bus in list: {e}")
+        await ctx.edit_original_response(content=f"can not find that bus in list")
     
 # add a favourite stop
 async def stop_autocompletion(
@@ -2151,7 +2151,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
         # Filter data by line if a specific line is selected
         if line != 'all':
             try:
-                line_stations = lines_dictionary_log_train_map_post_munnel[line][0]
+                line_stations = lines_dictionary_log_train_map_pre_munnel[line][0]
                 filtered_data = []
                 for row in data:
                     if row[1] in line_stations:  # Check if station is in the line's station list
@@ -2488,14 +2488,14 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                     numdirection = random.choice([-4,-3,-2,2,3,4])
             station = None
             while station == None:
-                station = lines_dictionary_log_train_map_post_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_post_munnel[line][0])-1)]
-                if not 0 <= lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection <= len(lines_dictionary_log_train_map_post_munnel[line][0]):
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
+                if not 0 <= lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection <= len(lines_dictionary_log_train_map_pre_munnel[line][0]):
                     station = None
 
             embed = discord.Embed(
                 title=f"Which __**{numdirection if numdirection > 0 else numdirection*-1}**__ stations are __**{direction1}**__ from __**{station}**__ station on the __**{line} line**__?",
                 description=f"**Answers must be in the correct order!** Answer using this format:\n<@{bot.user.id}> `station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
-                colour=lines_dictionary_log_train_map_post_munnel[line][1])
+                colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
                 await ctx.response.send_message(embed=embed)
@@ -2510,9 +2510,9 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             # get list of correct stations
             if numdirection > 0:
-                correct_list = lines_dictionary_log_train_map_post_munnel[line][0][lines_dictionary_log_train_map_post_munnel[line][0].index(station)+1:lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection+1]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+1:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection+1]
             else:
-                correct_list = lines_dictionary_log_train_map_post_munnel[line][0][lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection:lines_dictionary_log_train_map_post_munnel[line][0].index(station)]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)]
                 correct_list.reverse()
             correct_list1 = [x.lower() for x in correct_list]
 
@@ -2674,7 +2674,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
             # choose random station
             station = ""
             while station == "":
-                station = lines_dictionary_log_train_map_post_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_post_munnel[line][0])-1)]
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
 
             guessed_list = ""
             guessed = ""
@@ -2954,7 +2954,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 embed = discord.Embed(title="Train Logged")
         else:
             try:
-                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_log_train_map_post_munnel[line][1])
+                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             except:
                 embed = discord.Embed(title="Train Logged")
         
@@ -4107,7 +4107,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log {row[0]}")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_log_train_map_post_munnel[row[4]][1])
+                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[row[4]][1])
                             except:
                                 embed = discord.Embed(title=f'Log `{id}`')
                         embed.add_field(name=f'Set', value="{} ({})".format(row[1], row[2]))
@@ -4218,7 +4218,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log `{sublist[0]}`")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_log_train_map_post_munnel[sublist[4]][1])
+                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[sublist[4]][1])
                             except:
                                 embed = discord.Embed(title=f"Log {sublist[0]}")
                         embed.add_field(name=f'Set', value="{} ({})".format(sublist[1], sublist[2]))
@@ -5804,8 +5804,8 @@ async def profile(ctx, user: discord.User = None):
 # map view command
 @maps.command(name='view', description='View the maps the bot uses')
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
-        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         app_commands.Choice(name="Sydney Trains", value="log_sydney-train_map.png"),
         app_commands.Choice(name="NSW Intercity Trains", value="log__sydney-train__map.png"),
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
@@ -5825,13 +5825,13 @@ async def viewMaps(ctx, mode: str):
             compressed.save(f'cache/{editmode}.png')
             file=discord.File(f'cache/{editmode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
-            embed = discord.Embed(title=f"Former map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that was used before the Metro Tunnel Big Switch on February 1st 2026.")
+            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
             await printlog(f"Retrieved /log train map for {ctx.user.name} in {ctx.channel.mention}")
         elif mode == "time_based_variants/log_train_map_post_munnel.png":
-            embed = discord.Embed(title=f"Map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network.")
+            embed = discord.Embed(title=f"Future map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that will be used once the Metro Tunnel opens.")
             user = await bot.fetch_user(1002449671224041502)
             pfp = user.avatar.url
             embed.set_author(name="Map by Comeng17", icon_url=pfp)
@@ -5869,8 +5869,8 @@ async def viewMaps(ctx, mode: str):
 # map trip command maps trips 
 @maps.command(name='trips', description="View a map of all the trips you've logged")
 @app_commands.choices(mode=[
-        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_post_munnel.png"),
-        app_commands.Choice(name="Victorian Trains before the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains", value="time_based_variants/log_train_map_pre_munnel.png"),
+        app_commands.Choice(name="Victorian Trains after the Metro Tunnel Big Switch", value="time_based_variants/log_train_map_post_munnel.png"),
         # app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
 @app_commands.autocomplete(line=line_autocompletion)
@@ -5887,7 +5887,7 @@ async def viewMaps(ctx, mode: str):
         app_commands.Choice(name="Sprinter", value="Sprinter"),
         app_commands.Choice(name="Other", value="Other"),
 ])
-async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,):
+async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_pre_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,global_stats:bool=False):
     await ctx.response.defer()
     log_command(ctx.user.id, 'maps-trips')
     await printlog(f"Making trip map for {str(ctx.user.id)}")
@@ -5903,7 +5903,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             modeName = 'vic'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train, global_stats)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
@@ -5919,22 +5919,29 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
             try:
                 # make nameextras string
                 nameextras = ''
+                if global_stats == False:
+                    nameextras = f'@{username}'
+                else:
+                    nameextras = f'All'
                 if train != 'all' and year != 0:
-                    nameextras = f' for {train} trains in {year}'
+                    nameextras += f' for {train} trains in {year}'
                 elif train != 'all':
-                    nameextras = f' for ' + train.strip("\'")
+                    nameextras += f' for ' + train.strip("\'")
                 elif year != 0:
-                    nameextras = f' in {year}'
+                    nameextras += f' in {year}'
                 if line != 'All':
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
                 
-                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 cleanednamextras = nameextras.replace(' ', '%20').replace('|', '%7C')
                 imageURL = f"https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}-{year}-{train.replace(' ', '%20')}-{line.replace(' ', '%20')}&name={username}%27s%20Victorian%20train%20map{cleanednamextras}"
-                embed = discord.Embed(title=f"Pre Big Switch Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for {nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -5949,7 +5956,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         if mode == "time_based_variants/log_train_map_post_munnel.png":
             modeName = 'vic-metrotunnel'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train, global_stats)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
@@ -5965,21 +5972,28 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
             try:
                 # make nameextras string
                 nameextras = ''
+                if global_stats == False:
+                    nameextras = f'@{username}'
+                else:
+                    nameextras = f'All'
                 if train != 'all' and year != 0:
-                    nameextras = f' for {train} trains in {year}'
+                    nameextras += f' for {train} trains in {year}'
                 elif train != 'all':
-                    nameextras = f' for ' + train.strip("\'")
+                    nameextras += f' for ' + train.strip("\'")
                 elif year != 0:
-                    nameextras = f' in {year}'
+                    nameextras += f' in {year}'
                 if line != 'All':
                     nameextras += f' on the {line} line'
                 nameextras += f' | {round(percentageCovered, 2)} percent of segments travelled'
 
-                file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Victorian%20train%20map%20post%20Metro%20Tunnel'
-                embed = discord.Embed(title=f"Map of logs with </log train:1289843416628330506> for @{username}{nameextras}", 
+                embed = discord.Embed(title=f"Post Big Switch Map of logs with </log train:1289843416628330506> for {nameextras}", 
                                     color=0xb8b8b8, 
                                     description=f"[Click here to view in your browser]({imageURL})")
                 embed.set_image(url="attachment://map.png")
@@ -6003,7 +6017,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 return
             # Send the map once generated
             try:
-                file = discord.File(f'cache/{username}-{modeName}.png', filename='map.png')
+                if global_stats == True:
+                    file = discord.File(f'cache/{modeName}-{year}-{train}-{line}.png', filename='map.png')
+                else:
+                    file = discord.File(f'cache/{username}-{modeName}-{year}-{train}-{line}.png', filename='map.png')
                 line_str = '' if line == 'All' else f' on the {line} Line'
                 year_str = '' if year == 0 else f' in {str(year)}'
                 imageURL = f'https://trackpulsevic.xm9g.net/logs/map?img={username}-{modeName}&name={username}\'s%20Sydney%20tram%20map'
@@ -6639,18 +6656,41 @@ async def ping(ctx):
     log_command(ctx.author.id, 'ping')
     
 @bot.command()
-async def syncdb(ctx, url='https://victorianrailphotos.com/api/trainsets.csv'):
+async def syncdb(ctx, ):
     if ctx.author.id in admin_users:
         log_command(ctx.author.id, 'sync-db')
-        csv_url = url
+        # Download trainsets.csv
+        csv_url ='https://victorianrailphotos.com/api/trainsets.csv'
         save_location = "utils/trainsets.csv"
         await ctx.send(f"Downloading trainset data from {csv_url} to {save_location}")
         await printlog(f"Downloading trainset data from {csv_url} to `{save_location}`")
         try:
             await download_csv(csv_url, save_location)
-            await ctx.send(f"Success!")
+            await ctx.send(f"Success downloading trainsets.csv!")
         except Exception as e:
-            await ctx.send(f"Error: `{e}`")
+            await ctx.send(f"Error downloading trainsets.csv: `{e}`")
+
+        # Download tramsets.csv
+        tram_url = "https://victorianrailphotos.com/api/tramsets.csv"
+        tram_save_location = "utils/tramsets.csv"
+        await ctx.send(f"Downloading tramset data from {tram_url} to {tram_save_location}")
+        await printlog(f"Downloading tramset data from {tram_url} to `{tram_save_location}`")
+        try:
+            await download_csv(tram_url, tram_save_location)
+            await ctx.send(f"Success downloading tramsets.csv!")
+        except Exception as e:
+            await ctx.send(f"Error downloading tramsets.csv: `{e}`")
+
+        # Download bussets.csv
+        bus_url = "https://victorianrailphotos.com/api/bussets.csv"
+        bus_save_location = "utils/bussets.csv"
+        await ctx.send(f"Downloading busset data from {bus_url} to {bus_save_location}")
+        await printlog(f"Downloading busset data from {bus_url} to `{bus_save_location}`")
+        try:
+            await download_csv(bus_url, bus_save_location)
+            await ctx.send(f"Success downloading bussets.csv!")
+        except Exception as e:
+            await ctx.send(f"Error downloading bussets.csv: `{e}`")
     else:
         await printlog(f'{str(ctx.author.id)} tried to sync the database.')
         await ctx.send("You are not authorized to use this command.")
