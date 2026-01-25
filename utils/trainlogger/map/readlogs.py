@@ -597,6 +597,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 print(f"Year: {year}")
                 # Extract line from the date in column 4 (index 3)
                 trip_line = cols[4]
+                trip_train = cols[2]
                 print(f"Trip line: {trip_line}")
                 print(f"Line: {line_choice}")
             
@@ -751,6 +752,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
                 print(f"Year: {year}")
                 # Extract line from the date in column 4 (index 3)
                 trip_line = cols[4]
+                trip_train = cols[2]
                 print(f"Trip line: {trip_line}")
                 print(f"Line: {line_choice}")
             
