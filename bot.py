@@ -6656,18 +6656,41 @@ async def ping(ctx):
     log_command(ctx.author.id, 'ping')
     
 @bot.command()
-async def syncdb(ctx, url='https://victorianrailphotos.com/api/trainsets.csv'):
+async def syncdb(ctx, ):
     if ctx.author.id in admin_users:
         log_command(ctx.author.id, 'sync-db')
-        csv_url = url
+        # Download trainsets.csv
+        csv_url ='https://victorianrailphotos.com/api/trainsets.csv'
         save_location = "utils/trainsets.csv"
         await ctx.send(f"Downloading trainset data from {csv_url} to {save_location}")
         await printlog(f"Downloading trainset data from {csv_url} to `{save_location}`")
         try:
             await download_csv(csv_url, save_location)
-            await ctx.send(f"Success!")
+            await ctx.send(f"Success downloading trainsets.csv!")
         except Exception as e:
-            await ctx.send(f"Error: `{e}`")
+            await ctx.send(f"Error downloading trainsets.csv: `{e}`")
+
+        # Download tramsets.csv
+        tram_url = "https://victorianrailphotos.com/api/tramsets.csv"
+        tram_save_location = "utils/tramsets.csv"
+        await ctx.send(f"Downloading tramset data from {tram_url} to {tram_save_location}")
+        await printlog(f"Downloading tramset data from {tram_url} to `{tram_save_location}`")
+        try:
+            await download_csv(tram_url, tram_save_location)
+            await ctx.send(f"Success downloading tramsets.csv!")
+        except Exception as e:
+            await ctx.send(f"Error downloading tramsets.csv: `{e}`")
+
+        # Download bussets.csv
+        bus_url = "https://victorianrailphotos.com/api/bussets.csv"
+        bus_save_location = "utils/bussets.csv"
+        await ctx.send(f"Downloading busset data from {bus_url} to {bus_save_location}")
+        await printlog(f"Downloading busset data from {bus_url} to `{bus_save_location}`")
+        try:
+            await download_csv(bus_url, bus_save_location)
+            await ctx.send(f"Success downloading bussets.csv!")
+        except Exception as e:
+            await ctx.send(f"Error downloading bussets.csv: `{e}`")
     else:
         await printlog(f'{str(ctx.author.id)} tried to sync the database.')
         await ctx.send("You are not authorized to use this command.")
