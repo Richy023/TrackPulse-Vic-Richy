@@ -75,15 +75,15 @@ def getColor(type):
 def getEmojiColor(line):
     if line == "Lilydale" or line =="Belgrave" or line =="Alamein" or line =='Glen Waverley':
         return('<:burnley:1245673094509760562>')
-    if line == "Pakenham" or line =="Cranbourne":
+    if line in ["Pakenham", "Cranbourne", "Sunbury"]:
         return('<:metrotunnel:1245673090495680533>')
     if line == "Hurstbridge" or line =="Mernda":
         return('<:cliftonhill:1245673092655878174>')
-    if line == "Frankston" or line =="Williamstown" or line =='Werribee' or line == 'Stony Point':
+    if line == "Frankston" or line == 'Stony Point':
         return('<:frankston:1245673086360092735>')    
-    if line == "Upfield" or line =="Sunbury" or line =='Craigieburn':
+    if line == "Upfield" or line =='Craigieburn':
         return('<:northern:1245673088314638431>')    
-    if line == "Sandringham":
+    if line in ['Sandringham','Werribee','Williamstown']:
         return('<:crosscity:1245673084187578368>')
     if line == 'City Loop':
         return('<:cityloop:1265627754473197630>')  
@@ -118,13 +118,13 @@ def getlineEmoji(type):
     if type == "Stony Point":
         return('<:StonyPoint1:1299615026394431518><:StonyPoint2:1299615028659486761><:StonyPoint3:1299615030823747595><:StonyPoint4:1299615032346279989>')
     if type == "Sunbury":
-        return('<:Sunbury1:1299615798272458762><:Sunbury2:1299615800293851166><:Sunbury3:1299615802210652200>')
+        return('<:SUNBURY_1:1466034740380307528><:SUNBURY_2:1466034802493882428><:SUNBURY_3:1466034963479662677>')
     if type == "Upfield":
         return('<:Upfield1:1299615804467187762><:Upfield2:1299615806547689514><:Upfield3:1299615808896503859>')
     if type == "Werribee":
-        return('<:Werribee1:1299616316273201194><:Werribee2:1299616318714150922><:Werribee3:1299616323386609714>')
+        return('<:Werribee_Pink_0_0:1466037262042009721><:Werribee_Pink_1_0:1466037295651229802><:Werribee_Pink_2_0:1466037324826808413>')
     if type == "Williamstown":
-        return('<:Williamstown1:1299616796265156688><:Williamstown2:1299616798081024061><:Williamstown3:1299616799997825085><:Williamstown4:1299616802023936030><:Williamstown5:1299616804297117716>')
+        return('<:Williamstown_Pink_0_0:1466037737093337089><:Williamstown_Pink_1_0:1466037757620129993><:Williamstown_Pink_2_0:1466037780982267934><:Williamstown_Pink_3_0:1466037806743687333><:Williamstown_Pink_4_0:1466037828596142337>')
     if type == "City Loop":
         return('<:CityCircle1:1299990618897911878><:CityCircle2:1299990620940669020><:CityCircle3:1299990622832164925><:CityCircle4:1299990625004949556>')
     else:
@@ -153,7 +153,7 @@ def getMapEmoji(line, type):
         else:
             return '⚠'
         
-    if line == "Pakenham" or line =="Cranbourne":
+    if line == "Pakenham" or line =="Cranbourne" or line =="Sunbury":
         if type == "terminus":
             return('<:dt:1319982841580224572>')
         if type == "terminus2":
@@ -197,7 +197,7 @@ def getMapEmoji(line, type):
         else:
             return '⚠'
         
-    if line == "Frankston" or line =="Werribee" or line =="Williamstown":
+    if line == "Frankston":
         if type == "terminus":
             return('<:ft:1319982844533280831>')
         if type == "terminus2":
@@ -219,7 +219,7 @@ def getMapEmoji(line, type):
         else:
             return '⚠'
         
-    if line == "Sandringham":
+    if line == "Sandringham" or line =="Werribee" or line =="Williamstown":
         if type == "terminus":
             return('<:crt:1319982839701180436>')
         if type == "terminus2":
@@ -241,7 +241,7 @@ def getMapEmoji(line, type):
         else:
             return '⚠'
     
-    if line == "Sunbury" or line =="Upfield" or line =="Craigieburn":
+    if line == "Upfield" or line =="Craigieburn":
         if type == "terminus":
             return('<:nt:1320523324308197397>')
         if type == "terminus2":
