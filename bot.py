@@ -726,7 +726,7 @@ async def trainTimleyCheckerLoop():
                                 title=f'{train[4]}\'s Location',
                                 description=f'{train[1]} line to {train[5]}',
                                 url=train[2],
-                                color=lines_dictionary_log_train_map_post_munnel[train[1]][1],
+                                color=lines_dictionary_log_train_map_pre_munnel[train[1]][1],
                                 timestamp=datetime.now()
                             )
                             embed.set_footer(text='Maps © Thunderforest, Data © OpenStreetMap contributors')
@@ -1200,7 +1200,7 @@ async def train_search(ctx, train: str, state:str='auto', hide_run_info:bool=Fal
     
     if state == 'Victoria':
         # try:
-        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_log_train_map_post_munnel)
+        await searchTrainCommand(ctx, train, hide_run_info, metro_colour, vline_colour, ptv_grey,interchange_stations,lines_dictionary_log_train_map_pre_munnel)
         # except Exception as e:
         #     await ctx.edit_original_response(content=f'An error has occored. Please try again.\n`{e}`')
         #     await printlog(f'Search Train error: {e}')
@@ -2151,7 +2151,7 @@ async def game(ctx,rounds: int = 1, line:str='all', ultrahard: bool=False):
         # Filter data by line if a specific line is selected
         if line != 'all':
             try:
-                line_stations = lines_dictionary_log_train_map_post_munnel[line][0]
+                line_stations = lines_dictionary_log_train_map_pre_munnel[line][0]
                 filtered_data = []
                 for row in data:
                     if row[1] in line_stations:  # Check if station is in the line's station list
@@ -2488,14 +2488,14 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
                     numdirection = random.choice([-4,-3,-2,2,3,4])
             station = None
             while station == None:
-                station = lines_dictionary_log_train_map_post_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_post_munnel[line][0])-1)]
-                if not 0 <= lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection <= len(lines_dictionary_log_train_map_post_munnel[line][0]):
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
+                if not 0 <= lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection <= len(lines_dictionary_log_train_map_pre_munnel[line][0]):
                     station = None
 
             embed = discord.Embed(
                 title=f"Which __**{numdirection if numdirection > 0 else numdirection*-1}**__ stations are __**{direction1}**__ from __**{station}**__ station on the __**{line} line**__?",
                 description=f"**Answers must be in the correct order!** Answer using this format:\n<@{bot.user.id}> `station1`, `station2`{', `station3`' if numdirection >= 3 or numdirection <= -3 else ''}{', `station4`' if numdirection >= 4 or numdirection <= -4 else ''}{', `station5`' if numdirection >= 5 or numdirection <= -5 else ''}\n\n*Use <@{bot.user.id}> skip to skip to the next round.*",
-                colour=lines_dictionary_log_train_map_post_munnel[line][1])
+                colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             embed.set_author(name=f"Round {round+1}/{rounds}")
             if round == 0:
                 await ctx.response.send_message(embed=embed)
@@ -2510,9 +2510,9 @@ async def testthing(ctx, rounds: int = 1, direction: str = 'updown', line:str='a
 
             # get list of correct stations
             if numdirection > 0:
-                correct_list = lines_dictionary_log_train_map_post_munnel[line][0][lines_dictionary_log_train_map_post_munnel[line][0].index(station)+1:lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection+1]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+1:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection+1]
             else:
-                correct_list = lines_dictionary_log_train_map_post_munnel[line][0][lines_dictionary_log_train_map_post_munnel[line][0].index(station)+numdirection:lines_dictionary_log_train_map_post_munnel[line][0].index(station)]
+                correct_list = lines_dictionary_log_train_map_pre_munnel[line][0][lines_dictionary_log_train_map_pre_munnel[line][0].index(station)+numdirection:lines_dictionary_log_train_map_pre_munnel[line][0].index(station)]
                 correct_list.reverse()
             correct_list1 = [x.lower() for x in correct_list]
 
@@ -2674,7 +2674,7 @@ async def hangman(ctx, rounds: int = 1, attempts: int = 10):
             # choose random station
             station = ""
             while station == "":
-                station = lines_dictionary_log_train_map_post_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_post_munnel[line][0])-1)]
+                station = lines_dictionary_log_train_map_pre_munnel[line][0][random.randint(0,len(lines_dictionary_log_train_map_pre_munnel[line][0])-1)]
 
             guessed_list = ""
             guessed = ""
@@ -2954,7 +2954,7 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
                 embed = discord.Embed(title="Train Logged")
         else:
             try:
-                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_log_train_map_post_munnel[line][1])
+                embed = discord.Embed(title="Train Logged",colour=lines_dictionary_log_train_map_pre_munnel[line][1])
             except:
                 embed = discord.Embed(title="Train Logged")
         
@@ -4107,7 +4107,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log {row[0]}")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_log_train_map_post_munnel[row[4]][1])
+                                embed = discord.Embed(title=f"Log `{row[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[row[4]][1])
                             except:
                                 embed = discord.Embed(title=f'Log `{id}`')
                         embed.add_field(name=f'Set', value="{} ({})".format(row[1], row[2]))
@@ -4218,7 +4218,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                                 embed = discord.Embed(title=f"Log `{sublist[0]}`")
                         else:
                             try:
-                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_log_train_map_post_munnel[sublist[4]][1])
+                                embed = discord.Embed(title=f"Log `{sublist[0]}`",colour=lines_dictionary_log_train_map_pre_munnel[sublist[4]][1])
                             except:
                                 embed = discord.Embed(title=f"Log {sublist[0]}")
                         embed.add_field(name=f'Set', value="{} ({})".format(sublist[1], sublist[2]))
@@ -5903,7 +5903,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             modeName = 'vic'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic', train, global_stats)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train, global_stats)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
