@@ -258,7 +258,7 @@ station_coordinates = {
     "Terang": (-5500 + x_offset, 3550 + y_offset, -5150 + x_offset, 3700 + y_offset),
     "Sherwood Park": (-5850 + x_offset, 3750 + y_offset, -5150 + x_offset, 3900 + y_offset),
     "Warrnambool": (-5400 + x_offset, 4050 + y_offset, -4700 + x_offset, 4200 + y_offset),
-    "Caronline Springs": (-6050 + x_offset, 0 + y_offset, -5250 + x_offset, 150 + y_offset),
+    "Caroline Springs": (-6050 + x_offset, 0 + y_offset, -5250 + x_offset, 150 + y_offset),
     "Rockbank": (-6550 + x_offset, 50 + y_offset, -6050 + x_offset, 150 + y_offset),
     "Cobblebank": (-7150 + x_offset, 50 + y_offset, -6500 + x_offset, 150 + y_offset),
     "Melton": (-7500 + x_offset, 50 + y_offset, -7150 + x_offset, 200 + y_offset),
