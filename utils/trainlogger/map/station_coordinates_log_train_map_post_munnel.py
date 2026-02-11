@@ -145,7 +145,7 @@ station_coordinates = {
     "Sale": (22550 + x_offset, 4300 + y_offset, 22800 + x_offset, 4450 + y_offset),
     "Stratford": (22800 + x_offset, 4300 + y_offset, 23350 + x_offset, 4450 + y_offset),
     "Bairnsdale": (23400 + x_offset, 4500 + y_offset, 23900 + x_offset, 4650 + y_offset),
-    "Jolimont": (4277 + x_offset, 1715 + y_offset, 4700 + x_offset, 1837 + y_offset),
+    "Jolimont-MCG": (4277 + x_offset, 1715 + y_offset, 4700 + x_offset, 1837 + y_offset),
     "West Richmond": (4280 + x_offset, 1514 + y_offset, 5010 + x_offset, 1631 + y_offset),
     "North Richmond": (4280 + x_offset, 1321 + y_offset, 5010 + x_offset, 1438 + y_offset),
     "Collingwood": (4273 + x_offset, 1100 + y_offset, 4852 + x_offset, 1224 + y_offset),
