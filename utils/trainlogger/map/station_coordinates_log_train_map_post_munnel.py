@@ -3,8 +3,8 @@ y_offset = 6300
 
 station_coordinates = {
     "Parliament": (3618 + x_offset, 1264 + y_offset,  4134 + x_offset,  1393 + y_offset),
-    "Flinders Street": (2850 + x_offset, 2700 + y_offset, 3650 + x_offset, 2950 + y_offset),
-    "Town Hall": (2850 + x_offset, 2700 + y_offset, 3650 + x_offset, 2950 + y_offset),
+    "Flinders Street": (2850 + x_offset, 2600 + y_offset, 3650 + x_offset, 2850 + y_offset),
+    "Town Hall": (2850 + x_offset, 2600 + y_offset, 3650 + x_offset, 2850 + y_offset),
     "Southern Cross": (431 + x_offset, 1264 + y_offset, 1162 + x_offset, 1378 + y_offset),
     "Melbourne Central": (2850 + x_offset, -100 + y_offset, 3550 + x_offset, 350 + y_offset),
     "State Library": (2850 + x_offset, -100 + y_offset, 3550 + x_offset, 350 + y_offset),
@@ -12,7 +12,7 @@ station_coordinates = {
     "Anzac": (3750 + x_offset, 2750 + y_offset, 4100 + x_offset, 2900 + y_offset),
     "Parkville": (2400 + x_offset, -400 + y_offset, 2850 + x_offset, -250 + y_offset),
     "Arden": (2050 + x_offset, -400 + y_offset, 2400 + x_offset, -250 + y_offset),
-    "Richmond": (4350 + x_offset, 2500 + y_offset, 4800 + x_offset, 2650 + y_offset),
+    "Richmond": (4350 + x_offset, 2600 + y_offset, 4800 + x_offset, 2750 + y_offset),
     "East Richmond": (5250 + x_offset, 1750 + y_offset, 6020 + x_offset, 1920 + y_offset),
     "Burnley": (6050 + x_offset, 1700 + y_offset, 6450 + x_offset, 1940 + y_offset),
     "Heyington": (6600 + x_offset, 2110 + y_offset, 7100 + x_offset, 2250 + y_offset),
@@ -60,7 +60,7 @@ station_coordinates = {
     "Croydon": (6610 + x_offset, -1800 + y_offset, 7050 + x_offset, -1600 + y_offset),
     "Mooroolbark": (6610 + x_offset, -2000 + y_offset, 7250 + x_offset, -1750 + y_offset),
     "Lilydale": (6300 + x_offset, -2300 + y_offset, 6700 + x_offset, -2150 + y_offset),
-    "South Yarra": (4150 + x_offset, 2650 + y_offset, 4750 + x_offset, 2850 + y_offset),
+    "South Yarra": (4150 + x_offset, 2750 + y_offset, 4750 + x_offset, 2900 + y_offset),
     "Prahran": (3800 + x_offset, 3300 + y_offset, 4250 + x_offset, 3450 + y_offset),
     "Windsor": (3350 + x_offset, 3300 + y_offset, 3850 + x_offset, 3450 + y_offset),
     "Balaclava": (2850 + x_offset, 3300 + y_offset, 3400 + x_offset, 3500 + y_offset),
