@@ -1472,6 +1472,7 @@ import utils.bussearch as bussearch
 async def bussearchcommand(ctx, bus: str):
     await ctx.response.defer()
     bus = bus.upper()
+    await printlog(f'searching: {bus}')
     embed= await bussearch.search(bus, ctx)
     try:
         if embed == 'n':
@@ -1490,7 +1491,7 @@ async def bussearchcommand(ctx, bus: str):
 ])
     
 async def importbustram(ctx, mode:str, file:discord.Attachment):
-    if ctx.user.id in admin_users or ctx.user.id == 581098452327464973:
+    if ctx.user.id in admin_users:
         await ctx.response.defer()
         try:
             await file.save(f'temp/{file.filename}')
@@ -1503,9 +1504,11 @@ async def importbustram(ctx, mode:str, file:discord.Attachment):
                 save_path = f'utils/tramsets.csv'
             shutil.copy(f'temp/{file.filename}', save_path)  
             await ctx.edit_original_response(content=f"Successfully imported data for {mode} to `{save_path}`")
+            await printlog(f"Successfully imported data for {mode} to `{save_path}`")
             os.remove(f'temp/{file.filename}') 
         except Exception as e:
                 await ctx.edit_original_response(content=f"Error importing data: {str(e)}")
+                await printlog(f'error importing bus/tram data: {str(e)}')
     else:
         await ctx.edit_original_response("You do not have permission to use this command.")
         return
@@ -3967,10 +3970,10 @@ async def station_autocompletion(
 @app_commands.autocomplete(start=station_autocompletion)
 @app_commands.autocomplete(end=station_autocompletion)
 
-async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='Unknown', date:str='today', type:str='Unknown', notes:str=None, hidemessage:bool=False):
+async def logBus(ctx, line:str, number: str, operator:str, start:str, end:str, date:str='today', type:str='Unknown', notes:str=None, hidemessage:bool=False):
     channel = ctx.channel
     await printlog(date)
-    async def log(notes):
+    async def log(notes,type,operator):
         log_command(ctx.user.id, 'log-bus')
         await printlog("logging the bus")
 
@@ -3999,6 +4002,19 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
             notes = notes.replace('\n', ' ')
             # notes = f'"{notes}"'
+        
+        if type == "Unknown" and operator != 'Unknown':
+            if operator == 'Ventura Bus Lines':
+                operator = 'Ventura'
+            elif operator == 'Cdc Melbourne':
+                operator = 'CDC'
+            with open('utils/bussets.csv','r') as bussetsFile:
+                reader = csv.reader(bussetsFile)
+                for row in reader:
+                    if row[0] == number and row[2] == operator:
+                        type = f'{row[4]} on {row[3]}'
+
+
 
         # Add bus to the list
         id = addBus(ctx.user.name, set, type, savedate, line, start.title(), end.title(), operator.title(), notes)
@@ -4018,7 +4034,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
         
                 
     # Run in a separate task
-    asyncio.create_task(log(notes))
+    asyncio.create_task(log(notes,type,operator))
 
 
 
