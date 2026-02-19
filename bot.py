@@ -1481,6 +1481,7 @@ async def bussearchcommand(ctx, bus: str):
             await ctx.edit_original_response(embed=embed)
 
     except Exception as e:
+        print(f'Error finding bus: {e}')
         await ctx.edit_original_response(content=f"can not find that bus in list")
 
 @bot.tree.command(name="import-bus-tram-data", description="ADMIN ONLY Import csv data for search bus and tram")

@@ -75,7 +75,10 @@ async def search(bus, ctx):
     embed.add_field(name="Deloyments", value=f"[transportvic.me](<https://transportvic.me/bus/tracker/fleet?fleet={bus}>)", inline=False)
     
     # get photo
-    embed.set_image(url=getImage(plate, False, 'bus'))
+    image, credits = getImage(plate, False, 'bus')
+    if image:
+        embed.set_image(url=image)
+        embed.set_footer(text=f'Photo by {credits}')
     return embed
     
 
@@ -124,7 +127,7 @@ def bustracker(plate):
         print(f"Error: {response.status_code}")
 
 def getfleets(numberplate):
-    with open("utils/bussets.csv", "r") as file:
+    with open("utils/bussets.csv", "r", encoding='utf-8') as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
             if row[1] == numberplate:
