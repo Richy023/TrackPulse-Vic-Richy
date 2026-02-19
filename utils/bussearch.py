@@ -24,6 +24,9 @@ async def search(bus, ctx):
     elif bus[0] == "C":
         buss = bus[1:]
         data = getfleetsnumber(buss, "CDC")
+    elif bus[0] == "S":
+        buss = bus[1:]
+        data = getfleetsnumber(buss, "Skybus")
     elif bus[:2] == "TS":
         buss = bus[2:]
         data = getfleetsnumber(buss, "Transit Systems")
@@ -46,6 +49,8 @@ async def search(bus, ctx):
         embed=discord.Embed(title=f"{data[0]} ({data[1]})", color=discord.Color.orange())
     elif data[2] == 'Transit Systems':
         embed=discord.Embed(title=f"{data[0]} ({data[1]})", color=discord.Color.dark_green())
+    elif data[2] == 'Skybus':
+        embed=discord.Embed(title=f"{data[0]} ({data[1]})", color=discord.Color.red())
     else:
         embed=discord.Embed(title=f"{data[0]} ({data[1]})", color=discord.Color.light_gray())
     embed.add_field(name="Depot", value=data[7], inline=True)
