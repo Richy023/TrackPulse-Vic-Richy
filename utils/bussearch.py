@@ -6,6 +6,8 @@ from dotenv import *
 from datetime import datetime
 import os
 
+from utils.trainImage import getImage
+
 config = dotenv_values(".env")
 TRANSPORT_VIC_API_KEY = config['TRANSPORT_VIC_API_KEY']
 
@@ -66,6 +68,9 @@ async def search(bus, ctx):
             tripinfo += f"Route: {trip['route_id']} \n"
         embed.add_field(name="Current trip(s)", value=tripinfo,inline=False)
     embed.add_field(name="Deloyments", value=f"[transportvic.me](<https://transportvic.me/bus/tracker/fleet?fleet={bus}>)", inline=False)
+    
+    # get photo
+    embed.set_image(url=getImage(plate, False, 'bus'))
     return embed
     
 
