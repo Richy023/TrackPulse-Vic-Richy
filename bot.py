@@ -3966,12 +3966,12 @@ async def station_autocompletion(
     ][:25]
     
 @trainlogs.command(name="bus", description="Log a Bus you have been on")
-@app_commands.describe(number = "Bus number", type = 'Type of bus', date = "Date in DD/MM/YYYY format", line = 'bus route', start='Starting Stop', end = 'Ending Stop', hidemessage='Hide the message from other users, note this will not make the log private.')
+@app_commands.describe(number = "Bus number with prefix or number plate", type = 'Type of bus', date = "Date in DD/MM/YYYY format", line = 'bus route', start='Starting Stop', end = 'Ending Stop', hidemessage='Hide the message from other users, note this will not make the log private.')
 @app_commands.autocomplete(operator=busOpsautocompletion)
 @app_commands.autocomplete(start=station_autocompletion)
 @app_commands.autocomplete(end=station_autocompletion)
 
-async def logBus(ctx, line:str, number: str, operator:str, start:str, end:str, date:str='today', type:str='Unknown', notes:str=None, hidemessage:bool=False):
+async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='Unknown', date:str='today', type:str='Unknown', notes:str=None, hidemessage:bool=False):
     channel = ctx.channel
     await printlog(date)
     async def log(notes,type,operator):
@@ -4003,17 +4003,57 @@ async def logBus(ctx, line:str, number: str, operator:str, start:str, end:str, d
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
             notes = notes.replace('\n', ' ')
             # notes = f'"{notes}"'
-        
-        if type == "Unknown" and operator != 'Unknown':
-            if operator == 'Ventura Bus Lines':
-                operator = 'Ventura'
-            elif operator == 'Cdc Melbourne':
-                operator = 'CDC'
-            with open('utils/bussets.csv','r') as bussetsFile:
-                reader = csv.reader(bussetsFile)
-                for row in reader:
-                    if row[0] == number and row[2] == operator:
-                        type = f'{row[4]} on {row[3]}'
+        try:
+            if type == "Unknown":
+                if number[0] == "D":
+                    numbertest = number[1:]
+                    operator = "Dysons"
+                elif number[0] == "V":
+                    numbertest = number[1:]
+                    operator = "Ventura"
+                elif number[0] == "K":
+                    numbertest = number[1:]
+                    operator = "Kinetic"
+                elif number[0] == "C":
+                    numbertest = number[1:]
+                    operator = "CDC"
+                elif number[0] == "S":
+                    numbertest = number[1:]
+                    operator = "Skybus"
+                elif number[:2] == "TS":
+                    numbertest = number[2:]
+                    operator = "Transit Systems"
+                elif len(number) == 6:
+                    operator = "platenumber"
+                if operator != "platenumber":
+                    with open('utils/bussets.csv','r') as bussetsFile:
+                        reader = csv.reader(bussetsFile)
+                        for row in reader:
+                            if row[0] == numbertest and row[2] == operator:
+                                type = f'{row[4]} on {row[3]}'
+                                plate = row[1]
+                elif operator == "platenumber":
+                    with open('utils/bussets.csv','r') as bussetsFile:
+                        reader = csv.reader(bussetsFile)
+                        for row in reader:
+                            if row[1] == number:
+                                type = f'{row[4]} on {row[3]}'
+                                plate = row[1]
+                                numbertest = row[0]
+                                operator = row[2]
+        except:
+            try:
+                if operator == 'Ventura Bus Lines':
+                    operator = 'Ventura'
+                elif operator == 'Cdc Melbourne':
+                    operator = 'CDC'
+                with open('utils/bussets.csv','r') as bussetsFile:
+                    reader = csv.reader(bussetsFile)
+                    for row in reader:
+                        if row[0] == number and row[2] == operator:
+                            type = f'{row[4]} on {row[3]}'
+            except:
+                pass
 
 
 
@@ -4021,15 +4061,28 @@ async def logBus(ctx, line:str, number: str, operator:str, start:str, end:str, d
         id = addBus(ctx.user.name, set, type, savedate, line, start.title(), end.title(), operator.title(), notes)
 
         embed = discord.Embed(title="Bus Logged",colour=bus_colour)
-        
-        embed.add_field(name="Operator", value=operator)
-        embed.add_field(name="Number", value=f'{set} ({type})')
+
         embed.add_field(name="Line", value=line)
+        embed.add_field(name="Operator", value=operator)
+        try:
+            embed.add_field(name="Number", value=f'{numbertest}')
+        except:
+            embed.add_field(name="Number", value=f'{number}')
+        try:
+            embed.add_field(name="Number Plate", value=f'{plate}')
+        except:
+            pass
+        embed.add_field(name="Type", value=f'{type}')
         embed.add_field(name="Date", value=savedate)
         embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
         if notes != None:
             embed.add_field(name="Notes", value=notes)
-        embed.set_footer(text=f"Log ID #{id}")
+        image, credits = getImage(plate, False, 'bus')
+        if image:
+            embed.set_image(url=image)
+            embed.set_footer(text=f'Log ID #{id} | Photo by {credits}')
+        else:
+            embed.set_footer(text=f"Log ID #{id}")
 
         await ctx.response.send_message(embed=embed, ephemeral=hidemessage)
         
