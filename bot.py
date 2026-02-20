@@ -4079,7 +4079,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
             embed.add_field(name="Notes", value=notes)
         image, credits = getImage(plate, False, 'bus')
         if image:
-            embed.set_image(url=image)
+            embed.set_thumbnail(url=image)
             embed.set_footer(text=f'Log ID #{id} | Photo by {credits}')
         else:
             embed.set_footer(text=f"Log ID #{id}")
