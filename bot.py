@@ -3973,6 +3973,7 @@ async def station_autocompletion(
 
 async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='Unknown', date:str='today', type:str='Unknown', notes:str=None, hidemessage:bool=False):
     channel = ctx.channel
+    await ctx.response.defer(ephemeral=hidemessage)
     await printlog(date)
     async def log(notes,type,operator):
         log_command(ctx.user.id, 'log-bus')
@@ -3993,7 +3994,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                     await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
                     return
             except TypeError:
-                await ctx.response.send_message(f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
+                await ctx.edit_original_response(content=f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
 
         set = number
@@ -4092,7 +4093,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
         except:
             embed.set_footer(text=f"Log ID #{id}")
 
-        await ctx.response.send_message(embed=embed, ephemeral=hidemessage)
+        await ctx.edit_original_response(embed=embed)
         
                 
     # Run in a separate task
