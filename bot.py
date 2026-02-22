@@ -6359,9 +6359,9 @@ async def list_schedule(ctx, channel: discord.TextChannel):
 async def about(ctx):
     await ctx.response.defer()
     log_command(ctx.user.id, 'about')
-    embed = discord.Embed(title="About", description=f"TrackPulse Vic is a Discord bot that allows users to log their train, and tram trips in Victoria, New South Wales, South Australia and Western Australia, along with any bus trips. It also provides the ability to get real-time line status updates for Metro Trains Melbourne, upcoming departures from Melbourne stations and the ability to search for information about a specific train, as well as a range of other features.\nOnline Since <t:{uptime}:R>", color=discord.Color.blue())
+    embed = discord.Embed(title="About", description=f"TrackPulse Vic is a Discord bot designed for users to log their train, tram or bus trips across Victoria, New South Wales, South Australia and Western Australia, allowing you to keep track of what transport you have taken and when. It also includes other features such as real-time tracking for Metro Trains Melbourne, upcoming departures for Melbourne stations and the ability to search for information on specific trains, and also fun games for you to play with your friends.\nOnline Since <t:{uptime}:R>", color=discord.Color.blue())
     embed.add_field(name="Developed by", value="[Xm9G](https://xm9g.net/)\n[Comeng17](https://github.com/Comeng17)", inline=True)
-    embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\n[Richy](https://github.com/Richy023)\nsaladmunchr (hosting)\nAperture (NSW train info)\n',inline=True)
+    embed.add_field(name="Contributions by",value='[domino6658](https://github.com/domino6658)\n[AshKmo](https://github.com/AshKmo)\n[Richy](https://github.com/Richy023)\n[minirobinbin](https://github.com/minirobinbin)\nsaladmunchr (hosting)\nAperture (NSW train info)\n',inline=True)
     embed.add_field(name='Photos sourced from',value="[Victorian Rail Photos](https://victorianrailphotos.com/)")
     embed.add_field(name="Data Sources", value="[Transport Victoria](https://www.ptv.vic.gov.au/)\n", inline=True)
     embed.add_field(name='Website', value='https://trackpulsevic.xm9g.net')
