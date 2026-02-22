@@ -4004,44 +4004,47 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
             notes = notes.replace('\n', ' ')
             # notes = f'"{notes}"'
         try:
-            if type == "Unknown":
-                if number[0] == "D":
-                    numbertest = number[1:]
-                    operator = "Dysons"
-                elif number[0] == "V":
-                    numbertest = number[1:]
-                    operator = "Ventura"
-                elif number[0] == "K":
-                    numbertest = number[1:]
-                    operator = "Kinetic"
-                elif number[0] == "C":
-                    numbertest = number[1:]
-                    operator = "CDC"
-                elif number[0] == "S":
-                    numbertest = number[1:]
-                    operator = "Skybus"
-                elif number[:2] == "TS":
-                    numbertest = number[2:]
-                    operator = "Transit Systems"
-                elif len(number) == 6:
-                    operator = "platenumber"
-                if operator != "platenumber":
-                    with open('utils/bussets.csv','r') as bussetsFile:
-                        reader = csv.reader(bussetsFile)
-                        for row in reader:
-                            if row[0] == numbertest and row[2] == operator:
-                                type = f'{row[4]} on {row[3]}'
-                                plate = row[1]
-                elif operator == "platenumber":
-                    with open('utils/bussets.csv','r') as bussetsFile:
-                        reader = csv.reader(bussetsFile)
-                        for row in reader:
-                            if row[1] == number:
-                                type = f'{row[4]} on {row[3]}'
-                                plate = row[1]
-                                numbertest = row[0]
-                                operator = row[2]
+            await printlog("trying new version")
+            if number[0] == "D":
+                numbertest = number[1:]
+                operator = "Dysons"
+            elif number[0] == "V":
+                numbertest = number[1:]
+                operator = "Ventura"
+            elif number[0] == "K":
+                numbertest = number[1:]
+                operator = "Kinetic"
+            elif number[0] == "C":
+                numbertest = number[1:]
+                operator = "CDC"
+            elif number[0] == "S":
+                numbertest = number[1:]
+                operator = "Skybus"
+            elif number[:2] == "TS":
+                numbertest = number[2:]
+                operator = "Transit Systems"
+            elif len(number) == 6:
+                operator = "platenumber"
+            if operator != "platenumber":
+                with open('utils/bussets.csv','r') as bussetsFile:
+                    reader = csv.reader(bussetsFile)
+                    for row in reader:
+                        if row[0] == numbertest and row[2] == operator:
+                            type = f'{row[4]} on {row[3]}'
+                            plate = row[1]
+                            await printlog(f"type: {type}\nplate:{plate}")
+            elif operator == "platenumber":
+                with open('utils/bussets.csv','r') as bussetsFile:
+                    reader = csv.reader(bussetsFile)
+                    for row in reader:
+                        if row[1] == number:
+                            type = f'{row[4]} on {row[3]}'
+                            plate = row[1]
+                            numbertest = row[0]
+                            operator = row[2]
+                            await printlog(f"type: {type}\nplate:{plate}")
         except:
+            await printlog("reverting to old version")
             try:
                 if operator == 'Ventura Bus Lines':
                     operator = 'Ventura'
@@ -4052,6 +4055,8 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                     for row in reader:
                         if row[0] == number and row[2] == operator:
                             type = f'{row[4]} on {row[3]}'
+                            plate = row[1]
+                            await printlog(f"type: {type}\nplate:{plate}")
             except:
                 pass
 
@@ -4077,11 +4082,14 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
         embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
         if notes != None:
             embed.add_field(name="Notes", value=notes)
-        image, credits = getImage(plate, False, 'bus')
-        if image:
-            embed.set_thumbnail(url=image)
-            embed.set_footer(text=f'Log ID #{id} | Photo by {credits}')
-        else:
+        try:
+            image, credits = getImage(plate, False, 'bus')
+            if image:
+                embed.set_thumbnail(url=image)
+                embed.set_footer(text=f'Log ID #{id} | Photo by {credits}')
+            else:
+                embed.set_footer(text=f"Log ID #{id}")
+        except:
             embed.set_footer(text=f"Log ID #{id}")
 
         await ctx.response.send_message(embed=embed, ephemeral=hidemessage)
