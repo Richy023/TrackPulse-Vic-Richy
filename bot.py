@@ -169,7 +169,6 @@ for line in file:
     line = line.strip()
     lines_list.append(line)
 file.close()
-lines_list.append("Summer Start Metro Tunnel Service")
 
 file = open('utils\\datalists\\types.txt','r')
 types_list = []
