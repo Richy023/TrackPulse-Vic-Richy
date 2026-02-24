@@ -3996,9 +3996,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
             except TypeError:
                 await ctx.edit_original_response(content=f'Invalid date: {date}\nUse the form `dd/mm/yyyy`', ephemeral=True)
                 return
-
-        set = number
-        
+        set = number.upper()
         # format notes so it dosnt break anything
         if notes:
             notes = re.sub(r'[^\x00-\x7F]+', '', notes)
@@ -4006,25 +4004,28 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
             # notes = f'"{notes}"'
         try:
             await printlog("trying new version")
-            if number[0] == "D":
-                numbertest = number[1:]
+            if set[0] == "D":
+                numbertest = set[1:]
                 operator = "Dysons"
-            elif number[0] == "V":
-                numbertest = number[1:]
+            elif set[0] == "V":
+                numbertest = set[1:]
                 operator = "Ventura"
-            elif number[0] == "K":
-                numbertest = number[1:]
+            elif set[0] == "K":
+                numbertest = set[1:]
                 operator = "Kinetic"
-            elif number[0] == "C":
-                numbertest = number[1:]
+            elif set[0] == "C":
+                numbertest = set[1:]
                 operator = "CDC"
-            elif number[0] == "S":
-                numbertest = number[1:]
+            elif set[0] == "S":
+                numbertest = set[1:]
                 operator = "Skybus"
-            elif number[:2] == "TS":
-                numbertest = number[2:]
+            elif set[:2] == "TS":
+                numbertest = set[2:]
                 operator = "Transit Systems"
-            elif len(number) == 6:
+            elif set[:2] == "MK":
+                numbertest = set[2:]
+                operator = "McKenzies"
+            elif len(set) == 6:
                 operator = "platenumber"
             if operator != "platenumber":
                 with open('utils/bussets.csv','r') as bussetsFile:
@@ -4038,7 +4039,7 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                 with open('utils/bussets.csv','r') as bussetsFile:
                     reader = csv.reader(bussetsFile)
                     for row in reader:
-                        if row[1] == number:
+                        if row[1] == set:
                             type = f'{row[4]} on {row[3]}'
                             plate = row[1]
                             numbertest = row[0]
@@ -4051,10 +4052,12 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
                     operator = 'Ventura'
                 elif operator == 'Cdc Melbourne':
                     operator = 'CDC'
+                elif operator == 'McKenzies Tourist Service':
+                    operator = 'McKenzies'
                 with open('utils/bussets.csv','r') as bussetsFile:
                     reader = csv.reader(bussetsFile)
                     for row in reader:
-                        if row[0] == number and row[2] == operator:
+                        if row[0] == set and row[2] == operator:
                             type = f'{row[4]} on {row[3]}'
                             plate = row[1]
                             await printlog(f"type: {type}\nplate:{plate}")
@@ -4069,11 +4072,13 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
         embed = discord.Embed(title="Bus Logged",colour=bus_colour)
 
         embed.add_field(name="Line", value=line)
+        if operator == "platenumber":
+            operator = "Unknown"
         embed.add_field(name="Operator", value=operator)
         try:
             embed.add_field(name="Number", value=f'{numbertest}')
         except:
-            embed.add_field(name="Number", value=f'{number}')
+            embed.add_field(name="Number", value=f'{set}')
         try:
             embed.add_field(name="Number Plate", value=f'{plate}')
         except:
