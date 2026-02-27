@@ -1465,17 +1465,43 @@ async def tramsearch(ctx, tram: str):
         # embed.add_field(name='<a:botloading2:1261102206468362381> Loading trip data', value='⠀')
         embed_update = await ctx.edit_original_response(embed=embed)
 
+async def busOpsautocompletion(
+    interaction: discord.Interaction,
+    current: str
+) -> typing.List[app_commands.Choice[str]]:
+    # 1. Use set() to remove duplicates from busOps
+    # 2. Use sorted() to keep the list in alphabetical order
+    unique_operators = sorted(set(busOps))
+    
+    # 3. Return the filtered list (limited to 25 to prevent Discord API errors)
+    return [
+        app_commands.Choice(name=operator, value=operator)
+        for operator in unique_operators if current.lower() in operator.lower()
+    ][:25]
+
 import utils.bussearch as bussearch
 @search.command(name="bus", description="Search for a specific Bus")
 @app_commands.describe(bus="bus number or plate")
-async def bussearchcommand(ctx, bus: str):
+@app_commands.autocomplete(operator=busOpsautocompletion)
+async def bussearchcommand(ctx, bus: str, operator:str='Unknown'):
     await ctx.response.defer()
     bus = bus.upper()
+    if operator != "Unknown":
+        operatorlist = {"Dysons":'D',"Kinetic":'K',"Transit Systems":'TS',"Ventura":'V',"CDC":'C',"Skybus":'S',"McKenzies":'MK'}
+        if operator == 'Ventura Bus Lines':
+            operator = 'Ventura'
+        elif operator == 'Cdc Melbourne':
+            operator = 'CDC'
+        elif operator == 'McKenzies Tourist Service':
+            operator = 'McKenzies'
+
+        bus = operatorlist[operator] + bus
+    
     await printlog(f'searching: {bus}')
     embed= await bussearch.search(bus, ctx)
     try:
         if embed == 'n':
-            await ctx.edit_original_response(content="Please use operator prefix before number")
+            await ctx.edit_original_response(content="Please use operator prefix before number:\nDysons: `D`\nKinetic: `K`\nTransit Systems: TS\nVentura: `V`\nCDC: `C` (also include depot letter eg: W,T or O)\nSkybus: `S`\nMcKenzies: `MK`")
         else:
             await ctx.edit_original_response(embed=embed)
 
@@ -3937,22 +3963,6 @@ async def logCanberraTram(ctx, line:str, number: str, type:str, start:str, end:s
                 
     # Run in a separate task
     asyncio.create_task(log())
-
-
-
-async def busOpsautocompletion(
-    interaction: discord.Interaction,
-    current: str
-) -> typing.List[app_commands.Choice[str]]:
-    # 1. Use set() to remove duplicates from busOps
-    # 2. Use sorted() to keep the list in alphabetical order
-    unique_operators = sorted(set(busOps))
-    
-    # 3. Return the filtered list (limited to 25 to prevent Discord API errors)
-    return [
-        app_commands.Choice(name=operator, value=operator)
-        for operator in unique_operators if current.lower() in operator.lower()
-    ][:25]
 
 async def station_autocompletion(
     interaction: discord.Interaction,
