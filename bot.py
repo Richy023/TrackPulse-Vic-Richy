@@ -4076,7 +4076,10 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
 
 
         # Add bus to the list
-        id = addBus(ctx.user.name, set, type, savedate, line, start.title(), end.title(), operator.title(), notes)
+        try:
+            id = addBus(ctx.user.name, numbertest, type, savedate, line, start.title(), end.title(), operator.title(), notes)
+        except:
+            id = addBus(ctx.user.name, set, type, savedate, line, start.title(), end.title(), operator.title(), notes)
 
         embed = discord.Embed(title="Bus Logged",colour=bus_colour)
 
@@ -4113,7 +4116,129 @@ async def logBus(ctx, line:str, number: str, start:str, end:str, operator:str='U
     # Run in a separate task
     asyncio.create_task(log(notes,type,operator))
 
+@trainlogs.command(name='busedit',description='Edit a logged trip')
+@app_commands.choices(mode=[
+    app_commands.Choice(name="Bus", value="bus"),
+])
+@app_commands.autocomplete(operator=busOpsautocompletion)
+@app_commands.autocomplete(start=station_autocompletion)
+@app_commands.autocomplete(end=station_autocompletion)
+@app_commands.describe(date = "Date in DD/MM/YYYY format")
+async def editrow(ctx, id:str, mode:str='bus', line:str='nochange', number:str='nochange', start:str='nochange', end:str='nochange', date:str='nochange', type:str='auto', operator:str='nochange', notes:str='nochange'):
+    await ctx.response.defer()
+    log_command(ctx.user.id, 'edit-row')
+    
+    username = ctx.user.name
+    logid = id
+    if logid[0] == '#':
+        idformatted = logid[1:].upper()
+    else:
+        idformatted = logid.upper()
+    
+    # Find old data for the edited row
+    dataToDelete = universalReadRow(username, idformatted, mode)
+    
+    if notes != 'nochange':
+            # Remove emojis using regex
+            notes = re.sub(r'[^\x00-\x7F]+', '', notes)
+            # Remove newlines
+            notes = notes.replace('\n', ' ')
+            #add quotes so the csv dosn't break when u use a comma
+            notes = f'"{notes}"'
+            
+    # convert date from DD/MM/YYYY to YYYY-MM-DD
+    if date != 'nochange':
+        if date.lower() == 'today':
+            current_time = time.localtime()
+            savedate = time.strftime("%Y-%m-%d", current_time)
+        else:
+            try:
+                savedate = time.strptime(date, "%d/%m/%Y")
+                savedate = time.strftime("%Y-%m-%d", savedate)
+            except ValueError:
+                try:
+                    savedate = datetime.strptime(date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                except ValueError:
+                    await ctx.edit_original_response(content=f'Invalid date: `{date}`\nMake sure to use a possible date.')
+                    return
+            except TypeError:
+                await ctx.edit_original_response(content=f'Invalid date: `{date}`\nUse the form `dd/mm/yyyy`')
+                return
+    else:
+        savedate = 'nochange'
 
+    try:
+        await printlog("trying new version")
+        if number[0] == "D":
+            numbertest = number[1:]
+            operator = "Dysons"
+        elif number[0] == "V":
+            numbertest = number[1:]
+            operator = "Ventura"
+        elif number[0] == "K":
+            numbertest = number[1:]
+            operator = "Kinetic"
+        elif number[0] == "C":
+            numbertest = number[1:]
+            operator = "CDC"
+        elif number[0] == "S":
+            numbertest = number[1:]
+            operator = "Skybus"
+        elif number[:2] == "TS":
+            numbertest = number[2:]
+            operator = "Transit Systems"
+        elif number[:2] == "MK":
+            numbertest = number[2:]
+            operator = "McKenzies"
+        elif len(number) == 6:
+            operator = "platenumber"
+        if operator != "platenumber":
+            with open('utils/bussets.csv','r') as bussetsFile:
+                reader = csv.reader(bussetsFile)
+                for row in reader:
+                    if row[0] == numbertest and row[2] == operator:
+                        type = f'{row[4]} on {row[3]}'
+                        plate = row[1]
+                        await printlog(f"type: {type}\nplate:{plate}")
+        elif operator == "platenumber":
+            with open('utils/bussets.csv','r') as bussetsFile:
+                reader = csv.reader(bussetsFile)
+                for row in reader:
+                    if row[1] == set:
+                        type = f'{row[4]} on {row[3]}'
+                        plate = row[1]
+                        numbertest = row[0]
+                        operator = row[2]
+                        await printlog(f"type: {type}\nplate:{plate}")
+    except:
+        await printlog("reverting to old version")
+        try:
+            if operator == 'Ventura Bus Lines':
+                operator = 'Ventura'
+            elif operator == 'Cdc Melbourne':
+                operator = 'CDC'
+            elif operator == 'McKenzies Tourist Service':
+                operator = 'McKenzies'
+            with open('utils/bussets.csv','r') as bussetsFile:
+                reader = csv.reader(bussetsFile)
+                for row in reader:
+                    if row[0] == number and row[2] == operator:
+                        type = f'{row[4]} on {row[3]}'
+                        plate = row[1]
+                        await printlog(f"type: {type}\nplate:{plate}")
+        except:
+            pass
+    try:
+        result = editRowBus(username, idformatted, mode,line,numbertest,start,end,savedate,type,operator,notes)
+    except:
+        result = editRowBus(username, idformatted, mode,line,number,start,end,savedate,type,operator,notes)
+    
+    if result == 'invalid id did not show up':
+        await ctx.edit_original_response(content=f'Invalid log ID entered: `{idformatted}`')
+        return
+    
+    
+    await ctx.edit_original_response(content=f'**Successfully edited log `#{idformatted}`**\nOld data:\n`{dataToDelete}`\nNew data:\n`{result}`')
 
 # train logger reader log view
 vLineLines = ['Geelong','Warrnambool', 'Ballarat', 'Maryborough', 'Ararat', 'Bendigo','Echuca', 'Swan Hill','Albury', 'Seymour', 'Shepparton', 'Traralgon', 'Bairnsdale']
