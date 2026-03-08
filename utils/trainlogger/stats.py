@@ -1120,7 +1120,14 @@ def streak(user, mode):
         
         streaks.append(current_count)
         
-        return max(streaks), streaks[-1]
+        # Check if the most recent trip was today or yesterday
+        today = pd.Timestamp.now().normalize()
+        yesterday = today - pd.Timedelta(days=1)
+        last_trip_date = unique_dates[-1].normalize()
+        
+        current_streak = streaks[-1] if last_trip_date in [today, yesterday] else 0
+        
+        return max(streaks), current_streak
 
     except Exception as e:
         print(f"Error getting streak for {user}: {e}")
