@@ -1107,18 +1107,18 @@ def streak(user, mode):
             return 0, 0
         
         streaks = []
-        current_count = 1
+        currentStreak = 1
         
         for i in range(1, len(unique_dates)):
             if (unique_dates[i] - unique_dates[i-1]).days == 1:
-                current_count += 1
+                currentStreak += 1
             else:
-                streaks.append(current_count)
-                current_count = 1
+                streaks.append(currentStreak)
+                currentStreak = 1
         
-        streaks.append(current_count)
+        streaks.append(currentStreak)
         
-        # Check if the most recent trip was today or yesterday
+        # heck if the most recent trip was today or yesterday
         today = pd.Timestamp.now().normalize()
         yesterday = today - pd.Timedelta(days=1)
         last_trip_date = unique_dates[-1].normalize()
