@@ -625,7 +625,7 @@ def topOperators(user):
                 
     return output
 
-def setlist(user, train, summary:bool = False):
+def setlist(user, train, summary:bool = False): # probably shouldn't make this hard coded but use the trainsets csv.
     # List of items
     if train == "X'Trapolis 100":
         sets = [
@@ -1089,3 +1089,39 @@ def getTotalTrips(user='all', mode='all'):
             print(f"Error reading {filename}: {e}")
             line_count = 0
         return line_count
+    
+def streak(user, mode):
+    """
+    Returns the max and current streak for the chosen user.
+    """
+    if mode == 'train':
+        filename = f'utils/trainlogger/userdata/{user}.csv'
+    else:
+        filename = f'utils/trainlogger/userdata/{mode}/{user}.csv'
+    try:
+        df = pd.read_csv(filename)
+        date_series = pd.to_datetime(df.iloc[:, 3], format='mixed', dayfirst=True, errors='coerce')
+        unique_dates = sorted([d for d in date_series.unique() if pd.notna(d)])
+        
+        if not unique_dates:
+            return 0, 0
+        
+        streaks = []
+        current_count = 1
+        
+        for i in range(1, len(unique_dates)):
+            # Check if the next log is exactly one day after the previous
+            if (unique_dates[i] - unique_dates[i-1]).days == 1:
+                current_count += 1
+            else:
+                # Gap found: save finished streak and reset
+                streaks.append(current_count)
+                current_count = 1
+        
+        streaks.append(current_count)
+        
+        return max(streaks), streaks[-1]
+
+    except Exception as e:
+        print(f"Error getting streak for {user}: {e}")
+        return 0, 0
