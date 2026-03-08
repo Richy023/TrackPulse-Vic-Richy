@@ -1099,7 +1099,7 @@ def streak(user, mode):
     else:
         filename = f'utils/trainlogger/userdata/{mode}/{user}.csv'
     try:
-        df = pd.read_csv(filename)
+        df = pd.read_csv(filename, on_bad_lines='skip')
         date_series = pd.to_datetime(df.iloc[:, 3], format='mixed', dayfirst=True, errors='coerce')
         unique_dates = sorted([d for d in date_series.unique() if pd.notna(d)])
         
@@ -1110,11 +1110,9 @@ def streak(user, mode):
         current_count = 1
         
         for i in range(1, len(unique_dates)):
-            # Check if the next log is exactly one day after the previous
             if (unique_dates[i] - unique_dates[i-1]).days == 1:
                 current_count += 1
             else:
-                # Gap found: save finished streak and reset
                 streaks.append(current_count)
                 current_count = 1
         
