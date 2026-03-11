@@ -297,6 +297,10 @@ def lowestDate(user, mode):
     # Remove dashes from each date and convert them to integers
     cleaned_dates = [int(date.replace('-', '')) for date in dates]
 
+    # Empty files/users with no logs should be treated as missing data by callers.
+    if not cleaned_dates:
+        raise FileNotFoundError(f'No log entries found for user {user} in mode {mode}')
+
     # Find the lowest number in the cleaned_dates list
     lowest_number = min(cleaned_dates)
 
@@ -321,6 +325,10 @@ def highestDate(user, mode):
 
     # Remove dashes from each date and convert them to integers
     cleaned_dates = [int(date.replace('-', '')) for date in dates]
+
+    # Empty files/users with no logs should be treated as missing data by callers.
+    if not cleaned_dates:
+        raise FileNotFoundError(f'No log entries found for user {user} in mode {mode}')
 
     # Find the highest number in the cleaned_dates list
     highest_number = max(cleaned_dates)
