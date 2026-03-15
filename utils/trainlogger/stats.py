@@ -36,14 +36,24 @@ def topStats(user, stat, year, mode):
                 train_set = row[1]  # Changed to 'train_set' since 'set' is a Python keyword
                 train_type = row[2]
                 pair = (start_station, end_station)
-                
-                # Update counters
-                line_counter.update([line])
-                station_counter.update([start_station, end_station])
-                set_counter.update([train_set])
-                type_counter.update([train_type])
-                date_counter.update([date])
-                pair_counter.update([pair])
+
+                # Only update counters if value is not 'unknown' or 'N/A' (case-insensitive)
+                if line and line.lower() not in ['unknown', 'n/a']:
+                    line_counter.update([line])
+                if start_station and start_station.lower() not in ['unknown', 'n/a']:
+                    station_counter.update([start_station])
+                if end_station and end_station.lower() not in ['unknown', 'n/a']:
+                    station_counter.update([end_station])
+                if train_set and train_set.lower() not in ['unknown', 'n/a']:
+                    set_counter.update([train_set])
+                if train_type and train_type.lower() not in ['unknown', 'n/a']:
+                    type_counter.update([train_type])
+                if date and date.lower() not in ['unknown', 'n/a']:
+                    date_counter.update([date])
+                if (start_station and end_station and
+                    start_station.lower() not in ['unknown', 'n/a'] and
+                    end_station.lower() not in ['unknown', 'n/a']):
+                    pair_counter.update([pair])
 
         # Get the 10 most common entries
         most_common_lines = line_counter.most_common(100000)
