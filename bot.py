@@ -338,7 +338,7 @@ CITY_ROLE_ID = int(config.get('CITY_ROLE_ID', '0'))
 CITY_ROLE_PANEL_CUSTOM_ID = 'city_role_panel_claim_v1'
 CITY_ROLE_PANEL_REMOVE_CUSTOM_ID = 'city_role_panel_remove_v1'
 CITY_ROLE_DURATION_SECONDS = 21600 # six hors
-CITY_ROLE_DB_PATH = 'userdata/city_role_panel.db'
+CITY_ROLE_DB_PATH = str((Path(__file__).resolve().parent / 'userdata' / 'city_role_panel.db'))
 
 bot = commands.Bot(command_prefix=commands.when_mentioned, intents=discord.Intents.default())
 log_channel = bot.get_channel(STARTUP_CHANNEL_ID)
@@ -631,6 +631,7 @@ async def addGameAchievement(username, channel, mention, game:str='guesser'):
 
 # in the city role assigner
 def init_city_role_db():
+    Path(CITY_ROLE_DB_PATH).parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(CITY_ROLE_DB_PATH)
     cursor = conn.cursor()
     cursor.execute('''
