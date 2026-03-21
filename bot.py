@@ -783,7 +783,7 @@ class CityRolePanelView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label='I am in the city', style=discord.ButtonStyle.success, custom_id=CITY_ROLE_PANEL_CUSTOM_ID)
+    @discord.ui.button(label='I am trainspotting', style=discord.ButtonStyle.success, custom_id=CITY_ROLE_PANEL_CUSTOM_ID)
     async def claim_role(self, interaction: discord.Interaction, button: discord.ui.Button):
         if CITY_ROLE_ID == 0:
             await interaction.response.send_message('Role panel role is not configured.', ephemeral=True)
@@ -821,7 +821,7 @@ class CityRolePanelView(discord.ui.View):
         except Exception as e:
             await interaction.response.send_message(f'Failed to add role: {e}', ephemeral=True)
 
-    @discord.ui.button(label='I left the city', style=discord.ButtonStyle.danger, custom_id=CITY_ROLE_PANEL_REMOVE_CUSTOM_ID)
+    @discord.ui.button(label='I am not trainspotting', style=discord.ButtonStyle.danger, custom_id=CITY_ROLE_PANEL_REMOVE_CUSTOM_ID)
     async def remove_role(self, interaction: discord.Interaction, button: discord.ui.Button):
         if CITY_ROLE_ID == 0:
             await interaction.response.send_message('Role panel role is not configured.', ephemeral=True)
