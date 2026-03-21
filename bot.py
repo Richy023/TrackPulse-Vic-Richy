@@ -4762,7 +4762,7 @@ async def userLogs(ctx, mode:str='train', user: discord.User=None, id:str=None):
                             embed.add_field(name='Date',value=row[3])
                             embed.add_field(name='Trip',value=f"{row[5]} to {row[6]}")
                             if row[8]:
-                                embed.add_field(name='Notes',value=row[4])
+                                embed.add_field(name='Notes',value=row[8])
                 await ctx.followup.send(embed=embed)
 
                 
