@@ -696,14 +696,14 @@ def delete_city_role_claim(user_id: int):
 
 def build_city_role_panel_embed(active_claims):
     embed = discord.Embed(
-        title='Who is in the city?',
-        description='Use the buttons below to mark yourself as in the city or remove yourself early.',
+        title='Who is trainspotting?',
+        description='Use the button below to let others know if you are trainspotting and want to meet up with others.',
         color=discord.Color.blue(),
         timestamp=datetime.now()
     )
 
     if not active_claims:
-        mentions_text = 'No one is in the city.'
+        mentions_text = 'No one is trainspotting right now.'
     else:
         lines = [f'<@{user_id}>' for user_id, _ in active_claims]
         joined = '\n'.join(lines)
@@ -724,7 +724,7 @@ def build_city_role_panel_embed(active_claims):
         else:
             mentions_text = joined
 
-    embed.add_field(name='People in the city:', value=mentions_text, inline=False)
+    embed.add_field(name='People trainspotting:', value=mentions_text, inline=False)
     return embed
 
 
@@ -733,7 +733,7 @@ async def get_city_role_panel_message(channel: discord.abc.Messageable):
         if bot.user is None or msg.author.id != bot.user.id:
             continue
 
-        has_title = any((embed.title or '').strip() == 'Who is in the city?' for embed in msg.embeds)
+        has_title = any((embed.title or '').strip() == 'Who is trainspotting?' for embed in msg.embeds)
         if not has_title:
             continue
 
@@ -789,14 +789,7 @@ class CityRolePanelView(discord.ui.View):
             await interaction.response.send_message('Role panel role is not configured.', ephemeral=True)
             return
 
-        if interaction.guild is None:
-            await interaction.response.send_message('This can only be used in a server.', ephemeral=True)
-            return
-
         role = interaction.guild.get_role(CITY_ROLE_ID)
-        if role is None:
-            await interaction.response.send_message('Configured role could not be found.', ephemeral=True)
-            return
 
         member = interaction.user
         if not isinstance(member, discord.Member):
@@ -809,7 +802,7 @@ class CityRolePanelView(discord.ui.View):
         if role in member.roles:
             upsert_city_role_claim(member.id, expires_at)
             await interaction.response.send_message(
-                f'You already marked yourself as in the city. Timer reset, it now expires <t:{expires_at}:R>.',
+                f'You already marked yourself as trainspotting. Timer reset, it now expires <t:{expires_at}:R>.',
                 ephemeral=True
             )
             if interaction.channel is not None:
@@ -820,7 +813,7 @@ class CityRolePanelView(discord.ui.View):
             await member.add_roles(role, reason='Clicked city role panel button')
             upsert_city_role_claim(member.id, expires_at)
             await interaction.response.send_message(
-                f'You have been marked as in the city. Your status will automatically get removed <t:{expires_at}:R>.',
+                f'You have been marked as trainspotting. Your status will automatically get removed <t:{expires_at}:R>.',
                 ephemeral=True
             )
             if interaction.channel is not None:
@@ -843,7 +836,7 @@ class CityRolePanelView(discord.ui.View):
 
         if role not in member.roles:
             delete_city_role_claim(member.id)
-            await interaction.response.send_message('You already aren\'t in the city!', ephemeral=True)
+            await interaction.response.send_message('You already aren\'t trainspotting!', ephemeral=True)
             if interaction.channel is not None:
                 await refresh_city_role_panel_message(interaction.channel)
             return
@@ -852,7 +845,7 @@ class CityRolePanelView(discord.ui.View):
             await member.remove_roles(role, reason='Clicked city role panel remove button')
             delete_city_role_claim(member.id)
             await interaction.response.send_message(
-                'Role removed. You are no longer marked as in the city.',
+                'Role removed. You are no longer marked as trainspotting.',
                 ephemeral=True
             )
             if interaction.channel is not None:
@@ -866,7 +859,7 @@ async def city_role_panel_exists(channel: discord.abc.Messageable) -> bool:
         if bot.user is None or msg.author.id != bot.user.id:
             continue
 
-        has_title = any((embed.title or '').strip() == 'Who is in the city?' for embed in msg.embeds)
+        has_title = any((embed.title or '').strip() == 'Who is trainspotting?' for embed in msg.embeds)
         if not has_title:
             continue
 
@@ -931,9 +924,9 @@ async def city_role_expiry_loop():
 
         if member is not None and role is not None and role in member.roles:
             try:
-                await member.remove_roles(role, reason='in the city role expired after 6 hours')
+                await member.remove_roles(role, reason='trainspotting role expired after 6 hours')
             except Exception as e:
-                await printlog(f'Could not remove expired in the city role from {user_id}: {e}')
+                await printlog(f'Could not remove expired trainspotting role from {user_id}: {e}')
 
         delete_city_role_claim(user_id)
         changed = True
