@@ -7388,6 +7388,20 @@ async def restart(ctx):
         await ctx.send("You are not authorized to use this command.")
 
 @bot.command()
+async def shutdown(ctx):
+    if ctx.author.id in admin_users:
+        log_command(ctx.author.id, 'shutdown')
+        await ctx.send(f"Shutting down bot")
+        await printlog("Shutting down bot")
+        
+        await bot.close()
+        await stop_webserver()
+
+    else:
+        await printlog(f'{str(ctx.author.id)} tried to shutdown the bot.')
+        await ctx.send("You are not authorized to use this command.")
+
+@bot.command()
 async def update(ctx):
     if automatic_updates == True:
         if ctx.author.id in admin_users:
