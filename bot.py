@@ -332,6 +332,14 @@ STARTUP_CHANNEL_ID = int(config['STARTUP_CHANNEL_ID']) # channel id to send the 
 RARE_SERVICE_CHANNEL_ID = int(config['RARE_SERVICE_CHANNEL_ID'])
 USER_ID = config['USER_ID']
 
+CITY_ROLE_PANEL_ENABLED = config.get('CITY_ROLE_PANEL_ENABLED', 'OFF') == 'ON'
+CITY_ROLE_CHANNEL_ID = int(config.get('CITY_ROLE_CHANNEL_ID', str(STARTUP_CHANNEL_ID)))
+CITY_ROLE_ID = int(config.get('CITY_ROLE_ID', '0'))
+CITY_ROLE_PANEL_CUSTOM_ID = 'city_role_panel_claim_v1'
+CITY_ROLE_PANEL_REMOVE_CUSTOM_ID = 'city_role_panel_remove_v1'
+CITY_ROLE_DURATION_SECONDS = 21600 # six hors
+CITY_ROLE_DB_PATH = 'userdata/city_role_panel.db'
+
 bot = commands.Bot(command_prefix=commands.when_mentioned, intents=discord.Intents.default())
 log_channel = bot.get_channel(STARTUP_CHANNEL_ID)
 
@@ -481,6 +489,9 @@ async def stop_webserver():
 
 @bot.event
 async def on_ready():
+    init_city_role_db()
+    bot.add_view(CityRolePanelView())
+
     # download the trainset data     
     csv_url = "https://victorianrailphotos.com/api/trainsets.csv"
     save_location = "utils/trainsets.csv"
@@ -508,11 +519,21 @@ async def on_ready():
     except Exception as e:
         await printlog(f'Error: {e}\n make sure the bot has premission to send in the startup channel')
         return
+
+    try:
+        await ensure_city_role_panel_message()
+    except Exception as e:
+        await printlog(f'City role panel setup failed: {e}')
+
+    if CITY_ROLE_PANEL_ENABLED and not city_role_expiry_loop.is_running():
+        city_role_expiry_loop.start()
     
-    trainTimleyCheckerLoop.start()  # Start the train timley checker loop
+    if not trainTimleyCheckerLoop.is_running():
+        trainTimleyCheckerLoop.start()  # Start the train timley checker loop
     
     try:
-        task_loop.start()
+        if not task_loop.is_running():
+            task_loop.start()
     except:
         await printlog("WARNING: Rare train checker is not enabled!")
         await channel.send(f"WARNING: Rare train checker is not enabled! <@{USER_ID}>")
@@ -607,6 +628,317 @@ async def addGameAchievement(username, channel, mention, game:str='guesser'):
         embed = discord.Embed(title='Achievement unlocked!', color=achievement_colour)
         embed.add_field(name=info['name'], value=f"{info['description']}\n\n View all your achievements: </achievements view:1327085604789551134>")
         await channel.send(mention,embed=embed)
+
+# in the city role assigner
+def init_city_role_db():
+    conn = sqlite3.connect(CITY_ROLE_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS city_role_claims (
+            user_id INTEGER PRIMARY KEY,
+            expires_at INTEGER NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+
+def upsert_city_role_claim(user_id: int, expires_at: int):
+    conn = sqlite3.connect(CITY_ROLE_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        '''
+        INSERT INTO city_role_claims (user_id, expires_at)
+        VALUES (?, ?)
+        ON CONFLICT(user_id) DO UPDATE SET
+            expires_at = excluded.expires_at
+        ''',
+        (user_id, expires_at)
+    )
+    conn.commit()
+    conn.close()
+
+
+def get_active_city_role_claims():
+    now = int(time.time())
+    conn = sqlite3.connect(CITY_ROLE_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        'SELECT user_id, expires_at FROM city_role_claims WHERE expires_at > ? ORDER BY expires_at ASC',
+        (now,)
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def get_expired_city_role_claims():
+    now = int(time.time())
+    conn = sqlite3.connect(CITY_ROLE_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        'SELECT user_id FROM city_role_claims WHERE expires_at <= ?',
+        (now,)
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def delete_city_role_claim(user_id: int):
+    conn = sqlite3.connect(CITY_ROLE_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM city_role_claims WHERE user_id = ?', (user_id,))
+    conn.commit()
+    conn.close()
+
+
+def build_city_role_panel_embed(active_claims):
+    embed = discord.Embed(
+        title='Who is in the city?',
+        description='Use the buttons below to mark yourself as in the city or remove yourself early.',
+        color=discord.Color.blue(),
+        timestamp=datetime.now()
+    )
+
+    if not active_claims:
+        mentions_text = 'No one is in the city.'
+    else:
+        lines = [f'<@{user_id}>' for user_id, _ in active_claims]
+        joined = '\n'.join(lines)
+        if len(joined) > 1024:
+            kept = []
+            current = 0
+            remaining = len(lines)
+            for line in lines:
+                add_len = len(line) + (1 if kept else 0)
+                if current + add_len > 980:
+                    break
+                kept.append(line)
+                current += add_len
+                remaining -= 1
+            if remaining > 0:
+                kept.append(f'+ {remaining} more')
+            mentions_text = '\n'.join(kept)
+        else:
+            mentions_text = joined
+
+    embed.add_field(name='People in the city:', value=mentions_text, inline=False)
+    return embed
+
+
+async def get_city_role_panel_message(channel: discord.abc.Messageable):
+    async for msg in channel.history(limit=200):
+        if bot.user is None or msg.author.id != bot.user.id:
+            continue
+
+        has_title = any((embed.title or '').strip() == 'Who is in the city?' for embed in msg.embeds)
+        if not has_title:
+            continue
+
+        has_button = any(
+            getattr(component, 'custom_id', None) == CITY_ROLE_PANEL_CUSTOM_ID
+            for row in msg.components
+            for component in row.children
+        )
+        if has_button:
+            return msg
+    return None
+
+
+async def refresh_city_role_panel_message(channel: discord.abc.Messageable):
+    message = await get_city_role_panel_message(channel)
+    if message is None:
+        return
+
+    active_claims = get_active_city_role_claims()
+    guild = getattr(channel, 'guild', None)
+    role = guild.get_role(CITY_ROLE_ID) if guild is not None else None
+    cleaned_claims = []
+    for user_id, expires_at in active_claims:
+        if guild is None or role is None:
+            delete_city_role_claim(user_id)
+            continue
+
+        member = guild.get_member(user_id)
+        if member is None:
+            try:
+                member = await guild.fetch_member(user_id)
+            except Exception:
+                member = None
+
+        if member is None or role not in member.roles:
+            delete_city_role_claim(user_id)
+            continue
+
+        cleaned_claims.append((user_id, expires_at))
+
+    active_claims = cleaned_claims
+    embed = build_city_role_panel_embed(active_claims)
+    await message.edit(embed=embed, view=CityRolePanelView())
+
+
+class CityRolePanelView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @discord.ui.button(label='I am in the city', style=discord.ButtonStyle.success, custom_id=CITY_ROLE_PANEL_CUSTOM_ID)
+    async def claim_role(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if CITY_ROLE_ID == 0:
+            await interaction.response.send_message('Role panel role is not configured.', ephemeral=True)
+            return
+
+        if interaction.guild is None:
+            await interaction.response.send_message('This can only be used in a server.', ephemeral=True)
+            return
+
+        role = interaction.guild.get_role(CITY_ROLE_ID)
+        if role is None:
+            await interaction.response.send_message('Configured role could not be found.', ephemeral=True)
+            return
+
+        member = interaction.user
+        if not isinstance(member, discord.Member):
+            member = interaction.guild.get_member(interaction.user.id)
+            if member is None:
+                member = await interaction.guild.fetch_member(interaction.user.id)
+
+        expires_at = int(time.time()) + CITY_ROLE_DURATION_SECONDS
+
+        if role in member.roles:
+            upsert_city_role_claim(member.id, expires_at)
+            await interaction.response.send_message(
+                f'You already marked yourself as in the city. Timer reset, it now expires <t:{expires_at}:R>.',
+                ephemeral=True
+            )
+            if interaction.channel is not None:
+                await refresh_city_role_panel_message(interaction.channel)
+            return
+
+        try:
+            await member.add_roles(role, reason='Clicked city role panel button')
+            upsert_city_role_claim(member.id, expires_at)
+            await interaction.response.send_message(
+                f'You have been marked as in the city. Your status will automatically get removed <t:{expires_at}:R>.',
+                ephemeral=True
+            )
+            if interaction.channel is not None:
+                await refresh_city_role_panel_message(interaction.channel)
+        except Exception as e:
+            await interaction.response.send_message(f'Failed to add role: {e}', ephemeral=True)
+
+    @discord.ui.button(label='I left the city', style=discord.ButtonStyle.danger, custom_id=CITY_ROLE_PANEL_REMOVE_CUSTOM_ID)
+    async def remove_role(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if CITY_ROLE_ID == 0:
+            await interaction.response.send_message('Role panel role is not configured.', ephemeral=True)
+            return
+
+        role = interaction.guild.get_role(CITY_ROLE_ID)
+        member = interaction.user
+        if not isinstance(member, discord.Member):
+            member = interaction.guild.get_member(interaction.user.id)
+            if member is None:
+                member = await interaction.guild.fetch_member(interaction.user.id)
+
+        if role not in member.roles:
+            delete_city_role_claim(member.id)
+            await interaction.response.send_message('You already aren\'t in the city!', ephemeral=True)
+            if interaction.channel is not None:
+                await refresh_city_role_panel_message(interaction.channel)
+            return
+
+        try:
+            await member.remove_roles(role, reason='Clicked city role panel remove button')
+            delete_city_role_claim(member.id)
+            await interaction.response.send_message(
+                'Role removed. You are no longer marked as in the city.',
+                ephemeral=True
+            )
+            if interaction.channel is not None:
+                await refresh_city_role_panel_message(interaction.channel)
+        except Exception as e:
+            await interaction.response.send_message(f'Failed to remove role: {e}', ephemeral=True)
+
+
+async def city_role_panel_exists(channel: discord.abc.Messageable) -> bool:
+    async for msg in channel.history(limit=200):
+        if bot.user is None or msg.author.id != bot.user.id:
+            continue
+
+        has_title = any((embed.title or '').strip() == 'Who is in the city?' for embed in msg.embeds)
+        if not has_title:
+            continue
+
+        has_button = any(
+            getattr(component, 'custom_id', None) == CITY_ROLE_PANEL_CUSTOM_ID
+            for row in msg.components
+            for component in row.children
+        )
+        if has_button:
+            return True
+
+    return False
+
+
+async def ensure_city_role_panel_message():
+    if not CITY_ROLE_PANEL_ENABLED:
+        return
+
+    channel = bot.get_channel(CITY_ROLE_CHANNEL_ID)
+    if channel is None:
+        await printlog(f'City role panel channel not found: {CITY_ROLE_CHANNEL_ID}')
+        return
+
+    existing_message = await get_city_role_panel_message(channel)
+    if existing_message is not None:
+        await refresh_city_role_panel_message(channel)
+        return
+
+    embed = build_city_role_panel_embed(get_active_city_role_claims())
+    await channel.send(embed=embed, view=CityRolePanelView())
+
+
+@tasks.loop(minutes=1)
+async def city_role_expiry_loop():
+    if not CITY_ROLE_PANEL_ENABLED:
+        return
+
+    if CITY_ROLE_ID == 0:
+        return
+
+    channel = bot.get_channel(CITY_ROLE_CHANNEL_ID)
+    if channel is None:
+        return
+
+    guild = getattr(channel, 'guild', None)
+    if guild is None:
+        return
+
+    role = guild.get_role(CITY_ROLE_ID)
+    expired = get_expired_city_role_claims()
+    if not expired:
+        return
+
+    changed = False
+    for user_id, in expired:
+        member = guild.get_member(user_id)
+        if member is None:
+            try:
+                member = await guild.fetch_member(user_id)
+            except Exception:
+                member = None
+
+        if member is not None and role is not None and role in member.roles:
+            try:
+                await member.remove_roles(role, reason='in the city role expired after 6 hours')
+            except Exception as e:
+                await printlog(f'Could not remove expired in the city role from {user_id}: {e}')
+
+        delete_city_role_claim(user_id)
+        changed = True
+
+    if changed:
+        await refresh_city_role_panel_message(channel)
 
 
 # Rare train finder
