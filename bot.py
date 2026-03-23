@@ -4159,6 +4159,7 @@ async def NSWstop_autocompletion(
 ])
 @app_commands.choices(type=[
         app_commands.Choice(name="Urbos 3", value="Urbos 3"),
+    app_commands.Choice(name="Urbos 100", value="Urbos 100"),
         app_commands.Choice(name="Citadis 305", value="Citadis 305"),
 ])
 # SYdney tram logger nsw tram
@@ -4217,6 +4218,7 @@ async def logNSWTram(ctx, line:str, number: str, type:str, start:str, end:str, d
 ])
 @app_commands.choices(type=[
         app_commands.Choice(name="Urbos 3", value="Urbos 3"),
+    app_commands.Choice(name="Urbos 100", value="Urbos 100"),
 ])
 @app_commands.choices(start=[
         app_commands.Choice(name='Alinga Street', value='Alinga Street'),
@@ -4281,7 +4283,7 @@ async def logCanberraTram(ctx, line:str, number: str, type:str, start:str, end:s
             return
 
         # Add train to the list
-        id = addSydneyTram(ctx.user.name, number, type, savedate, line, start.title(), end.title())
+        id = addCanberraTram(ctx.user.name, number, type, savedate, line, start.title(), end.title())
 
         embed = discord.Embed(title="Tram Logged",colour=sydney_tram_colour)
         
