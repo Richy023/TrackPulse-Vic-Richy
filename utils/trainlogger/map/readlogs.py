@@ -827,7 +827,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
         print("using cached version")
     else:
         if global_stats == True:
-            map_handler.highlight_map(affected_lines, f"cache/{modeName}-{year}-{trainType}-{line_choice}-{no_compression}.png", stations, no_compression)
+            map_handler.highlight_map(affected_lines, f"cache/{modeName}-{year}-{trainType}-{line_choice}-{str(no_compression)}.png", stations, no_compression)
 
             station_txt = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_stations.txt","w")
             station_txt.write(','.join(stations))
@@ -838,7 +838,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
             affected_lines_txt = open(f"cache\\{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt","w")
             affected_lines_txt.write(''.join(''.join(affected_lines_writable)))
         else:
-            map_handler.highlight_map(affected_lines, f"cache/{user}-{modeName}-{year}-{trainType}-{line_choice}-{no_compression}.png", stations, no_compression)
+            map_handler.highlight_map(affected_lines, f"cache/{user}-{modeName}-{year}-{trainType}-{line_choice}-{str(no_compression)}.png", stations, no_compression)
 
             station_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_stations.txt","w")
             station_txt.write(','.join(stations))
