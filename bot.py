@@ -6518,6 +6518,8 @@ async def viewMaps(ctx, mode: str, no_compression: bool = False):
         embed.set_image(url="attachment://map.png")
         embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
         await ctx.followup.send(embed=embed, file=file)
+        if no_compression:
+            await ctx.send(file=file)
     except Exception as e:
         await printlog(e)
 
