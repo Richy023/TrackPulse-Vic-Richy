@@ -846,7 +846,7 @@ def logMap(user:str, lines_dictionary:dict, mode:str='time_based_variants/log_tr
             affected_lines_writable = []
             for affected_line in affected_lines:
                 affected_lines_writable.append(f"{','.join(affected_line)}\n")
-            affected_lines_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}_affected_lines.txt","w")
+            affected_lines_txt = open(f"cache\\{user}-{modeName}-{year}-{trainType}-{line_choice}-{str(no_compression)}_affected_lines.txt","w")
             affected_lines_txt.write(''.join(''.join(affected_lines_writable)))
 
     return(len(affected_lines))

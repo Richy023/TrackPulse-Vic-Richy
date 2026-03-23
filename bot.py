@@ -6519,12 +6519,10 @@ async def viewMaps(ctx, mode: str, no_compression: bool = False):
             await printlog(f"Retrieved NSW Light Rail for {ctx.user.name} in {ctx.channel.mention}")
         embed.set_image(url="attachment://map.png")
         embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
-        await ctx.followup.send(embed=embed, file=file)
-        try:
-            if no_compression:
-                await ctx.followup.send(file=file)
-        except:
-            print("damn")
+        if no_compression:
+            await ctx.followup.send(file=file)
+        else:
+            await ctx.followup.send(embed=embed, file=file)
     except Exception as e:
         await printlog(e)
 
@@ -6611,7 +6609,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 pfp = user_pic.avatar.url
                 embed.set_author(name="Map by Comeng17", icon_url=pfp)
                 embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
-                await ctx.followup.send(embed=embed, file=file)
+                if no_compression:
+                    await ctx.followup.send(file=file)
+                else:
+                    await ctx.followup.send(embed=embed, file=file)
             except Exception as e:
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
         
@@ -6663,7 +6664,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 pfp = user_pic.avatar.url
                 embed.set_author(name="Map by Comeng17", icon_url=pfp)
                 embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
-                await ctx.followup.send(embed=embed, file=file)
+                if no_compression:
+                    await ctx.followup.send(file=file)
+                else:
+                    await ctx.followup.send(embed=embed, file=file)
             except Exception as e:
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
         
@@ -6694,7 +6698,10 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 pfp = user_pic.avatar.url
                 embed.set_author(name="Map by aperturethefloof", icon_url=pfp)
                 embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
-                await ctx.followup.send(embed=embed, file=file)
+                if no_compression:
+                    await ctx.followup.send(file=file)
+                else:
+                    await ctx.followup.send(embed=embed, file=file)
             except Exception as e:
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
 
