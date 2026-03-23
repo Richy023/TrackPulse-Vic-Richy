@@ -6520,7 +6520,7 @@ async def viewMaps(ctx, mode: str, no_compression: bool = False):
         await ctx.followup.send(embed=embed, file=file)
         try:
             if no_compression:
-                await ctx.send_message(file=file)
+                await ctx.channel.send(file=file)
         except:
             print("damn")
     except Exception as e:
