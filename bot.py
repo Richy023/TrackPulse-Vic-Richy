@@ -6549,7 +6549,7 @@ async def viewMaps(ctx, mode: str, no_compression: bool = False):
         app_commands.Choice(name="Sprinter", value="Sprinter"),
         app_commands.Choice(name="Other", value="Other"),
 ])
-async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,global_stats:bool=False):
+async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel.png",line: str='All', train:str='all', year: int=0, user: discord.Member=None,global_stats:bool=False,no_compression:bool=False):
     await ctx.response.defer()
     log_command(ctx.user.id, 'maps-trips')
     await printlog(f"Making trip map for {str(ctx.user.id)}")
@@ -6565,7 +6565,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             modeName = 'vic'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train, global_stats)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_pre_munnel, mode, line, year, 'vic', train, global_stats, no_compression)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
@@ -6618,7 +6618,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         if mode == "time_based_variants/log_train_map_post_munnel.png":
             modeName = 'vic-metrotunnel'
             try:
-                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train, global_stats)
+                percent_amount = await asyncio.to_thread(logMap, target_user, lines_dictionary_log_train_map_post_munnel, mode, line, year, 'vic-metrotunnel', train, global_stats, no_compression)
             except FileNotFoundError:
                 await ctx.followup.send(f'{"You have" if user == None else username + " has"} no logs!')
                 return
