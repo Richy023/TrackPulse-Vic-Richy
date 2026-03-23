@@ -6465,18 +6465,21 @@ async def profile(ctx, user: discord.User = None):
         app_commands.Choice(name="NSW Regional and Interstate Trains", value="log___sydney-train___map.png"),
         app_commands.Choice(name="NSW Light Rail", value="log_sydney-tram_map.png"),
 ])
-async def viewMaps(ctx, mode: str):
+async def viewMaps(ctx, mode: str, no_compression: bool = False):
     await ctx.response.defer()
     log_command(ctx.user.id,'map-view')
     try:
-        editmode = mode.removeprefix("time_based_variants/")
+        editmode = mode.removeprefix("time_based_variants/") + str(no_compression)
         try:
             file=discord.File(f'cache/{editmode}.png', filename='map.png')
         except:
             uncompressed = Image.open(f'utils/trainlogger/map/{mode}')
             legended = legend(uncompressed,f'utils/trainlogger/map/legends/{mode}')
-            compressed = compress(legended)
-            compressed.save(f'cache/{editmode}.png')
+            if no_compression:
+                legended.save(f'cache/{editmode}.png')
+            else:
+                compressed = compress(legended)
+                compressed.save(f'cache/{editmode}.png')
             file=discord.File(f'cache/{editmode}.png', filename='map.png')
         if mode == "time_based_variants/log_train_map_pre_munnel.png":
             embed = discord.Embed(title=f"Former map of the network covered by </log train:1289843416628330506>", color=0xb8b8b8, description="This is a map that is used by a seperate command to show where you have been on the railway network. This is the map that was used before the Metro Tunnel Big Switch on February 1st 2026.")
@@ -6517,6 +6520,11 @@ async def viewMaps(ctx, mode: str):
         embed.set_image(url="attachment://map.png")
         embed.set_footer(text="If you're interested in helping make these maps (especially the interstate ones) contact Xm9G or Comeng17")
         await ctx.followup.send(embed=embed, file=file)
+        try:
+            if no_compression:
+                await ctx.channel.send(file=file)
+        except:
+            print("damn")
     except Exception as e:
         await printlog(e)
 
