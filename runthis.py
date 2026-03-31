@@ -121,6 +121,14 @@ admin_users = [1002449671224041502, 780303451980038165, 634620519500480512, 5810
 if config['DEVS_TO_HAVE_ADMIN_ACCESS'] == 'OFF':
     admin_users = [int(USER_ID)]
 
+os.spawnl(os.P_NOWAIT, sys.executable, 'python', 'bot.py')
+
+@bot.command()
+async def megaping(ctx):
+    latency = round(bot.latency * 1000)  # Convert latency to ms
+    await ctx.send(f"Pong! Backup program operational! Latency: {latency} ms")
+    log_command(ctx.author.id, 'ping')
+
 @bot.command()
 async def start(ctx):
     if ctx.author.id in admin_users:
