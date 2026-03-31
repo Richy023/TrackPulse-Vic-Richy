@@ -1,82 +1,29 @@
 from calendar import c
 from math import e
-from numbers import Number
-import operator
-from shutil import ExecError
-import shutil
-import sqlite3
-from tracemalloc import stop
 from cycler import V
-from discord.ext import commands, tasks
-from discord import app_commands
+from discord.ext import commands
 import discord
-import json
-import requests
-import asyncio
-import threading
-from datetime import datetime
-import time
-import csv
-import random
-from typing import Literal, Optional
-import typing
 from re import A
-import traceback
 import os
-from pathlib import Path
-import git
-import pandas as pd
 import builtins
 
 import sys
 
-from commands.NSWsearchtrain import NSWsearchTrainCommand
-from commands.logger.logqldtrain import logQLDtrain
-from commands.searchPhoto import searchTrainPhoto
-from commands.searchtrain import searchTrainCommand
-from commands.traintimleyfetcher import getchannelstocheck, seeWhereTrainsAre, trainTimleyFetcherAdd, trainTimleyFetcherList, trainTimleyFetcherRemove
-from photosubmissions.manager import addSubmission, getUserID, removeSubmission, returnQueue
-from utils.alias import setWebAlias
-from utils.aviationAPIs.airportdata import get_airport_data
-from utils.aviationAPIs.aircraftphoto import getplaneimage
-from utils.game.imageadder import acceptGuesserPhoto
-from utils.trainlogger.map.line_coordinates_log_train_map_pre_munnel import getTotalLines_pre_munnel
-from utils.trainlogger.map.line_coordinates_log_train_map_post_munnel import getTotalLines_post_munnel
-from utils.trainlogger.map.line_coordinates_log_sydney_tram_map import getTotalLines_sydney_tram
-from utils.vicrailphotosapi.accepter import acceptPhoto, webAddImage
 sys.stdout = sys.__stdout__ 
 
 original_open = builtins.open
 
-# Commands imports
-from commands.help import helpCommand
-from commands.logexport import logExport
-
 # Utils imports
-from utils import healthcheck, trainset
-from utils.directions import getDirectionName
-from utils.downloader import downloader_function
 from utils.favourites.viewer import *
 from utils.search import *
 from utils.colors import *
-from utils.stationID import nameToStopID
 from utils.stats.stats import *
-from utils.pageScraper import *
-from utils.trainImage import *
-from utils.checktype import *
-from utils.rareTrain import *
-from utils.montagueAPI import *
-from utils.map.map import *
-from utils.game.lb import *
 
 # trainlogger imports
-from utils.trainlogger.achievements.check import awardAchievement, checkAchievements, checkGameAchievements, checkHangmanAchievements, getAchievementInfo
 from utils.trainlogger.main import *
 from utils.trainset import *
 from utils.trainlogger.stats import *
 from utils.trainlogger.ids import *
-from utils.trainlogger.map.readlogs import logMap
-from utils.trainlogger.map.mapimage import compress, legend
 from utils.lines_dictionaries import *
 from utils.trainlogger.achievements import *
 from utils.trainlogger.graph import *
@@ -93,8 +40,6 @@ from utils.stoppingpattern import *
 from utils.locationfromid import *
 from utils.stationDisruptions import *
 from utils.stats.stats import *
-from utils.vlineTrickery import getVlineStopType
-import threading
 
 print("""TrackPulse Vic Copyright (C) 2024  Billy Evans
     This program comes with ABSOLUTELY NO WARRANTY.
