@@ -81,7 +81,7 @@ async def start(ctx):
         await ctx.send(f"Starting bot")
         await printlog("Starting bot")
 
-        os.spawnl(os.P_NOWAIT, sys.executable, 'python', 'bot.py')
+        os.spawnl(os.P_NOWAIT, sys.executable, 'python3', 'bot.py')
 
         await ctx.send(f"Started")
         await printlog("Started")
