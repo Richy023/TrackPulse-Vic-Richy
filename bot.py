@@ -1520,7 +1520,6 @@ async def victorianrailphotos(ctx, number: str = '', traintype: str = '', locati
         app_commands.Choice(name="New South Wales", value="NSW"),
 ])
 async def train_search(ctx, train: str, state:str='auto', hide_run_info:bool=False):
-    if train == 'IEV120': train = 'EV120'
     # try and auto find state
     if state == 'auto':
         Type = trainType(train) 
@@ -3358,6 +3357,14 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
             embed.add_field(name="Trip", value=f'{start.title()} to {end.title()}')
         if notes:
             embed.add_field(name="Notes", value=notes.strip('"'))
+
+        # tell you if you have ridden the train before
+        _, count = checkTrainRidden(set, f"utils/trainlogger/userdata/{ctx.user.name}.csv")
+        rides_before = max(len(count) - 1, 0)
+        if rides_before > 0:
+            embed.add_field(name="Status", value=f"You have ridden this train {rides_before} times before!")
+        else:
+            embed.add_field(name="Status", value="This is your first time riding this train!")
 
         # thing to find image:
         await printlog(f"Finding image for {number}")
