@@ -3358,13 +3358,6 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
         if notes:
             embed.add_field(name="Notes", value=notes.strip('"'))
 
-        # tell you if you have ridden the train before
-        _, count = checkTrainRidden(set, f"utils/trainlogger/userdata/{ctx.user.name}.csv")
-        rides_before = max(len(count) - 1, 0)
-        if rides_before > 0:
-            embed.add_field(name="Status", value=f"You have ridden this train {rides_before} times before!")
-        else:
-            embed.add_field(name="Status", value="This is your first time riding this train!")
 
         # thing to find image:
         await printlog(f"Finding image for {number}")
@@ -3404,9 +3397,22 @@ async def logtrain(ctx, line:str, number:str, start:str, end:str, date:str='toda
             
         except Exception as e:
             await printlog(f"Error getting image: {e}")
+            
+        # extra details thing
+        extraText = '\u200b'
+
+        # tell you if you have ridden the train before
+        _, count = checkTrainRidden(set, f"utils/trainlogger/userdata/{ctx.user.name}.csv")
+        rides_before = max(len(count) - 1, 0)
+        if rides_before > 0:
+            extraText += f"You have ridden this train {rides_before} times before!"
+        else:
+            extraText += "This is your first time riding this train!"
+
+        extraText += f'\nPhoto by {credits} on [victorianrailphotos.com](https://victorianrailphotos.com)' if credits is not None else ''
+        embed.add_field(name="\u200b", value=extraText)
 
         footer = f"Log ID #{id}"
-        footer += f' | Photo by {credits}' if credits is not None else ''
         embed.set_footer(text=footer)
         
         await ctx.edit_original_response(embed=embed)
