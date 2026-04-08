@@ -40,6 +40,7 @@ import typing
 from re import A
 import traceback
 import os
+import zipfile
 from pathlib import Path
 import git
 import pandas as pd
@@ -7118,6 +7119,51 @@ async def exporthistory(ctx, train:str):
         await ctx.send(file=discord.File(filepath, filename=f"{train}.csv"))
     else:
         await ctx.send("Currently only admins can export train history, in the future this data may become available to all users.")
+
+@bot.command(name='backup')
+async def backup(ctx):
+    if ctx.guild is not None:
+        await ctx.send("This command can only be used in DMs.")
+        return
+
+    if ctx.author.id not in admin_users:
+        await ctx.send("You are not authorized to use this command.")
+        return
+
+    log_command(ctx.author.id, 'backup')
+    await ctx.send("Preparing backup archive...")
+
+    root_path = Path(__file__).resolve().parent
+    userdata_path = root_path / 'utils' / 'trainlogger' / 'userdata'
+    leaderboard_path = root_path / 'utils' / 'game' / 'scores'
+    temp_path = root_path / 'temp'
+    temp_path.mkdir(parents=True, exist_ok=True)
+
+    backup_name = f"trackpulse-backup-{datetime.utcnow().strftime('%Y%m%d-%H%M%S')}"
+    backup_file = temp_path / f"{backup_name}.zip"
+
+    try:
+        with zipfile.ZipFile(backup_file, 'w', zipfile.ZIP_DEFLATED) as archive:
+            if userdata_path.exists():
+                for file_path in userdata_path.rglob('*'):
+                    if file_path.is_file():
+                        archive.write(file_path, file_path.relative_to(root_path))
+
+            if leaderboard_path.exists():
+                for file_path in leaderboard_path.rglob('*'):
+                    if file_path.is_file():
+                        archive.write(file_path, file_path.relative_to(root_path))
+
+        await ctx.send(file=discord.File(str(backup_file), filename=f"{backup_name}.zip"))
+    except Exception as e:
+        await printlog(f"Backup creation failed: {e}")
+        await ctx.send(f"Failed to generate backup: {e}")
+    finally:
+        if backup_file.exists():
+            try:
+                backup_file.unlink()
+            except Exception:
+                pass
 
 # analytics viewer
 @bot.command()
