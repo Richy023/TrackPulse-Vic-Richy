@@ -7148,6 +7148,8 @@ async def backup(ctx):
         if source_path.exists():
             for file_path in source_path.rglob('*'):
                 if file_path.is_file():
+                    if source_path == userdata_path and 'maps' in file_path.relative_to(userdata_path).parts:
+                        continue
                     files_to_backup.append(file_path)
 
     if not files_to_backup:
