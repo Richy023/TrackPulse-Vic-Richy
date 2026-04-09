@@ -7140,30 +7140,76 @@ async def backup(ctx):
     temp_path.mkdir(parents=True, exist_ok=True)
 
     backup_name = f"trackpulse-backup-{datetime.utcnow().strftime('%Y%m%d-%H%M%S')}"
-    backup_file = temp_path / f"{backup_name}.zip"
+    max_discord_file_size = 8 * 1024 * 1024
+    target_archive_size = int(7.5 * 1024 * 1024)
+
+    files_to_backup = []
+    for source_path in [userdata_path, leaderboard_path]:
+        if source_path.exists():
+            for file_path in source_path.rglob('*'):
+                if file_path.is_file():
+                    files_to_backup.append(file_path)
+
+    if not files_to_backup:
+        await ctx.send("No backup data was found.")
+        return
+
+    files_to_backup.sort(key=lambda p: str(p))
+
+    archive_groups = []
+    current_group = []
+    current_estimated_size = 0
+
+    for file_path in files_to_backup:
+        file_size = file_path.stat().st_size
+        # Include a small buffer per file for zip metadata overhead.
+        estimated_entry_size = file_size + 2048
+
+        if current_group and (current_estimated_size + estimated_entry_size) > target_archive_size:
+            archive_groups.append(current_group)
+            current_group = []
+            current_estimated_size = 0
+
+        current_group.append(file_path)
+        current_estimated_size += estimated_entry_size
+
+    if current_group:
+        archive_groups.append(current_group)
+
+    created_archives = []
 
     try:
-        with zipfile.ZipFile(backup_file, 'w', zipfile.ZIP_DEFLATED) as archive:
-            if userdata_path.exists():
-                for file_path in userdata_path.rglob('*'):
-                    if file_path.is_file():
-                        archive.write(file_path, file_path.relative_to(root_path))
+        total_parts = len(archive_groups)
+        for index, group in enumerate(archive_groups, start=1):
+            archive_filename = f"{backup_name}-part{index:02d}-of-{total_parts:02d}.zip"
+            archive_path = temp_path / archive_filename
 
-            if leaderboard_path.exists():
-                for file_path in leaderboard_path.rglob('*'):
-                    if file_path.is_file():
-                        archive.write(file_path, file_path.relative_to(root_path))
+            with zipfile.ZipFile(archive_path, 'w', zipfile.ZIP_DEFLATED) as archive:
+                for file_path in group:
+                    archive.write(file_path, file_path.relative_to(root_path))
 
-        await ctx.send(file=discord.File(str(backup_file), filename=f"{backup_name}.zip"))
+            created_archives.append(archive_path)
+            archive_size = archive_path.stat().st_size
+            if archive_size > max_discord_file_size:
+                await ctx.send(
+                    f"Backup failed: {archive_filename} is {archive_size / (1024 * 1024):.2f} MB, "
+                    "which is above Discord's 8 MB upload limit."
+                )
+                return
+
+        await ctx.send(f"Backup ready. Sending {len(created_archives)} archive file(s).")
+        for archive_path in created_archives:
+            await ctx.send(file=discord.File(str(archive_path), filename=archive_path.name))
     except Exception as e:
         await printlog(f"Backup creation failed: {e}")
         await ctx.send(f"Failed to generate backup: {e}")
     finally:
-        if backup_file.exists():
-            try:
-                backup_file.unlink()
-            except Exception:
-                pass
+        for archive_path in created_archives:
+            if archive_path.exists():
+                try:
+                    archive_path.unlink()
+                except Exception:
+                    pass
 
 # analytics viewer
 @bot.command()
