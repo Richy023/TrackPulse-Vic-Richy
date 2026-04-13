@@ -63,6 +63,7 @@ async def printlog(text):
         await log_channel.send(text)
 
 admin_users = [1002449671224041502, 780303451980038165, 634620519500480512, 581098452327464973, 637885403101396994, int(USER_ID)]
+start_users = admin_users + [916060846139002940, 1166317869911511053, 746614482205278229]
 if config['DEVS_TO_HAVE_ADMIN_ACCESS'] == 'OFF':
     admin_users = [int(USER_ID)]
 
@@ -76,7 +77,7 @@ async def megaping(ctx):
 
 @bot.command()
 async def start(ctx):
-    if ctx.author.id in admin_users:
+    if ctx.author.id in start_users:
         log_command(ctx.author.id, 'start')
         await ctx.send(f"Starting bot")
         await printlog("Starting bot")
