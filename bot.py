@@ -537,6 +537,9 @@ async def on_ready():
     except:
         await printlog("WARNING: Rare train checker is not enabled!")
         await channel.send(f"WARNING: Rare train checker is not enabled! <@{USER_ID}>")
+
+    if not healthcheck_ping_loop.is_running():
+        healthcheck_ping_loop.start()
     
     # Refresh all users
     if startupAchievements:
@@ -978,7 +981,6 @@ async def log_rare_trains(rare_trains):
 async def task_loop():
     # update status
     totalLogs = getTotalTrips()
-    healthcheck.pinghealthcheck() # ping to the monitoring thing
 
     try:
         await printlog(f"Updating bot status, total logs = `{totalLogs}`")
@@ -1005,6 +1007,11 @@ async def task_loop():
         thread.start()
     else:
         print("Rare checker not enabled!")
+
+
+@tasks.loop(seconds=60)
+async def healthcheck_ping_loop():
+    healthcheck.pinghealthcheck()
 
 
 global secondLoop
