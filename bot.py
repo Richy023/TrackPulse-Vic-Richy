@@ -6474,6 +6474,8 @@ async def profile(ctx, user: discord.User = None):
         await profiles()
         
     except Exception as e:
+        import traceback
+        await printlog(f"{traceback.format_exc()}")
         await ctx.edit_original_response(content = f"Error: `{e}`")
 
 # map view command
