@@ -5791,6 +5791,7 @@ async def termini(ctx):
 @app_commands.choices(train=[
     app_commands.Choice(name="Summary", value="summary"),
     app_commands.Choice(name="X'Trapolis 100", value="X'Trapolis 100"),
+    app_commands.Choice(name="X'Trapolis 2.0", value="X'Trapolis 2.0"),
     app_commands.Choice(name="Comeng", value="Comeng"),
     app_commands.Choice(name="Siemens Nexas", value="Siemens Nexas"),
     app_commands.Choice(name="HCMT", value="HCMT"),
@@ -5800,7 +5801,7 @@ async def termini(ctx):
 ])
 async def sets(ctx, train:str):
     userid = ctx.user
-    trainTypes = ["X'Trapolis 100", "Comeng", 'Siemens Nexas', 'HCMT', 'VLocity', 'Sprinter', 'N Class']
+    trainTypes = ["X'Trapolis 100", "X'Trapolis 2.0", "Comeng", 'Siemens Nexas', 'HCMT', 'VLocity', 'Sprinter', 'N Class']
     await ctx.response.defer()
     log_command(ctx.user.id, 'log-sets')
     
