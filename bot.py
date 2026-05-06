@@ -6741,7 +6741,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
             except:
                 pass
 
-asyncio.create_task(safe_generate_map())
+    asyncio.create_task(safe_generate_map())
 
 @bot.command(name='testfind')
 async def testfind(ctx):
