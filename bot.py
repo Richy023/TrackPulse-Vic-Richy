@@ -354,7 +354,7 @@ async def printlog(text):
 # check if these things are on in the .env
 rareCheckerOn = False
 automatic_updates = False
-admin_users = [1002449671224041502, 780303451980038165, 634620519500480512, 581098452327464973, 637885403101396994, int(USER_ID)]
+admin_users = [1002449671224041502, 780303451980038165, 634620519500480512, 581098452327464973, 637885403101396994, 997746009318891603, int(USER_ID)]
 if config['RARE_SERVICE_CHECKER'] == 'ON':
     rareCheckerOn = True
 startupAchievements = False
@@ -1306,14 +1306,13 @@ async def route(ctx, mode: str, number: int):
 
 
 # train Photo search
-@search.command(name="train-photo", description="Search for xm9g's railway photos")
-@app_commands.describe(number="Carriage number", search_set="Search the full set instead of the train number")
+@search.command(name="train-photo", description="Search Victorianrailphotos.com")
+@app_commands.describe(number="Carriage number", search_set="Search for photos of all carriages in the set.")
 async def line_info(ctx, number: str, search_set:bool=False):
     log_command(ctx.user.id, 'train-photo')
     await searchTrainPhoto(ctx, number, search_set)
 
 # Station search station
-
 async def station_autocompletion(
     interaction: discord.Interaction,
     current: str
