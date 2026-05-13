@@ -6730,7 +6730,17 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
 
     # Start the async map generation
-    asyncio.create_task(generate_map())
+    async def safe_generate_map():
+        try:
+            await generate_map()
+        except Exception as e:
+            await printlog(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
+            try:
+                await ctx.followup.send(f'An error occurred while generating the map. Please try again.\n```{e}```')
+            except:
+                pass
+
+    asyncio.create_task(safe_generate_map())
 
 @bot.command(name='testfind')
 async def testfind(ctx):
