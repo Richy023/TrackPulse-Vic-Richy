@@ -6729,18 +6729,69 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
             except Exception as e:
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
 
-    # Start the async map generation
+# Start the async map generation
     async def safe_generate_map():
+        import os
+        import traceback
+        
+        # get memory usage before starting the map generation
+        baseline_rss_kb = 0
         try:
-            await generate_map()
-        except Exception as e:
-            await printlog(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
-            try:
-                await ctx.followup.send(f'An error occurred while generating the map. Please try again.\n```{e}```')
-            except:
-                pass
+            with open('/proc/self/status', 'r') as f:
+                for line in f:
+                    if line.startswith('VmRSS:'):
+                        baseline_rss_kb = int(line.split()[1])
+                        break
+        except:
+            pass
 
-    asyncio.create_task(safe_generate_map())
+        map_task = asyncio.ensure_future(generate_map())
+        
+        try:
+            while not map_task.done():
+                await asyncio.sleep(1.0)
+                
+                # 2. Get the Current RAM
+                current_rss_kb = 0
+                try:
+                    with open('/proc/self/status', 'r') as f:
+                        for line in f:
+                            if line.startswith('VmRSS:'):
+                                current_rss_kb = int(line.split()[1])
+                                break
+                except:
+                    continue 
+                
+                # how much mapstrips is using compared to before it started
+                command_usage_kb = current_rss_kb - baseline_rss_kb
+                
+                # 4GB limit
+                if command_usage_kb > (4 * 1024 * 1024): 
+                    map_task.cancel()
+                    
+                    print(f"MEMORY ERROR (EXCEEDED) in map generation")
+                    
+                    error_msg = ("Map Generation ERROR: Memory Limit Reached. Please try again in a few minutes. "
+                                 "If you see me again, please know the developers are actively trying to fix this issue. "
+                                 "Apologies for any inconvenience.")
+                    
+                    try:
+                        await ctx.edit_original_response(content=error_msg)
+                    except:
+                        try:
+                            await ctx.followup.send(error_msg)
+                        except:
+                            pass
+                    return
+            
+            await map_task
+            
+        except asyncio.CancelledError:
+            pass
+        except Exception as e:
+            print(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
+
+    await safe_generate_map()
 
 @bot.command(name='testfind')
 async def testfind(ctx):
