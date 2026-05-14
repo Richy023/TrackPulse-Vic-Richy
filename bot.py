@@ -6730,7 +6730,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
 
     # Start the async map generation
-async def safe_generate_map():
+    async def safe_generate_map():
         import resource
         
         # Get memory limit (85% of available, estimated from current usage)
@@ -6764,7 +6764,7 @@ async def safe_generate_map():
             except:
                 pass
 
-asyncio.create_task(safe_generate_map())
+        asyncio.create_task(safe_generate_map())
 
 @bot.command(name='testfind')
 async def testfind(ctx):
