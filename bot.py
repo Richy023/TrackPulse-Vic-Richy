@@ -6730,17 +6730,41 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 await ctx.followup.send(f'Error sending map:\n```{e}```')
 
     # Start the async map generation
-    async def safe_generate_map():
+async def safe_generate_map():
+        import resource
+        
+        # Get memory limit (85% of available, estimated from current usage)
+        soft, hard = resource.getrlimit(resource.RLIMIT_DATA)
+        
+        map_task = asyncio.ensure_future(generate_map())
+        
         try:
-            await generate_map()
+            while not map_task.done():
+                await asyncio.sleep(0.5)
+                
+                current_memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                
+                if current_memory > 4000 * 1024 * 1024:  # 4GB limit
+                    map_task.cancel()
+                    print(f'CRITICAL ERROR: Map generation memory limit exceeded. Used: {current_memory / 1024 / 1024:.1f}MB')
+                    try:
+                        await ctx.edit_original_response(content='Map Generation ERROR: Memory Limit Reached. We are actively trying to fix this issue.')
+                    except:
+                        await ctx.followup.send('Map Generation ERROR: Memory Limit Reached. Please try again in a few minutes. If you see me again, please report it to the bot developers.')
+                    return
+            
+            await map_task
+            
+        except asyncio.CancelledError:
+            pass
         except Exception as e:
-            await printlog(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
+            print(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
             try:
-                await ctx.followup.send(f'An error occurred while generating the map. Please try again.\n```{e}```')
+                await ctx.edit_original_response(content='Map Generation ERROR: Memory Limit Reached. Please try again in a few minutes. If you see me again, please report it to the bot developers.')
             except:
                 pass
 
-    asyncio.create_task(safe_generate_map())
+asyncio.create_task(safe_generate_map())
 
 @bot.command(name='testfind')
 async def testfind(ctx):
