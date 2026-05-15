@@ -49,7 +49,6 @@ import builtins
 # thing to make it work on all oses
 import sys
 
-from wand import resource
 
 from commands.NSWsearchtrain import NSWsearchTrainCommand
 from commands.logger.logqldtrain import logQLDtrain
