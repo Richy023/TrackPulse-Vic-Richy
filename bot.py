@@ -49,6 +49,8 @@ import builtins
 # thing to make it work on all oses
 import sys
 
+from wand import resource
+
 from commands.NSWsearchtrain import NSWsearchTrainCommand
 from commands.logger.logqldtrain import logQLDtrain
 from commands.searchPhoto import searchTrainPhoto
@@ -6734,7 +6736,7 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
         import os
         import traceback
         
-        # get memory usage before starting the map generation
+        # get memory usage
         baseline_rss_kb = 0
         try:
             with open('/proc/self/status', 'r') as f:
@@ -6743,15 +6745,14 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                         baseline_rss_kb = int(line.split()[1])
                         break
         except:
-            pass
+            baseline_rss_kb = 0
 
         map_task = asyncio.ensure_future(generate_map())
         
         try:
             while not map_task.done():
-                await asyncio.sleep(1.0)
+                await asyncio.sleep(0.3)
                 
-                # 2. Get the Current RAM
                 current_rss_kb = 0
                 try:
                     with open('/proc/self/status', 'r') as f:
@@ -6762,14 +6763,13 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                 except:
                     continue 
                 
-                # how much mapstrips is using compared to before it started
                 command_usage_kb = current_rss_kb - baseline_rss_kb
                 
-                # 4GB limit
-                if command_usage_kb > (4 * 1024 * 1024): 
+                # 4GB limit (4 * 1024 * 1024 KB)
+                if command_usage_kb > 4194304: 
                     map_task.cancel()
                     
-                    print(f"MEMORY ERROR (EXCEEDED) in map generation")
+                    print("MEMORY ERROR (EXCEEDED) in map generation")
                     
                     error_msg = ("Map Generation ERROR: Memory Limit Reached. Please try again in a few minutes. "
                                  "If you see me again, please know the developers are actively trying to fix this issue. "
@@ -6784,13 +6784,15 @@ async def mapstrips(ctx,mode: str="time_based_variants/log_train_map_post_munnel
                             pass
                     return
             
+            # wait for the map generation to actually finish
             await map_task
             
         except asyncio.CancelledError:
-            pass
+            pass 
         except Exception as e:
             print(f'CRITICAL ERROR in map generation: {e}\n{traceback.format_exc()}')
 
+    # safe wrapper thing
     await safe_generate_map()
 
 @bot.command(name='testfind')
