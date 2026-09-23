@@ -6298,7 +6298,6 @@ async def profile(ctx, user: discord.User = None):
                 userid = user.id
                 pfp = user.avatar.url
 
-            # --- Helper functions ---
             def get_top_stat(stat_list):
                 if not stat_list:
                     return "None"
@@ -6323,7 +6322,6 @@ async def profile(ctx, user: discord.User = None):
                     except ValueError:
                         continue
                 return str(date_str)
-            # ------------------------
 
             pages = []
             current_page = 0
