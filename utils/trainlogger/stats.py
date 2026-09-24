@@ -289,6 +289,20 @@ def linePercent(user):
     percent = round((total / numberOfLines) * 100, 2)
     return f'{percent}%'
 
+def _parse_date_for_sorting(date_str):
+    if not date_str or date_str == "None":
+        return 99999999
+    
+    formats = ["%d/%m/%Y", "%m/%d/%Y", "%Y-%m-%d", "%d-%m-%Y"]
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(str(date_str).strip(), fmt)
+            return int(dt.strftime("%Y%m%d"))
+        except ValueError:
+            continue
+            
+    return 99999999 
+
 def lowestDate(user, mode):
     if mode == 'train':
         filename = f'utils/trainlogger/userdata/{user}.csv'
@@ -304,8 +318,7 @@ def lowestDate(user, mode):
             # Extract the date string from each row and add it to the dates list
             dates.append(row[3])
 
-    # Remove dashes from each date and convert them to integers
-    cleaned_dates = [int(date.replace('-', '')) for date in dates]
+    cleaned_dates = [_parse_date_for_sorting(date) for date in dates]
 
     # Empty files/users with no logs should be treated as missing data by callers.
     if not cleaned_dates:
@@ -333,8 +346,7 @@ def highestDate(user, mode):
             # Extract the date string from each row and add it to the dates list
             dates.append(row[3])
 
-    # Remove dashes from each date and convert them to integers
-    cleaned_dates = [int(date.replace('-', '')) for date in dates]
+    cleaned_dates = [_parse_date_for_sorting(date) for date in dates]
 
     # Empty files/users with no logs should be treated as missing data by callers.
     if not cleaned_dates:
