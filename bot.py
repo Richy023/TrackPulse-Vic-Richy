@@ -6283,11 +6283,14 @@ async def queue(ctx: discord.Interaction):
     
 @stats.command(name='profile', description="Shows a users trip log stats, and leaderboard wins")    
 async def profile(ctx, user: discord.User = None):
-    await maintenance_func(ctx)
-    log_command(ctx.user.id, 'view-profile')
-    try:
+
+    if not ctx.response.is_done():
         await ctx.response.defer()
 
+    await maintenance_func(ctx)
+    log_command(ctx.user.id, 'view-profile')
+
+    try:
         async def profiles():
             if user is None:
                 username = ctx.user.name
@@ -6749,7 +6752,11 @@ async def profile(ctx, user: discord.User = None):
     except Exception as e:
         import traceback
         await printlog(f"{traceback.format_exc()}")
-        await ctx.edit_original_response(content=f"Error: `{e}`")
+
+        if ctx.response.is_done():
+            await ctx.edit_original_response(content=f"Error: `{e}`")
+        else:
+            await ctx.response.send_message(content=f"Error: `{e}`")
 
 # map view command
 @maps.command(name='view', description='View the maps the bot uses')
