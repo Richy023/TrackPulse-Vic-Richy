@@ -18,12 +18,13 @@ Antique Shop/Midland Hwy
 Apex Park/Princes Hwy
 Ararat Railway Station
 Ararat Railway Station/High St
+Ararat Station/High St
 Ardeer Railway Station
+Ardeer Station/Forrest St
 Austin St/Henty Hwy
 Austin St/Penhurst-Warrnambool Rd
 Austin St/Warncoort-Birregurra Rd
 Avenel Railway Station
-Avenel Station/Queen St
 Axedale Rd/Northern Hwy
 BP Roadhouse/Glenelg Hwy
 BP Roadhouse/Homburg Tce
@@ -53,6 +54,7 @@ Barraport East Rd/Boort - Quambatook Rd
 Bay  of Islands
 Bay Rd/Bass Hwy
 Bayley St/Nihil St
+Beacon Bvd/Surf Coast Hwy
 Beaufort Railway Station
 Beaufort Station/Pratt St
 Bells Bvd/Great Ocean Rd
@@ -80,6 +82,7 @@ Boort/Godfrey St
 Border Service Station/Murray St
 Boree St/Sunraysia Hwy
 Borung/Boort-Wederburn Rd
+Bourke St/Sydney St
 Brambuk the National Park and Cultural Centre/Grampians Rd
 Bridges Barracks/Morobe Rd
 Bridgewater/Calder Hwy
@@ -126,13 +129,13 @@ Caulfield Station/Sir John Monash Dr
 Centennial Park/Bombala St
 Centre Valley Rd/Princes Dr
 Chiltern Railway Station
-Chiltern Station/Railway Access Rd
 Church St/Walnut St
 Clarence St/Victoria Rd
 Clarendon-Lal Lal Rd/Midland Hwy
 Clarkefield Railway Station
 Clarkefield Station/Station St
 Clayton Railway Station
+Clayton Station/Haughton Rd
 Clunes Railway Station
 Clunes Station/Ballarat Maryborough Rd
 Clunes-Creswick
@@ -141,6 +144,7 @@ Coach Terminal/24 Roberts Ave
 Coal Creek Museum/South Gippsland Hwy
 Coastside Dr/Surf Coast Hwy
 Cobblebank Railway Station
+Cobblebank Station
 Cobram Station/Punt Rd
 Coburg PS/Bell St
 Colac Railway Station
@@ -158,7 +162,6 @@ Cranbourne Park SC/Lyall St
 Creswick Railway Station
 Creswick Station/Raglan St
 Creswick-Newstead Rd
-Cross Lane/Toolamba Rd
 Cubitt St/Western Hwy
 Cuibitt St/Western Hwy
 Cumberland Hotel/Creswick-Newstead Rd
@@ -182,6 +185,7 @@ Drummond St/Glenelg Hwy
 Dundas St/Market St
 Dunolly Rd
 Eaglehawk Railway Station
+Eaglehawk Station/Hall St
 Eaglesons Rd/Clarendon-Lal Lal Rd
 East Pakenham Railway Station
 East Pakenham Station/Sharnet Cct
@@ -194,6 +198,7 @@ Elmore Railway Station
 Elmore Station/Northern Hwy
 Ely St/Snow Rd
 Epsom Railway Station
+Epsom Station/Station St
 Essendon Railway Station
 Euroa - Mansfield Rd/Maroondah Hwy
 Euroa Railway Station
@@ -211,6 +216,7 @@ Feehans Rd/Surf Coast Hwy
 Fisher St/Western Hwy
 Fitzgerald Rd/Robinvale - Sea Lake Rd
 Fitzgerald Rd/Robinvale - Seal Lake Rd
+Flinder St Station/Flinders St
 Flinders Street Railway Station
 Flowerdale Hotel/Whittlesea-Yea Rd
 Footscray Railway Station
@@ -318,7 +324,6 @@ Jetty Rd/Princes Hwy
 John Field Dr/Narracan Dr (north side)
 Jolimont Centre/Northbourne Ave
 Jones Park Rest Area/Barton Hwy
-Kaarimba Rd/Barmah - Shepparton Rd
 Kangaroo Flat Railway Station
 Kangaroo Flat Station/High St
 Kangaroo Flat Station/Short St
@@ -416,10 +421,7 @@ Milk Bar/Echuca - Nathalia Rd
 Milk Bar/Glenelg Hwy
 Milk Bar/Station St
 Mill St/McLennan St
-Mill St/Midland Hwy
 Milltown CFA/Henty Hwy
-Miners Rest Hotel/137 McKenzie St
-Miners Rest Hotel/138 McKenzie St
 Mitchell St/Davis St
 Mitchell St/High St
 Mobil Roadhouse/Sunraysia Hwy
@@ -428,6 +430,7 @@ Moe Station/Lloyd St
 Monro St/Bombala St
 Moorabool St/Malop St
 Mooroopna Railway Station
+Mooroopna Station/Young St
 Morrissey St/Waverley Ave
 Mort Ave/Princes Hwy
 Morwell Railway Station
@@ -535,8 +538,10 @@ Recreation Reserve/Grampians Rd
 Red Cliffs Post Office/Indi Ave
 Reserve Rd/Torquay Rd
 Richmond Railway Station
+Richmond Station/Punt Rd
 Riddells Creek Railway Station
 Riddells Creek Station/Hamilton St
+Rise Bvd
 Rivadestra Pizza & Pasta/Bridge Rd
 River St/Midland Hwy
 Roadhouse/Melba Hwy
@@ -547,6 +552,7 @@ Robinvale Railway Station/Bromley Rd
 Rochester Railway Station
 Rochester Station/Northern Hwy
 Rockbank Railway Station
+Rockbank Station/Leakes Rd
 Romsey Community Hub/Main St
 Roo Fuel/Meeniyan - Promontory Rd
 Rosebery Station/Henty Hwy
@@ -658,7 +664,6 @@ Victory Park/Hall Rd
 Village Green/North Rd
 Vine St/Vine St
 Violet Town Railway Station
-Violet Town Station/Primrose St
 Visitor Information Centre/Great Ocean Rd
 Visitors Centre/Jondaryan Ave
 Wairewa Rd/Princes Hwy
@@ -694,14 +699,18 @@ Webster St/Dunlop St
 Welsford St/South Gippsland Hwy
 Wendouree Railway Station
 Wendouree Station
+West Tarneit Railway Station
+West Tarneit Station/Leakes Rd
 Western Hwy
 Westpac Bank/Albury St
+White Rd/McKenzie St
 White St/Hamilton - Port Fairy Rd
 Whyte St/Henty St
 Wills St/Edwards St
 Winchelsea Railway Station
 Winchelsea Station
 Windermere Way/Madden Rd
+Wodonga CBD/Elgin Bvd
 Wodonga Railway Station
 Wodonga Station/Moloney Dr
 Wodonga TAFE/87 McKoy St
@@ -720,6 +729,5 @@ Yarragon Railway Station
 Yarragon Station/Princes Hwy
 Yarringa Rd/Great Ocean Rd
 Yendon Rd/Harbours Rd
-Zeerust Rd/Barmah - Sheppartoin Rd
 Zeerust Rd/Barmah - Shepparton Rd
 east of Pechell St/High St

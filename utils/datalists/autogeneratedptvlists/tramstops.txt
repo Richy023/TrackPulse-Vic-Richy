@@ -8,7 +8,6 @@
 7C-MCG Gates 4-7/John Cain Arena
 7D-Olympic Boulevard
 A'Beckett St/Malvern Rd #36
-ANZAC Station/St Kilda Rd #20
 Abbotsford St Interchange/Abbotsford St #19
 Abbotsford St/Queensberry St #14
 Abinger St/Church St #60
@@ -44,6 +43,7 @@ Alma Rd/Chapel St #40
 Alma Rd/St Kilda Rd #32
 Anderson Rd/Burke Rd #56
 Anderson St/Wattletree Rd #50
+Anzac Station/St Kilda Rd #20
 Arden St/Abbotsford St #15
 Argyle St/Chapel St #39
 Argyle St/St Kilda Rd #33
@@ -73,6 +73,7 @@ Balwyn Rd/Doncaster Rd #51
 Balwyn Rd/Whitehorse Rd #47
 Balwyn Shopping Centre/Whitehorse Rd #48
 Bambra Rd/Glenhuntly Rd #54
+Bank St/Mt Alexander Rd #29
 Barb St/Raleigh Rd #44
 Barkers Rd/Church St #26
 Barkers Rd/Glenferrie Rd #77
@@ -163,7 +164,6 @@ Burke Rd/Whitehorse Rd #42
 Burnley St/Bridge Rd #21
 Burnley St/Swan St #14
 Burnley St/Victoria St #24
-Burrowes St/Union Rd #34
 Burwood Rd/Glenferrie Rd #73
 Burwood Rd/Power St #27
 Cabrini Hospital/Wattletree Rd #47
@@ -276,7 +276,6 @@ D3-Stadium Precinct - Bourke St/Harbour Esp
 D4-Docklands Park/Harbour Esp
 D5-South Wharf/Wurundjeri Way
 D6-Flinders Street West/Flinders St
-D6-Victoria Police Centre/Flinders St
 Daly St/Dawson St #33
 Dandenong Rd/Chapel St #42
 Dandenong Rd/Derby Rd #58
@@ -361,16 +360,15 @@ Flagstaff Railway Station/William St #7
 Flagstaff Station/La Trobe St #3
 Flemington Bridge Station/Flemington Rd #22
 Flemington Racecourse/Epsom Rd #30
-Flemington Racecourse/Racecourse Rd #29
 Flemington Rd/Peel St #12
 Fletcher St/Napier St #41
-Fletcher St/Pascoe Vale Rd #38
 Flinders St/Queens Bridge St #1
 Flinders Street Railway Station/Elizabeth St #1
 Flockhart St/Victoria St #23
 Florence Ave/Cotham Rd #39
 Footscray Market/Leeds St #63
 Footscray Station/Leeds St #64
+Forbes St/Fletcher St #40
 Fordham Gardens/Camberwell Rd #50
 Fordholm Rd/Riversdale Rd #31
 Francis St/Malvern Rd #33
@@ -401,7 +399,6 @@ Glen Eira Rd/Hawthorn Rd #54
 Glen Huntly Railway Station/Glen Huntly Rd #61
 Glen Iris Rd/Camberwell Rd #48
 Glenarm Rd/Malvern Rd #50
-Glenbervie Rd/Toorak Rd #139
 Glendale St/Riversdale Rd #57
 Glenferrie Railway Station/Glenferrie Rd #74
 Glenferrie Rd/Cotham Rd #36
@@ -466,12 +463,11 @@ High St/St Kilda Rd #27
 Highett St/Church St #62
 Highfield Rd/Riversdale Rd #51
 Highfield Rd/Toorak Rd #53
-Highpoint Shopping Centre/Wests Rd #49
+Highpoint Shopping Centre/Rosamond Rd #51
 Highview Gr/Burwood Hwy #69
 Hill Rd/Doncaster Rd #50
 Hill St/Church St #24
 Hobson St/Malvern Rd #33
-Hoddle St/Fletcher St #39
 Hoddle St/Victoria Pde #18
 Hodgson St/Smith St #18
 Hoffmans Rd/Keilor Rd #52
@@ -559,7 +555,6 @@ Leslie St/Victoria St #23
 Leura Gr/Burke Rd #58
 Lewisham Rd/High St #34
 Liddiard St/Glenferrie Rd #75
-Lincoln Rd/Mt Alexander Rd #46
 Lincoln Square/Swanston St #3
 Lithgow St/Toorak Rd #53
 Llaneast St/Glenferrie Rd #55
@@ -587,9 +582,7 @@ Mansfield St/High St #40
 Maple Cres/Camberwell Rd #47
 Maribyrnong College/River St #53
 Maribyrnong Community Centre/Raleigh Rd #45
-Maribyrnong Park/Maribyrnong Rd #41
 Maribyrnong Rd/Ascot Vale Rd #34
-Maribyrnong Rd/Mt Alexander Rd #30
 Maribyrnong Rd/Union Rd #37
 Market St/Flinders St #3
 Maroona Rd/Glenhuntly Rd #63
@@ -609,6 +602,7 @@ Melbourne Central Station/Elizabeth St #5
 Melbourne Central Station/La Trobe St #5
 Melbourne Central Station/Swanston St #8
 Melbourne Museum/Nicholson St #11
+Melbourne Showgrounds/Epsom Rd #33
 Melbourne Showgrounds/Union Rd #33
 Melbourne Sports & Aquatic Centre/Albert Rd #131
 Melbourne Sports and Aquatic Centre/Light Rail #129
@@ -671,7 +665,6 @@ Murphy St/Flemington Rd #15
 Murray Rd/Gilbert Rd #43
 Murray Rd/Plenty Rd #49
 Murray St/Malvern Rd #41
-Murray St/Pascoe Vale Rd #36
 Napier St/Gertrude St #14
 Narrak Rd/Whitehorse Rd #51
 Nelson Rd/Whitehorse Rd #57
@@ -679,7 +672,6 @@ Newmarket Plaza/Racecourse Rd #26
 Newry St/Brunswick St #19
 Nicholls St/Wattletree Rd #46
 Nicholson St/Droop St #62
-Nicholson St/Fletcher St #40
 Nicholson St/Hopkins St #62
 Nicholson St/Victoria Pde #10
 Normanby Ave/High St #38
@@ -703,7 +695,6 @@ Old Burwood Rd/Burwood Hwy #67
 Ontario St/Balaclava Rd #44
 Orange Gr/Camberwell Rd #47
 Orange Gr/Carlisle St #39
-Ormond Rd/Mt Alexander Rd #30
 Orrong Cres/Camberwell Rd #48
 Orrong Rd/Balaclava Rd #43
 Orrong Rd/Dandenong Rd #38
@@ -768,8 +759,6 @@ Queensberry St/Peel St #11
 Queensberry St/Swanston St #4
 RMIT University/Swanston St #7
 RMIT/Plenty Rd #71
-Racing Victoria/161 Epsom Rd #31
-Racing Victoria/400 Epsom Rd #31
 Raglan St/Plenty Rd #43
 Raleigh Rd/Wests Rd #48
 Randall St/Raleigh Rd #45
@@ -807,7 +796,6 @@ Royal Pde/Glenhuntly Rd #50
 Russell St/Bourke St #7
 Russell St/Flinders St #6
 Sackville St/Burke Rd #69
-Salisbury St/Pascoe Vale Rd #36
 Sandown Rd/Epsom Rd #32
 Scotchmer St/Nicholson St #18
 Scotchmer St/St Georges Rd #22
@@ -915,7 +903,6 @@ Tooronga Rd/Riversdale Rd #37
 Tooronga Rd/Wattletree Rd #49
 Trafalgar Rd/Camberwell Rd #44
 Trafalgar Rd/Riversdale Rd #43
-Treadwell Rd/Keilor Rd #52
 Truganini Rd/Glenhuntly Rd #66
 Tweedie Pl/Church St #63
 Tyler St/Plenty Rd #52
@@ -943,17 +930,16 @@ Victoria St/Racecourse Rd #24
 Victoria St/Sydney Rd #23
 Vincent St/Wattletree Rd #50
 Vision Australia/Glenferrie Rd #66
-Visy Park/Royal Pde #16
 Walker St/High St #26
 Walker St/Royal Pde #16
 Walsh St/Toorak Rd #124
 Waltham St/Bridge Rd #17
 Wanda Rd/Hawthorn Rd #49
 Warra St/Glenferrie Rd #65
-Warrick St/Mt Alexander Rd #29
 Warrigal Rd/Burwood Hwy #58
 Warrigal Rd/Riversdale Rd #56
 Warrs Rd/Raleigh Rd #44
+Waterford Ave/Wests Rd #49
 Wattle Ave/Doncaster Rd #46
 Wattle Park/1013 Riversdale Rd #58
 Wattle Park/Riversdale Rd #58
@@ -962,7 +948,6 @@ Wattle Valley Rd/Riversdale Rd #50
 Wattletree Rd/Dandenong Rd #40
 Wattletree Rd/Glenferrie Rd #54
 Wellington St/Glenferrie Rd #79
-Wellington St/Mt Alexander Rd #26
 Wellington St/Queens Pde #23
 Wellington St/Racecourse Rd #25
 Wellington St/Victoria Pde #16
@@ -984,7 +969,6 @@ Williams Rd/Dandenong Rd #35
 Williams Rd/High St #35
 Williams Rd/Malvern Rd #34
 Williams Rd/Toorak Rd #131
-Williamson Rd/Rosamond Rd #51
 Williamson Rd/Wests Rd #50
 Willow Gr/Riversdale Rd #47
 Wilson Gr/Camberwell Rd #49

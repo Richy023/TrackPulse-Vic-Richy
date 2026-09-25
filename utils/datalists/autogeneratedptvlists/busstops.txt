@@ -58,7 +58,6 @@
 131 Centre Rd
 131 Ranfurly Way
 1324 Sydney Rd
-133 Kensington Rd
 134 Marine Pde
 1349 Sydney Rd
 135 Brady Rd
@@ -83,7 +82,6 @@
 15 Queens Pde
 15 Stackpoole St
 150 Princes Hwy
-156 Kensington Rd
 157 Tarcombe Rd
 16 Donovan Dr
 16 Kandanga Gr
@@ -205,6 +203,7 @@
 32 Barcelona St
 32 Emma St
 32 Harris Rd
+328 Mandalay Cct
 33 Belair Ave
 33 Byron St
 330 Dynon Rd
@@ -231,7 +230,6 @@
 4 McLean Ave
 40 Dorking Rd
 401 Monbulk Rd
-409 Sandy Rd
 41 Churchill Ave
 41 Queens Pde
 417 Park Rd
@@ -428,6 +426,7 @@ Adelaide St/Strachans Rd
 Adelaide St/Streeton Dr
 Adeline St/Grimshaw St
 Adeline St/Kororoit Creek Rd
+Adelong Bvd/Alfred Rd
 Adelong Ct/Loch Rd
 Adeney St/Stanger St
 Adler Gr/Boundary Rd
@@ -461,6 +460,7 @@ Ahern St/Jacksons Rd
 Ailsa Ave/Darling Rd
 Ainsdale Ave/Boronia Rd
 Ainsley Ave/Bloomfield Rd
+Ainsley Rd/Wiltshire Bvd
 Ainslie Dr/Ferntree Gully Rd
 Aintree Town Centre/Fields St
 Aircraft Station/Triholm Ave
@@ -604,6 +604,9 @@ Alford St/Ballarat Rd
 Alfred Dr/Main St
 Alfred Hospital/Commercial Rd
 Alfred Hospital/Punt Rd
+Alfred Rd/Ferris Rd
+Alfred Rd/Mount Cottrell Rd
+Alfred Rd/Princes Hwy
 Alfred Sq/The Esplanade
 Alfred Square/The Esplanade
 Alfred St/Clunes-Creswick Rd
@@ -633,6 +636,7 @@ Allambanan Dr/Dorset Rd
 Allambi Ave/Boneo Rd
 Allambi St/Power Ave
 Allan St/Cheltenham Rd
+Allan Street Park/Allan St
 Allandale Dr/Ballarat Rd
 Allandale Rd/Gillespie Rd
 Allandale Rd/Lower Dandenong Rd
@@ -841,6 +845,7 @@ Anzac Ave/Hume and Hovell Rd
 Anzac Ave/Smith St
 Anzac Ave/Sydney Rd
 Anzac Park/Aitken Bvd
+Anzac Rd/Fields St
 Anzac St/Mt Dandenong Rd
 Anzac Station/Domain Rd
 Anzac Station/St Kilda Rd
@@ -908,6 +913,7 @@ Archibald St/Orrong Rd
 Archie Graham Centre/Timor St
 Archimedes Ave/Rennie St
 Arco Ct/Calvert St
+Ard Ave/Taylors Rd
 Ardcloney Dr/Macedon St
 Ardeer Ct/Malmsbury Dr
 Ardeer Station/Forrest St
@@ -976,6 +982,7 @@ Arrowgrass St/McArthurs Rd
 Art Gallery Pioneer Settlement/Marraboor St
 Arthur Beachley Reserve/Ardoyne St
 Arthur St/Church St
+Arthur St/Gordon St
 Arthur St/Heidelberg Rd
 Arthur St/Huntingdale Rd
 Arthur St/Learmonth St
@@ -1066,11 +1073,11 @@ Atkinson St/Williamsons Rd
 Atlantis Dr/Point Cook Rd
 Atlas Dr/Hall Rd
 Aton St/Kangaroo Ground-Warrandyte Rd
-Attenborough Rd/Station St
 Attercliffe Ave/Derby St
 Attercliffe Ave/Sussex St
 Attunga Cres/Railway Pde
 Attunga St/Middleborough Rd
+Auburn Dr/Taylors Rd
 Auburn Gr/Auburn Rd
 Auburn Rd/Airedale Ave
 Auburn South PS/Tooronga Rd
@@ -1112,6 +1119,7 @@ Autumn St/McCurdy Rd
 Autumn St/O'Hea St
 Autumn St/Torquay Rd
 Auty St/Selby Rd
+Avalon Airport Terminal/Airport Dr
 Avalon Airport/Outside Terminal
 Avalon Cres/Broad Oak Dr
 Avalon Gr/Evelyn Rd
@@ -1134,7 +1142,6 @@ Avocat Ave North/Nardoo St
 Avocet St/Blackburn Rd
 Avon Cl/Ballarat Rd
 Avon Ct/Mountain Gate Dr
-Avon Rd Shops/Dundas St
 Avon St/Chapel Rd
 Avon St/Severn St
 Avondale Ave/Biggs St
@@ -1230,7 +1237,6 @@ Balaclava Rd/Orrong Rd
 Balaka Pl/Grimshaw St
 Balaka St/Kallara Rd
 Balcombe Dr/Manor Lakes Bvd
-Balcombe Dr/Racecourse Rd
 Balcombe Grammar School/Nepean Hwy
 Balcombe Rd/Ebden Ave
 Balcombe Rd/Reserve Rd
@@ -1290,6 +1296,7 @@ Ballarat Rd/Waiora Ave
 Ballarat Sec Col/Langstaffe Dr
 Ballarat Showgrounds/Howitt St
 Ballarat St/Francis St
+Ballarat Station
 Ballarat Station/Lydiard St
 Ballarat Station/Lydiard St N
 Ballarat Technology Park/University Dr
@@ -1386,7 +1393,6 @@ Banyan Cres/Kauri Cres
 Banyan Dr/Hall Rd
 Banyan Dr/Strathlea Dr
 Banyan Fields Primary School/Cadles Rd
-Banyan St/Dundas St
 Banyule Dr/Smythes Rd
 Banyule Primary School/Banyule Rd
 Baptcare Brookview Community/Dimboola Rd
@@ -1451,6 +1457,7 @@ Barlyn Rd/Huntingdale Rd
 Barmah Hotel/Maloney St
 Barnard Ct/Findon Rd
 Barnard Ct/Monash St
+Barnards Rd/Taylors Rd
 Barnato Gr/Orrong Rd
 Barnes Bvd/Lawson Cl
 Barnett Cl/Golf Links Rd
@@ -1532,6 +1539,7 @@ Batesford Rd/Power Ave
 Batesford Reserve/Power Ave
 Batey Cres/Maloney Dr
 Bath St/Barkly St
+Bath StBarkly St
 Batman Ave/Gap Rd
 Batman Ave/Parkside Dr
 Batman Rd/Henderson St
@@ -1562,6 +1570,8 @@ Baxter St/McIvor Hwy
 Baxter Station/Baxter-Tooradin Rd
 Baxter-Tooradin Rd/Fisheries Rd
 Baxter-Tooradin Rd/Pearcedale Rd
+Baxterpark Dr/Mount Cottrell Rd
+Baxterpark Dr/Tower St
 Bay Rd/Bluff Rd
 Bay Rd/Esplanade
 Bay Rd/Graham Rd
@@ -1589,10 +1599,9 @@ Bayonne Cl/Plenty River Dr
 Bayside Ave/Lorimer St
 Bayside Ave/Munro Ave
 Bayside City Council/Royal Ave
-Bayside College/Kororoit Creek Rd
-Bayside Sec Col/Blenheim Rd
-Bayside Sec Col/Millers Rd
-Bayside Secondary College/McArthurs Rd
+Bayside College Altona North Campus/McArthurs Rd
+Bayside College Paisley Campus/Blenheim Rd
+Bayside College Williamstown Campus/Kororoit Creek Rd
 Baystone Pl/The Gateway
 Bayswater Business Hub/Jersey Rd
 Bayswater North PS/Stuart St
@@ -1623,6 +1632,7 @@ Beachcomber Lane/Fischer St
 Beachley St/South Rd
 Beachside Car Park/Nepean Hwy
 Beachview Pde/Sanctuary Lakes South Bvd
+Beacon Bvd/Surf Coast Hwy
 Beacon Pl/Vantage Point Bvd
 Beacon Point Rd/Thamballina Rd
 Beacon St/Imes St
@@ -1861,6 +1871,7 @@ Bendoran Cres/Greenwood Dr
 Benetook Ave/Eleventh St
 Benetook Ave/Fifteenth St
 Benga Ave/Hemmings St
+Benjamin St/Bentons Rd
 Benmara Crst/Harold Keys Dr
 Bennet St/Cheltenham Rd
 Bennett Ct/Anderson St
@@ -2247,7 +2258,6 @@ Bossington St/Warrigal Rd
 Boswell Ave/West Fyans St
 Botanic Ct/Greenwood Dr
 Botanic Dr/Darwin Way
-Botanic Dr/Royal Cres
 Botanic Gardens Ret Village/Craig Rd
 Botanic Gardens Retirement Village/Craig Rd
 Botanic Gardens/Jamieson St
@@ -2273,6 +2283,7 @@ Boundary Rd/Derby St
 Boundary Rd/Fairbairn Rd
 Boundary Rd/Garden Bvd
 Boundary Rd/Governor Rd
+Boundary Rd/Horseshoe Bend Rd
 Boundary Rd/Leather St
 Boundary Rd/Lower Dandenong Rd
 Boundary Rd/Maroondah Hwy
@@ -2294,6 +2305,7 @@ Bourke Rd/Clarinda Rd
 Bourke St/Buckley St
 Bourke St/Queen St
 Bourke St/Ringwood St
+Bourke St/Sydney St
 Bournemouth Ave/Donald St
 Bowden Ct/Farrington Pde
 Bowden Spur Rd/Whittlesea-Kinglake Rd
@@ -2330,6 +2342,7 @@ Boxshall St/St Andrews St
 Boyce Rd/Belgrave-Gembrook Rd
 Boyd Ave/Clayton Rd
 Boyd Ct/Taunton Cres
+Boyd Ln/Aspire Bvd
 Boyd Rd/Gembrook Rd
 Boyd St/Blackburn Rd
 Boyd St/Curtin Cres
@@ -2480,6 +2493,7 @@ Bridge St/Pickles St
 Bridge St/Synnot St
 Bridge St/West Fyans St
 Bridge St/Williamstown Rd
+Bridgefield Town Park/Leakes Rd
 Bridgehaven Dr/Aitken Bvd
 Bridgekeepers Cottage/Murray St
 Bridges Ave/Shorts Rd
@@ -2606,7 +2620,6 @@ Browns Ct/Princes Hwy
 Browns Lane/Yan Yean Rd
 Browns Pde/Howitt St
 Browns Rd/Craig Rd
-Browns Rd/Dundas St
 Browns Rd/Mt Dandenong Tourist Rd
 Browns Rd/Pearcedale Rd
 Bruce Park/Bondi Ave
@@ -2725,7 +2738,6 @@ Bungower Rd/Nepean Hwy
 Bunnings/Thomas Mitchell Dr
 Bunninyong St/Francis St
 Bunurong Memorial Park/790 Frankston-Dandenong Rd
-Bunyip Primary School/Nar Nar Goon-Longwarry Rd
 Bupa Aged Care/Park Lane
 Bupa Aged Care/Smythes Rd
 Burbidge Dr/Halletts Way
@@ -2868,11 +2880,11 @@ Cadell St/East St
 Cadorna St/Elgar Rd
 Caesar St/Police Rd
 Cairncroft Ave/Warburton Hwy
-Cairncross Lane/Kensington Rd
 Cairnes St/Batman Rd
 Cairnlea Dr/Ballarat Rd
 Cairnlea Dr/Furlong Rd
 Cairnlea Park PS/Furlong Rd
+Cairnlea Town Centre/Cairnlea Dr
 Cairns Ave/Boneo Rd
 Cairns Ave/West Fyans St
 Cairns Rd/McDowall Rd
@@ -2891,6 +2903,7 @@ Calder Park Dr/Glenbruar Dr
 Calder Park Dr/Hume Dr
 Calder Park Dr/Loddon Dr
 Calder Park Dr/Melton Hwy
+Calderas Rd/Taylors Rd
 Calderwood Ave/Phoenix Dr
 Caledonia St/Thunder St
 Caledonian PS/Thompson St
@@ -2925,10 +2938,10 @@ Cambria Rd/Cheltenham Rd
 Cambrian Way Preschool/54 Cambrian Way
 Cambridge Cres/Ballan Rd
 Cambridge Cres/Napier St
-Cambridge Ct/Somerset Dr
 Cambridge Dr/Normanby St
 Cambridge Rd/Hawthory Rd
 Cambridge Rd/Ridge Rd
+Cambridge Rd/Somerset Dr
 Cambridge Reserve/Mitchell
 Camden Rd/Ardlui Dr
 Camdolle Cl/Darwin Way
@@ -3077,6 +3090,7 @@ Carberry Dr/Gisborne-Melton Rd
 Carberry Way/Ellscott Bvd
 Carbine St/Leslie St
 Carbine Way/Goodwood Dr
+Carbine Way/Racecourse Rd
 Carbine Way/Taylors Rd
 Carboni Ct/Jacksons Rd
 Carcoola Rd/Mt. Dandenong Rd
@@ -3126,8 +3140,6 @@ Carlton Baths/Rathdowne St
 Carlton Ct/Calder Park Dr
 Carlton Gardens/Rathdowne St
 Carlton Gardens/Victoria St
-Carlton North Post Office/Rathdowne St
-Carlton North Post Office/Richardson St
 Carlton Rd/Gladstone Rd
 Carlton St/Gillies St N
 Carluke Cl/Bemersyde Dr
@@ -3144,11 +3156,13 @@ Carnarvon Ave/Forest Rd
 Carnarvon Cl/Palmerston Cres
 Carnarvon Rd/Hayes Rd
 Carnarvon St/Blyth St
+Carnation Dr/Lightsview Bvd
 Carnegie Ct/Fersfield Rd
 Carnegie Station/Koornang Rd
 Carney Cres/Delatite Rd
 Carney St/Callister St
 Carnival Bvd/Bells Rd
+Carnoustie Gve/Bentons Rd
 Carol Gr/Melrose Dr
 Carol St/Borg Cres
 Caroline Ave/Waugh Rd
@@ -3171,7 +3185,6 @@ Carr St/Newlands Rd
 Carrajung - Woodside Rd/Yarram - Traralgon Rd
 Carramar Ave/Coleman Pde
 Carramar Ct/Pindari Dr
-Carramar St/Bungower Rd
 Carramar St/Robertson Dr
 Carranballac P-9 College/Dunnings Rd
 Carrick Dr/Melrose Dr
@@ -3280,7 +3293,6 @@ Cavanagh St/Esmond St
 Cavanagh St/Friendship Sq
 Cavendish Ct/Mossgiel Park Dr
 Cavendish St/Mercer St
-Caversham Dr/Dunns Rd
 Caversham Dr/Henry Rd
 Caves Gr/Springvale Rd
 Caviar Ct/Howe St
@@ -3337,6 +3349,7 @@ Central Reserve/Springvale Rd
 Central Reserve/Waverley Rd
 Central Square SC/Central Ave
 Central Square SC/Sturt St
+Central Square Shopping Centre/Maya Ave
 Central Square Shopping Centre/Merton St
 Central Walk Shopping Centre/High St
 Central West SC/Ashley St
@@ -3369,6 +3382,7 @@ Centre Valley Rd/Princes Dr
 Centre for Nanofabrication/Wellington Rd
 Centro Wodonga/Smythe St
 Century Dr/Malcolm Rd
+Cerini Rd/Midland Hwy
 Cerulean Dr/Bridge Rd
 Cervara St/Warrigal Rd
 Ceylon St/Whitehorse Rd
@@ -3460,6 +3474,7 @@ Chas Johnson Reserve/Balaclava Rd
 Chase Bvd/Dyson Dr
 Chase Bvd/Jarrah Dr
 Chase View Ct/Kangaroo Ground-Warrandyte Rd
+Chateau Prom/Taylors Rd
 Chatfield Ave/Point Nepean Rd
 Chatfield St/Williamstown Rd
 Chatswood Cl/Westlands Rd
@@ -3647,6 +3662,7 @@ Churchill Ave/Huntingdale Rd
 Churchill Ave/Queen St
 Churchill Dr/Mt Dandenong Tourist Rd
 Churchill Memorial Reserve/Waller St
+Churchill North Primary School/Coolabah Dr
 Churchill Primary School/Howard Ave
 Churchill Rd/Princes Dr
 Churchill Rd/Vary St
@@ -3669,7 +3685,6 @@ City Pl/Sun Cres
 City Rd/Queens Bridge St
 City Rd/Southbank Bvd
 City Rd/Wantirna Rd
-City Vista Ct/Taylors Rd
 CityLife Church/Kingsway
 CityLife Church/Kingsway Dr
 Citybay Dr/Saltwater Prom
@@ -3691,6 +3706,7 @@ Clapham Ave/Springvale Rd
 Clapham St/Normanby Ave
 Clapham Way/Grand Bvd
 Clapperton St/Centre Rd
+Clara Ave/Kirkpatrick Bvd
 Clara Dr/Bells Rd
 Clarafield Cres/Sayers Rd
 Clare Brennan Dr/Furlong Rd
@@ -3717,6 +3733,7 @@ Clarendon St/Victoria Pde
 Clarendon St/Wales St
 Claret Ash Bvd/Arnolds Creek Bvd
 Clarey St/Belle Vue Rd
+Clarian Street Reserve/Cairnlea Dr
 Clarice Rd/Middleborough Rd
 Clarinda Community Library/Bourke Rd
 Clarinda Rd/Bourke Rd
@@ -3764,7 +3781,6 @@ Clayton St/Spencer St
 Clayton Station/Carinish Rd
 Clayton Station/Clayton Rd
 Clearview Court Reserve/Bethany Rd
-Clearview Court Reserve/Coach St
 Clearview Dr/Harold St
 Clearwood Cl/Warranwood Rd
 Cleary Ave/Eleventh St - North
@@ -4027,6 +4043,7 @@ Concord School/Grimshaw St
 Concorde Ave/City Vista Ct
 Condev Ct/Terrara Rd
 Condor Pl/Melba Ave
+Conductor Rd/Morningside Dr
 Conelly Park/Hawkstowe Pde
 Confait Ct/Telford Dr
 Conifer Ave/Geelong Rd
@@ -4048,6 +4065,7 @@ Conran Dr/Thacker St
 Conservation Volunteers Australia/Barkly St
 Consolidated School/Polding St
 Constance St/Tooronga Rd
+Constant Ave/Farm Rd
 Continuing Education Centre/High St
 Contursi Dr/Calder Park Dr
 Conway St/Josephine Ave
@@ -4134,12 +4152,14 @@ Coquette St/Autumn St
 Coral Dr/Ormond Rd
 Coral Mews Ret Village/Hallam Rd
 Coral Park PS/Coral Dr
+Coral Rd/Prince St
 Coral St/Ashleigh Ave
 Coral St/Nardoo St
 Corangamite Lake Rd/Coragulac-Beeac Rd
 Corbett St/Oconnor Ave
 Corbin Pl/Prince Of Wales Ave
 Corby St/Balwyn Rd
+Cordhill Ct/Taylors Rd
 Corduroy Rd/Warburton Hwy
 Coreen Ave/Balcombe Rd
 Corella St/Union Rd
@@ -4254,6 +4274,7 @@ Craig St/Cranbourne Rd
 Craigcare Nursing Home/Nepean Hwy
 Craigie Rd/Esplanade
 Craigie Rd/Nepean Hwy
+Craigie Road Reserve/Craigie Road
 Craigieburn Bicentennial Park/Craigieburn Rd
 Craigieburn Central SC/Central Park Ave
 Craigieburn Central SC/Lygon Dr
@@ -4312,6 +4333,7 @@ Creighton Way/Racecourse Rd
 Cremean Ave/Bond St
 Cremin Ct/Finlayson St
 Crepe Rd/Railway Pde
+Crescent St/Goulburn Rd
 Cresser St/Mills St
 Cresswell Ave/Palmers Rd
 Cresswell Cres/Springfield Rd
@@ -4346,11 +4368,11 @@ Croft St/Huntingdale Rd
 Crofters Hill Way/Jones Rd
 Cromb Ave/Tramway Pde
 Crombie Rd/Warburton Hwy
+Cromdale St/Bentons Rd
 Cromer Ave/McIntyre Rd
 Cromer Cres/Albany Dr
 Cromer Pl/Odessa Ave
 Cromwell Ct/Central Rd
-Cromwell Dr/Rennie St
 Cromwell Pde/Geelong Rd
 Cromwell St/Burwood Hwy
 Cromwell St/Victoria Pde
@@ -4486,7 +4508,6 @@ Dales Park/Warrigal Rd
 Daley St/Bell St
 Daley St/Cumberland Rd
 Daley St/Glen Huntly Rd
-Daley St/Morley St
 Dalgetty Rd/Balcombe Rd
 Dalgetty Rd/Holding St
 Dalgetty St/Holding St
@@ -4637,6 +4658,7 @@ Davine St/Sutton St
 Davis Ave/Military Rd
 Davis Ave/Skewes St
 Davis Ct/Archer St
+Davis Rd/Dohertys Rd
 Davis Rd/Hogans Rd
 Davis Rd/Leakes Rd
 Davis St/Bell St
@@ -4674,7 +4696,6 @@ Daybreak Vsta/Highlander Dr
 Daylesford Rd/Cypress Rd
 Daylesford Tce/Caroline Springs Bvd
 De Carle St/Albion St
-De Carle St/Moreland Rd
 De Castella Dr/Wavell St
 De Havilland Rd/Lower Dandenong Rd
 De Soza Park/Warrenheip St
@@ -4704,6 +4725,8 @@ Dean St/Murray Rd
 Dean St/Thurgoona St
 Deane St/Cranbourne Rd
 Deane St/Surrey Rd
+Deans Marsh - Lorne Rd/Deans Marsh _Birregurra Rd
+Deans Marsh-Lorne Rd/Deans Marsh -Birregurra Rd
 Deans Wood Rd/Canterbury Rd
 Deanswood Rd/Somerville Rd
 Deborah Dr/Frankston - Flinders Rd
@@ -4724,6 +4747,7 @@ Deep Lead Rd/Midland Hwy
 Deepdene PS/Burke Rd
 Deer Park Bowls Club/Ballarat Rd
 Deer Park Hotel/Ballarat Rd
+Deer Park Library/Neale Rd
 Deer Park Reserve/Ballarat Rd
 Deer Park Station/Mt Derrimut Rd
 Dehnert St/Doncaster Rd
@@ -4792,6 +4816,7 @@ Derham St/Williamstown Rd
 Derinya Dr/Overport Rd
 Derna Ct/Malaya Rd
 Derrick St/Melbourne Rd
+Derril Rd/Mornington-Tyabb Rd
 Derrimut Rd/Barber Dr
 Derrimut Rd/Cameron Dr
 Derrimut Rd/Heaths Rd
@@ -4901,6 +4926,8 @@ Dodds St/Crimea St
 Doe St/Melbourne Rd
 Doherty Ave/McDonald St
 Dohertys Rd/Cherry Lane
+Dohertys Rd/Davis Rd
+Dohertys Rd/Derrimut Rd
 Dohertys Rd/Fitzgerald Rd
 Dohertys Rd/Morris Rd
 Dohertys Rd/Palmers Rd
@@ -4982,6 +5009,7 @@ Doran Ave/Walker St
 Dorchap Ct/Bellbridge Dr
 Dorchester Cres/Greenwood Dr
 Dorchester Dr/The Promenade
+Dorchester St/Wiltshire Bvd
 Dorevitch Pathology/Green St
 Dorgan St/Kooyong Rd
 Doris Dr/Heaths Rd
@@ -5032,7 +5060,6 @@ Dover St/Centre Rd
 Doveton Ave/Frawley Rd
 Doveton Ave/Princes Hwy
 Doveton Baptist Church/Kidds Rd
-Doveton Cres/Lydiard St N
 Doveton Heights Primary School/Laurel Ave
 Doveton Pool In The Park/Tristania St
 Doveton Senior Citizens Club/Power Rd
@@ -5085,6 +5112,7 @@ Drummer Lane/Maramba Dr
 Drummond Golf/Dean St
 Drummond St/Tylden St
 Drummond St/Victoria St
+Dry Creek/Derrimut Rd
 Dryburgh St/Haines St
 Dryburgh St/Shiel St
 Dryburgh St/Spencer St
@@ -5326,7 +5354,7 @@ Edgewater SC/Edgewater Bvd
 Edgewood Cl/Harold Keys Dr
 Edgewood Rd/Princes Hwy
 Edi Cheshunt Rd/King Valley Rd
-Edi Cheshunt Rd/Wangaratta - Whitfield Rd
+Edi/Wangaratta - Whitfield Rd
 Edina Rd/Dorset Rd
 Edina St/Stanley St
 Edinburgh Ave/Autumn St
@@ -5520,6 +5548,7 @@ Ellstone Ave/Wilsons Rd
 Ellswood Cres/Benetook Ave
 Ellswood Cres/Cureton Ave
 Elm Ave/Gillies St S
+Elm Dr/Taylors Rd
 Elm Gr/High Street Rd
 Elm Gr/Lightwood Rd
 Elm St/Beechworth Rd
@@ -5536,6 +5565,7 @@ Elmslie Dr/Narre Warren-Cranbourne Rd
 Elmstead Dr/Ferntree Gully Rd
 Eloera St/Glenfern Rd
 Elonera Rd/Princes Hwy
+Eloquence Rd/Odyssey Blvd
 Elpara Way/Ormond Rd
 Elphinstone Bvd/Glencairn Dr
 Elphinstone Hotel/14 Wright St
@@ -5601,8 +5631,8 @@ Emily St/Neerim Rd
 Emily St/Wallis St
 Eminence Bvd/Bassetts Rd
 Emma Way/Wright St
-Emmanuel College Junior Campus/Ardlie St
 Emmanuel College/Ardlie St
+Emmanuel College/Chambers Rd
 Emmanuel College/Dunnings Rd
 Emmanuel College/Palmers Rd
 Emmaus College/Springvale Rd
@@ -5639,6 +5669,7 @@ Epping North SC/Lyndarum Dr
 Epping Plaza SC/Cooper St
 Epping Plaza SC/High St
 Epping Rd/Bridge Inn Rd
+Epping Rd/Craigieburn Rd
 Epping Rd/Hayston Bvd
 Epping Rd/Pine Park Dr
 Epping Recreation Reserve/High St
@@ -5786,7 +5817,6 @@ Everard Rd/Maroondah Hwy
 Everard Rd/Pearson Rd
 Everard Rd/pearson Rd
 Everard St/Essex St
-Everard St/Morley St
 Everglade Ave/Parkmore Rd
 Evergreen Ave/Oakwood Rd
 Evergreen Cl/McNeilly Rd
@@ -5794,6 +5824,7 @@ Evergreen Ct/Hume Dr
 Evergreen Dr/Ballan Rd
 Evergreen Way/Centre Rd
 Everitt St/South St
+Everlasting Bvd/Alfred Rd
 Eversley Rd/Pyrenees Hwy
 Everton Cl/Haverbrack Dr
 Everton Rd/Morris Rd
@@ -5813,6 +5844,7 @@ Exeter Rd/Lyons Rd
 Exeter Rd/Maroondah Hwy
 Exeter Rd/Patrick Ave
 Exeter St/East St
+Exford Dr/Bungowe Rd
 Exford Rd/Bridge Rd
 Exford Rd/Staughton St
 Exford St/Longford Cres
@@ -5856,6 +5888,7 @@ Fairfield Community Centre/Station St
 Fairfield Station/Station St
 Fairfield Station/Wingrove St
 Fairhall Ave/Armstrong Rd
+Fairhaven Ave/Mandalay Cct
 Fairhaven Bvd/Evans Rd
 Fairhills High School/Scoresby Rd
 Fairhills PS/Manuka Dr
@@ -5890,10 +5923,10 @@ Family Store/Malaya Rd
 Family Vet Centre/Beechworth Rd
 Fankhauser Dr/Burwood Hwy
 Fanny St/Wilson St
-Faraday Rd/Bayswater Rd
 Faraday St/Lygon St
 Farleigh Ave/Station St
 Farm Rd/Centre Rd
+Farm Rd/Newmarket Rd
 Farm Rd/Warrigal Rd
 Farmers Arms Hotel/McIvor Hwy
 Farmhouse Bvd/Greenfields Dr
@@ -6097,6 +6130,7 @@ Fittis St/Blackshaws Rd
 Fitzgerald Dr/The Lakes Bvd
 Fitzgerald Rd/Cherry Lane
 Fitzgerald Rd/Dohertys Rd
+Fitzgerald Rd/Forrest St
 Fitzgerald Rd/Glengala Rd
 Fitzgerald Rd/Hilma St
 Fitzgerald Rd/Princes Hwy
@@ -6121,6 +6155,7 @@ Fiveways Bvd/Cheltenham Rd
 Flam St/Ashleigh Ave
 Flanagan St/Higgins St
 Flavia Rd/Church Rd
+Fleece Rd/Frontier Av
 Fleet St/High Street Rd
 Fleetwood Ct/Wanstead St
 Fleetwood Dr/Narre Warren-Cranbourne Rd
@@ -6134,7 +6169,6 @@ Fletcher Rd/Loch Rd
 Fletcher Rd/Manchester Rd
 Fletcher Rd/Maroondah Hwy
 Fletcher St/Loeman St
-Fletcher St/Pascoe Vale Rd #38
 Fletcher St/South Rd
 Flete Ave/Kooyong Rd
 Fleurbaix St/Sanananda St
@@ -6177,7 +6211,6 @@ Floyd Ave/Medowra Ave
 Floyd Ave/Sisely Ave
 Flying Fruit Fly School/Silva Dr
 Flynn Cres/Kyabram St
-Foam St/Main St
 Foam St/Willis St
 Foch St/Haig St
 Foch St/Station St
@@ -6193,10 +6226,9 @@ Foote St/High St
 Foote St/Thompsons Rd
 Foote St/Williamsons Rd
 Foothills Park/Galloway Dr
-Footscray City College/Farnsworth Ave
 Footscray City PS/Bristow St
+Footscray High School Kinnear Campus/Farnsworth Ave
 Footscray Hockey Club/Fogarty Ave
-Footscray Hospital/Gordon St
 Footscray Park/35 Ballarat Rd
 Footscray Park/Ballarat Rd
 Footscray Plaza SC/French St
@@ -6220,7 +6252,7 @@ Fordham Rd/Broadway
 Fordson Rd/Sydney Rd
 Fordyce St/Benalla Rd
 Fore St/Yea Rd
-Forest Dr/Hearns Rd
+Forest Dr/Hearn Rd
 Forest Dr/Nepean Hwy
 Forest Hill College/Hawthorn Rd
 Forest Hill Police Station/Springvale Rd
@@ -6411,6 +6443,7 @@ Fryers Rd/South Valley Rd
 Fryers St/Corio St
 Fryers St/Wyndham St
 Fuchsia Ct/Cootamundra Dr
+Fuji Dr/Altezze Dr
 Fulham Gr/Gilbert Rd
 Fulham Rd/Heidelberg Rd
 Fulham Rd/Separation St
@@ -6522,7 +6555,6 @@ Gardiner St/Victoria St
 Gardner Pde/Hereford Rd
 Garfield Ct/Willow Dr
 Garfield Station/Nar Nar Goon - Longwarry Rd
-Garfield Station/Nar Nar Goon-Longwarry Rd
 Garibaldi St/Kosciuszko St
 Garnet Ave/Phillipson St
 Garnet St/Buckley St
@@ -6569,6 +6601,7 @@ Geelong Homemaker Centre/Princes Hwy
 Geelong Rd/Angliss St
 Geelong Rd/Barkly St
 Geelong Rd/Droop St
+Geelong Rd/Ison Rd
 Geelong Rd/Little Boundary Rd
 Geelong Rd/Millers Rd
 Geelong Showgrounds/St Albans Rd
@@ -6623,6 +6656,7 @@ George St/Kars St
 George St/Murray Rd
 George St/Peterkin St
 George St/Poath Rd
+George St/Prince St
 George St/Stud Rd
 George St/Union St
 George St/Victoria St
@@ -6774,6 +6808,7 @@ Glen Waverley Station/Railway Pde
 Glenair St/High St
 Glenara Ct/Grimshaw St
 Glenbervie Rd/Napier St
+Glenbrook Ave/Cairnlea Dr
 Glenbrook Cl/Rosedale Gr
 Glenbruar Dr/Calder Park Dr
 Glenburn Dr/Hinrichsen Dr
@@ -6789,6 +6824,7 @@ Glendale Park/Findon Rd
 Glendarragh Rd/Reynolds Rd
 Glendene Ct/Lyall Dr
 Glendonald Park/Amaroo Dr
+Gleneagles Ave/Prince St
 Gleneagles Sec Col/Reema Bvd
 Glenelg Dr/Bourke Rd
 Glenelg Hwy/Wiltshire Lane
@@ -6826,7 +6862,6 @@ Glenside St/Canning St
 Glenton Ct/Mt Gisborne Rd
 Glenvale Rd/Geelong Rd
 Glenview Rd/Warburton Hwy
-Glenvue Rd/Dundas St
 Glenwill Dr/Ironstone Rd
 Glenwood Assisted Living/Henry St
 Glenwood Ave/Civic Pde
@@ -6882,7 +6917,6 @@ Golf Links Dr/Mandalay Cct
 Golf Links Dr/Prince Of Wales Ave
 Golf Links Rd/Dorset Rd
 Golf Links Rd/Maroondah Hwy
-Golf Pde/Dundas St
 Golf Rd/Newlands Rd
 Golfwood Cl/Centre Dandenong Rd
 Gona St/Churchill Rd
@@ -6949,6 +6983,7 @@ Goulburn Ovens TAFE/Wallis St
 Goulburn Valley Health/Graham St
 Goulburn Valley Hwy/Vickers St
 Goulburn Valley Media Centre/Wyndham St
+Goulding Park/Aspire Bvd
 Gouldthorp Ave/Warrigal Rd
 Gourlay Rd/Melton Hwy
 Gourlay St/Kirsten St
@@ -7088,6 +7123,7 @@ Graze Rd/Elizabeth Dr
 Great Brome Ave/Lyndarum Dr
 Great Ryrie St/Canterbury Rd
 Great Western Dr/George Rd
+Greater Avalon Employment Precinct (GAEP)/Canberra Dr
 Greater Beveridge Community Centre/Lithgow St
 Greaves Rd/Wood Rd
 Greaves St North/Gerald St
@@ -7163,6 +7199,7 @@ Gregory St/Gillies St N
 Gregory St/Winifred St
 Greig Dr/Mernda Village Dr
 Greig St/Massey Ave
+Greigs Rd/Innovation Ave
 Gremel Rd/Plenty Rd
 Grenfell Pl/Major Cres
 Grenfell Rise/Harold Keys Dr
@@ -7181,7 +7218,6 @@ Grevillea Rd/Gillies St N
 Grevillea Rd/Midland Hwy
 Grevillea St/Box St
 Grevillea St/Brookfield Bvd
-Grevillea St/Coolabah Dr
 Grevillea St/Waterview Bvd
 Grevillia Rd/Rhodes Pde
 Grey St/Best St
@@ -7252,10 +7288,8 @@ Guilfoyle Ave/Shorts Rd
 Gull Ct/Gladesville Bvd
 Gully Crst/Monbulk Rd
 Gum Ct/Waverley Park Dr
-Gum Dr/McClelland Ave
 Gum Rd/Main Rd West
 Gumarooka Ave/Dandarriga Dr
-Gunida Ct/Dundas St
 Gunns Rd/Frawley Rd
 Gunsynd Ct/Underbank Bvd
 Gunyah Rd/Springfield Rd
@@ -7392,7 +7426,6 @@ Hampstead Cres/Watsons Rd
 Hampstead Dr/Heaths Rd
 Hampstead Rd/Emu Rd
 Hampstead Rd/Oakwood Ave
-Hampstead Rd/Williamson Rd
 Hampton Ave/Wright St
 Hampton PS/Ludstone St
 Hampton Park Bowls Club/Pound Rd
@@ -7557,6 +7590,7 @@ Hassett Ave/Prospect Hill Rd
 Hassett St/McIntyre Rd
 Hastings Ave/Middleborough Rd
 Hastings Ave/Wimmera Dr
+Hastings Community House/High St
 Hastings Rd/Moorooduc Hwy
 Hastings SC/King St
 Hastings Station/High St
@@ -7615,6 +7649,7 @@ Hayes Rd/Schotters Rd
 Hayes St/Eaglehawk Rd
 Hayes St/Maude St
 Hayfield Rd/Bridgewater Rd
+Hayston Bvd/Epping Rd
 Hayston Park/Hayston Bvd
 Hayton Park Bvd/Hall Rd
 Hayward Ct/Boronia Rd
@@ -7655,6 +7690,7 @@ Healey Rd/Kitchen Rd
 Heals Rd/Schotters Rd
 Health Centre/Ferrars St
 Healthscope Ct/Ontario Ave
+Healy Dr/Altezze Dr
 Heany St/Waverley Rd
 Heape Way/Tortice Dr
 Heath St/Kiewa Ave
@@ -7955,6 +7991,7 @@ Highlands Rd/Delatite Rd
 Highlands Retirement Village/Waterview Bvd
 Highlands SC/Aitken Bvd
 Highlands SC/Grand Bvd
+Highline Bvd/Altezze Dr
 Highmont Dr/Princes Hwy
 Highpark Dr/Empress Ave
 Highpoint SC/Aquatic Dr
@@ -7993,6 +8030,7 @@ Hillcroft Park/Cuckoo St
 Hilldene Lane/Tooborac Rd
 Hillingdon Cres/High St
 Hillside Pde/Toorak Rd
+Hillside Primary School/Wattle Valley Dr
 Hillside Recreation Reserve/Royal Cres
 Hillside St/Princes Hwy
 Hillsmeade PS/Littlecroft Ave
@@ -8006,7 +8044,6 @@ Hillview Ave/Reynard St
 Hillview Ct/Timberside Dr
 Hilma St/Fitzgerald Rd
 Hilton Rd/Mt Dandenong Tourist Rd
-Hilton St/Bourchier St
 Hilton St/Plunkett Rd
 Hilton St/Widford St
 Hindle St/Church St
@@ -8049,6 +8086,7 @@ Hodgson St/Church St
 Hodgson St/Thompsons Rd
 Hoffmans Rd/Buckley St
 Hoffmans Rd/Keilor Rd
+Hoffmans Rd/Keilor Rd #52
 Hoffmans Rd/Mary St
 Hoffmans Rd/Vaynor St
 Hogan Ave/Ringwood-Warrandyte Rd
@@ -8143,6 +8181,7 @@ Honeyeater Way/Webster Way
 Honeys Rd/Cape Paterson Rd
 Honeysuckle St/High St
 Honour Ave/Berwick-Cranbourne Rd
+Honour Ave/Hull Rd
 Honour Ave/McGrath Rd
 Hood Cres/Cornish St
 Hood Cres/Glen Eira Rd
@@ -8269,6 +8308,7 @@ Howlong Public School/Hawkins St
 Howqua Inlet/Mansfield-Woods Point Rd
 Hoxton Cres/Royal Tce
 Hoxton Crst/Royal Tce
+Hoylake Gve/Dava Dr
 Hubble St/Loch St
 Hubert St/Glenfern Rd
 Hudson Park/Sydney St
@@ -8307,6 +8347,7 @@ Hume Central Secondary College/Blair St
 Hume Cres/Cuthberts Rd
 Hume Ct/Endeavour Dr
 Hume Ct/Gaskin St
+Hume Dr/City Vista Ct
 Hume Dr/Copperfield Dr
 Hume Dr/Overton Lea Bvd
 Hume Fwy/Tooborac Rd
@@ -8365,7 +8406,6 @@ Husband Rd/Springvale Rd
 Husband Rd/Stevens Rd
 Husseys Lane/Ringwood-Warrandyte Rd
 Hutchins Ct/Highfield Ave
-Hutchins Park/Dunns Rd
 Hutchinson Dr/Lynbrook Bvd
 Hutchison Ave/Beach Rd
 Hutchison St/Patten St
@@ -8405,6 +8445,7 @@ Ibis Way/Franklin Rd
 Ida St/Garnet St
 Ida St/Miller St
 Idaho St/Bacchus Marsh Rd
+Idyll St/Mandalay Cct
 Iffla St/Dorcas St
 Ikara St/Dunns Rd
 Ila St/West St
@@ -8432,7 +8473,6 @@ Industrial Dr/Fairbairn Rd
 Industry Park Dr/McDonald Rd
 Indwe St/Roberts St
 Information Centre/Glenelg Hwy
-Information Centre/Watt St
 Information Centre/Western Hwy
 Ingenia Lifestyle Lakeside/Watt St
 Ingles St/Lorimer St
@@ -8457,6 +8497,7 @@ Inkerman St/Rosamond Rd
 Inkerman St/Wurundjeri Bvd
 Innellan Rd/Murrumbeena Rd
 Innes Ct/Soldiers Rd
+Innovation Av/Lightsview Blvd
 Inshore Dr/Fischer St
 Insignia Bvd/Sturt St
 Interchange Dr/Leakes Rd
@@ -8477,6 +8518,7 @@ Iona Ct/Karingal Dr
 Iona Dr/Sutton St
 Iona St/Forster St
 Iramoo Primary School/McGrath Rd
+Iramoo Way/Farm Rd
 Ireland St/Railway Pde
 Irene Ave/Short Rd
 Irene Cres/Wattle Valley Rd
@@ -8587,7 +8629,6 @@ James Milne Dr/Yarra Rd
 James Mirams Dr/Aitken Bvd
 James Mirams Dr/Bridgewater Rd
 James St/Beach St
-James St/Charles St
 James St/Cherry Lane
 James St/Cranbourne Rd
 James St/Emily St
@@ -8677,6 +8718,7 @@ Jennison Ct/Chelsea Park Dr
 Jenola Pde/High Street Rd
 Jensen Ct/Ballintine St
 Jerilderie Dr/Ernst Wanke Rd
+Jerrold St/Gordon St
 Jersey Rd/Barry St
 Jersey Rd/Mountain Hwy
 Jersey St/O'Hea St
@@ -8709,6 +8751,7 @@ Johansons Rd/Warrandyte - Ringwood Rd
 Johansons Rd/Warrandyte-Ringwood Rd
 John Batman Gardens/Bay Rd
 John Byron Reserve/Fleetwood Dr
+John Cain Memorial Park/Darebin Rd
 John Cain Memorial Park/Station St
 John Ct/Union Rd
 John Fawkner College/Jukes Rd
@@ -8901,6 +8944,7 @@ Kardinia International College/Ballarat Rd
 Kardinia Park/Moorabool St
 Kareela Rd/Cranbourne Rd
 Karen Ct/York Rd
+Karina St/Bentons Rd
 Karina St/Overport Rd
 Karingal Bowling Club/Skye Rd
 Karingal Dr/Lucerne Cres
@@ -8965,6 +9009,7 @@ Keilor Rd/Turrun St
 Keilor Rd/Wayut St
 Keilor Ret Village/Old Calder Hwy
 Keilor SC/Old Calder Hwy
+Keilor Shopping Centre/Old Calder Hwy
 Keily Rd/Fersfield Rd
 Keith Ave/Greenbrook Dr
 Keith Ave/Kinross Ave
@@ -9072,6 +9117,7 @@ Kerr St/Kent Rd
 Kerr St/Middleborough Rd
 Kerrford Dr/Kerr Rd
 Kerrie Rd/High Street Rd
+Kerry Ave/Bentons  Rd
 Kerry Pde/Bundoran Pde
 Kerry Way/Wicklow Dr
 Kershaw Dr
@@ -9091,6 +9137,7 @@ Kew Junction/Princess St
 Kew Junction/Studley Park Rd
 Keyes Ct/Wallace Rd
 Keylana Dr/Springvale Rd
+Keynes Cct/Aspire Bvd
 Keys Rd/Chesterville Rd
 Keys Rd/Herald St
 Keys Rd/Warrigal Rd
@@ -9109,6 +9156,7 @@ Kiama Ct/Bellara Dr
 Kiama Dr/High St
 Kiama Way/Jetty Rd
 Kiandra Mews/Ralph Cres
+Kiandra St/Bentons Rd
 Kiata Dr/Thirteenth St
 Kiddle St/Lorne St
 Kidds Rd/Power Rd
@@ -9138,6 +9186,7 @@ Killester College/Springvale Rd
 Killibury Ct/Serpells Rd
 Kilmore Ave/Winter Cres
 Kilmore East Station/O'Gradys Rd
+Kilmore Shopping Centre/Sydney St
 Kilpa Rd/Keys Rd
 Kilsyth Ave/Liverpool Rd
 Kilsyth Centenary Swimming Centre/Hawthory Rd
@@ -9184,7 +9233,9 @@ King St/Ross St
 King St/Stud Rd
 King St/Victoria St
 King St/Williamsons Rd
-King Valley Primary School/Wangaratta - Whitfield Rd
+King Valley/Wangaratta - Whitfield Rd
+King's College/47 Balmoral Rd
+King's College/Balmoral Rd
 King's Park/Tallarook St
 Kingdom Bvd/Exford Rd
 Kingdom Dr/Narre Warren-Cranbourne Rd
@@ -9194,8 +9245,6 @@ Kinglake Memorial Reserve/Whittlesea-Kinglake Rd
 Kinglake Police Station/Whittlesea-Kinglake Rd
 Kingloch Pde/Dunbarton Dr
 Kings College Dr/Sasses Ave
-Kings College/47 Balmoral Rd
-Kings College/Balmoral Rd
 Kings Living Ret Vill/King St
 Kings Rd/Gillespie Rd
 Kings Rd/Hume Dr
@@ -9712,6 +9761,7 @@ Legend Ave/Camelot Dr
 Legon Rd/Coombs Ave
 Lehmann Ave/Heyers Rd
 Lehmann Cres/Forest Dr
+Leicester Ave
 Leicester Sq/Coventry St
 Leicester St/Greythorn Rd
 Leichardt St/Bowen St
@@ -9814,6 +9864,7 @@ Lexton Rd/Middleborough Rd
 Lexton St/Kyabram St
 Leyland Rd/Huntingdale Rd
 Lia Amie Pl/Marsh Gr
+Liberation Cct/Constant Ave
 Liberty Ave/Clauscen Dr
 Liberty Ave/Shearer Dr
 Liberty Avenue Reserve/Liberty Ave
@@ -9894,6 +9945,7 @@ Lindrum Rd/Karingal Dr
 Lindsay Ct/Bullumwaal Rd
 Lindsay St/Francis St
 Lindsay St/High St
+Linesman Dr/Fields St
 Link Dr/Dromana Pde
 Link Rd/Warburton Hwy
 Link St/Dunne St
@@ -9911,8 +9963,6 @@ Lions Aged Hostel/Barkly St
 Lions Park/High St
 Lions Park/Reserve St
 Lions Park/Service St
-Lionsville Ret Village/Moreland Rd
-Lionsville Retirement Village/Moreland Rd
 Lipscombe Park/Kirtain Dr
 Lipton Dr/Mahoneys Rd
 Lisa Ct/Etiwanda Ave
@@ -10030,7 +10080,7 @@ Longstaff Way/Phillip Dr
 Longtan Ave/Elizabeth Dr
 Longview Ave/Dorothy St
 Longwarry Railway Station/Nar Nar Goon-Longwarry Rd
-Longwarry Station/Nar Nar Goon-Longwarry Rd
+Longwood Ave/Cairnlea Dr
 Longwood Park/Findon Rd
 Longwood St/Centennial Bvd
 Lonhro Ct/Station Rd
@@ -10060,6 +10110,7 @@ Lorna St/Klauer St
 Lorne Rd/Malvern Rd
 Lorne St/Mutton Rd
 Lorne St/Wembley Rd
+Lorne Visitor Centre/Great Ocean Rd
 Lorraine Cres/Johnstone St
 Lorraine Kovacs Reserve/Daniel Solander Dr
 Lorraine Kovaks Reserve/Daniel Solander Dr
@@ -10089,6 +10140,7 @@ Lower Terrace Cres/Jacksons Rd
 Lowery Rd/Koroit-Port Fairy Rd
 Lowery Rd/Port Fairy Rd
 Lowes Rd/Warburton Hwy
+Lowther Hall Grammar School/Leslie Rd
 Lowther St/Heidelberg Rd
 Loxton Ave/Mowbray Dr
 Loyola Ave/Balmoral Rd
@@ -10171,6 +10223,7 @@ Lynch St/Moore St
 Lynda Blundell Centre/186 Blair St
 Lyndale Greens PS/Oakwood Ave
 Lyndale Sec Col/Gladstone Rd
+Lyndarum Dr/Epping Rd
 Lynden Gr/Huntingdale Rd
 Lyndhurst Bvd/Marriott Bvd
 Lyndhurst Cres/Nicholson St
@@ -10188,6 +10241,7 @@ Lynne Ave/Burwood Hwy
 Lynne St/Wells Rd
 Lynnwood Pde/High St
 Lynott St/Alexander Ave
+Lynwood Dr/Mount Cottrell Rd
 Lyon Rd/Martins Lane
 Lyons Ave/Yuille St
 Lyons Dr/Belgrave-Gembrook Rd
@@ -10444,7 +10498,6 @@ Marathon Bvd/Waterview Bvd
 Marcella Ct/Blackburn Rd
 Marcellin Rd/Golden Way
 Marchant Ave/Broadway
-Marchington Ave/Barkly St
 Marco Polo St/Mt Alexander Rd
 Marcus Cres/Kyabram St
 Mardi Cl/Allumba Dr
@@ -10483,6 +10536,7 @@ Marigold Ave/Millers Rd
 Marilyn Cl/Princess Rd
 Marimba Cct/Wright St
 Marina Dr/Centenary Ave
+Marine Pde/Hodgins Rd
 Marine Pde/Woolamai Gr
 Marine St/Anglers Rd
 Marine St/Coral St
@@ -10557,6 +10611,7 @@ Marsham Rd/Stephensons Rd
 Marshy Way/Station Pde
 Martell St/Joseph St
 Martens Ct/Melba Ave
+Marthas Ridge Dr/Craigie Rd
 Marthas Ridge Dr/Racecourse Rd
 Martin St/Blackburn Rd
 Martin St/Burgundy St
@@ -10644,9 +10699,11 @@ Maurice Ct/Rooks Rd
 Mavista Ave/Canova Dr
 Mavron Ave/Leakes Rd
 Mawby Rd/East Boundary Rd
+Mawson Gardens/Aspire Bvd
 Max Pawsey Reserve/Princes Hwy
 Maxine Dr/St Helena Rd
 Maxwell St/Albion Rd
+Maxwell St/Bentons Rd
 Maxwell St/Dunns Rd
 May Ave/Merton St
 May Park Ave/Warrigal Rd
@@ -10882,6 +10939,7 @@ Meadowbank Ave/Billanook Way
 Meadowbank Dr/Furlong Rd
 Meadowlands Way/Ridgemont Dr
 Meadowlands Way/Skyline Way
+Meadows Dr/Taylors Rd
 Meadows Way/Lower Beckhams Rd
 Meadowvale Dr/Rossack Dr
 Meadowvale Ret Village/Eagle Dr
@@ -10914,7 +10972,6 @@ Melbourne Airport T1 Skybus/Arrival Dr
 Melbourne Airport T3 Skybus/Arrival Dr
 Melbourne Airport T4 Skybus/Service Rd
 Melbourne Airport/Grants Rd
-Melbourne Bowls Centre/264 Darebin Rd
 Melbourne Central/Lonsdale St
 Melbourne Eastern Private Hospital/Scoresby Rd
 Melbourne Girls Grammar/Anderson St
@@ -10933,6 +10990,7 @@ Melbourne Rd/Coppin Rd
 Melbourne Rd/Ferguson St
 Melbourne Rd/Ocean Beach Rd
 Melbourne Rd/St Pauls Rd
+Melbourne Showgrounds/Langs Rd
 Melbourne St/Inglis St
 Melbourne University/Grattan St
 Melbourne University/Royal Pde
@@ -10962,9 +11020,10 @@ Melton Christian College/Brooklyn Rd
 Melton Civic Centre/High St
 Melton Hwy/Calder Park Dr
 Melton Hwy/Parmelia Dr
+Melton Hwy/Sanctuary Rd
 Melton Hwy/The Parks
 Melton Secondary College/Coburns Rd
-Melton Station/Staughton St
+Melton Station/Brooklyn Rd
 Melton Valley Dr/High St
 Melton Waves Leisure Centre/Coburns Rd
 Melton West Community Centre/Westmelton Dr
@@ -10980,6 +11039,7 @@ Melville Rd/Reynard St
 Melville Rd/Smith St
 Melville Rd/Victoria St
 Melville St/Morris St
+Melville Way/Lightsview Bvd
 Melvin St/Cranbourne Rd
 Memorial Ave/Belgrave-Gembrook Rd
 Memorial Ave/High St
@@ -11009,7 +11069,6 @@ Menzies St/Barkly St
 Merbein P-10 College/Commercial St
 Merbein Post Office/Railway Ave
 Merbein St/Sussex St
-Mercantile Pde/Kensington Rd
 Mercer St/King St
 Mercer St/Newcombe St
 Mercer St/The Esplanade South
@@ -11049,6 +11108,7 @@ Merrett Dr/Kororoit Creek Rd
 Merri Business Park/Normanby Ave
 Merri Creek/125 Arthurton Rd
 Merri Creek/Newlands Rd
+Merri-bek Primary School/Moreland Rd
 Merribrook Bvd/Pattersons Rd
 Merricks Beach Rd/Frankston-Flinders Rd
 Merrifield Bvd/Donnybrook Rd
@@ -11075,7 +11135,6 @@ Metropolitan Remand Centre/Middle Rd
 Metropolitan Ring Rd/Plenty Rd
 Metung St/Belmore Rd
 Meyrick Cres/Winston Rd
-Miami Dr/Bass Meadows Bvd
 Miami Dr/Saltwater Prom
 Michael Ct/Hampshire Rd
 Michael St/Balcombe Rd
@@ -11159,7 +11218,6 @@ Military Rd/Canning St
 Milk Bar/Irving Rd
 Milk Bar/Mitchells Lane
 Milk Bar/Station St
-Milk Bar/Wangaratta - Whitfield Rd
 Mill Ave/Wembley Ave
 Mill Park Baptist Church/Morang Dr
 Mill Park Lakes Reserve/The Lakes Bvd
@@ -11170,7 +11228,6 @@ Mill Park Stables Shopping Centre/Childs Rd
 Mill Park Stables Shopping Centre/Redleap Ave
 Mill St/Drummond St N
 Mill St/McLennan St
-Mill St/Midland Hwy
 Millar Cl/Stewart Dr
 Millar Ct/Dennison St
 Millar Rd/Melrose Dr
@@ -11201,7 +11258,6 @@ Millers Rd/Geelong Rd
 Millers Rd/Kororoit Creek Rd
 Millers Rd/Marigold Ave
 Millers Rd/Mason St
-Millers Rd/McArthurs Rd
 Millers Rd/West Gate Fwy
 Millewa Cres/Riggall St
 Millgrove CFA/Warburton Hwy
@@ -11247,8 +11303,6 @@ Mimosa St/High Street Rd
 Mincha Ave/Pleasant Rd
 Mindoro Cres/Childs Rd
 Mineral Springs Cres/Main Rd
-Miners Rest Hotel/137 McKenzie St
-Miners Rest Hotel/138 McKenzie St
 Miners Rest PS/Dundas St
 Miners Rest SC/Howe St
 Miners Rest SC/Raglan St
@@ -11264,6 +11318,7 @@ Minnie St/Glenlyon Rd
 Minona St/Jukes Rd
 Mira Ct/Ferguson Rd
 Mirabella Cres/Middleborough Rd
+Mirabelle Ct/Taylors Rd
 Mirage Dr/San Mateo Ave
 Miranda Rd/Borrie St
 Miranda Rd/Cheddar Rd
@@ -11274,7 +11329,6 @@ Mirls St/Mason St
 Mirriam Ave/Johnson St
 Mission St/Melbourne Rd
 Misten Ave/Blackshaws Rd
-Mistral Way/Golf Links Dr
 Mitcham Bowls Club/Mitcham Rd
 Mitcham Rd/Brunswick Rd
 Mitcham Rd/Canterbury Rd
@@ -11288,7 +11342,8 @@ Mitchell House Village/Vary St
 Mitchell Pde/Reynard St
 Mitchell Rd/Elgar Rd
 Mitchell Rd/Hereford Rd
-Mitchell St Central/Mitchell St
+Mitchell St Central - Bay A/Mitchell St
+Mitchell St Central - Bay B/Mitchell St
 Mitchell St/Benalla Rd
 Mitchell St/Hampstead Rd
 Mitchell St/High St
@@ -11308,6 +11363,7 @@ Moama Community Centre/Martin St
 Moama Holiday Villas/Chanter St
 Moama Marketplace/Boundary Rd
 Moama Public School/Simms St
+Moama St/Goulburn Rd
 Moama St/South Rd
 Mock St/Springvale Rd
 Mockridge Ave/Rockbank Middle Rd
@@ -11500,7 +11556,6 @@ Mordialloc SC/Centre Way
 Mordialloc Station/Albert St
 Morekana Cres/Balmoral Cres
 Morekana Walking Track/Howitt Ave
-Moreland PS/Moreland Rd
 Moreland Rd/Melville Rd #40
 Moreland St/Dynon Rd
 Moreland St/Hopkins St
@@ -11513,25 +11568,28 @@ Morey St/Balcombe Rd
 Morgan Cres/Station St
 Morgan St/Moroney St
 Morgan St/Thompson Rd
+Morgantis Rd/Midland Hwy
 Moriah St/Centre Rd
 Morinda Way/Flaxen Hills Rd
 Morkham Ct/Stirling Dr
-Morley St/Daley St
 Morley St/Evell St
 Mornane St/Victoria St
+Mornington Bay Aged Care/Racecourse Rd
 Mornington PS/Tanti Ave
 Mornington Park PS/Robertson Dr
 Mornington Park/Esplanade
 Mornington Peninsula Freeway/Springvale Rd
 Mornington Peninsula Fwy/Boneo Rd
 Mornington Peninsula Fwy/Frankston-Flinders Rd
-Mornington Ret Village/Mornington-Tyabb Rd
+Mornington Racecourse/Racecourse Rd
 Mornington-Tyabb Rd
 Mornington-Tyabb Rd/Frankston-Flinders Rd
+Mornington-Tyabb Rd/Racecourse Rd
 Mornmoot Ct/Fitzgerald Rd
 Morobe St/Oriel Rd
 Moroney St/Riley St
 Morotai Ave/High St
+Morpeth Way/Alfred Rd
 Morpung Ave/Fifteenth St
 Morradoo Station/Disney St
 Morrah St/Royal Pde
@@ -11588,12 +11646,12 @@ Mount Arapiles/Natimuk-Frances Rd
 Mount Burnett Rd/Gembrook Rd
 Mount Clear PS/Geelong Rd
 Mount Clear Vet Clinic/Geelong Rd
+Mount Cottrell Rd/Alfred Rd
 Mount Dandenong Observatory/Observatory Rd
 Mount Dandenong Tourist Rd/Falls Rd
 Mount Duneed Rd/Surf Coast Hwy
 Mount Eirene Rd/Gembrook Rd
 Mount Eliza SC/Mount Eliza Way
-Mount Eliza Secondary College
 Mount Erin College/Golf Links Rd
 Mount Hira College/Perry Rd
 Mount Martha Rd/Bruce Rd
@@ -11636,6 +11694,7 @@ Mountford Cres/Benyon St
 Mountview Ave/Frawley Rd
 Mowbray Dr/High Street Rd
 Mowbray St/Galloway Dr
+Moyhu/Wangaratta - Whitfield Rd
 Mt Alexander Rd/Keilor Rd
 Mt Alexander Rd/Kellaway Ave
 Mt Alexander Rd/Ormond Rd
@@ -11755,6 +11814,7 @@ Murray Valley Hwy
 Murray Valley Private Hospital/Nordsvan Dr
 Murrayville Newsagency/Reed St
 Murrindal Dr/Sovereign Crest Bvd
+Murrindal St/Farm Rd
 Murrong Ave/North Rd
 Murrumbeena Cres/Murrumbeena Rd
 Murrumbeena Park/Kangaroo Rd
@@ -11853,14 +11913,12 @@ Narre Warren-Cranbourne Rd/Rochester Pde
 Narre Warren-Cranbourne Rd/Sladen St
 Narrows Beach/Bellarine Hwy
 Nash Ave/Clifton Springs Rd
-Nasmyth St/Rennie St
 Natalia Ave/Coora Rd
 Natasha Cl/Mountain Gate Dr
 Nathan Dr/Davies St
 Natika Ct/Church St
 Natimuk Rd/Mintern Cres
 Nation Rd/Belgrave-Gembrook Rd
-National Bowls Centre/Darebin Rd
 National Bvd/Sydney Rd
 National Dr/Abbotts Rd
 National Dr/Palmers Rd
@@ -11914,6 +11972,7 @@ Nelson St/Frankston-Flinders Rd
 Nelson St/Highett Rd
 Nelson St/Lyons St
 Nene Ct/Oakbank Bvd
+Nepean Hwy/Bentons Rd
 Nepean Hwy/Centre Dandenong Rd
 Nepean Hwy/Centre Rd
 Nepean Hwy/Craigie Rd
@@ -11984,6 +12043,7 @@ Newman Ave/Leila Rd
 Newman Cres/McNairn Rd
 Newman Rd/Springfield Rd
 Newman St/View St
+Newmarket Rd/Timbarra Dr
 Newmet Ct/Coolavin Rd
 Newminister Way/Point Cook Rd
 Newminster Way/Point Cook Rd
@@ -12068,6 +12128,7 @@ Nish St/Somerville St
 Nissan Dr/Kitchen Rd
 Nixon Ct/Leahy St
 Nixon St/Corio St
+Nobel Banks Dr/Cairnlea Dr
 Nobel Banks Dr/Furlong Rd
 Nobel St/Victoria St
 Nobel St/Winston Rd
@@ -12324,7 +12385,6 @@ Oak Ave/Dorset Rd
 Oak Ave/Paperbark St
 Oak Ave/Warrigal Rd
 Oak Grange Ret Village/Union St
-Oak Lane/Bayswater Rd
 Oak St/Grange Rd
 Oak St/High St
 Oak Towers Aged Care/Atherton Rd
@@ -12386,6 +12446,7 @@ Oddie St/Drummond St N
 Odessa Ct/Haverbrack Dr
 Odowd St/Broadway
 Odowd St/Howard St
+Odyssey Blvd/Tarneit Rd
 Officer Recreation Reserve/Princes Hwy
 Officer Sec Col/Parker St
 Officer Secondary College/Bridge Rd
@@ -12441,6 +12502,7 @@ Old Warrandyte Rd/Mitcham Rd
 Old Warrandyte Rd/Springvale Rd
 Old Warrandyte Rd/Woodhouse Rd
 Old Wesley Church/Duke St
+Old Wonthaggi Post Office/Watt St
 Olde Maritime Motor Inn/Banyan St
 Oldfield Gr/Carrick Dr
 Oldfield Pl/Sommersby Rd
@@ -12487,6 +12549,7 @@ Olivette Ave/Mt Dandenong Tourist Rd
 Olivewood Ave/San Mateo Ave
 Olivewood Dr/San Mateo Ave
 Olivia Dr/Jacana Ave
+Olivia Way/High St
 Olivine Bvd/Cycad Ave
 Olliers Rd/Creswick Rd
 Olney Ave/Boundary Rd
@@ -12496,7 +12559,6 @@ Olver St/High St
 Olwen St/Springvale Rd
 Olympic Ave/Geelong Rd
 Olympic Pde/Aspinall St
-Olympic Pde/Norelle Crst
 Olympic Pool/Swan St
 Olympic St/Grimshaw St
 Olympic Village Shopping Centre/Southern Rd
@@ -12514,7 +12576,6 @@ Ontario Ave/Colonial Dr
 Ontario Ave/Eleventh St
 Ontario Ave/Fifteenth St
 Ontario Ave/Seventeenth St
-Opal Aged Care/Racecourse Rd
 Opal Ct/Melrose Dr
 Ophelia St/Burwood Hwy
 Opie Rd/Main Rd West
@@ -12583,7 +12644,6 @@ Oscar St/Williamstown Rd
 Oslo Ct/London Rd
 Oslo Way/Taylors Rd
 Osmond Pl/The Parkway
-Osprey Dr/City Vista Ct
 Osprey Pl/Royal Tce
 Osprey Pl/Royal Tce Tce
 Osprey Rd/Ridge Rd
@@ -12658,13 +12718,13 @@ Pacific Bvd/Reserve Rd
 Pacific Dr/Horseshoe Bend Rd
 Pacific Dr/Oriel Rd
 Pacific Dr/Ramu Pde
-Pacific Gra/Golf Links Dr
 Pacific Prom/Windermere Bvd
 Pacific Way/Mahoneys Rd
 Pacific Werribee Shopping Centre/Derrimut Rd
 Packham St/Brauman St
 Packham St/Tilton St
 Paddock St/Madisons Ave
+Padma Blvd/Dohertys Rd
 Padua College/Frankston-Flinders Rd
 Page Ave/Howe Pde
 Page Ave/Kilby Rd
@@ -12777,6 +12837,7 @@ Park Cres/Moorabool St
 Park Cres/Springfield Rd
 Park Dr/Baillie St
 Park Dr/Belgrave-Hallam Rd
+Park Hill Retirement Village/Mornington-Tyabb Rd
 Park Lane/Bell St
 Park Lane/Frankston-Flinders Rd
 Park Lane/Vincent Dr
@@ -12833,6 +12894,7 @@ Parklands Ave/Karingal Dr
 Parklands Ave/Yarana Rd
 Parklands Cl/Springvale Rd
 Parklea Way/Baden Powell Dr
+Parklea Way/Morningside Dr
 Parkmore Rd/Chandler Rd
 Parkmore Rd/Springvale Rd
 Parkmore SC/Cheltenham Rd
@@ -12840,6 +12902,7 @@ Parkmore Shopping Centre/Kingsclere Ave
 Parkside Ave/Lauricella Ave
 Parkside Ave/Sterling Dr
 Parkside Bvd/Moreland Rd
+Parkside Cres/Dunns Rd
 Parkside Dr/Tyquin St
 Parkside Rd/Tait St
 Parkside Ret Village/Gwalia St (north side)
@@ -12885,6 +12948,7 @@ Pascoe Vale Rd/Brewster St
 Pascoe Vale Rd/Coleraine St
 Pascoe Vale Rd/Fletcher St #38
 Pascoe Vale Rd/Lichfield Ave
+Pascoe Vale Rd/Moreland Rd
 Pascoe Vale Rd/Pascoe Ave
 Pascoe Vale Rd/Reservoir Dr
 Pascoe Vale Rd/Taggerty Cres
@@ -12934,7 +12998,6 @@ Paulette Ct/Berrabri Dr
 Pauline Way/Mikada Bvd
 Pauls Cres/Dowling St
 Paxton Dr/Remington Dr
-Paxton St/Brunel St
 Paxton St/Darling Rd
 Paxton St/Mullum Mullum Rd
 Paydon Way/Warana Dr
@@ -12990,6 +13053,7 @@ Pembroke Dr/Eramosa Rd
 Pender Ave/Strachans Rd
 Pender St/Victoria Rd
 Pendula Ct/Darling Way
+Pengelly St/Farm Rd
 Penhallurick St/Wilkie St
 Penhurst Ct/Remington Dr
 Peninsula Ave/Melbourne Rd
@@ -12997,8 +13061,10 @@ Peninsula Bvd/Hartnett Dr
 Peninsula Community Theatre/Nepean Hwy
 Peninsula Cres/Southgateway
 Peninsula Grammar/Nepean Hwy
+Peninsula Grange Aged Care/Racecourse Rd
 Peninsula Home SC/Nepean Hwy
 Peninsula Private Hospital/Cranbourne-Frankston Rd
+Penleigh & Essendon Grammar Junior School/Raleigh St
 Penleigh and Essendon Grammar
 Penleigh and Essendon Grammar/Keilor Rd
 Penllyne Ave/Boronia Rd
@@ -13116,6 +13182,7 @@ Piermont Dr/Fairholme Bvd
 Pietro Rd/Kingston Rd
 Pigdon St/Portarlington Rd
 Pigdon St/Rathdowne St
+Pigdons Rd/Pigdons Rd
 Pigdons Rd/Princes Hwy
 Pigeon Bank Rd/Kangaroo Ground-Warrandyte Rd
 Pigtail Rd/Ringwood-Warrandyte Rd
@@ -13137,6 +13204,7 @@ Pine Ave/Vickers Rd
 Pine Cres/Springfield Rd
 Pine Cres/Station St
 Pine Hill Dr/Springvale Rd
+Pine Park Dr/Epping Rd
 Pine Rd/Pontiac Ave
 Pine Rd/Sali Dr
 Pine St/Chesterville Rd
@@ -13243,6 +13311,7 @@ Plummer St/Salmon St
 Plumpton Ave/Craigieburn Rd
 Plumpton Ave/Rhodes Pde
 Plumpton Rd/Houdini Dr
+Plumpton Rd/Taylors Rd
 Plumpton Rd/Welcome Rd
 Plumridge St/Kennewell St
 Plumridge St/Napier St
@@ -13427,6 +13496,7 @@ Princes Hwy/Belgrave-Hallam Rd
 Princes Hwy/Blackburn Rd
 Princes Hwy/Charles St
 Princes Hwy/Clayton Rd
+Princes Hwy/Coldstream Ave
 Princes Hwy/Dawson St
 Princes Hwy/Duncan Dr
 Princes Hwy/Ferntree Gully Rd
@@ -13476,6 +13546,7 @@ Prospect Hill Rd/Narre Warren North Rd
 Prospect Hill Rd/Tinks Rd
 Prospect Hill Retarding Basin/Narre Warren North Rd
 Prospect St/Buckley St
+Prospector Dr/Cairnlea Dr
 Prosperity Rd/Main Rd
 Protea St/Cadles Rd
 Proton Ct/Solar Dr
@@ -13579,7 +13650,6 @@ Quire Rd/Buchan South Rd
 Quist Pde/Everlasting Bvd
 RACV Cobram Resort/Campbell Rd
 RACV Torquay Resort/3 Great Ocean Rd
-RAS Showgrounds/Langs Rd
 RF Turner Memorial Park/High St
 RGC Cook Reserve/Victoria Dr
 RHL Sparks Reserve/Middleborough Rd
@@ -13590,12 +13660,13 @@ RMIT Bundoora Campus West/McKimmies Rd
 RMIT Bundoora Campus West/Plenty Rd
 RSL Nelson Square Village/McClelland St
 RSPCA/Princes Hwy
-RTC Resource Centre/Pigdons Rd
 Racecourse Dr/Princes Hwy
+Racecourse Grange Aged Care/Racecourse Rd
 Racecourse Rd Nth/Racecourse Rd
 Racecourse Rd/Bald Hill Rd
 Racecourse Rd/Barrington Dr
 Racecourse Rd/Bass Hwy
+Racecourse Rd/Bungower Rd
 Racecourse Rd/Cameron Way
 Racecourse Rd/Henry St
 Rachel Ct/Vickers St
@@ -13647,6 +13718,7 @@ Raleigh St/Pascoe Vale Rd
 Raleighs Rd/Centenary Ave
 Ralph St/Glengala Rd
 Ralph St/Hilma St
+Ramble Cl/Mandalay Cct
 Rambling Way/Deakin Ave
 Ramlegh Bvd/Tuckers Rd
 Ramlegh Reserve Cricket & Soccer Fields/Heather Gr
@@ -13837,6 +13909,7 @@ Retreat Rd/Buxton-Marysville Rd
 Retreat Rd/Stanley Ave
 Reve St/Dorset Rd
 Revell St/Point Nepean Rd
+Reverence Dr/Lightsview Blvd
 Revo St/Jubilee St
 Rex Ct/De Kerilleau Dr
 Rex Rd/Cooper St
@@ -13977,6 +14050,7 @@ Riverside Plaza/Goulburn Valley Hwy
 Riverstone Bvd/Grices Rd
 Riverview Family Caravan Park/Sweetman Pde
 Riverview Rd/Coster St
+Riverwalk Primary School/Coldstream Ave
 Riverwood Village/Padman Dr
 Rivette St/Lower Dandenong Rd
 Riviera Ct/Moira Ave
@@ -14166,6 +14240,7 @@ Rosella Ave/Kookaburra Ave
 Rosella Ave/Sullivans Rd
 Rosella Ct/Pearcedale Rd
 Rosella St/Leeds St
+Roseman Rd/Switchback Rd
 Rosemary Ave/Cousins St
 Rosemary Cl/Tarneit Rd
 Rosemary Ct/Ferntree Gully Rd
@@ -14215,6 +14290,7 @@ Rossmith Ave/Charman Rd
 Rossmore Ave/Boundary Rd
 Rossmore Ave/North Rd
 Rossmoyne Village/Station St
+Rosso Dr/Dohertys Rd
 Rostrevor Pde/Belmore Rd
 Rostrevor Pde/Bundoran Pde
 Roswell Community Centre/Sharland Rd
@@ -14284,7 +14360,7 @@ Royal Botanical Gardens/Domain Rd
 Royal Ct/Knowles St
 Royal Hotel/River St
 Royal Mail Hotel/Albert St
-Royal Melb Hosp Royal Park/Poplar Rd
+Royal Melbourne Hospital Royal Park/Poplar Rd
 Royal Melbourne Hospital/Flemington Rd
 Royal Melbourne Hospital/Grattan St
 Royal Melbourne Hospital/Royal Pde
@@ -14323,6 +14399,7 @@ Rufus St/Miller St
 Rules Rd/Princes Hwy
 Rumann Ave/Rosehill St
 Rumbalara Aboriginal Co-Op/Rumbalara Rd
+Runcorn Cres/Ferris Rd
 Rundell Way/Princes Hwy
 Rundle Dr/Wedge Rd
 Running Creek Rd/Kiewa Valley Hwy
@@ -14330,6 +14407,7 @@ Runnymede Rd/Belgrave-Hallam Rd
 Rupert Rd/Woods Point Rd
 Rupert St/Maroondah Hwy
 Rural Dr/Phillip St
+Rusden St/Nepean Hwy Service Rd
 Rushall Station/Rushall Cres
 Rushdale St/Ferntree Gully Rd
 Rushton St/Ison Rd
@@ -14376,7 +14454,7 @@ Ryan St/Holloway St
 Ryan St/Water St
 Ryans Rd/Clayton Rd
 Ryder St/Glengala Rd
-Rye Beach Community Centre/Nelson St
+Rye Community House/Nelson St
 Rye Foreshore Reserve/Point Nepean Rd
 Rye RSL/Nelson St
 Rye Shopping Centre/Point Nepean Rd
@@ -14493,14 +14571,13 @@ Sandringham Station/Station St
 Sandstone Ave/Point Cook Rd
 Sandvyk Ct/Borg Cres
 Sandy Point Rd/South Beach Rd
-Sandy Rd/Bass Meadows Bvd
-Sandy Rd/Tiberius Rd
 Sankey Reserve/Station Rd
 Santa Cruz Bvd/Bridgewater Rd
 Santa Cruz Vew/La Rochelle Bvd
 Santa Monica Bvd/Shell Rd
 Santarosa Ave/Davis Rd
 Sanwill Ave/Garden St
+Sapling Blvd/Dohertys Rd
 Sapphire St/Murray Rd
 Sara Rd/Ferntree Gully Rd
 Sarah Ct/Parry Rd
@@ -14508,6 +14585,7 @@ Saratoga Ave/Sheepwash Rd
 Sardine St/Lorimer St
 Sargeants Rd/Midland Hwy
 Sargent Ave/Twelfth St
+Saric St/Taylors Rd
 Sarnia Ct/Kurrajong Rd
 Sarona St/Ross St
 Sarzana St/Warrigal Rd
@@ -14573,7 +14651,7 @@ Scoresby Rd/Ferntree Gully Rd
 Scoresby Rd/Power Rd
 Scoresby Sec Col/Zerfas St
 Scoresby Village SC/Stud Rd
-Scorpio St/S Beach Rd
+Scorpio St/South Beach Rd
 Scotch Cct/Auburn Rd
 Scotchmans Creek Rd/Warburton Hwy
 Scotchmans Rd/Portarlington Rd
@@ -14614,6 +14692,7 @@ Sears Ct/Sinclair St
 Seaside Pde/The Esplanade
 Seasons Bvd/Sayers Rd
 Seaspray Hall/Futcher St
+Seaton Rd/Hoylake Gr
 Seattle St/Stroma Ave
 Seaver Gr/Leamington St
 Seaview Ave/Geelong Rd
@@ -14917,6 +14996,7 @@ Sinclair St/Murray St
 Sinclairs Rd/Junortoun Rd
 Sinclairs Rd/Somerset Park Rd
 Sinclairs Rd/Sullivans Rd
+Sinclairs Rd/Taylors Rd
 Singleton Dr/Thomas Mitchell Dr
 Singleton Rd/Carron St
 Singleton Reserve/John Fawkner Dr
@@ -14924,7 +15004,6 @@ Singleton Reserve/Ridge Rd
 Sir Isaac Isaacs Park/Isaacs Ave
 Sir William Fry Reserve/Nepean Hwy
 Sir William Hall Hostel/Edwin St
-Siren St/Golf Links Dr
 Sirius College/Fitzgerald Rd
 Sirius Way/Dalray Cres
 Sirovilla Retirement Village/Princes Hwy
@@ -15012,6 +15091,7 @@ Solomon Dr/Station Rd
 Solomon St/Lloyd St
 Solomon St/Padman Dr
 Solson Pl/Springvale Rd
+Solstice Dr/City Vista Ct
 Solway St/Winton Rd
 Somerfield Dr/Perry Rd
 Somerleigh Rd/Boundary Rd
@@ -15263,7 +15343,6 @@ St Annes Catholic PS/Brunel Rd
 St Annes Catholic PS/Riddell Rd
 St Anthony's Primary School/Wilson Rd
 St Arnaud Rd/Eynesbury Rd
-St Arnoud Rd/Eynesbury Rd
 St Aubins Ave/Orrong Rd
 St Augustine's PS/Old Calder Hwy
 St Augustines Church/Como Pde
@@ -15345,13 +15424,13 @@ St Johns Wood Rd/Point Nepean Rd
 St Johns Wood/Mccormicks Rd
 St Joseph's Catholic Church/Hope St
 St Joseph's College/Twelfth St
+St Joseph's PS/Botanic Rd
 St Joseph's Primary School/Wedge St
 St Josephs Catholic Church/Boronia Rd
 St Josephs Catholic School/Argyle Ave
 St Josephs College Stadium/Eleventh St
 St Josephs College/Brenock Park Dr
 St Josephs College/Shannon Ave
-St Josephs PS/Botanic Rd
 St Josephs PS/Russell St
 St Josephs Westcourt Campus/Minerva Rd
 St Kevin's PS/Hallam Rd
@@ -15369,8 +15448,8 @@ St Kilda Station/Fitzroy St
 St Kilians Church/McCrae St
 St Killian St/Holdsworth Rd
 St Kinnord St/Buckley St
+St Laurence O'Toole Primary School/Ogilvy St
 St Laurence Park Retirement Village/Station Lake Rd
-St Laurences Memorial School/Ogilvy St
 St Laurent Bvd/Hacketts Rd
 St Leger Pl/Meadow Glen Dr
 St Leonard's Primary School/Springvale Rd
@@ -15380,6 +15459,7 @@ St Leonards Lake Reserve/Murradoc Rd
 St Leonards Shops/Murradoc Rd
 St Leonards Uniting Church/New St
 St Liborius PS/Eaglehawk Rd
+St Macartan's Primary School/Bungower Rd
 St Margarets Catholic Primary School/St Albans Rd
 St Mark's Church/Sydney Rd
 St Marks Primary School/Lower Dandenong Rd
@@ -15412,14 +15492,12 @@ St Patricks PS/Princes Hwy
 St Patricks Primary School/The Avenue
 St Patricks Primary School/Warrigal Rd
 St Paul Apostle South School/Matthew Flinders Ave
-St Paul's Catholic College/Chambers Rd
 St Paul's Church/Glengala Rd
 St Paul's Church/Powlett St
 St Paul's Grammar School/Bowen St
 St Paul's Grammar/Cross's Rd
 St Pauls Catholic PS/248 Sunshine Ave
 St Pauls Church/Dorset Rd
-St Pauls Church/Somerville Rd
 St Pauls Lutharan Kindergarten/Torquay Rd
 St Pauls PS/Fourteenth St
 St Pauls Primary School/Fourteenth St
@@ -15471,6 +15549,7 @@ Stanhope Gr/Prospect Hill Rd
 Stanley Ave/Ferntree Gully Rd
 Stanley Ave/Retreat Rd
 Stanley Ave/Spring Gully Rd
+Stanley Cres/Esplanade
 Stanley Dr/Sydney Rd
 Stanley Grose Dr/Winton Rd
 Stanley Rd/Bass Hwy
@@ -15494,7 +15573,6 @@ Stately Dr/Bradford Dr
 Station Ave/Beaconsfield-Emerald Rd
 Station Lake Rd/Flinders Ave
 Station Lane/Mitchell St
-Station Pier
 Station Rd/Ballarat Rd
 Station Rd/Belgrave-Gembrook Rd
 Station Rd/Cherry Lane
@@ -15522,7 +15600,6 @@ Station St/Mernda Ave
 Station St/Olympic Pde
 Station St/Portarlington Rd
 Station St/Princes Hwy
-Station St/Rae Ave
 Station St/Riversdale Rd
 Station St/Rutland Rd
 Station St/Separation St
@@ -15600,6 +15677,7 @@ Stewart St/Goulburn St
 Stewart St/Hazel St
 Stewart St/High Street Rd
 Stewart St/Matthew St
+Stewart St/Nepean Hwy
 Stewart St/Nicholson St
 Stewart St/Nolan St
 Stewart St/North Rd
@@ -15624,6 +15702,7 @@ Stockdale Rd/Farmer Cres
 Stockland SC/Gillies St N
 Stockland SC/Norman St
 Stocks Ave/High St
+Stockton Dr/Cairnlea Dr
 Stockton Dr/Furlong Rd
 Stockwell Cres/Lady Nelson Way
 Stoddart St/Ballarat Rd
@@ -15873,7 +15952,6 @@ Swan St/Fosters Rd
 Swan St/Mate St
 Swan St/O'Neills Rd
 Swan St/Punt Rd
-Swan St/Rennie St
 Swan St/Tarneit Rd
 Swann St/Henty Hwy
 Swanpool Ave/Station St
@@ -15924,7 +16002,6 @@ Sycamore St/Waverley Rd
 Sydare Ave/Dandenong Rd
 Sydenham Ave/Holdsworth Rd
 Sydenham Ave/John St
-Sydenham-Hillside PS/Wattle Valley Dr
 Sydney Parkinson Ave/John Fawkner Dr
 Sydney Parkinson Reserve/James Cook Dr
 Sydney Rd/Albion St
@@ -15965,7 +16042,6 @@ Symonds St/Stony Point Rd
 Symons St/Howitt St
 Syndal Station/Blackburn Rd
 Syndal Station/Coleman Pde
-TAFE Gippsland - Yallourn Campus/Monash Rd
 TAFE Gippsland Morwell Campus/Princes Dr
 TB Drew Park/Cemetery Rd
 Taberer Ct/Greenfields Dr
@@ -16013,6 +16089,7 @@ Taparoo Rd/Tuckers Rd
 Taplin Way/Donald Cameron Dr
 Tara Ave/Middleborough Rd
 Tara Bvd/Rix Rd
+Tara Dr/High St
 Tara Gr/North Rd
 Taradale Hall/De La Beche St
 Tarago Tce/Taylors Rd
@@ -16038,6 +16115,7 @@ Tarneit Rd/Bethany Rd
 Tarneit Rd/Heaths Rd
 Tarneit Rd/Hogans Rd
 Tarneit Rd/Leakes Rd
+Tarneit Rd/Odyssey Blvd
 Tarneit Rd/Parramatta Rd
 Tarneit Rd/Sayers Rd
 Tarneit Senior College/Crossway Ave
@@ -16071,6 +16149,7 @@ Tattersalls Lane/Lonsdale St
 Tatura Cres/Nathalia St
 Tatyoon Rd/Marx Cres
 Taunton Cres/Berrabri Dr
+Taven St/High St
 Tavern Tce/Mason St
 Tawonga Store/Kiewa Valley Hwy
 Taylor Ave/Spring St
@@ -16095,6 +16174,7 @@ Taylors Lane/Elsworth Dr
 Taylors Lane/Turramurra Dr
 Taylors Rd/Abbotts Rd
 Taylors Rd/Caroline Springs Bvd
+Taylors Rd/Fields St
 Taylors Rd/Frontier Ave
 Taylors Rd/Hall Rd
 Taylors Rd/Jesmond Rd
@@ -16216,7 +16296,6 @@ The Crossover/Koornang Rd
 The Crossway/Milleara Rd
 The Entrance/Shearwater Dr
 The Entrance/Taylors Rd
-The Esperence/McClelland Ave
 The Esplanade/Glenleith Ave
 The Esplanade/Heidelberg Rd
 The Esplanade/Horseshoe Bend Rd
@@ -16393,7 +16472,6 @@ Thurgoona Plaza/Shuter Ave
 Thurleigh Ave/Bayswater Rd
 Ti Tree Rd/Old Melbourne Rd
 Tibbles St/Reserve Rd
-Tiberius Rd/Julius St
 Tidal Way/Saltwater Prom
 Tiernan St/Droop St
 Tierney Lane/Howard St
@@ -16415,7 +16493,6 @@ Timboon Masonic Park/Bond St
 Timboon-Colac Rd/Cobden-Port Campbell Rd
 Timboon-Nullawarre Rd/Bailey St
 Timins St/Barkly St
-Timmins Cres/Dundas St
 Timms Cres/Howard Rd
 Timms Rd/Drouin Poowong Rd
 Timor Pde/Ramu Pde
@@ -16484,6 +16561,7 @@ Tootle St/The Elms Bvd
 Topiary St/Bolivar Esp
 Toppings Rd/Homestead Rd
 Toppings Rd/Yarra Rd
+Tora Cres/City vista Ct
 Torbay St/Greensborough Hwy
 Tormore Rd/Boronia Rd
 Torney St/Linsell Bvd
@@ -16515,6 +16593,7 @@ Towerbridge Rise/Belleview Dr
 Towerhill Dr/Wonga Rd
 Towerhill Rd/Foot St
 Towerhill Rd/Vantage Point Bvd
+Towers Rd/Nepean Hwy
 Town Hall/Main Rd
 Town Hall/Orr St
 Town Hall/Princes Hwy
@@ -16557,6 +16636,7 @@ Transit Lounge/Great Alpine Rd
 Traralgon Bowls Club/Gwalia St
 Traralgon Plaza SC/Franklin St
 Traralgon Railway Reserve/Rose Ave
+Traralgon Railway Station/Princes St
 Traralgon Station/Princes St
 Traralgon Tennis Centre/Franklin St
 Traralgon Vet Centre/Princes Hwy
@@ -16569,7 +16649,6 @@ Trawalla Ave/Grange Rd
 Trawalla Ct/Pound Rd
 Trawool St/Dorking Rd
 Treacy St/O'Brien St
-Treadwell Rd/Keilor Rd #52
 Treble Ct/Mariners Reef Rd
 Treeby Bvd/Arwon St
 Treeby Bvd/McDonald St
@@ -16684,8 +16763,10 @@ Twin Ranges Dr/Stoddarts Rd
 Two Bays Roadhouse/Murray Valley Hwy
 Twobar Pl/Canterbury Rd
 Twyford St/Middleborough Rd
+Twyford Wy/Davis Rd
 Tyabb Central Recreation Reserve/Frankston-Flinders Rd
 Tyabb Central Recreation Reserve/Mornington-Tyabb Rd
+Tyabb Primary School/Mornington-Tyabb Rd
 Tyas Pl/Herrington Ave
 Tyers Community Park/Moe-Glengarry Rd
 Tyers Cres/Eildon Pde
@@ -16764,7 +16845,6 @@ Upper Heidelberg Rd/Bell St
 Upper Heidelberg Rd/Heidelberg Rd
 Upper Heidelberg Rd/Ivanhoe Pde
 Upper Heidelberg Rd/Seddon St
-Upper Yarra Sec Col/Riversdale Rd
 Upton Cres/Darling Way
 Upton Cres/Saxonwood Dr
 Upwey CFA/Morris Rd
@@ -16817,7 +16897,6 @@ Valley Lake Bvd/Rachelle Rd
 Valley Park Bvd/Dimboola Rd
 Valley Pde/Glen Iris Rd
 Valley St/Coora Rd
-Valley View Dr/Wangaratta - Whitfield Rd
 Valley Village Mews Ret Village/David St
 Valleyview Dr/Karoo Rd
 Valnere St/Mitchell St
@@ -16873,6 +16952,7 @@ Verdon St/Ferguson St
 Verdun Dr/Princes Hwy
 Verdun Dr/Victor Cres
 Verdun Gr/Spring St
+Vere Ct/Taylors Rd
 Vere St/Hoddle St
 Vermont Ave/Bacchus Marsh Rd
 Vermont Ave/Princess Rd
@@ -17270,7 +17350,6 @@ Warunda Pde/Saltwater Prom
 Warwick Bayley Oval/Princes Hwy
 Warwick Rd/Cumberland Rd
 Warwick Rd/McIntyre Rd
-Warwick Rd/Northumberland Rd
 Warwick Rd/Sturt St
 Warwick St/Autumn St
 Washington Dr/Old Dandenong Rd
@@ -17334,6 +17413,8 @@ Watsons Rd/Ferntree Gully Rd
 Watsons Rd/Victoria St
 Watsons Rd/Whittlesea-Kinglake Rd
 Watsons Rd/Wilsons Rd
+Watt Rd/Racecourse Rd
+Watt St/Aloha St
 Watt St/Blackshaws Rd
 Watt St/Durham Rd
 Watt St/Montgomery Cres
@@ -17351,6 +17432,7 @@ Wattle Rd/Hampstead Rd
 Wattle St/Dalton Rd
 Wattle Tree Lane/Cranbourne Rd
 Wattlebird Cres/Taits Rd
+Wattlebird St/Lithgow St
 Wattlebrae St/Henty St
 Wattletree Ave/Murradoc Rd
 Wattletree Rd/Commercial Rd
@@ -17366,6 +17448,7 @@ Waurn Ponds SC/Princes Hwy
 Waurn Ponds Shopping Centre/Colac Rd
 Waurn Ponds Shopping Centre/Pioneer Rd
 Waurn Ponds Station/Sugargum Dr
+Wavell Pde/City Vista Ct
 Wavell St/Kalkee Rd
 Waverley Christian College/Narre Warren-Cranbourne Rd
 Waverley Gardens SC/Hansworth St
@@ -17540,12 +17623,12 @@ West Park/Autumn St
 West Rd/Baxter-Tooradin Rd
 West Rd/Robinsons Rd
 West Richmond Railway Station/Hoddle St
-West St/Bourchier St
 West St/Evell St
 West St/Forrest St
 West St/Glenroy Rd
 West St/South St
 West St/Springvale Rd
+West Tarneit Station
 Westall PS/Fairbank Rd
 Westall Rd/Springvale Rd
 Westall SC/Rosebank Ave
@@ -17639,6 +17722,7 @@ Whipbird Dr/Lyrebird Dr
 Whipstick Gully Rd/Yarra St
 Whipstick Rd/Hodgson St
 Whirakee St/Bendigo-Maryborough Rd
+Whistle Dr/Tower St
 Whitcombes Rd/Portarlington Rd
 White Ave/Kilby Rd
 White Ave/Rippon Rd
@@ -17648,7 +17732,7 @@ White Hills Cemetery/St Killian St
 White Hills Rd/Albert St
 White Hills SC/Napier St
 White Lodge Ct/Park Rd
-White Night Interchange/Williamson St
+White Rd/McKenzie St
 White St/Boundary Rd
 White St/Miller St
 White St/North Rd
@@ -17687,6 +17771,7 @@ Whiteside Rd/Clayton Rd
 Whiteside Rd/Princes Hwy
 Whitewood St/Excelsior Dr
 Whitfield Cres/Highlander Dr
+Whitfield/Wangaratta - Whitfield Rd
 Whitmuir Rd/Centre Rd
 Whitmuir Rd/McKinnon Rd
 Whiton Gr/Ballan Rd
@@ -17853,6 +17938,7 @@ Wilsons Rd/Solar Dr
 Wilsons Rd/Woods Rd
 Wilton Gr/Glen Huntly Rd
 Wilton Vale Rd
+Wiltshire Boulevard Reserve/Wiltshire Bvd
 Wiltshire Lane/Whitelaw Ave
 Wimble St/Barker St
 Wimble St/Oak St
@@ -17976,6 +18062,7 @@ Wood St/McColl St
 Wood St/Settlement Rd
 Wood St/Station Rd
 Wood Wood General Store/Murray Valley Hwy
+Woodburn Ave/Cairnlea Dr
 Woodburn Cres/Malmsbury Dr
 Woodburn Pl/Knight St
 Woodbury Ave/Gourlay Rd
@@ -18028,6 +18115,7 @@ Woodville Park SC/Warringa Cres
 Woodward St/View Rd
 Woolboard Rd/Salmon St
 Woolleys Rd/Stony Point Rd
+Woolshed Ave/Cairnlea Dr
 Woolshed Ave/Furlong Rd
 Woolshed Dr/Kerr Rd
 Woolway Ct/Smythes Rd
@@ -18127,6 +18215,7 @@ Yaralla Rd/Centre Rd
 Yarcombe Cres/Bridgewater Rd
 Yaringa St/Poplar Bvd
 Yarla Ct/Lucerne Cres
+Yarlington Rd/Modesto Dr
 Yarra Ave/Boldrewood Pde
 Yarra Bend Park/Studley Park Rd
 Yarra Hills Sec Col/Cambridge Rd
@@ -18143,7 +18232,7 @@ Yarra St/Lower Heidelberg Rd
 Yarra St/Ryrie St
 Yarra Theological Union/Albion Rd
 Yarra Valley Bvd/Rosemont Dr
-Yarra Valley Tourist Railway/Healesville-Kinglake Rd
+Yarra Valley Railway/Healesville-Kinglake Rd
 Yarra View Ct/Research-Warrandyte Rd
 Yarra View Ret Village/Warburton Hwy
 Yarra Warra Preschool/186 Research-Warrandyte Rd
@@ -18162,6 +18251,7 @@ Yarraman Station/Railway Pde
 Yarrambat Primary School/Yan Yean Rd
 Yarramundi Dr/Jetty Rd
 Yarraridge Dr/Black Springs Rd
+Yarraville Gardens/Hyde St
 Yarraville Oval/Anderson St
 Yarraville Oval/Williamstown Rd
 Yarraville Square SC/High St
@@ -18202,6 +18292,7 @@ York St/Matthews Ave
 York St/Whitehorse Rd
 Yorkminster Ave/Boronia Rd
 Young St/Guinea St
+Young St/High St
 Young St/North Rd
 Young St/Peel St S
 Young St/Vine Ave

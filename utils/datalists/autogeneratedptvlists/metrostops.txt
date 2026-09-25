@@ -70,7 +70,6 @@ Fawkner Station
 Ferntree Gully Station
 Flagstaff Station
 Flemington Bridge Station
-Flemington Racecourse Station
 Flinders Street Station
 Footscray Station
 Frankston Station
@@ -180,7 +179,6 @@ Sandringham Station
 Seaford Station
 Seaholme Station
 Seddon Station
-Showgrounds Station
 Somerville Station
 South Kensington Station
 South Morang Station
