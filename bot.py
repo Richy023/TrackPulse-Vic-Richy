@@ -295,7 +295,8 @@ for stop in vline_stops:
         vline_stations.append(stop.replace(' Railway Station',''))
 
 metro_tunnel_stations = ['Town Hall','Arden','Anzac','Parkville','State Library']
-stations_list = metro_stations + vline_stations + metro_tunnel_stations + heritage_stations
+missing_stations = ['Flemington Racecourse', 'Showgrounds']
+stations_list = metro_stations + vline_stations + metro_tunnel_stations + missing_stations + heritage_stations
 stations_list = sorted(set(stations_list))
 
 vline_coach_stops = []
